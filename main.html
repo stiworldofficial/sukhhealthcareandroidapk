@@ -1017,39 +1017,6 @@
         }
     </script>
     
-    <!-- 
-    ========================================================
-    GOOGLE APPS SCRIPT CODE (Code.gs) 
-    Aapko yeh code apne Google Sheet ke Extensions > Apps Script me dalna hai.
-    Sheet me Columns aise banayein Row 1 me:
-    A: Date | B: Name | C: Phone | D: Email | E: Address | F: Product | G: Qty | H: Amount | I: Status | J: Razorpay Txn ID
-    ========================================================
-
-    function doPost(e) {
-      var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-      var data = JSON.parse(e.postData.contents);
-      
-      if(data.action === 'createOrder') {
-        var rowData = [
-          new Date(), data.name, data.phone, data.email, data.address,
-          data.product, data.qty, data.amount, data.status, "" 
-        ];
-        sheet.appendRow(rowData);
-        return ContentService.createTextOutput(JSON.stringify({"result":"success"})).setMimeType(ContentService.MimeType.JSON);
-        
-      } else if(data.action === 'updatePayment') {
-        var dataRange = sheet.getDataRange().getValues();
-        for(var i = dataRange.length - 1; i >= 0; i--) {
-          if(dataRange[i][2] == data.phone) { // Column C is phone
-            sheet.getRange(i + 1, 9).setValue(data.status); // Column I
-            sheet.getRange(i + 1, 10).setValue(data.txnId); // Column J
-            break;
-          }
-        }
-        return ContentService.createTextOutput(JSON.stringify({"result":"updated"})).setMimeType(ContentService.MimeType.JSON);
-      }
-    }
-    ========================================================
-    -->
+   
 </body>
 </html>
