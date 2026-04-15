@@ -25,7 +25,7 @@
     <!-- Premium Fonts - Including Playfair and Lato for the rich popup -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&family=Noto+Sans+Devanagari:wght@700;900&family=Lato:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
     
-    <!-- Razorpay SDK (NEW ADDED) -->
+    <!-- Razorpay SDK -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
     <style>
@@ -37,13 +37,13 @@
             --secondary-rgb: 0, 145, 213;
             --accent: #F58220;
             
-            --bg-dark: #f9fbf9; /* Now a light background */
+            --bg-dark: #f9fbf9; 
             --card-glass: rgba(255, 255, 255, 0.95);
             --header-offset: calc(15px + env(safe-area-inset-top));
             --header-height: 64px;
             --footer-offset: calc(25px + env(safe-area-inset-bottom));
             --footer-height: 64px; 
-            --text-light: #1f2937; /* Dark text for readability */
+            --text-light: #1f2937; 
             --dark-green: #51B04B; 
             
             /* Detailed Modal specific colors */
@@ -71,7 +71,7 @@
             filter: grayscale(20%) sepia(10%);
         }
 
-        /* --- FLOATING HEADER --- */
+        /* --- FLOATING HEADER (z-index 2000) --- */
         .iphone-header {
             position: fixed; top: var(--header-offset); left: 50%; transform: translateX(-50%);
             width: 92%; max-width: 600px; height: var(--header-height);
@@ -113,7 +113,7 @@
         
         .accordion-btn { width: 100%; padding: 18px 22px; margin-bottom: 10px; border-radius: 18px; background: rgba(0, 145, 213, 0.08); font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(0, 145, 213, 0.15); }
 
-        /* --- DOCK --- */
+        /* --- DOCK (z-index 2000) --- */
         .iphone-dock-wrapper { 
             position: fixed; bottom: var(--footer-offset); 
             left: 0; width: 100%; display: flex; justify-content: center; z-index: 2000; padding: 0 15px; 
@@ -171,23 +171,18 @@
         .floral-line { height: 1.5px; width: 60px; background: linear-gradient(90deg, transparent, var(--primary)); }
         .floral-line.rev { background: linear-gradient(270deg, transparent, var(--primary)); }
 
-        /* --- EXISTING GENERIC MODAL (For second card) --- */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(255,255,255,0.85); backdrop-filter: blur(15px); display: none; z-index: 2500; align-items: center; justify-content: center; padding: 25px; }
-        .modal-box { background: #ffffff; border: 2.5px solid var(--secondary); border-radius: 40px; width: 100%; max-width: 440px; padding: 35px; box-shadow: 0 20px 60px rgba(0, 145, 213, 0.2); position: relative; overflow: hidden; text-align: left; }
-        .modal-bg-img { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.05; z-index: 0; filter: none; }
-        .list-item { background: rgba(81, 176, 75, 0.05); border: 1.5px solid rgba(81, 176, 75, 0.2); padding: 18px; border-radius: 20px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s; position: relative; z-index: 5; color: #1f2937; }
-        .list-item:hover { background: rgba(81, 176, 75, 0.15); border-color: var(--primary); }
-
         /* =========================================
-           DETAILED PRODUCT MODAL
+           POPUP MODALS (Scaled down 20% & Z-index 1900)
            ========================================= */
         .p-modal-overlay { 
             position: fixed; inset: 0; 
             background: rgba(0, 0, 0, 0.6); 
             backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); 
+            /* Z-index 1900 to stay UNDER Header & Footer (2000) */
             z-index: 1900; 
             display: flex; justify-content: center; align-items: center; 
             opacity: 0; pointer-events: none; transition: opacity 0.3s ease; 
+            /* Kept between header and footer via padding */
             padding-top: calc(var(--header-offset) + var(--header-height) + 15px);
             padding-bottom: calc(var(--footer-offset) + var(--footer-height) + 15px);
             padding-left: 15px; padding-right: 15px;
@@ -195,105 +190,106 @@
         }
         .p-modal-overlay.active { opacity: 1; pointer-events: auto; }
         
+        /* Reduced max-width and scaled down */
         .product-modal { 
             background: #ffffff; 
-            width: 1100px; max-width: 100%; 
+            width: 850px; max-width: 100%; 
             height: auto; max-height: 100%; 
-            border-radius: 20px; 
+            border-radius: 16px; 
             overflow: hidden; position: relative; 
-            transform: translateY(20px) scale(0.98); transition: all 0.3s ease; 
+            transform: translateY(20px) scale(0.95); transition: all 0.3s ease; 
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
             display: flex; flex-direction: row; text-align: left; 
         }
-        .p-modal-overlay.active .product-modal { transform: translateY(0) scale(1); }
+        /* Mobile scale down */
+        @media (max-width: 640px) {
+            .product-modal { 
+                transform: scale(0.85) translateY(20px); 
+            }
+            .p-modal-overlay.active .product-modal { transform: scale(0.9) translateY(0); }
+        }
+        @media (min-width: 641px) {
+            .p-modal-overlay.active .product-modal { transform: translateY(0) scale(0.9); }
+        }
         
-        .p-modal-close { position: absolute; top: 10px; right: 10px; background: #fff; border: none; font-size: 1.5rem; color: var(--color-brand); cursor: pointer; transition: all 0.2s; z-index: 50; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .p-modal-close { position: absolute; top: 8px; right: 8px; background: #fff; border: none; font-size: 1.2rem; color: var(--color-brand); cursor: pointer; transition: all 0.2s; z-index: 50; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .p-modal-close:hover { background: var(--color-brand); color: #fff; transform: scale(1.05); }
 
-        .modal-left { width: 45%; background: #f9f9f9; display: flex; flex-direction: column; padding: 2rem; border-right: 1px solid #eee; overflow-y: auto;}
-        .main-img-container { width: 100%; max-width: 512px; aspect-ratio: 1 / 1; margin: 0 auto 1rem auto; border-radius: 12px; overflow: hidden; background: #fff; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #eaeaea; position: relative; }
+        .modal-left { width: 45%; background: #f9f9f9; display: flex; flex-direction: column; padding: 1.5rem; border-right: 1px solid #eee; overflow-y: auto;}
+        .main-img-container { width: 100%; max-width: 400px; aspect-ratio: 1 / 1; margin: 0 auto 0.8rem auto; border-radius: 10px; overflow: hidden; background: #fff; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #eaeaea; position: relative; }
         .main-img-container img, .main-img-container iframe { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; transition: opacity 0.3s ease; border: none; }
         
-        .thumbnails-container { display: flex; gap: 10px; justify-content: center; height: 80px; }
-        .thumbnail-btn { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; background: #fff; opacity: 0.6; position: relative; flex-shrink: 0;}
+        .thumbnails-container { display: flex; gap: 8px; justify-content: center; height: 60px; }
+        .thumbnail-btn { width: 60px; height: 60px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; background: #fff; opacity: 0.6; position: relative; flex-shrink: 0;}
         .thumbnail-btn:hover { opacity: 1; }
         .thumbnail-btn.active { border-color: var(--color-premium-gold); opacity: 1; box-shadow: 0 2px 8px rgba(197, 160, 89, 0.3); }
         .thumbnail-btn img { width: 100%; height: 100%; object-fit: cover; }
-        .video-play-icon { position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; }
+        .video-play-icon { position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
 
-        .modal-right { width: 55%; padding: 2.5rem 3rem; overflow-y: auto; background: #fff; }
-        .modal-section { padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #f0f0f0; }
+        .modal-right { width: 55%; padding: 1.8rem 2rem; overflow-y: auto; background: #fff; }
+        .modal-section { padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #f0f0f0; }
         .modal-section:last-child { border-bottom: none; }
         
-        .m-title { font-family: 'Playfair Display', serif !important; font-size: 2rem; color: var(--color-brand); line-height: 1.2; margin-bottom: 0.5rem; font-weight: normal !important; }
-        .star-rating { color: #FFA41C; font-size: 1rem; }
-        .rating-text { color: #007185; font-size: 0.9rem; cursor: pointer; font-weight: normal !important; }
+        .m-title { font-family: 'Playfair Display', serif !important; font-size: 1.6rem; color: var(--color-brand); line-height: 1.2; margin-bottom: 0.4rem; font-weight: normal !important; }
+        .star-rating { color: #FFA41C; font-size: 0.85rem; }
+        .rating-text { color: #007185; font-size: 0.8rem; cursor: pointer; font-weight: normal !important; }
         .rating-text:hover { text-decoration: underline; color: #C7511F; }
-        .price-block { display: flex; align-items: baseline; gap: 10px; margin-bottom: 5px; }
-        .m-discount { color: #CC0C39; font-size: 1.5rem; font-weight: 300 !important; font-family: 'Lato', sans-serif !important; }
-        .m-price { font-size: 2rem; font-weight: 700 !important; color: #0f1111; font-family: 'Lato', sans-serif !important;}
-        .m-mrp { color: #565959; text-decoration: line-through; font-size: 0.9rem; font-family: 'Lato', sans-serif !important; font-weight: normal !important; }
-        .tax-info { color: #565959; font-size: 0.85rem; font-family: 'Lato', sans-serif !important; font-weight: normal !important; }
-        .stock-status { color: #007600; font-size: 1.1rem; font-weight: 500 !important; margin-top: 8px; font-family: 'Lato', sans-serif !important; }
-        .section-heading { font-family: 'Lato', sans-serif !important; font-size: 1.1rem; font-weight: 700 !important; color: #0f1111; margin-bottom: 10px; }
-        .m-desc { font-size: 0.95rem; line-height: 1.6; color: #333; font-family: 'Lato', sans-serif !important; font-weight: normal !important; }
+        .price-block { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+        .m-discount { color: #CC0C39; font-size: 1.2rem; font-weight: 300 !important; font-family: 'Lato', sans-serif !important; }
+        .m-price { font-size: 1.6rem; font-weight: 700 !important; color: #0f1111; font-family: 'Lato', sans-serif !important;}
+        .m-mrp { color: #565959; text-decoration: line-through; font-size: 0.8rem; font-family: 'Lato', sans-serif !important; font-weight: normal !important; }
+        .tax-info { color: #565959; font-size: 0.75rem; font-family: 'Lato', sans-serif !important; font-weight: normal !important; }
+        .stock-status { color: #007600; font-size: 0.95rem; font-weight: 500 !important; margin-top: 6px; font-family: 'Lato', sans-serif !important; }
+        .section-heading { font-family: 'Lato', sans-serif !important; font-size: 0.95rem; font-weight: 700 !important; color: #0f1111; margin-bottom: 8px; }
+        .m-desc { font-size: 0.85rem; line-height: 1.5; color: #333; font-family: 'Lato', sans-serif !important; font-weight: normal !important; }
         .m-benefits { list-style: none; padding: 0; margin: 0; font-family: 'Lato', sans-serif !important;}
-        .m-benefits li { position: relative; padding-left: 1.5rem; margin-bottom: 8px; font-size: 0.95rem; color: #0f1111; font-weight: normal !important; }
-        .m-benefits li::before { content: "•"; position: absolute; left: 0; top: -2px; font-size: 1.2rem; color: var(--color-brand); font-weight: bold !important; }
+        .m-benefits li { position: relative; padding-left: 1.2rem; margin-bottom: 6px; font-size: 0.85rem; color: #0f1111; font-weight: normal !important; }
+        .m-benefits li::before { content: "•"; position: absolute; left: 0; top: -2px; font-size: 1rem; color: var(--color-brand); font-weight: bold !important; }
 
-        .fixed-size-badge { display: inline-flex; border: 1.5px solid var(--color-premium-gold); border-radius: 6px; overflow: hidden; margin-top: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); font-family: 'Lato', sans-serif !important;}
-        .fixed-size-badge .fixed-size-icon { background: var(--color-premium-gold); color: white; padding: 8px 14px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
-        .fixed-size-badge .fixed-size-text { background: #fff; color: #0f1111; padding: 8px 20px; font-weight: 600 !important; font-size: 0.95rem; display: flex; align-items: center; }
+        .fixed-size-badge { display: inline-flex; border: 1.5px solid var(--color-premium-gold); border-radius: 5px; overflow: hidden; margin-top: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); font-family: 'Lato', sans-serif !important;}
+        .fixed-size-badge .fixed-size-icon { background: var(--color-premium-gold); color: white; padding: 6px 10px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+        .fixed-size-badge .fixed-size-text { background: #fff; color: #0f1111; padding: 6px 15px; font-weight: 600 !important; font-size: 0.85rem; display: flex; align-items: center; }
 
-        .custom-qty-selector { display: inline-flex; border: 1px solid #d5d9d9; border-radius: 6px; overflow: hidden; background-color: #f2f2f2; height: 34px;width: 77px; box-shadow: 0 1px 2px rgba(15,17,17,.15); font-family: 'Lato', sans-serif !important;}
-        .custom-qty-btn { background: #f2f2f2; border: none; width: 28px; font-size: 1.1rem; font-weight: bold !important; color: #111; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .custom-qty-selector { display: inline-flex; border: 1px solid #d5d9d9; border-radius: 5px; overflow: hidden; background-color: #f2f2f2; height: 30px;width: 65px; box-shadow: 0 1px 2px rgba(15,17,17,.15); font-family: 'Lato', sans-serif !important;}
+        .custom-qty-btn { background: #f2f2f2; border: none; width: 22px; font-size: 0.95rem; font-weight: bold !important; color: #111; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
         .custom-qty-btn:hover { background: #e3e6e6; }
-        .custom-qty-input { width: 36px; border: none; border-left: 1px solid #d5d9d9; border-right: 1px solid #d5d9d9; background: #fff; text-align: center; font-size: 0.95rem; font-weight: 600 !important; color: #0f1111; pointer-events: none; }
+        .custom-qty-input { width: 30px; border: none; border-left: 1px solid #d5d9d9; border-right: 1px solid #d5d9d9; background: #fff; text-align: center; font-size: 0.85rem; font-weight: 600 !important; color: #0f1111; pointer-events: none; }
 
-        .action-buttons { display: flex; gap: 15px; margin-top: 20px; font-family: 'Lato', sans-serif !important;}
-        .btn-add-cart { flex: 1; background: #FFD814; border: 1px solid #FCD200; border-radius: 50px; padding: 12px; font-size: 0.95rem; font-weight: 600 !important; color: #0f1111; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 5px rgba(213,217,217,.5); }
+        .action-buttons { display: flex; gap: 10px; margin-top: 15px; font-family: 'Lato', sans-serif !important;}
+        .btn-add-cart { flex: 1; background: #FFD814; border: 1px solid #FCD200; border-radius: 40px; padding: 8px; font-size: 0.85rem; font-weight: 600 !important; color: #0f1111; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 5px rgba(213,217,217,.5); }
         .btn-add-cart:hover { background: #F7CA00; }
-        .btn-buy-now { flex: 1; background: #FFA41C; border: 1px solid #FF8F00; border-radius: 50px; padding: 12px; font-size: 0.95rem; font-weight: 600 !important; color: #0f1111; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 5px rgba(213,217,217,.5); }
+        .btn-buy-now { flex: 1; background: #FFA41C; border: 1px solid #FF8F00; border-radius: 40px; padding: 8px; font-size: 0.85rem; font-weight: 600 !important; color: #0f1111; cursor: pointer; transition: background 0.2s; box-shadow: 0 2px 5px rgba(213,217,217,.5); }
         .btn-buy-now:hover { background: #FA8900; }
-        .secure-badge { display: flex; align-items: center; gap: 8px; color: #007185; font-size: 0.9rem; margin-top: 15px; font-family: 'Lato', sans-serif !important; font-weight: normal !important;}
+        .secure-badge { display: flex; align-items: center; gap: 6px; color: #007185; font-size: 0.8rem; margin-top: 10px; font-family: 'Lato', sans-serif !important; font-weight: normal !important;}
 
         @media (max-width: 1024px) {
             .product-modal { flex-direction: column; display: block; overflow-y: auto; }
-            .modal-left { width: 100%; height: auto; padding: 1.5rem; border-right: none; border-bottom: 1px solid #eee; overflow-y: visible;}
-            .modal-right { width: 100%; padding: 2rem; }
+            .modal-left { width: 100%; height: auto; padding: 1.2rem; border-right: none; border-bottom: 1px solid #eee; overflow-y: visible;}
+            .modal-right { width: 100%; padding: 1.5rem; }
         }
 
         @media (max-width: 640px) {
-            .product-modal { 
-                flex-direction: column; 
-                height: 100%; 
-                display: block; overflow-y: auto; overflow-x: hidden; 
-                border-radius: 20px; 
-                transform: scale(0.95) translateY(20px); 
-                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
-                margin: 0; width: 100%; 
-            }
-            .p-modal-overlay.active .product-modal { transform: scale(1) translateY(0); }
-            .p-modal-close { top: 10px; right: 10px; position: absolute; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+            .product-modal { flex-direction: column; height: 100%; display: block; overflow-y: auto; overflow-x: hidden; border-radius: 16px; margin: 0; width: 100%; }
+            .p-modal-close { top: 8px; right: 8px; position: absolute; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
             .modal-left { padding: 1rem; }
             .main-img-container { aspect-ratio: 1 / 1; height: auto; } 
-            .thumbnails-container { height: 60px; overflow-x: auto; justify-content: flex-start;}
-            .thumbnail-btn { width: 60px; height: 60px; }
-            .modal-right { padding: 1.5rem; overflow-y: visible; }
-            .m-title { font-size: 1.5rem; }
+            .thumbnails-container { height: 50px; overflow-x: auto; justify-content: flex-start;}
+            .thumbnail-btn { width: 50px; height: 50px; }
+            .modal-right { padding: 1rem; overflow-y: visible; }
+            .m-title { font-size: 1.3rem; }
             .action-buttons { flex-direction: column; }
         }
 
-        /* --- CHECKOUT MODAL STYLES (NEW) --- */
-        #checkoutModal { z-index: 3000; }
-        .input-group { margin-bottom: 1rem; position: relative; }
-        .checkout-input { width: 100%; padding: 12px 15px; border: 2px solid #e5e7eb; border-radius: 12px; font-family: 'Lato', sans-serif !important; font-weight: 500 !important; font-size: 1rem; outline: none; transition: border-color 0.3s; background: #f9fafb; color: #111827;}
+        /* --- CHECKOUT MODAL STYLES (Scaled down & Z-index 1900) --- */
+        .input-group { margin-bottom: 0.8rem; position: relative; }
+        /* Reduced padding & font sizes by 20% */
+        .checkout-input { width: 100%; padding: 8px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-family: 'Lato', sans-serif !important; font-weight: 500 !important; font-size: 0.85rem; outline: none; transition: border-color 0.3s; background: #f9fafb; color: #111827;}
         .checkout-input:focus { border-color: var(--primary); background: #fff; }
         .checkout-input.error { border-color: #ef4444; }
-        .error-msg { color: #ef4444; font-size: 0.75rem; font-family: 'Lato', sans-serif !important; font-weight: 600 !important; position: absolute; bottom: -18px; left: 5px; display: none; }
-        .checkout-label { display: block; font-family: 'Lato', sans-serif !important; font-weight: 700 !important; margin-bottom: 5px; color: #374151; font-size: 0.9rem;}
+        .error-msg { color: #ef4444; font-size: 0.7rem; font-family: 'Lato', sans-serif !important; font-weight: 600 !important; position: absolute; bottom: -16px; left: 5px; display: none; }
+        .checkout-label { display: block; font-family: 'Lato', sans-serif !important; font-weight: 700 !important; margin-bottom: 4px; color: #374151; font-size: 0.8rem;}
         
-        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #fff; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: none; margin: 0 auto; }
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #fff; border-radius: 50%; width: 16px; height: 16px; animation: spin 1s linear infinite; display: none; margin: 0 auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         * { font-style: normal !important; }
@@ -304,7 +300,7 @@
     
     <div id="fixed-media-background"></div>
 
-    <!-- FLOATING HEADER FIXED LAYOUT -->
+    <!-- FLOATING HEADER FIXED LAYOUT (Always on top) -->
     <header class="iphone-header">
         <div class="flex-1 flex justify-start items-center">
             <img src="sukh.png" alt="Icon" class="w-10 h-10 rounded-xl border-2 border-primary shadow-sm" onerror="this.src='https://placehold.co/100x100/51B04B/FFF?text=TS'">
@@ -398,13 +394,13 @@
         </div>
     </main>
     
-    <!-- DOCK NAV -->
+    <!-- DOCK NAV (Always on top) -->
     <div class="iphone-dock-wrapper">
         <nav class="iphone-dock">
             <a href="#track.html" class="nav-link"><i class="fas fa-map-location-dot"></i><span>Track</span></a>
             
             <!-- CONNECTED CART ICON -->
-            <a href="#cart.html" class="nav-link relative" id="dock-cart">
+            <a href="#" class="nav-link relative" id="dock-cart">
                 <div class="relative">
                     <i class="fas fa-shopping-bag text-[1.1rem]"></i>
                     <span id="cart-badge" class="absolute -top-2 -right-2 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center hidden shadow-sm border border-white">0</span>
@@ -419,22 +415,7 @@
         </nav>
     </div>
 
-    <!-- EXISTING GENERIC MODAL -->
-    <div id="modalOverlay" class="modal-overlay">
-        <div class="modal-box">
-            <div id="modalBg" class="modal-bg-img"></div>
-            <div class="flex justify-between items-center mb-8 px-2 relative z-10">
-                <div>
-                    <h2 id="modalTitle" class="text-2xl font-black text-secondary uppercase">Collection</h2>
-                    <p class="text-[10px] text-gray-500 uppercase tracking-[4px] mt-1">Refined Selections</p>
-                </div>
-                <button onclick="closePopup()" class="w-12 h-12 rounded-2xl bg-orange-50 border border-accent/30 text-accent flex items-center justify-center shadow-sm"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="modalList" class="space-y-4 max-h-[50vh] overflow-y-auto pr-2 px-2 relative z-10"></div>
-        </div>
-    </div>
-
-    <!-- DETAILED PRODUCT MODAL -->
+    <!-- DETAILED PRODUCT MODAL (Between Header & Footer) -->
     <div class="p-modal-overlay" id="detailedProductModal">
         <div class="product-modal relative">
             <button class="p-modal-close" onclick="closeDetailedProductModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -450,13 +431,13 @@
                 <div class="modal-section">
                     <h1 class="m-title" id="detailModalTitle">Product Name</h1>
                     <div class="flex items-center gap-2 mb-1">
-                        <span class="bg-green-700 text-white text-xs px-2 py-0.5 rounded font-bold" id="detailModalRatingNo" style="font-weight: 700 !important; font-family: 'Lato', sans-serif !important;">4.5 <i class="fa-solid fa-star text-[10px]"></i></span>
+                        <span class="bg-green-700 text-white text-[10px] px-1 py-0.5 rounded font-bold" id="detailModalRatingNo" style="font-weight: 700 !important; font-family: 'Lato', sans-serif !important;">4.5 <i class="fa-solid fa-star text-[8px]"></i></span>
                         <div class="star-rating">
                             <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                         </div>
                         <span class="rating-text" id="detailModalReviews">124 ratings</span>
                     </div>
-                    <p class="text-sm text-gray-500 font-normal" style="font-family: 'Lato', sans-serif !important;">Brand: <span class="text-[#007185] cursor-pointer hover:underline">Sukh Healthcare</span></p>
+                    <p class="text-xs text-gray-500 font-normal" style="font-family: 'Lato', sans-serif !important;">Brand: <span class="text-[#007185] cursor-pointer hover:underline">Sukh Healthcare</span></p>
                 </div>
                 
                 <div class="modal-section">
@@ -464,7 +445,7 @@
                         <span class="m-discount" id="detailModalDiscount">-30%</span>
                         <span class="m-price" id="detailModalPrice">₹0</span>
                     </div>
-                    <div class="text-sm text-gray-600 mb-1" style="font-family: 'Lato', sans-serif !important; font-weight: normal !important;">
+                    <div class="text-xs text-gray-600 mb-1" style="font-family: 'Lato', sans-serif !important; font-weight: normal !important;">
                         M.R.P.: <span class="m-mrp" id="detailModalMRP">₹0</span>
                     </div>
                     <p class="tax-info">Inclusive of all taxes</p>
@@ -490,15 +471,15 @@
                 </div>
 
                 <div class="modal-section !border-none !pb-0">
-                    <div class="mb-4">
+                    <div class="mb-3">
                         <h3 class="section-heading">Ingredients</h3>
-                        <p class="text-sm text-gray-700 mb-3" id="detailModalIngredients" style="font-family: 'Lato', sans-serif !important; font-weight: normal !important;"></p>
+                        <p class="text-xs text-gray-700 mb-2" id="detailModalIngredients" style="font-family: 'Lato', sans-serif !important; font-weight: normal !important;"></p>
                         <h3 class="section-heading">How to use</h3>
-                        <p class="text-sm text-gray-700" id="detailModalUsage" style="font-family: 'Lato', sans-serif !important; font-weight: normal !important;"></p>
+                        <p class="text-xs text-gray-700" id="detailModalUsage" style="font-family: 'Lato', sans-serif !important; font-weight: normal !important;"></p>
                     </div>
 
-                    <div class="flex flex-col gap-2 mt-4 pt-4 border-t border-gray-200">
-                        <label class="text-sm font-bold text-[#0f1111] mb-1" style="font-family: 'Lato', sans-serif !important;">Quantity:</label>
+                    <div class="flex flex-col gap-1 mt-3 pt-3 border-t border-gray-200">
+                        <label class="text-xs font-bold text-[#0f1111] mb-1" style="font-family: 'Lato', sans-serif !important;">Quantity:</label>
                         <div class="custom-qty-selector">
                             <button class="custom-qty-btn" onclick="updateDetailedQty(-1)">-</button>
                             <input type="text" class="custom-qty-input" id="detailModalQty" value="1" readonly>
@@ -507,9 +488,8 @@
                     </div>
                     
                     <div class="action-buttons">
-                        <button class="btn-add-cart" onclick="addToCartFromModal(1)"><i class="fa-solid fa-cart-shopping mr-2"></i> Add to Cart</button>
-                        <!-- MODIFIED BUY NOW: Trigger Checkout -->
-                        <button class="btn-buy-now" onclick="openCheckoutModal()"><i class="fa-solid fa-bolt mr-2"></i> Buy Now</button>
+                        <button class="btn-add-cart" onclick="addToCartFromModal(1)"><i class="fa-solid fa-cart-shopping mr-1"></i> Add to Cart</button>
+                        <button class="btn-buy-now" onclick="openCheckoutModal(false)"><i class="fa-solid fa-bolt mr-1"></i> Buy Now</button>
                     </div>
 
                     <div class="secure-badge">
@@ -521,30 +501,52 @@
         </div>
     </div>
 
-    <!-- CHECKOUT MODAL (NEW) -->
-    <div id="checkoutModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[3000] hidden items-center justify-center p-4 transition-opacity">
-        <div class="bg-white rounded-[24px] w-full max-w-md p-6 sm:p-8 relative shadow-2xl transform scale-95 transition-transform" id="checkoutBox">
-            <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 w-8 h-8 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center hover:bg-red-100 hover:text-red-600 transition-colors">
+    <!-- CART MODAL (Between Header & Footer) -->
+    <div id="cartModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1900] hidden items-center justify-center p-4 transition-opacity" style="padding-top: calc(var(--header-offset) + var(--header-height) + 15px); padding-bottom: calc(var(--footer-offset) + var(--footer-height) + 15px);">
+        <div class="bg-white rounded-[16px] w-full max-w-[320px] p-4 relative shadow-2xl flex flex-col h-full max-h-[80vh]">
+            <button onclick="closeCartModal()" class="absolute top-2 right-2 w-8 h-8 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center hover:bg-red-100 hover:text-red-600 transition-colors z-10"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="text-lg font-black text-[#1A362D] uppercase tracking-wide mb-3 text-center border-b pb-2">Your Cart</h2>
+            
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto pr-1 space-y-2">
+                <!-- Cart items load here dynamically -->
+            </div>
+            
+            <div class="pt-3 border-t border-gray-200 mt-3 shrink-0">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="font-bold text-gray-700 text-sm">Total:</span>
+                    <span class="text-lg font-black text-[#0f1111]" id="cartTotalAmount">₹0</span>
+                </div>
+                <button onclick="proceedToCheckoutFromCart()" class="w-full bg-[#FFA41C] hover:bg-[#FA8900] text-[#0f1111] font-black text-sm py-2.5 rounded-xl shadow-[0_2px_5px_rgba(213,217,217,.5)] transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bolt"></i> Proceed to Buy
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- UPDATED CHECKOUT MODAL (Scaled down 20%, Between Header & Footer) -->
+    <div id="checkoutModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1900] hidden items-center justify-center p-4 transition-opacity" style="padding-top: calc(var(--header-offset) + var(--header-height) + 15px); padding-bottom: calc(var(--footer-offset) + var(--footer-height) + 15px);">
+        <div class="bg-white rounded-[16px] w-full max-w-[320px] p-4 sm:p-5 relative shadow-2xl transform scale-95 transition-transform overflow-y-auto max-h-full" id="checkoutBox">
+            <button onclick="closeCheckoutModal()" class="absolute top-2 right-2 w-8 h-8 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center hover:bg-red-100 hover:text-red-600 transition-colors z-10">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-black text-[#1A362D] uppercase tracking-wide">Checkout</h2>
-                <p class="text-sm text-gray-500 font-normal" style="font-family: 'Lato', sans-serif !important;">Please enter correct delivery details</p>
+            <div class="text-center mb-4 mt-2">
+                <h2 class="text-lg font-black text-[#1A362D] uppercase tracking-wide">Checkout</h2>
+                <p class="text-xs text-gray-500 font-normal mt-1" style="font-family: 'Lato', sans-serif !important;">Please enter correct delivery details</p>
             </div>
 
             <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
                 <div class="input-group">
                     <label class="checkout-label">Full Name</label>
                     <input type="text" id="chkName" class="checkout-input" placeholder="Rahul Sharma" required>
-                    <span class="error-msg" id="errName">Naam zaroori hai</span>
+                    <span class="error-msg" id="errName">Sahi aur poora naam likhein (min 3 chars)</span>
                 </div>
                 
                 <div class="input-group">
                     <label class="checkout-label">Phone Number (10 digits)</label>
                     <div class="relative">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold" style="font-family: 'Lato', sans-serif !important;">+91</span>
-                        <input type="tel" id="chkPhone" class="checkout-input pl-11" placeholder="9876543210" maxlength="10" required>
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-xs" style="font-family: 'Lato', sans-serif !important;">+91</span>
+                        <input type="tel" id="chkPhone" class="checkout-input pl-10" placeholder="9876543210" maxlength="10" required>
                     </div>
                     <span class="error-msg" id="errPhone">Sahi 10-digit number daalein</span>
                 </div>
@@ -555,18 +557,18 @@
                     <span class="error-msg" id="errEmail">Sahi email id daalein</span>
                 </div>
 
-                <div class="input-group mb-6">
+                <div class="input-group mb-4">
                     <label class="checkout-label">Full Delivery Address</label>
-                    <textarea id="chkAddress" class="checkout-input resize-none h-24" placeholder="House No, Street, City, State, Pincode" required></textarea>
-                    <span class="error-msg" id="errAddress">Poora address likhna zaroori hai (min 10 words)</span>
+                    <textarea id="chkAddress" class="checkout-input resize-none h-16" placeholder="House No, Street, City, State, Pincode" required></textarea>
+                    <span class="error-msg" id="errAddress">Poora address likhna zaroori hai</span>
                 </div>
 
-                <div class="flex justify-between items-center mb-6 px-2 py-3 bg-gray-50 rounded-xl border border-gray-200">
-                    <span class="font-bold text-gray-700" style="font-family: 'Lato', sans-serif !important;">Total Amount:</span>
-                    <span class="text-xl font-black text-[#0f1111]" id="chkTotalAmount">₹0</span>
+                <div class="flex justify-between items-center mb-4 px-3 py-2 bg-gray-50 rounded-lg border border-gray-200">
+                    <span class="font-bold text-gray-700 text-xs" style="font-family: 'Lato', sans-serif !important;">Total Amount:</span>
+                    <span class="text-lg font-black text-[#0f1111]" id="chkTotalAmount">₹0</span>
                 </div>
 
-                <button type="submit" id="btnPayNow" class="w-full bg-[#51B04B] hover:bg-[#3d8c38] text-white font-black text-lg py-3 rounded-xl shadow-[0_4px_15px_rgba(81,176,75,0.4)] transition-all">
+                <button type="submit" id="btnPayNow" class="w-full bg-[#51B04B] hover:bg-[#3d8c38] text-white font-black text-sm py-2.5 rounded-lg shadow-[0_4px_15px_rgba(81,176,75,0.4)] transition-all">
                     <span id="btnPayText">Pay & Place Order</span>
                     <div id="btnPayLoader" class="loader"></div>
                 </button>
@@ -582,68 +584,7 @@
         menuBtn.onclick = () => sidebar.classList.add('open');
         closeSidebarBtn.onclick = () => sidebar.classList.remove('open');
 
-        // --- OLD GENERIC POPUP LOGIC ---
-        const lists = {
-            festive: { title: "Festive Art", bg: "blessingsssl.png", items: [ { name: "Indo Arebic", link: "festive_indoarabic.html" },{ name: "Moroccan Trends", link: "festive_geometric.html" },{ name: "Arabic Festive", link: "festive_arabic.html" }, { name: "Indian Classic", link: "festive_indian.html" }, { name: "Minimal Style", link: "festive_minimal.html" }] }
-        };
-
-        function openPopup(key) {
-            const data = lists[key];
-            document.getElementById('modalTitle').innerText = data.title;
-            document.getElementById('modalBg').style.backgroundImage = `url('${data.bg}')`;
-            const container = document.getElementById('modalList');
-            container.innerHTML = data.items.map(item => `
-                <div class="list-item" onclick="window.location.href='${item.link}'">
-                    <span class="font-black text-xs uppercase text-dark">${item.name}</span>
-                    <i class="fas fa-chevron-right text-primary text-[10px]"></i>
-                </div>
-            `).join('');
-            document.getElementById('modalOverlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePopup() {
-            document.getElementById('modalOverlay').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // --- CART LOGIC ADDED ---
-        let totalCartItems = 0;
-
-        function animateCartIcon() {
-            const dockCart = document.getElementById('dock-cart');
-            const dockCartIcon = dockCart.querySelector('i');
-            
-            dockCartIcon.classList.add('scale-150', 'text-accent');
-            setTimeout(() => {
-                dockCartIcon.classList.remove('scale-150', 'text-accent');
-            }, 300);
-        }
-
-        function quickAddToCart(e, productId) {
-            e.stopPropagation(); // Prevents the modal from opening
-            totalCartItems++;
-            
-            const badge = document.getElementById('cart-badge');
-            badge.innerText = totalCartItems;
-            badge.classList.remove('hidden');
-            
-            animateCartIcon();
-        }
-
-        function addToCartFromModal(productId) {
-            const qty = parseInt(document.getElementById('detailModalQty').value) || 1;
-            totalCartItems += qty;
-            
-            const badge = document.getElementById('cart-badge');
-            badge.innerText = totalCartItems;
-            badge.classList.remove('hidden');
-            
-            animateCartIcon();
-            closeDetailedProductModal(); // Option to auto-close after adding, remove if not needed
-        }
-
-        // --- DETAILED PRODUCT MODAL LOGIC ---
+        // --- DETAILED PRODUCT DATA ---
         const detailedProducts = [
             { 
              id: 1, 
@@ -655,7 +596,7 @@
              image: "kama-xxx-initial.png", 
              gallery: [ 
                  { type: 'video', id: "aqz-KE-bpKQ" },
-                 { type: 'image', url: "kama-xxx-one.png" }, 
+                 { type: 'image', url: "kama-xxx-initial.png" }, 
                  { type: 'image', url: "kama-xxx-two.png" }, 
                  { type: 'image', url: "kama-xxx-three.png" }, 
                  { type: 'image', url: "kama-xxx-four.png" } 
@@ -675,10 +616,130 @@
             }
         ];
 
+        // --- CART LOGIC ---
+        let cartItems = [];
+        let totalCartItems = 0;
         let detailedQty = 1;
         let currentCheckoutPrice = 0;
         let currentCheckoutProductName = "";
 
+        function animateCartIcon() {
+            const dockCartIcon = document.querySelector('#dock-cart i');
+            dockCartIcon.classList.add('scale-150', 'text-accent');
+            setTimeout(() => {
+                dockCartIcon.classList.remove('scale-150', 'text-accent');
+            }, 300);
+        }
+
+        function updateCartBadge() {
+            totalCartItems = cartItems.reduce((sum, item) => sum + item.qty, 0);
+            const badge = document.getElementById('cart-badge');
+            badge.innerText = totalCartItems;
+            if(totalCartItems > 0) {
+                badge.classList.remove('hidden');
+                animateCartIcon();
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function addItemToCartLogic(product, qty) {
+            const existing = cartItems.find(item => item.id === product.id);
+            if(existing) {
+                existing.qty += qty;
+            } else {
+                cartItems.push({
+                    id: product.id,
+                    name: product.name,
+                    price: parseInt(product.price.replace(/[^0-9]/g, '')),
+                    img: product.gallery[1].url,
+                    qty: qty
+                });
+            }
+            updateCartBadge();
+        }
+
+        function quickAddToCart(e, productId) {
+            e.stopPropagation(); 
+            const product = detailedProducts.find(p => p.id === productId);
+            if(product) addItemToCartLogic(product, 1);
+        }
+
+        function addToCartFromModal(productId) {
+            const qty = parseInt(document.getElementById('detailModalQty').value) || 1;
+            const product = detailedProducts.find(p => p.id === productId);
+            if(product) {
+                addItemToCartLogic(product, qty);
+                closeDetailedProductModal(); 
+            }
+        }
+
+        // Cart Modal Functions
+        document.getElementById('dock-cart').addEventListener('click', function(e) {
+            e.preventDefault();
+            openCartModal();
+        });
+
+        function openCartModal() {
+            closeDetailedProductModal(); 
+            closeCheckoutModal();
+            const container = document.getElementById('cartItemsContainer');
+            if(cartItems.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-500 text-xs mt-10">Your cart is empty!</p>';
+                document.getElementById('cartTotalAmount').innerText = '₹0';
+            } else {
+                let html = '';
+                let total = 0;
+                cartItems.forEach((item, index) => {
+                    const itemTotal = item.price * item.qty;
+                    total += itemTotal;
+                    html += `
+                    <div class="flex items-center gap-2 bg-gray-50 p-2 rounded-lg border border-gray-100 shadow-sm">
+                        <img src="${item.img}" class="w-12 h-12 rounded object-cover border border-gray-200" onerror="this.src='https://placehold.co/100x100?text=IMG'">
+                        <div class="flex-1 overflow-hidden">
+                            <h4 class="text-xs font-black text-dark truncate">${item.name}</h4>
+                            <div class="text-[10px] text-gray-500 mt-0.5">Qty: ${item.qty} &times; ₹${item.price}</div>
+                            <div class="text-xs font-black text-primary mt-0.5">₹${itemTotal}</div>
+                        </div>
+                        <button onclick="removeCartItem(${index})" class="text-red-400 hover:text-red-600 p-1"><i class="fa-solid fa-trash text-[10px]"></i></button>
+                    </div>`;
+                });
+                container.innerHTML = html;
+                document.getElementById('cartTotalAmount').innerText = `₹${total}`;
+            }
+            document.getElementById('cartModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function removeCartItem(index) {
+            cartItems.splice(index, 1);
+            updateCartBadge();
+            openCartModal(); // Refresh cart view
+        }
+
+        function proceedToCheckoutFromCart() {
+            if(cartItems.length === 0) {
+                alert("Please add items to cart first!");
+                return;
+            }
+            
+            const total = cartItems.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const productNames = cartItems.map(item => `${item.name} (x${item.qty})`).join(', ');
+            
+            currentCheckoutProductName = productNames;
+            currentCheckoutPrice = total; 
+            detailedQty = 1; // Since currentCheckoutPrice is already multiplied by total
+            
+            closeCartModal();
+            openCheckoutModal(true); // true means coming from cart
+        }
+
+        // --- DETAILED PRODUCT MODAL LOGIC ---
         function changeMainMedia(type, data, element) { 
             document.querySelectorAll('.thumbnail-btn').forEach(btn => btn.classList.remove('active')); 
             element.classList.add('active'); 
@@ -707,7 +768,7 @@
             const product = detailedProducts.find(p => p.id === id); 
             if(!product) return; 
             
-            // Set for checkout
+            // Set global variables for buy now (non-cart checkout)
             currentCheckoutProductName = product.name;
             currentCheckoutPrice = parseInt(product.price.replace(/[^0-9]/g, '')) || 0;
 
@@ -716,7 +777,7 @@
             vidEl.src = ''; 
             vidEl.classList.add('hidden'); 
             imgEl.classList.remove('hidden'); 
-            imgEl.src = product.gallery[1].url; // Set first image as default
+            imgEl.src = product.gallery[1].url; 
             
             const thumbnailsContainer = document.getElementById('detailModalThumbnails'); 
             thumbnailsContainer.innerHTML = ''; 
@@ -730,7 +791,7 @@
             }); 
             
             document.getElementById('detailModalTitle').innerText = product.name; 
-            document.getElementById('detailModalRatingNo').innerHTML = `${product.rating} <i class="fa-solid fa-star text-[10px]"></i>`; 
+            document.getElementById('detailModalRatingNo').innerHTML = `${product.rating} <i class="fa-solid fa-star text-[8px]"></i>`; 
             document.getElementById('detailModalReviews').innerText = `${product.reviews} ratings`; 
             document.getElementById('detailModalPrice').innerText = product.price; 
             document.getElementById('detailModalMRP').innerText = product.mrp; 
@@ -760,13 +821,11 @@
             document.getElementById('detailModalVideo').src = ''; 
         }
 
-        // Close detailed modal if clicked outside
         document.getElementById('detailedProductModal').addEventListener('click', (e) => { 
             if(e.target === document.getElementById('detailedProductModal')) {
                 closeDetailedProductModal();
             }
         });
-
 
         // --- Smooth Slider Logic ---
         const slides = [
@@ -776,10 +835,8 @@
             { img: "sliderone.webp" },
             { img: "slidertwo.webp" }
         ];
-        
         let currentSlide = 0;
         let isTransitioning = false;
-        
         const frontImg = document.getElementById('slide-img-front');
         const backImg = document.getElementById('slide-img-back');
         frontImg.style.backgroundImage = `url('${slides[0].img}')`;
@@ -803,34 +860,23 @@
         }
         setInterval(() => changeSlide(1), 5000);
 
-        // Card 3D effect
-        document.querySelectorAll('.premium-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                if (window.innerWidth < 1024) return;
-                const rect = card.getBoundingClientRect();
-                const x = (e.clientX - rect.left - rect.width / 2) / 10;
-                const y = (e.clientY - rect.top - rect.height / 2) / 10;
-                card.style.transform = `rotateX(${-y}deg) rotateY(${x}deg) translateY(-10px)`;
-            });
-            card.addEventListener('mouseleave', () => card.style.transform = `rotateX(0deg) rotateY(0deg) translateY(0)`);
-        });
-
         // ==========================================
-        // CHECKOUT & PAYMENT LOGIC (NEW ADDED)
+        // CHECKOUT & PAYMENT LOGIC 
         // ==========================================
-        const GOOGLE_SCRIPT_WEB_APP_URL = "YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE"; 
-        const RAZORPAY_KEY_ID = "YOUR_RAZORPAY_KEY_HERE"; 
+        const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec"; 
+        const RAZORPAY_KEY_ID = "rzp_live_SLy447saTnXqbZ"; 
 
-        function openCheckoutModal() {
-            closeDetailedProductModal(); // Close product modal first
-            const total = currentCheckoutPrice * detailedQty;
+        function openCheckoutModal(fromCart = false) {
+            closeDetailedProductModal(); 
+            
+            // If from detailed product modal, qty matters. If from cart, price is already totaled.
+            const total = currentCheckoutPrice * (fromCart ? 1 : detailedQty);
             document.getElementById('chkTotalAmount').innerText = `₹${total}`;
             
             const modal = document.getElementById('checkoutModal');
             const box = document.getElementById('checkoutBox');
             modal.style.display = 'flex';
             
-            // Animation
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
                 box.classList.remove('scale-95');
@@ -850,9 +896,9 @@
             }, 200);
         }
 
-        // Validation Functions
         function validatePhone(phone) { return /^[6-9]\d{9}$/.test(phone); }
-        function validateEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+        function validateEmail(email) { return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email); }
+        function validateAddress(address) { return address.length > 10 && address.split(' ').length > 2; }
 
         function resetErrors() {
             document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
@@ -882,65 +928,42 @@
             const email = document.getElementById('chkEmail').value.trim();
             const address = document.getElementById('chkAddress').value.trim();
             
-            if(name.length < 2) {
-                document.getElementById('errName').style.display = 'block';
-                document.getElementById('chkName').classList.add('error');
-                isValid = false;
-            }
-            if(!validatePhone(phone)) {
-                document.getElementById('errPhone').style.display = 'block';
-                document.getElementById('chkPhone').classList.add('error');
-                isValid = false;
-            }
-            if(!validateEmail(email)) {
-                document.getElementById('errEmail').style.display = 'block';
-                document.getElementById('chkEmail').classList.add('error');
-                isValid = false;
-            }
-            if(address.length < 10) {
-                document.getElementById('errAddress').style.display = 'block';
-                document.getElementById('chkAddress').classList.add('error');
-                isValid = false;
-            }
+            if(name.length < 3) { document.getElementById('errName').style.display = 'block'; document.getElementById('chkName').classList.add('error'); isValid = false; }
+            if(!validatePhone(phone)) { document.getElementById('errPhone').style.display = 'block'; document.getElementById('chkPhone').classList.add('error'); isValid = false; }
+            if(!validateEmail(email)) { document.getElementById('errEmail').style.display = 'block'; document.getElementById('chkEmail').classList.add('error'); isValid = false; }
+            if(!validateAddress(address)) { document.getElementById('errAddress').style.display = 'block'; document.getElementById('chkAddress').classList.add('error'); isValid = false; }
 
             if(!isValid) return;
 
-            // Form is valid. Start process.
             showBtnLoader(true);
+
+            const uniqueOrderId = "ORD-" + new Date().getTime() + "-" + Math.floor(Math.random() * 1000);
+            
+            const amountToPay = parseInt(document.getElementById('chkTotalAmount').innerText.replace(/[^0-9]/g, ''));
 
             const orderData = {
                 action: 'createOrder',
+                orderId: uniqueOrderId,
                 name: name,
                 phone: phone,
                 email: email,
                 address: address,
                 product: currentCheckoutProductName,
-                qty: detailedQty,
-                amount: currentCheckoutPrice * detailedQty,
+                qty: (detailedQty === 1 && cartItems.length > 0) ? totalCartItems : detailedQty, 
+                amount: amountToPay,
                 status: "Payment Pending",
                 txnId: ""
             };
 
             try {
-                // 1. Send initial data to Google Sheet
-                if(GOOGLE_SCRIPT_WEB_APP_URL === "YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE"){
-                    alert("Developer Note: Google Script URL set nahi hai. Mock mode me aage badh rahe hain.");
-                    startRazorpayPayment(orderData, "row_" + Math.floor(Math.random()*1000));
-                    return;
-                }
-
-                const response = await fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+                await fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(orderData)
                 });
                 
-                const mockRowId = new Date().getTime(); 
-                
-                // 2. Open Razorpay
-                startRazorpayPayment(orderData, mockRowId);
-
+                startRazorpayPayment(orderData, uniqueOrderId, amountToPay);
             } catch (error) {
                 console.error("Sheet Error:", error);
                 alert("Server issue. Please try again.");
@@ -948,25 +971,18 @@
             }
         }
 
-        function startRazorpayPayment(orderData, sheetRowId) {
-            const amountInPaise = orderData.amount * 100;
-
-            if(RAZORPAY_KEY_ID === "YOUR_RAZORPAY_KEY_HERE"){
-                alert("Developer Note: Razorpay Key set nahi hai. Payment cancel ki ja rahi hai.");
-                showBtnLoader(false);
-                return;
-            }
+        function startRazorpayPayment(orderData, uniqueOrderId, amountToPay) {
+            const amountInPaise = amountToPay * 100;
 
             var options = {
                 "key": RAZORPAY_KEY_ID, 
                 "amount": amountInPaise, 
                 "currency": "INR",
                 "name": "Sukh Healthcare",
-                "description": `Payment for ${orderData.product} (Qty: ${orderData.qty})`,
+                "description": `Payment for Order ${uniqueOrderId}`,
                 "image": "https://placehold.co/100x100/51B04B/FFF?text=SH", 
                 "handler": function (response) {
-                    // 3. Payment Success - Update Google Sheet
-                    updatePaymentInSheet(sheetRowId, response.razorpay_payment_id, orderData);
+                    updatePaymentInSheet(uniqueOrderId, response.razorpay_payment_id);
                 },
                 "prefill": {
                     "name": orderData.name,
@@ -985,29 +1001,30 @@
             rzp1.open();
         }
 
-        async function updatePaymentInSheet(rowId, txnId, orderData) {
+        async function updatePaymentInSheet(orderId, txnId) {
             const updateData = {
                 action: 'updatePayment',
-                rowId: rowId, 
-                phone: orderData.phone, 
+                orderId: orderId, 
                 txnId: txnId,
                 status: "Paid Successfully"
             };
 
             try {
-                if(GOOGLE_SCRIPT_WEB_APP_URL !== "YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE"){
-                     await fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(updateData)
-                    });
-                }
+                await fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updateData)
+                });
                 
                 alert(`Order Placed Successfully!\nTransaction ID: ${txnId}`);
+                
+                // Clear cart if successful
+                cartItems = [];
+                updateCartBadge();
+                
                 closeCheckoutModal();
                 document.getElementById('checkoutForm').reset();
-                
             } catch (error) {
                 console.error("Update Error:", error);
                 alert("Payment received but error saving to database. Contact Support with Txn ID: " + txnId);
@@ -1016,7 +1033,5 @@
             }
         }
     </script>
-    
-   
 </body>
 </html>
