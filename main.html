@@ -131,8 +131,7 @@
         .hero-slider { 
             width: 100%;
             max-width: 1536px;
-            /* Updated to 16:9 ratio (1920x1080 format) */
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 1536 / 1024;
             height: auto;
             margin: 0 auto 30px auto; 
             border-radius: 40px; 
@@ -141,14 +140,13 @@
             border: 2.5px solid var(--primary); 
             box-shadow: 0 15px 40px rgba(0,0,0,0.1); 
         }
-        @media (max-width: 640px) { .hero-slider { aspect-ratio: 16 / 9; height: auto; } }
+        @media (max-width: 640px) { .hero-slider { aspect-ratio: 1536 / 1024; height: auto; } }
         
         .slide-img-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: opacity 1.2s ease-in-out; transform: scale(1.05); }
 
         /* --- CARD GRID & EXISTING ORIGINAL CARDS --- */
         .card-grid { display: grid; grid-template-columns: 1fr; gap: 16px; width: 100%; }
         @media (min-width: 640px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
 
         .premium-card { 
             background: var(--card-glass); 
@@ -166,8 +164,8 @@
         @media (min-width: 640px) { .premium-card { padding: 14px; } }
         .premium-card:hover { border-color: var(--secondary); transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0, 145, 213, 0.2); }
         
-        /* Updated to strictly follow 16:9 ratio (1920x1080) */
-        .card-img { width: 100%; aspect-ratio: 16 / 9; height: auto; border-radius: 16px; object-fit: cover; transition: 0.6s; border: 3px solid var(--primary); }
+        /* Updated Card Image Aspect Ratio to 1920x1080 (16:9) */
+        .card-img { width: 100%; aspect-ratio: 1920 / 1080; height: auto; border-radius: 16px; object-fit: cover; transition: 0.6s; border: 3px solid var(--primary); }
 
         .floral-divider { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 15px 0 20px 0; opacity: 0.8; }
         .floral-line { height: 1.5px; width: 60px; background: linear-gradient(90deg, transparent, var(--primary)); }
@@ -180,9 +178,11 @@
             position: fixed; inset: 0; 
             background: rgba(0, 0, 0, 0.6); 
             backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); 
+            /* Z-index 1900 to stay UNDER Header & Footer (2000) */
             z-index: 1900; 
             display: flex; justify-content: center; align-items: center; 
             opacity: 0; pointer-events: none; transition: opacity 0.3s ease; 
+            /* Kept between header and footer via padding */
             padding-top: calc(var(--header-offset) + var(--header-height) + 15px);
             padding-bottom: calc(var(--footer-offset) + var(--footer-height) + 15px);
             padding-left: 15px; padding-right: 15px;
@@ -190,9 +190,10 @@
         }
         .p-modal-overlay.active { opacity: 1; pointer-events: auto; }
         
+        /* Reduced max-width and scaled down */
         .product-modal { 
             background: #ffffff; 
-            width: 950px; max-width: 100%; 
+            width: 850px; max-width: 100%; 
             height: auto; max-height: 100%; 
             border-radius: 16px; 
             overflow: hidden; position: relative; 
@@ -200,6 +201,7 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
             display: flex; flex-direction: row; text-align: left; 
         }
+        /* Mobile scale down */
         @media (max-width: 640px) {
             .product-modal { 
                 transform: scale(0.85) translateY(20px); 
@@ -213,22 +215,23 @@
         .p-modal-close { position: absolute; top: 8px; right: 8px; background: #fff; border: none; font-size: 1.2rem; color: var(--color-brand); cursor: pointer; transition: all 0.2s; z-index: 50; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .p-modal-close:hover { background: var(--color-brand); color: #fff; transform: scale(1.05); }
 
-        .modal-left { width: 50%; background: #f9f9f9; display: flex; flex-direction: column; padding: 1.5rem; border-right: 1px solid #eee; overflow-y: auto;}
+        .modal-left { width: 45%; background: #f9f9f9; display: flex; flex-direction: column; padding: 1.5rem; border-right: 1px solid #eee; overflow-y: auto;}
         
-        /* Updated main image/video container to 16:9 ratio (1920x1080) */
-        .main-img-container { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; height: auto; margin: 0 auto 0.8rem auto; border-radius: 10px; overflow: hidden; background: #000; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #eaeaea; position: relative; }
-        .main-img-container img, .main-img-container iframe { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: opacity 0.3s ease; border: none; }
+        /* Updated Product Modal Image/Video Aspect Ratio to 1920x1080 (16:9) */
+        .main-img-container { width: 100%; max-width: 100%; aspect-ratio: 1920 / 1080; margin: 0 auto; border-radius: 10px; overflow: hidden; background: #fff; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #eaeaea; position: relative; }
+        .main-img-container img, .main-img-container iframe { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; transition: opacity 0.3s ease; border: none; }
         
-        .thumbnails-container { display: flex; gap: 8px; justify-content: center; height: auto; padding-top: 5px;}
+        /* Thumbnails Container adjusted to sit neatly below */
+        .thumbnails-container { display: flex; gap: 8px; justify-content: space-between; height: auto; width: 100%; margin-top: 10px; }
         
-        /* Updated thumbnail aspect ratio to 16:9 */
-        .thumbnail-btn { width: 80px; aspect-ratio: 16 / 9; height: auto; border-radius: 6px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; background: #fff; opacity: 0.6; position: relative; flex-shrink: 0;}
+        /* Thumbnails flex 1 to distribute space perfectly evenly without overflowing */
+        .thumbnail-btn { flex: 1; aspect-ratio: 16 / 9; height: auto; border-radius: 6px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; background: #fff; opacity: 0.6; position: relative;}
         .thumbnail-btn:hover { opacity: 1; }
         .thumbnail-btn.active { border-color: var(--color-premium-gold); opacity: 1; box-shadow: 0 2px 8px rgba(197, 160, 89, 0.3); }
         .thumbnail-btn img { width: 100%; height: 100%; object-fit: cover; }
         .video-play-icon { position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
 
-        .modal-right { width: 50%; padding: 1.8rem 2rem; overflow-y: auto; background: #fff; }
+        .modal-right { width: 55%; padding: 1.8rem 2rem; overflow-y: auto; background: #fff; }
         .modal-section { padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #f0f0f0; }
         .modal-section:last-child { border-bottom: none; }
         
@@ -238,7 +241,7 @@
         .rating-text:hover { text-decoration: underline; color: #C7511F; }
         .price-block { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
         .m-discount { color: #CC0C39; font-size: 1.2rem; font-weight: 300 !important; font-family: 'Lato', sans-serif !important; }
-        .m-price { font-size: 1.6rem; font-weight: 700 !important; color: #0f1111; font-family: 'Lato', sans-serif !important;}
+        .m-price { font-size: 1.6rem; font-weight: 700 !important; color: #0f1111; font-family: 'Lato', sans-serif !important; transition: all 0.3s;}
         .m-mrp { color: #565959; text-decoration: line-through; font-size: 0.8rem; font-family: 'Lato', sans-serif !important; font-weight: normal !important; }
         .tax-info { color: #565959; font-size: 0.75rem; font-family: 'Lato', sans-serif !important; font-weight: normal !important; }
         .stock-status { color: #007600; font-size: 0.95rem; font-weight: 500 !important; margin-top: 6px; font-family: 'Lato', sans-serif !important; }
@@ -274,9 +277,9 @@
             .product-modal { flex-direction: column; height: 100%; display: block; overflow-y: auto; overflow-x: hidden; border-radius: 16px; margin: 0; width: 100%; }
             .p-modal-close { top: 8px; right: 8px; position: absolute; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
             .modal-left { padding: 1rem; }
-            .main-img-container { aspect-ratio: 16 / 9; height: auto; } 
-            .thumbnails-container { overflow-x: auto; justify-content: flex-start;}
-            .thumbnail-btn { width: 70px; }
+            .main-img-container { aspect-ratio: 1920 / 1080; height: auto; } 
+            .thumbnails-container { height: auto; overflow-x: visible; justify-content: space-between;}
+            .thumbnail-btn { width: auto; height: auto; aspect-ratio: 16 / 9; }
             .modal-right { padding: 1rem; overflow-y: visible; }
             .m-title { font-size: 1.3rem; }
             .action-buttons { flex-direction: column; }
@@ -284,6 +287,7 @@
 
         /* --- CHECKOUT MODAL STYLES (Scaled down & Z-index 1900) --- */
         .input-group { margin-bottom: 0.8rem; position: relative; }
+        /* Reduced padding & font sizes by 20% */
         .checkout-input { width: 100%; padding: 8px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-family: 'Lato', sans-serif !important; font-weight: 500 !important; font-size: 0.85rem; outline: none; transition: border-color 0.3s; background: #f9fafb; color: #111827;}
         .checkout-input:focus { border-color: var(--primary); background: #fff; }
         .checkout-input.error { border-color: #ef4444; }
@@ -365,13 +369,13 @@
             <div class="floral-line rev"></div>
         </div>
 
-        <!-- SERVICE GRID (Exactly 3 Cards Implemented with 16:9 1920x1080 Images) -->
+        <!-- SERVICE GRID -->
         <div class="card-grid mb-8">
             
             <!-- First Card -->
             <div class="premium-card group relative" onclick="openDetailedProductModal(1)">
                 <div class="relative">
-                    <img src="bridal.png" class="card-img" onerror="this.src='https://placehold.co/1920x1080/51B04B/FFF?text=KAMA-XXX'">
+                    <img src="bridal.png" class="card-img" onerror="this.src='kama-xxx-initial.png'">
                     <!-- Quick Add to Cart Button floating on image -->
                     <button class="absolute bottom-3 right-3 w-10 h-10 bg-[#F58220] hover:bg-[#d97018] text-white rounded-full shadow-[0_5px_15px_rgba(245,130,32,0.4)] flex items-center justify-center transition-transform hover:scale-110 z-10 border-2 border-white" onclick="quickAddToCart(event, 1)">
                         <i class="fas fa-plus"></i>
@@ -385,19 +389,10 @@
             
             <!-- Second Card -->
             <div class="premium-card group" onclick="window.location.href='track.html'">
-                <img src="festive.png" class="card-img" onerror="this.src='https://placehold.co/1920x1080/0091D5/FFF?text=Track+Order'">
+                <img src="festive.png" class="card-img" onerror="this.src='track.png'">
                 <div class="mt-4 text-center">
-                    <h3 class="text-sm sm:text-lg font-black text-dark group-hover:text-secondary transition-colors uppercase tracking-widest">Track-Order</h3>
+                    <h3 class="text-sm sm:text-lg font-black text-dark group-hover:text-secondary transition-colors uppercase tracking-widest">Treck-Order</h3>
                     <p class="text-gray-500 text-[10px] sm:text-xs mt-1 italic">You Can Track Your Order </p>
-                </div>
-            </div>
-
-            <!-- Third Card (Added to make it 3 cards as requested) -->
-            <div class="premium-card group" onclick="window.location.href='social.html'">
-                <img src="social.png" class="card-img" onerror="this.src='https://placehold.co/1920x1080/F58220/FFF?text=Our+Community'">
-                <div class="mt-4 text-center">
-                    <h3 class="text-sm sm:text-lg font-black text-dark group-hover:text-secondary transition-colors uppercase tracking-widest">Our Community</h3>
-                    <p class="text-gray-500 text-[10px] sm:text-xs mt-1 italic">Join us on Social Media</p>
                 </div>
             </div>
 
@@ -431,7 +426,6 @@
             <button class="p-modal-close" onclick="closeDetailedProductModal()"><i class="fa-solid fa-xmark"></i></button>
             
             <div class="modal-left">
-                <!-- Video/Image container set strictly to 16:9 ratio -->
                 <div class="main-img-container">
                     <img id="detailModalMainImg" src="" alt="Product View">
                     <iframe id="detailModalVideo" class="hidden" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -487,6 +481,21 @@
                         <p class="text-xs text-gray-700 mb-2" id="detailModalIngredients" style="font-family: 'Lato', sans-serif !important; font-weight: normal !important;"></p>
                         <h3 class="section-heading">How to use</h3>
                         <p class="text-xs text-gray-700" id="detailModalUsage" style="font-family: 'Lato', sans-serif !important; font-weight: normal !important;"></p>
+                    </div>
+
+                    <!-- Delivery Options Block -->
+                    <div class="mb-3 border-t border-gray-200 pt-3">
+                        <h3 class="section-heading mb-2">Delivery Options</h3>
+                        <div class="flex flex-col gap-2">
+                            <label class="flex items-center gap-2 cursor-pointer text-[0.85rem] text-[#0f1111]" style="font-family: 'Lato', sans-serif !important;">
+                                <input type="radio" name="deliveryOption" value="normal" checked class="w-4 h-4 accent-primary" onchange="updateDeliveryCost()">
+                                <span>Normal Delivery (7 Days) - <b class="text-green-600">Free</b></span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer text-[0.85rem] text-[#0f1111]" style="font-family: 'Lato', sans-serif !important;">
+                                <input type="radio" name="deliveryOption" value="fast" class="w-4 h-4 accent-primary" onchange="updateDeliveryCost()">
+                                <span>3rd Day Delivery - <b class="text-red-500">+₹50</b></span>
+                            </label>
+                        </div>
                     </div>
 
                     <div class="flex flex-col gap-1 mt-3 pt-3 border-t border-gray-200">
@@ -633,6 +642,11 @@
         let detailedQty = 1;
         let currentCheckoutPrice = 0;
         let currentCheckoutProductName = "";
+        
+        // --- NEW GLOBALS FOR DELIVERY COST ---
+        let currentBasePrice = 0;
+        let currentDeliveryFee = 0;
+        let selectedProductId = null;
 
         function animateCartIcon() {
             const dockCartIcon = document.querySelector('#dock-cart i');
@@ -662,7 +676,7 @@
                 cartItems.push({
                     id: product.id,
                     name: product.name,
-                    price: parseInt(product.price.replace(/[^0-9]/g, '')),
+                    price: parseInt(String(product.price).replace(/[^0-9]/g, '')),
                     img: product.gallery[1].url,
                     qty: qty
                 });
@@ -680,7 +694,15 @@
             const qty = parseInt(document.getElementById('detailModalQty').value) || 1;
             const product = detailedProducts.find(p => p.id === productId);
             if(product) {
-                addItemToCartLogic(product, qty);
+                const isFast = currentDeliveryFee > 0;
+                // Modify object structure temporarily for cart grouping
+                const cartProduct = {
+                    id: isFast ? `${product.id}_fast` : `${product.id}_normal`,
+                    name: isFast ? `${product.name} (3rd Day Delivery)` : product.name,
+                    price: `₹${currentBasePrice + currentDeliveryFee}`,
+                    gallery: product.gallery
+                };
+                addItemToCartLogic(cartProduct, qty);
                 closeDetailedProductModal(); 
             }
         }
@@ -750,6 +772,21 @@
             openCheckoutModal(true); // true means coming from cart
         }
 
+        // --- DELIVERY OPTIONS LOGIC ---
+        function updateDeliveryCost() {
+            const fastDelivery = document.querySelector('input[name="deliveryOption"][value="fast"]').checked;
+            currentDeliveryFee = fastDelivery ? 50 : 0;
+            const newTotal = currentBasePrice + currentDeliveryFee;
+            document.getElementById('detailModalPrice').innerText = `₹${newTotal}`;
+            
+            // Update global fields for direct Buy Now
+            const product = detailedProducts.find(p => p.id === selectedProductId);
+            if (product) {
+                currentCheckoutProductName = fastDelivery ? `${product.name} (3rd Day Delivery)` : product.name;
+                currentCheckoutPrice = newTotal;
+            }
+        }
+
         // --- DETAILED PRODUCT MODAL LOGIC ---
         function changeMainMedia(type, data, element) { 
             document.querySelectorAll('.thumbnail-btn').forEach(btn => btn.classList.remove('active')); 
@@ -779,9 +816,17 @@
             const product = detailedProducts.find(p => p.id === id); 
             if(!product) return; 
             
-            // Set global variables for buy now (non-cart checkout)
+            selectedProductId = id;
+            currentBasePrice = parseInt(product.price.replace(/[^0-9]/g, '')) || 0;
+            currentDeliveryFee = 0;
+
+            // Set global variables for direct buy now
             currentCheckoutProductName = product.name;
-            currentCheckoutPrice = parseInt(product.price.replace(/[^0-9]/g, '')) || 0;
+            currentCheckoutPrice = currentBasePrice;
+
+            // Reset Delivery Radio Buttons to Normal
+            const normalRadio = document.querySelector('input[name="deliveryOption"][value="normal"]');
+            if(normalRadio) normalRadio.checked = true;
 
             const imgEl = document.getElementById('detailModalMainImg'); 
             const vidEl = document.getElementById('detailModalVideo'); 
@@ -804,7 +849,7 @@
             document.getElementById('detailModalTitle').innerText = product.name; 
             document.getElementById('detailModalRatingNo').innerHTML = `${product.rating} <i class="fa-solid fa-star text-[8px]"></i>`; 
             document.getElementById('detailModalReviews').innerText = `${product.reviews} ratings`; 
-            document.getElementById('detailModalPrice').innerText = product.price; 
+            document.getElementById('detailModalPrice').innerText = `₹${currentBasePrice}`; 
             document.getElementById('detailModalMRP').innerText = product.mrp; 
             document.getElementById('detailModalDiscount').innerText = product.discount; 
             document.getElementById('detailModalSizeText').innerText = product.size; 
