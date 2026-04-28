@@ -131,7 +131,8 @@
         .hero-slider { 
             width: 100%;
             max-width: 1536px;
-            aspect-ratio: 1536 / 1024;
+            /* Updated to 16:9 ratio (1920x1080 format) */
+            aspect-ratio: 16 / 9;
             height: auto;
             margin: 0 auto 30px auto; 
             border-radius: 40px; 
@@ -140,13 +141,14 @@
             border: 2.5px solid var(--primary); 
             box-shadow: 0 15px 40px rgba(0,0,0,0.1); 
         }
-        @media (max-width: 640px) { .hero-slider { aspect-ratio: 1536 / 1024; height: auto; } }
+        @media (max-width: 640px) { .hero-slider { aspect-ratio: 16 / 9; height: auto; } }
         
         .slide-img-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; transition: opacity 1.2s ease-in-out; transform: scale(1.05); }
 
         /* --- CARD GRID & EXISTING ORIGINAL CARDS --- */
         .card-grid { display: grid; grid-template-columns: 1fr; gap: 16px; width: 100%; }
         @media (min-width: 640px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
 
         .premium-card { 
             background: var(--card-glass); 
@@ -164,8 +166,8 @@
         @media (min-width: 640px) { .premium-card { padding: 14px; } }
         .premium-card:hover { border-color: var(--secondary); transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0, 145, 213, 0.2); }
         
-        .card-img { width: 100%; height: 220px; border-radius: 16px; object-fit: cover; transition: 0.6s; border: 3px solid var(--primary); }
-        @media (min-width: 640px) { .card-img { height: 280px; } }
+        /* Updated to strictly follow 16:9 ratio (1920x1080) */
+        .card-img { width: 100%; aspect-ratio: 16 / 9; height: auto; border-radius: 16px; object-fit: cover; transition: 0.6s; border: 3px solid var(--primary); }
 
         .floral-divider { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 15px 0 20px 0; opacity: 0.8; }
         .floral-line { height: 1.5px; width: 60px; background: linear-gradient(90deg, transparent, var(--primary)); }
@@ -178,11 +180,9 @@
             position: fixed; inset: 0; 
             background: rgba(0, 0, 0, 0.6); 
             backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); 
-            /* Z-index 1900 to stay UNDER Header & Footer (2000) */
             z-index: 1900; 
             display: flex; justify-content: center; align-items: center; 
             opacity: 0; pointer-events: none; transition: opacity 0.3s ease; 
-            /* Kept between header and footer via padding */
             padding-top: calc(var(--header-offset) + var(--header-height) + 15px);
             padding-bottom: calc(var(--footer-offset) + var(--footer-height) + 15px);
             padding-left: 15px; padding-right: 15px;
@@ -190,10 +190,9 @@
         }
         .p-modal-overlay.active { opacity: 1; pointer-events: auto; }
         
-        /* Reduced max-width and scaled down */
         .product-modal { 
             background: #ffffff; 
-            width: 850px; max-width: 100%; 
+            width: 950px; max-width: 100%; 
             height: auto; max-height: 100%; 
             border-radius: 16px; 
             overflow: hidden; position: relative; 
@@ -201,7 +200,6 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
             display: flex; flex-direction: row; text-align: left; 
         }
-        /* Mobile scale down */
         @media (max-width: 640px) {
             .product-modal { 
                 transform: scale(0.85) translateY(20px); 
@@ -215,18 +213,22 @@
         .p-modal-close { position: absolute; top: 8px; right: 8px; background: #fff; border: none; font-size: 1.2rem; color: var(--color-brand); cursor: pointer; transition: all 0.2s; z-index: 50; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .p-modal-close:hover { background: var(--color-brand); color: #fff; transform: scale(1.05); }
 
-        .modal-left { width: 45%; background: #f9f9f9; display: flex; flex-direction: column; padding: 1.5rem; border-right: 1px solid #eee; overflow-y: auto;}
-        .main-img-container { width: 100%; max-width: 400px; aspect-ratio: 1 / 1; margin: 0 auto 0.8rem auto; border-radius: 10px; overflow: hidden; background: #fff; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #eaeaea; position: relative; }
-        .main-img-container img, .main-img-container iframe { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; transition: opacity 0.3s ease; border: none; }
+        .modal-left { width: 50%; background: #f9f9f9; display: flex; flex-direction: column; padding: 1.5rem; border-right: 1px solid #eee; overflow-y: auto;}
         
-        .thumbnails-container { display: flex; gap: 8px; justify-content: center; height: 60px; }
-        .thumbnail-btn { width: 60px; height: 60px; border-radius: 6px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; background: #fff; opacity: 0.6; position: relative; flex-shrink: 0;}
+        /* Updated main image/video container to 16:9 ratio (1920x1080) */
+        .main-img-container { width: 100%; max-width: 100%; aspect-ratio: 16 / 9; height: auto; margin: 0 auto 0.8rem auto; border-radius: 10px; overflow: hidden; background: #000; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #eaeaea; position: relative; }
+        .main-img-container img, .main-img-container iframe { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: opacity 0.3s ease; border: none; }
+        
+        .thumbnails-container { display: flex; gap: 8px; justify-content: center; height: auto; padding-top: 5px;}
+        
+        /* Updated thumbnail aspect ratio to 16:9 */
+        .thumbnail-btn { width: 80px; aspect-ratio: 16 / 9; height: auto; border-radius: 6px; overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; background: #fff; opacity: 0.6; position: relative; flex-shrink: 0;}
         .thumbnail-btn:hover { opacity: 1; }
         .thumbnail-btn.active { border-color: var(--color-premium-gold); opacity: 1; box-shadow: 0 2px 8px rgba(197, 160, 89, 0.3); }
         .thumbnail-btn img { width: 100%; height: 100%; object-fit: cover; }
         .video-play-icon { position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
 
-        .modal-right { width: 55%; padding: 1.8rem 2rem; overflow-y: auto; background: #fff; }
+        .modal-right { width: 50%; padding: 1.8rem 2rem; overflow-y: auto; background: #fff; }
         .modal-section { padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid #f0f0f0; }
         .modal-section:last-child { border-bottom: none; }
         
@@ -272,9 +274,9 @@
             .product-modal { flex-direction: column; height: 100%; display: block; overflow-y: auto; overflow-x: hidden; border-radius: 16px; margin: 0; width: 100%; }
             .p-modal-close { top: 8px; right: 8px; position: absolute; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
             .modal-left { padding: 1rem; }
-            .main-img-container { aspect-ratio: 1 / 1; height: auto; } 
-            .thumbnails-container { height: 50px; overflow-x: auto; justify-content: flex-start;}
-            .thumbnail-btn { width: 50px; height: 50px; }
+            .main-img-container { aspect-ratio: 16 / 9; height: auto; } 
+            .thumbnails-container { overflow-x: auto; justify-content: flex-start;}
+            .thumbnail-btn { width: 70px; }
             .modal-right { padding: 1rem; overflow-y: visible; }
             .m-title { font-size: 1.3rem; }
             .action-buttons { flex-direction: column; }
@@ -282,7 +284,6 @@
 
         /* --- CHECKOUT MODAL STYLES (Scaled down & Z-index 1900) --- */
         .input-group { margin-bottom: 0.8rem; position: relative; }
-        /* Reduced padding & font sizes by 20% */
         .checkout-input { width: 100%; padding: 8px 12px; border: 2px solid #e5e7eb; border-radius: 10px; font-family: 'Lato', sans-serif !important; font-weight: 500 !important; font-size: 0.85rem; outline: none; transition: border-color 0.3s; background: #f9fafb; color: #111827;}
         .checkout-input:focus { border-color: var(--primary); background: #fff; }
         .checkout-input.error { border-color: #ef4444; }
@@ -364,13 +365,13 @@
             <div class="floral-line rev"></div>
         </div>
 
-        <!-- SERVICE GRID -->
+        <!-- SERVICE GRID (Exactly 3 Cards Implemented with 16:9 1920x1080 Images) -->
         <div class="card-grid mb-8">
             
             <!-- First Card -->
             <div class="premium-card group relative" onclick="openDetailedProductModal(1)">
                 <div class="relative">
-                    <img src="bridal.png" class="card-img" onerror="this.src='kama-xxx-initial.png'">
+                    <img src="bridal.png" class="card-img" onerror="this.src='https://placehold.co/1920x1080/51B04B/FFF?text=KAMA-XXX'">
                     <!-- Quick Add to Cart Button floating on image -->
                     <button class="absolute bottom-3 right-3 w-10 h-10 bg-[#F58220] hover:bg-[#d97018] text-white rounded-full shadow-[0_5px_15px_rgba(245,130,32,0.4)] flex items-center justify-center transition-transform hover:scale-110 z-10 border-2 border-white" onclick="quickAddToCart(event, 1)">
                         <i class="fas fa-plus"></i>
@@ -384,10 +385,19 @@
             
             <!-- Second Card -->
             <div class="premium-card group" onclick="window.location.href='track.html'">
-                <img src="festive.png" class="card-img" onerror="this.src='track.png'">
+                <img src="festive.png" class="card-img" onerror="this.src='https://placehold.co/1920x1080/0091D5/FFF?text=Track+Order'">
                 <div class="mt-4 text-center">
-                    <h3 class="text-sm sm:text-lg font-black text-dark group-hover:text-secondary transition-colors uppercase tracking-widest">Treck-Order</h3>
+                    <h3 class="text-sm sm:text-lg font-black text-dark group-hover:text-secondary transition-colors uppercase tracking-widest">Track-Order</h3>
                     <p class="text-gray-500 text-[10px] sm:text-xs mt-1 italic">You Can Track Your Order </p>
+                </div>
+            </div>
+
+            <!-- Third Card (Added to make it 3 cards as requested) -->
+            <div class="premium-card group" onclick="window.location.href='social.html'">
+                <img src="social.png" class="card-img" onerror="this.src='https://placehold.co/1920x1080/F58220/FFF?text=Our+Community'">
+                <div class="mt-4 text-center">
+                    <h3 class="text-sm sm:text-lg font-black text-dark group-hover:text-secondary transition-colors uppercase tracking-widest">Our Community</h3>
+                    <p class="text-gray-500 text-[10px] sm:text-xs mt-1 italic">Join us on Social Media</p>
                 </div>
             </div>
 
@@ -421,6 +431,7 @@
             <button class="p-modal-close" onclick="closeDetailedProductModal()"><i class="fa-solid fa-xmark"></i></button>
             
             <div class="modal-left">
+                <!-- Video/Image container set strictly to 16:9 ratio -->
                 <div class="main-img-container">
                     <img id="detailModalMainImg" src="" alt="Product View">
                     <iframe id="detailModalVideo" class="hidden" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
