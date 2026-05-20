@@ -80,7 +80,8 @@
             border: 1px solid rgba(255,255,255,0.4); 
             width: 320px; max-width: 90vw; 
             height: auto; max-height: calc(100vh - 150px); overflow-y: auto; 
-            border-radius: var(--radius-xl); padding: 2.5rem 2rem; position: relative; 
+            /* FIX: WebView overlap ko rokne ke liye sidebar top padding badhai hai */
+            border-radius: var(--radius-xl); padding: 4rem 2rem 2.5rem 2rem; position: relative; 
             transform: translateX(-100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
             box-shadow: var(--shadow-float); display: flex; flex-direction: column; gap: 2rem; 
         }
@@ -88,7 +89,8 @@
         .sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 4px; }
         .sidebar-overlay.active .sidebar { transform: translateX(0); }
         
-        .close-sidebar-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(0,0,0,0.05); border: none; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; color: var(--color-text); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        /* FIX: Close button ko bhi status bar se thoda niche push kiya hai */
+        .close-sidebar-btn { position: absolute; top: 2.5rem; right: 1.5rem; background: rgba(0,0,0,0.05); border: none; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; color: var(--color-text); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
         .close-sidebar-btn:hover { background: rgba(0,0,0,0.1); color: var(--color-premium-gold); }
         
         .sidebar-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--color-brand); text-align: center; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0, 0, 0, 0.05); display: flex; align-items: center; justify-content: center; gap: 10px; }
@@ -336,10 +338,13 @@
 
         @media (max-width: 640px) {
             html { font-size: 14px; }
-            /* FIX: Drastically reduced padding-top to perfectly align below the header */
-            body { padding-top: 60px; padding-bottom: 80px; } 
-            .navbar { padding: 1rem; }
-            .header-wrapper.scrolled .navbar { padding: 0.8rem 1rem; }
+            /* FIX: WebView me Header aur status bar overlap ko rokne ke liye body padding adjust ki hai */
+            body { padding-top: 90px; padding-bottom: 80px; } 
+            
+            /* FIX: Mobile Navbar ke andar 35px padding-top de di hai taaki time/battery ke niche logo aaye */
+            .navbar { padding: 35px 1rem 1rem 1rem; }
+            .header-wrapper.scrolled .navbar { padding: 25px 1rem 0.8rem 1rem; }
+            
             .product-grid { grid-template-columns: 350px; justify-content: center; gap: 3.5rem; }
             .store-container { padding: 0 1rem; }
             .section-title { font-size: 1.6rem; } 
@@ -349,9 +354,9 @@
             .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
             .footer-legal a { margin: 0 0.5rem; }
             
-            /* FIX: Updated padding logic to match header */
+            /* FIX: Modals/Cart Overlays bhi safe distance par rahenge */
             .modal-overlay, .cart-overlay { 
-                padding-top: 60px !important; /* Adjusted from 140px to 60px */
+                padding-top: 90px !important; 
                 padding-bottom: 85px !important; 
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
@@ -421,9 +426,10 @@
                 <img src="sukhname.png" alt="Sukh Name" class="sidebar-logo-name-img">
             </div>
             <div class="sidebar-links">
-                
-                <a href="#allblogs.html">Wellness Journal</a>
-                <a href="#trackorder.html">Track Order</a>
+                <a href="#"></a>
+                <a href="#philosophy"></a>
+                <a href="allblogs.html">Wellness Journal</a>
+                <a href="trackorder.html">Track Order</a>
             </div>
             <div class="mt-auto pt-6 border-t border-gray-200">
                 <div class="flex gap-4 text-xl text-[#1A362D] justify-center">
@@ -514,13 +520,13 @@
                 <h4>Explore</h4>
                 <a href="#">Shop All</a>
                 <a href="#">Bestsellers</a>
-                <a href="trackorder.html">Track Order</a>
+                <a href="#trackorder.html">Track Order</a>
             </div>
             <div class="footer-col">
                 <h4>About</h4>
                 <a href="#philosophy">Our Philosophy</a>
                 <a href="#">Rare Ingredients</a>
-                <a href="allblogs.html">Journal</a>
+                <a href="#allblogs.html">Journal</a>
             </div>
 
             </div>
