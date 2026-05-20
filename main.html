@@ -35,13 +35,13 @@
         html { font-size: 16px; scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         
-        /* FIX: Header overlap issue resolved with adjusted padding-top */
+        /* FIX: Optimized padding-top to remove extra white space */
         body { 
             background-color: var(--color-bg-base); 
             font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif; 
             color: var(--color-text); 
             overflow-x: hidden;
-            padding-top: 120px; /* Increased globally */
+            padding-top: 76px; /* Exactly matches desktop header height */
         }
 
         /* =========================================
@@ -336,7 +336,8 @@
 
         @media (max-width: 640px) {
             html { font-size: 14px; }
-            body { padding-top: 140px; padding-bottom: 80px; } /* Ensures header and bottom nav don't overlap in webviews */
+            /* FIX: Drastically reduced padding-top to perfectly align below the header */
+            body { padding-top: 60px; padding-bottom: 80px; } 
             .navbar { padding: 1rem; }
             .header-wrapper.scrolled .navbar { padding: 0.8rem 1rem; }
             .product-grid { grid-template-columns: 350px; justify-content: center; gap: 3.5rem; }
@@ -348,10 +349,10 @@
             .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
             .footer-legal a { margin: 0 0.5rem; }
             
-            /* FIX: UNIFIED POPUP & OVERLAY LOGIC FOR MOBILE */
+            /* FIX: Updated padding logic to match header */
             .modal-overlay, .cart-overlay { 
-                padding-top: 140px !important; /* To safely clear header in webview */
-                padding-bottom: 85px !important; /* To clear bottom nav */
+                padding-top: 60px !important; /* Adjusted from 140px to 60px */
+                padding-bottom: 85px !important; 
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
                 align-items: center !important;
@@ -420,10 +421,9 @@
                 <img src="sukhname.png" alt="Sukh Name" class="sidebar-logo-name-img">
             </div>
             <div class="sidebar-links">
-                <a href="#"></a>
-                <a href="#philosophy"></a>
-                <a href="allblogs.html">Wellness Journal</a>
-                <a href="trackorder.html">Track Order</a>
+                
+                <a href="#allblogs.html">Wellness Journal</a>
+                <a href="#trackorder.html">Track Order</a>
             </div>
             <div class="mt-auto pt-6 border-t border-gray-200">
                 <div class="flex gap-4 text-xl text-[#1A362D] justify-center">
@@ -550,13 +550,13 @@
             <i class="fa-solid fa-shop"></i>
             <span>Shop</span>
         </a>
-        <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="nav-item relative">
+        <a href="https://wa.me/9306027053" target="_blank" class="nav-item relative">
             <div class="wa-floating-btn">
                 <i class="fa-brands fa-whatsapp"></i>
             </div>
             <span class="mt-8 invisible">WA</span> <!-- Invisible text just for spacing -->
         </a>
-        <a href="trackorder.html" class="nav-item">
+        <a href="#trackorder.html" class="nav-item">
             <i class="fa-solid fa-truck-fast"></i>
             <span>Track</span>
         </a>
