@@ -449,12 +449,12 @@
                 <p class="footer-desc">Crafting pure, botanical wellness through ancient Ayurvedic wisdom and modern science to support your daily vitality.</p>
                 
                 <div class="compliance-info">
-                    <strong>SukhHealthcare </strong><br>
-                    Sonipat Haryana,India<br>
-                    Sonipat, 131403<br>
+                    <strong>Sukh Healthcare </strong><br>
+                    House No 23/786, Krishna Nagar,<br>
+                    Near Hindu Vidya Peeth School, Kath Mandi,<br>
+                    Sonipat, Haryana 131001, India<br>
                     Email: healthcaresukh@gmail.com<br>
                     Phone: +91-9306027053<br>
-                    
                 </div>
 
                 <div class="social-links">
@@ -679,15 +679,15 @@
                 <p><strong>Effective Date:</strong> January 1, 2026</p>
                 <p>Welcome to Sukh Healthcare. By accessing or using our website, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
                 <h3>1. Introduction</h3>
-                <p>This website is operated by Sukh Healthcare Pvt. Ltd. Throughout the site, the terms "we", "us" and "our" refer to Sukh Healthcare. The use of this website is subject to the following terms of use.</p>
+                <p>This website is operated by Sukh Healthcare. Throughout the site, the terms "we", "us" and "our" refer to Sukh Healthcare. The use of this website is subject to the following terms of use.</p>
                 <h3>2. Age Restriction</h3>
                 <p>You must be at least 18 years of age to use this website and purchase our products. By using this website you warrant that you are at least 18 years old.</p>
                 <h3>3. Product Information & Disclaimer</h3>
                 <p>The products sold on this website are Ayurvedic dietary supplements. They are not intended to diagnose, treat, cure, or prevent any disease. Information provided is for educational purposes only and is not a substitute for professional medical advice.</p>
-                <h3>4. Pricing and Payment</h3>
-                <p>All prices are subject to change without notice. We do not store any credit card or payment information on our servers.</p>
+                <h3>4. Pricing and Payment (No COD)</h3>
+                <p>All prices are subject to change without notice. We strictly do not provide Cash on Delivery (COD) services for any products/orders. All payments on our website are accepted only through online payment methods such as UPI, Debit Card, Credit Card, Net Banking, and Wallets. We do not store any credit card or payment information on our servers.</p>
                 <h3>5. Contact Information</h3>
-                <p>Questions about the Terms of Service should be sent to us at admin@sukhhealthcare.com.</p>
+                <p>Questions about the Terms of Service should be sent to us at healthcaresukh@gmail.com.</p>
             `,
             privacy: `
                 <h2>Privacy Policy</h2>
@@ -706,17 +706,17 @@
                 <h2>Refund & Cancellation Policy</h2>
                 <p><strong>Effective Date:</strong> January 1, 2026</p>
                 <h3>1. Cancellation Policy</h3>
-                <p>Orders can be cancelled within 10 hours of placing them or before they are dispatched, whichever is earlier. To cancel an order, please email us at admin@sukhhealthcare.com. Once dispatched, orders cannot be cancelled.</p>
+                <p>Orders can be cancelled within 10 hours of placing them or before they are dispatched, whichever is earlier. To cancel an order, please email us at healthcaresukh@gmail.com. Once dispatched, orders cannot be cancelled.</p>
                 <h3>2. Refund Policy</h3>
                 <p>We accept return and refund requests within 7 days of delivery <strong>only if the product received is damaged, defective, or incorrect</strong>. For hygiene and safety reasons, opened or used health supplements cannot be returned.</p>
                 <h3>3. Process for Refund</h3>
-                <p>To initiate a return, please send an unboxing video and images of the product to support@sukhhealthcare.in. Once verified, refunds will be processed to the original mode of payment within 5-7 working days.</p>
+                <p>To initiate a return, please send an unboxing video and images of the product to healthcaresukh@gmail.com. Once verified, refunds will be processed to the original mode of payment within 5-7 working days.</p>
             `,
             shipping: `
                 <h2>Shipping Policy</h2>
                 <p><strong>Effective Date:</strong> January 1, 2026</p>
                 <h3>1. Processing Time</h3>
-                <p>All orders are processed within 24-48 business hours after receiving the confirmation email.(There Is no C.O.D AVAILABLE ) You will receive another notification when your order has shipped.</p>
+                <p>All orders are processed within 24-48 business hours after receiving the confirmation email. <strong>Please note: We do not offer Cash on Delivery (COD). All orders must be fully prepaid via online payment methods.</strong> You will receive another notification when your order has shipped.</p>
                 <h3>2. Shipping Rates and Estimates</h3>
                 <ul>
                     <li><strong>Standard Delivery:</strong> 5-7 Business Days (Free on prepaid orders)</li>
@@ -731,10 +731,10 @@
                 <h2>Contact Us</h2>
                 <p>We are here to assist you with any questions about our products or your order.</p>
                 <h3>Registered Office Address</h3>
-                <p>Sukh Healthcare Pvt. Ltd.<br>123 Wellness Avenue, Ayush Vihar,<br>New Delhi, India 110001</p>
+                <p>Sukh Healthcare<br>House No 23/786, Krishna Nagar,<br>Near Hindu Vidya Peeth School, Kath Mandi,<br>Sonipat, Haryana 131001, India</p>
                 <h3>Get in Touch</h3>
                 <ul>
-                    <li><strong>Email:</strong> admin@sukhhealthcare.com (Response within 24 hours)</li>
+                    <li><strong>Email:</strong> healthcaresukh@gmail.com (Response within 24 hours)</li>
                     <li><strong>Phone/WhatsApp:</strong> +91-9306027053 (Mon-Sat, 10 AM to 6 PM)</li>
                 </ul>
             `
@@ -1062,7 +1062,6 @@
             if(currentModalProduct) { addItemsToCart(currentModalProduct, currentQty); closeModal(); } 
         };
 
-        // FIX: Replaced window.onload with direct function call and event listener to ensure rendering doesn't get blocked
         document.addEventListener('DOMContentLoaded', renderProducts);
         renderProducts(); // Immediate call as a fallback
 
