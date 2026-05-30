@@ -6,8 +6,6 @@
     <title>Sukh Healthcare | Premium Wellness Store</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Cashfree SDK -->
-    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -591,7 +589,7 @@
 
                     <div class="secure-badge">
                         <i class="fa-solid fa-shield-halved"></i>
-                        <span>100% Secure transaction via Cashfree</span>
+                        <span>100% Secure transaction via CCAvenue</span>
                     </div>
                 </div>
             </div>
@@ -686,7 +684,7 @@
                 <p><strong>Effective Date:</strong> January 1, 2026</p>
                 <p>Sukh Healthcare values your privacy. This Privacy Policy outlines how we collect, use, and protect your personal information.</p>
                 <h3>1. Information We Collect</h3>
-                <p>We collect personal information such as your name, email address, phone number, and shipping address when you place an order. Payment details are processed securely by our payment gateway (Cashfree) and are not stored by us.</p>
+                <p>We collect personal information such as your name, email address, phone number, and shipping address when you place an order. Payment details are processed securely by our payment gateway and are not stored by us.</p>
                 <h3>2. How We Use Your Information</h3>
                 <p>We use your information to process transactions, deliver products, send order updates, and respond to customer service requests.</p>
                 <h3>3. Data Protection</h3>
@@ -1058,7 +1056,7 @@
         renderProducts(); // Immediate call as a fallback
 
         // ==========================================
-        // CASHFREE PAYMENT LOGIC
+        // CCAVENUE PAYMENT LOGIC
         // ==========================================
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
         
@@ -1150,63 +1148,29 @@
             };
 
             try {
+                // Pehle order Google Sheet mein Pending status ke sath save hoga
                 fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
                     method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(orderData)
                 }).catch(e => console.log("Sheet log ignored:", e));
                 
-                const response = await fetch("https://sukhhealthcare-backend.vercel.app/api/create-order", {
-                    method: "POST", headers: { "Content-Type": "application/json" },
+                // Naye CCAvenue Backend par request bhejna
+                const response = await fetch("https://sukhhealthcare-backend.vercel.app/api/ccav-request", {
+                    method: "POST", 
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ amount: finalAmount, phone: orderData.phone, email: orderData.email, name: orderData.name })
                 });
 
-                const data = await response.json();
-
-                if (data.payment_session_id) {
-                    const cashfree = Cashfree({ mode: "production" });
+                if (response.ok) {
+                    // CCAvenue ki taraf redirect karne wala HTML response capture karna
+                    const htmlContent = await response.text();
                     
-                    let checkoutOptions = {
-                        paymentSessionId: data.payment_session_id,
-                        redirectTarget: "_modal" 
-                    };
-                    
-                    cashfree.checkout(checkoutOptions).then((result) => {
-                        if(result.error) {
-                            showBtnLoader(false);
-                            alert("Payment Error/Cancelled: " + result.error.message);
-                            
-                            orderData.status = "Failed / Cancelled";
-                            fetch(GOOGLE_SCRIPT_WEB_APP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(orderData) });
-                        }
-                        
-                        if(result.paymentDetails) {
-                            orderData.status = "PAID SUCCESSFULLY - ₹" + finalAmount;
-                            
-                            let bankTxnId = "Success";
-                            if (result.paymentDetails.paymentId) {
-                                bankTxnId = result.paymentDetails.paymentId;
-                            } else if (result.paymentDetails.cfPaymentId) {
-                                bankTxnId = result.paymentDetails.cfPaymentId;
-                            } else {
-                                bankTxnId = "CF-" + uniqueOrderId;
-                            }
-                            
-                            orderData.txnId = bankTxnId; 
-                            
-                            fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
-                                method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(orderData)
-                            }).then(() => {
-                                if(checkoutMode === 'cart') { cart = []; updateCartUI(); updateCartCount(); }
-                                closeCheckout();
-                                showBtnLoader(false);
-                                
-                                alert("✨ Payment Successful! Aapka order confirm ho gaya hai.");
-                            });
-                        }
-                    });
+                    // Frontend par HTML render karke form auto-submit karna
+                    document.open();
+                    document.write(htmlContent);
+                    document.close();
                 } else {
-                    alert("Payment shuru karne mein dikkat aayi: " + (data.message || "Session error"));
+                    alert("Payment shuru karne mein dikkat aayi. Kripya Vercel backend check karein.");
                     showBtnLoader(false);
                 }
             } catch (error) {
