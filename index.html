@@ -1061,7 +1061,7 @@
         renderProducts();
 
         // ==========================================
-        // ULTIMATE CCAVENUE PAYMENT LOGIC (Form Submit Bypass)
+        // CCAVENUE PAYMENT LOGIC
         // ==========================================
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
         
@@ -1123,7 +1123,6 @@
             }
         }
 
-        // === YE HAI NAYA ROBUST CONNECTION METHOD ===
         window.handleCheckoutSubmit = async function(e) {
             e.preventDefault();
 
@@ -1154,41 +1153,71 @@
             };
 
             try {
-                // 1. Google Sheets me Order save karna
+                // 1. Google Sheets me Order save karna (Optional logging)
                 fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
                     method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(orderData)
                 }).catch(e => console.log("Sheet log ignored:", e));
                 
-                // 2. NAYA TARIQA: Seedha Form Submit (Isme CORS error 100% nahi aayega!)
-                const paymentForm = document.createElement('form');
-                paymentForm.method = 'POST';
-                // Yahan aapke Vercel serverless function ka URL hai
-                paymentForm.action = 'https://ccavenue-backend.vercel.app/';
-
-                // Data jo backend ko chahiye, wo hidden inputs me dalenge
-                const paramsToBackend = { 
-                    amount: finalAmount, 
-                    phone: orderData.phone, 
-                    email: orderData.email, 
-                    name: orderData.name 
+                // 2. CCAVENUE PAYMENT INTEGRATION
+                // AAPKA VERCEL BACKEND URL YAHAN DALA HAI
+                const backendUrl = 'https://ccavenue-backend.vercel.app/api/encrypt';
+                
+                // Data jo backend ko jayega encrypt hone ke liye
+                const paymentData = {
+                    merchant_id: '4448120', // APNA MERCHANT ID YAHAN UPDATE KAREIN BAACH ME
+                    order_id: uniqueOrderId,
+                    currency: 'INR',
+                    amount: finalAmount.toFixed(2), // Amount in format '100.00'
+                    redirect_url: 'https://ccavenue-backend.vercel.app/api/response', 
+                    cancel_url: 'https://ccavenue-backend.vercel.app/api/response',
+                    language: 'EN',
+                    billing_name: name,
+                    billing_address: address,
+                    billing_tel: phone,
+                    billing_email: email
                 };
 
-                for (const key in paramsToBackend) {
-                    const hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = key;
-                    hiddenField.value = paramsToBackend[key];
-                    paymentForm.appendChild(hiddenField);
+                const response = await fetch(backendUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(paymentData)
+                });
+                
+                const result = await response.json();
+
+                if(result.encRequest) {
+                    // Lock hua data milne ke baad CCAvenue ka page kholna
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    
+                    // TEST MODE URL: https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction
+                    // LIVE MODE URL: https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction
+                    // Abhi ke liye LIVE mode rakha hai, agar test karna hai toh upar wala use karein
+                    form.action = 'https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction'; 
+
+                    const encInput = document.createElement('input');
+                    encInput.type = 'hidden';
+                    encInput.name = 'encRequest';
+                    encInput.value = result.encRequest;
+                    form.appendChild(encInput);
+
+                    const accessInput = document.createElement('input');
+                    accessInput.type = 'hidden';
+                    accessInput.name = 'access_code';
+                    accessInput.value = result.accessCode;
+                    form.appendChild(accessInput);
+
+                    document.body.appendChild(form);
+                    form.submit(); 
+                } else {
+                    showNotification('Payment process me error hai. Kripya thodi der baad koshish karein.', true);
+                    showBtnLoader(false);
                 }
 
-                document.body.appendChild(paymentForm);
-                // Redirects current page directly to Vercel (eliminating all fetch/CORS problems)
-                paymentForm.submit();
-
             } catch (error) {
-                console.error("Form Creation Error:", error);
-                showNotification("Payment shuru hone me problem hai. Kripya page refresh karein.", true);
+                console.error("Payment Error:", error);
+                showNotification("Internet connection error. Kripya check karein.", true);
                 showBtnLoader(false);
             }
         };
