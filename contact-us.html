@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Sukh Healthcare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary-dark: #12351d; --primary-light: #2c5e3f; --accent-gold: #c59b27; --bg-color: #f8f9f8; --text-dark: #333333; --text-muted: #666666; }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.7; color: var(--text-dark); background-color: var(--bg-color); margin: 0; padding: 0; }
+        .header-bar { background-color: var(--primary-dark); color: #fff; padding: 15px 0; text-align: center; border-bottom: 3px solid var(--accent-gold); }
+        .header-bar h2 { margin: 0; font-family: 'Playfair Display', serif; font-size: 24px; letter-spacing: 1px; }
+        .page-wrapper { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .content-box { background-color: #fff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        h1 { font-family: 'Playfair Display', serif; color: var(--primary-dark); font-size: 2.5em; text-align: center; margin-top: 0; margin-bottom: 10px; position: relative; }
+        h1::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--accent-gold); margin: 15px auto 30px; }
+        p.subtitle { text-align: center; color: var(--text-muted); font-size: 1.1em; margin-bottom: 40px; }
+        
+        .contact-container { display: flex; flex-wrap: wrap; gap: 40px; }
+        .contact-info { flex: 1; min-width: 300px; background: #fcfcfc; padding: 30px; border-radius: 8px; border: 1px solid #eaeaea; border-top: 4px solid var(--primary-light); }
+        .contact-info h3 { color: var(--primary-dark); margin-top: 0; font-family: 'Playfair Display', serif; font-size: 1.5em; }
+        .info-row { margin-bottom: 20px; }
+        .info-row strong { display: block; color: var(--primary-dark); font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .info-row p, .info-row a { margin: 0; color: var(--text-dark); text-decoration: none; font-size: 1.05em; }
+        .info-row a:hover { color: var(--accent-gold); }
+
+        .legal-footer { margin-top: 50px; padding-top: 30px; border-top: 1px solid #eaeaea; display: flex; flex-wrap: wrap; gap: 30px; justify-content: space-between; font-size: 0.9em; color: var(--text-muted); }
+        .legal-block h4 { color: var(--primary-dark); margin-bottom: 10px; font-size: 1.1em; }
+        .legal-block p { margin-bottom: 5px; line-height: 1.5; }
+        @media (max-width: 768px) { .content-box { padding: 30px 20px; } .legal-footer { flex-direction: column; gap: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="header-bar"><h2>Sukh Healthcare</h2></div>
+    <div class="page-wrapper">
+        <div class="content-box">
+            <h1>Get In Touch</h1>
+            <p class="subtitle">Have questions about KAMA-XXX GOLD or your order? We are here to assist you.</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="info-row">
+                        <strong>Legal Entity Name</strong>
+                        <p>Sukh Healthcare</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong>Registered Office Address</strong>
+                        <p>House No 23/786, Krishna Nagar,<br>Near Hindu Vidya Peeth School, Kath Mandi,<br>Sonipat, Haryana 131001, India</p>
+                    </div>
+
+                    <div class="info-row">
+                        <strong>Direct Phone</strong>
+                        <a href="tel:+919306027053">+91-9306027053</a>
+                    </div>
+
+                    <div class="info-row">
+                        <strong>Email Address</strong>
+                        <a href="mailto:admin@sukhhealthcare.com">admin@sukhhealthcare.com</a>
+                    </div>
+                    
+                    <div class="info-row" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                        <strong>Business Hours</strong>
+                        <p style="color: var(--text-muted); font-size: 0.95em;">Monday - Saturday: 10:00 AM to 6:00 PM (IST)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="legal-footer" style="justify-content: center; text-align: center;">
+                <p>Sukh Healthcare - Trusted by Thousands of Men. GMP Certified.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
