@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Sukh Healthcare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-dark: #12351d; /* Deep Forest Green */
+            --primary-light: #2c5e3f;
+            --accent-gold: #c59b27;
+            --bg-color: #f8f9f8;
+            --text-dark: #333333;
+            --text-muted: #666666;
+        }
+        body { font-family: 'Poppins', sans-serif; line-height: 1.7; color: var(--text-dark); background-color: var(--bg-color); margin: 0; padding: 0; }
+        .header-bar { background-color: var(--primary-dark); color: #fff; padding: 15px 0; text-align: center; border-bottom: 3px solid var(--accent-gold); }
+        .header-bar h2 { margin: 0; font-family: 'Playfair Display', serif; font-size: 24px; letter-spacing: 1px; }
+        .header-bar span { color: var(--accent-gold); font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+        .page-wrapper { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .content-box { background-color: #fff; padding: 50px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        h1 { font-family: 'Playfair Display', serif; color: var(--primary-dark); font-size: 2.5em; text-align: center; margin-top: 0; margin-bottom: 30px; position: relative; }
+        h1::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--accent-gold); margin: 15px auto 0; }
+        h3 { color: var(--primary-light); font-size: 1.4em; margin-top: 35px; margin-bottom: 15px; font-family: 'Playfair Display', serif; }
+        p { margin-bottom: 20px; font-weight: 300; }
+        .highlight-box { background-color: #fdfaf2; border-left: 4px solid var(--accent-gold); padding: 20px; margin: 30px 0; border-radius: 0 8px 8px 0; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
+        .feature-item { text-align: center; padding: 20px; background: #fff; border: 1px solid #eee; border-radius: 8px; }
+        .feature-item strong { display: block; color: var(--primary-dark); margin-bottom: 10px; }
+        
+        /* Footer/Legal Section */
+        .legal-footer { margin-top: 50px; padding-top: 30px; border-top: 1px solid #eaeaea; display: flex; flex-wrap: wrap; gap: 30px; justify-content: space-between; font-size: 0.9em; color: var(--text-muted); }
+        .legal-block h4 { color: var(--primary-dark); margin-bottom: 10px; font-size: 1.1em; }
+        .legal-block p { margin-bottom: 5px; line-height: 1.5; }
+        
+        @media (max-width: 768px) { .content-box { padding: 30px 20px; } h1 { font-size: 2em; } .legal-footer { flex-direction: column; gap: 20px; } }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <h2>Sukh Healthcare</h2>
+        <span>Premium Ayurvedic Wellness</span>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="content-box">
+            <h1>About Us</h1>
+            <p>Welcome to <strong>Sukh Healthcare</strong>, a brand rooted in the timeless wisdom of Ayurveda and dedicated to enhancing modern lifestyles through pure, natural formulations. As a GMP-certified company, we take immense pride in delivering healthcare solutions that are safe, effective, and ethically crafted.</p>
+            
+            <div class="highlight-box">
+                <p style="margin:0; font-weight: 400; color: var(--primary-dark);"><strong>Our Flagship Commitment:</strong> We are the proud creators of <strong>KAMA-XXX GOLD</strong>, a premium double-power formula designed specifically for men's vitality. Trusted by thousands of men, our proprietary medicine represents our dedication to uncompromising quality.</p>
+            </div>
+
+            <h3>Our Philosophy: Pure Herbs, No Chemicals</h3>
+            <p>At Sukh Healthcare, we believe that nature holds the key to true wellness. Our products are meticulously developed using authentic Ayurvedic texts and modern clinical standards. We source the rarest and most potent herbs—such as Sudh Shilajit, Ashwagandha, Safed Musli, and Swaran Bhang—to create formulations that restore balance, strength, and stamina without the use of harmful chemicals.</p>
+
+            <h3>Why Choose Sukh Healthcare?</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <strong>🌿 100% Ayurvedic</strong>
+                    <span style="font-size:0.9em; color:var(--text-muted)">Formulated with ancient wisdom and pure botanical extracts.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>🛡️ Clinically Trusted</strong>
+                    <span style="font-size:0.9em; color:var(--text-muted)">Manufactured in GMP-certified facilities ensuring top safety.</span>
+                </div>
+                <div class="feature-item">
+                    <strong>⚡ Double Power Formula</strong>
+                    <span style="font-size:0.9em; color:var(--text-muted)">Designed for maximum efficacy, energy, and vigour.</span>
+                </div>
+            </div>
+
+            <h3>Our Mission</h3>
+            <p>To empower individuals to lead healthier, more fulfilling lives by providing access to premium-grade Ayurvedic proprietary medicines. We stand by the purity of our ingredients and the effectiveness of our blends, ensuring that every capsule brings you closer to holistic well-being.</p>
+            
+            <div class="legal-footer">
+                <div class="legal-block" style="flex: 1; min-width: 250px;">
+                    <h4>Corporate Identity</h4>
+                    <p><strong>Legal Entity Name:</strong> Sukh Healthcare</p>
+                    <p><strong>Manufacturing Info:</strong> S.D.A - 132001 (A GMP Certified Company)</p>
+                </div>
+                <div class="legal-block" style="flex: 1; min-width: 250px;">
+                    <h4>Registered Office</h4>
+                    <p>House No 23/786, Krishna Nagar,<br>Near Hindu Vidya Peeth School, Kath Mandi,<br>Sonipat, Haryana 131001, India</p>
+                </div>
+                <div class="legal-block" style="flex: 1; min-width: 200px;">
+                    <h4>Contact Support</h4>
+                    <p><strong>Phone:</strong> +91-9306027053</p>
+                    <p><strong>Email:</strong> admin@sukhhealthcare.com</p>
+                    <p><strong>Website:</strong> sukhhealthcare.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
