@@ -1126,10 +1126,6 @@
             }
         }
 
-        // ==========================================
-        // NAYA TARIQA: DIRECT FORM SUBMIT METHOD
-        // (Isme CORS ya Javascript Error aane ka chance 0% hai)
-        // ==========================================
         window.handleCheckoutSubmit = async function(e) {
             e.preventDefault();
 
@@ -1141,44 +1137,23 @@
             showBtnLoader(true);
 
             const uniqueOrderId = "ORD-" + new Date().getTime() + "-" + Math.floor(Math.random() * 1000);
-            const totalQty = checkoutMode === 'cart' ? cart.reduce((sum, item) => sum + item.qty, 0) : currentQty;
-            const isFastDelivery = document.getElementById('deliveryFast').checked;
-            const deliveryMethodStr = isFastDelivery ? " | Delivery: Express (2-3 Days, +₹50)" : " | Delivery: Standard (5-7 Days)";
-
-            const orderData = {
-                action: 'createOrder',
-                orderId: uniqueOrderId,
-                name: name,
-                phone: phone,
-                email: email,
-                address: address,
-                product: finalItemsDetails + deliveryMethodStr,
-                qty: totalQty,
-                amount: finalAmount,
-                status: "Pending (Payment Initialized)", 
-                txnId: ""
-            };
+            
+            // YAHAN VERCEL KA URL HAI
+            const backendUrl = 'https://ccavenue-backend.vercel.app/api/encrypt';
 
             try {
-                // 1. Google Sheets me Order save karna
-                fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
-                    method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(orderData)
-                }).catch(e => console.log("Sheet log ignored:", e));
-                
-                // 2. Yahan hum direct ek invisible form banayenge jo backend par jayega
+                // HUM EK INVISIBLE FORM BANAYENGE JO DIRECT VERCEL PAR JAYEGA
                 const paymentForm = document.createElement('form');
                 paymentForm.method = 'POST';
-                // Backend API encrypt karne wali:
-                paymentForm.action = 'https://ccavenue-backend.vercel.app/api/encrypt';
+                paymentForm.action = backendUrl; // Seedha Vercel ke /api/encrypt par
 
-                // Data jo CCAvenue aur aapke backend dono ko chahiye
-                const paramsToBackend = { 
-                    merchant_id: '4448120',
+                // Data jo backend ko jayega
+                const paramsToBackend = {
+                    merchant_id: '4448120', 
                     order_id: uniqueOrderId,
                     currency: 'INR',
-                    amount: finalAmount.toFixed(2),
-                    redirect_url: 'https://ccavenue-backend.vercel.app/api/response',
+                    amount: finalAmount.toFixed(2), 
+                    redirect_url: 'https://ccavenue-backend.vercel.app/api/response', 
                     cancel_url: 'https://ccavenue-backend.vercel.app/api/response',
                     language: 'EN',
                     billing_name: name,
@@ -1187,7 +1162,7 @@
                     billing_email: email
                 };
 
-                // Form ke andar data chupana
+                // Form ke andar fields dalna
                 for (const key in paramsToBackend) {
                     const hiddenField = document.createElement('input');
                     hiddenField.type = 'hidden';
@@ -1198,12 +1173,12 @@
 
                 document.body.appendChild(paymentForm);
                 
-                // Yeh step direct Vercel ko hit karega aur page change kar dega
-                paymentForm.submit();
+                // Form Submit hote hi Vercel par bhej dega! (No CORS error possible)
+                paymentForm.submit(); 
 
             } catch (error) {
-                console.error("Form Creation Error:", error);
-                showNotification("Payment shuru hone me problem hai. Kripya page refresh karein.", true);
+                console.error("Payment Error:", error);
+                showNotification("Internet connection error. Kripya check karein.", true);
                 showBtnLoader(false);
             }
         };
