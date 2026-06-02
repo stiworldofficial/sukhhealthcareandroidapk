@@ -1062,7 +1062,7 @@
         renderProducts();
 
         // ==========================================
-        // CCAVENUE PAYMENT LOGIC
+        // ROBUST CCAVENUE PAYMENT LOGIC (UPDATED)
         // ==========================================
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
         
@@ -1134,6 +1134,7 @@
 
             showBtnLoader(true);
 
+            // Create Unique Order ID
             const uniqueOrderId = "ORD-" + new Date().getTime() + "-" + Math.floor(Math.random() * 1000);
             const totalQty = checkoutMode === 'cart' ? cart.reduce((sum, item) => sum + item.qty, 0) : currentQty;
             const isFastDelivery = document.getElementById('deliveryFast').checked;
@@ -1154,22 +1155,20 @@
             };
 
             try {
-                // 1. Google Sheets me Order save karna (Optional logging)
+                // 1. Google Sheets Logging (Silent)
                 fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
                     method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(orderData)
                 }).catch(e => console.log("Sheet log ignored:", e));
                 
                 // 2. CCAVENUE PAYMENT INTEGRATION
-                // AAPKA VERCEL BACKEND URL YAHAN DALA HAI
                 const backendUrl = 'https://ccavenue-backend.vercel.app/api/encrypt';
                 
-                // Data jo backend ko jayega encrypt hone ke liye
                 const paymentData = {
-                    merchant_id: '4448120', // APNA MERCHANT ID YAHAN UPDATE KAREIN BAACH ME
+                    merchant_id: '4448120', // AAPKA ASLI MERCHANT ID YAHAN HAI
                     order_id: uniqueOrderId,
                     currency: 'INR',
-                    amount: finalAmount.toFixed(2), // Amount in format '100.00'
+                    amount: finalAmount.toFixed(2).toString(), // Ensures strict two-decimal string matching CCAvenue standard
                     redirect_url: 'https://ccavenue-backend.vercel.app/api/response', 
                     cancel_url: 'https://ccavenue-backend.vercel.app/api/response',
                     language: 'EN',
@@ -1179,22 +1178,28 @@
                     billing_email: email
                 };
 
+                // Request to Vercel
                 const response = await fetch(backendUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json' 
+                    },
                     body: JSON.stringify(paymentData)
                 });
                 
+                // HTTP Error Handle
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
                 const result = await response.json();
 
-                if(result.encRequest) {
-                    // Lock hua data milne ke baad CCAvenue ka page kholna
+                // Check for successful encryption payload
+                if(result.encRequest && result.accessCode) {
+                    // Create Form to redirect to CCAvenue
                     const form = document.createElement('form');
                     form.method = 'POST';
-                    
-                    // TEST MODE URL: https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction
-                    // LIVE MODE URL: https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction
-                    // Abhi ke liye LIVE mode rakha hai, agar test karna hai toh upar wala use karein
                     form.action = 'https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction'; 
 
                     const encInput = document.createElement('input');
@@ -1212,13 +1217,14 @@
                     document.body.appendChild(form);
                     form.submit(); 
                 } else {
-                    showNotification('Payment process me error hai. Kripya thodi der baad koshish karein.', true);
+                    console.error("Encryption result error:", result);
+                    showNotification('Encryption error. Kripya thodi der baad koshish karein.', true);
                     showBtnLoader(false);
                 }
 
             } catch (error) {
                 console.error("Payment Error:", error);
-                showNotification("Internet connection error. Kripya check karein.", true);
+                showNotification("Backend connection error. Kripya check karein.", true);
                 showBtnLoader(false);
             }
         };
