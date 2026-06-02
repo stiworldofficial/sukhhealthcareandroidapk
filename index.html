@@ -1188,12 +1188,20 @@
                     body: JSON.stringify(paymentData)
                 });
                 
-                // HTTP Error Handle
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                const responseText = await response.text();
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch(e) {
+                    console.error("Server HTML Error:", responseText);
+                    throw new Error("Server Crash (500 Error)");
                 }
 
-                const result = await response.json();
+                // HTTP Error Handle
+                if (!response.ok) {
+                    console.error("Backend Error:", result);
+                    throw new Error(result.error || `HTTP error! status: ${response.status}`);
+                }
 
                 // Check for successful encryption payload
                 if(result.encRequest && result.accessCode) {
@@ -1224,7 +1232,7 @@
 
             } catch (error) {
                 console.error("Payment Error:", error);
-                showNotification("Backend connection error. Kripya check karein.", true);
+                showNotification(`Error: ${error.message}. Kripya Vercel Logs dekhein.`, true);
                 showBtnLoader(false);
             }
         };
