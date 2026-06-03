@@ -449,15 +449,16 @@
                 <h4>Explore</h4>
                 <a href="#store">Shop Wellness</a>
                 <a href="#trackorder.html">Track Order</a>
-                <a href="#" onclick="openLegalModal('contact'); return false;">Contact Us</a>
+                <a href="about-us.html">About Us</a>
+                <a href="contact-us.html">Contact Us</a>
             </div>
             
             <div class="footer-col">
                 <h4>Legal & Policies</h4>
-                <a href="#" onclick="openLegalModal('terms'); return false;">Terms & Conditions</a>
-                <a href="#" onclick="openLegalModal('privacy'); return false;">Privacy Policy</a>
-                <a href="#" onclick="openLegalModal('refund'); return false;">Refund & Cancellation</a>
-                <a href="#" onclick="openLegalModal('shipping'); return false;">Shipping Policy</a>
+                <a href="terms-and-conditions.html">Terms & Conditions</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="refund-and-cancellation.html">Refund & Cancellation Policy</a>
+                <a href="shipping-and-delivery-policy.html">Shipping & Delivery Policy</a>
             </div>
         </div>
 
@@ -821,7 +822,7 @@
             if(e.target === document.getElementById('cartOverlay')) closeCart(); 
         });
 
-        // --- PRODUCT DATA (CARDS WILL RENDER FROM HERE) ---
+        // REBRANDED PRODUCT TO MEET COMPLIANCE
         const products = [
             { 
              id: 1, 
@@ -857,7 +858,6 @@
         let currentModalProduct = null;
         let currentQty = 1;
 
-        // --- RENDER PRODUCTS FUNCTION ---
         function renderProducts() {
             const grid = document.getElementById('productGrid'); 
             if(!grid) return;
@@ -1058,13 +1058,11 @@
             if(currentModalProduct) { addItemsToCart(currentModalProduct, currentQty); closeModal(); } 
         };
 
-        // RUN RENDER FUNCTION ON LOAD TO SHOW CARDS
         document.addEventListener('DOMContentLoaded', renderProducts);
         renderProducts();
 
-        // --- STREAMING_CHUNK:Finalizing Payment Form Bypass... ---
         // ==========================================
-        // ROBUST CCAVENUE PAYMENT LOGIC (Form Submit Bypass)
+        // CCAVENUE PAYMENT LOGIC
         // ==========================================
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
         
@@ -1137,22 +1135,41 @@
             showBtnLoader(true);
 
             const uniqueOrderId = "ORD-" + new Date().getTime() + "-" + Math.floor(Math.random() * 1000);
-            
-            // YAHAN VERCEL KA URL HAI
-            const backendUrl = 'https://ccavenue-backend.vercel.app/api/encrypt';
+            const totalQty = checkoutMode === 'cart' ? cart.reduce((sum, item) => sum + item.qty, 0) : currentQty;
+            const isFastDelivery = document.getElementById('deliveryFast').checked;
+            const deliveryMethodStr = isFastDelivery ? " | Delivery: Express (2-3 Days, +₹50)" : " | Delivery: Standard (5-7 Days)";
+
+            const orderData = {
+                action: 'createOrder',
+                orderId: uniqueOrderId,
+                name: name,
+                phone: phone,
+                email: email,
+                address: address,
+                product: finalItemsDetails + deliveryMethodStr,
+                qty: totalQty,
+                amount: finalAmount,
+                status: "Pending (Payment Initialized)", 
+                txnId: ""
+            };
 
             try {
-                // HUM EK INVISIBLE FORM BANAYENGE JO DIRECT VERCEL PAR JAYEGA
-                const paymentForm = document.createElement('form');
-                paymentForm.method = 'POST';
-                paymentForm.action = backendUrl; // Seedha Vercel ke /api/encrypt par
-
-                // Data jo backend ko jayega
-                const paramsToBackend = {
-                    merchant_id: '4448120', 
+                // 1. Google Sheets me Order save karna (Optional logging)
+                fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+                    method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                }).catch(e => console.log("Sheet log ignored:", e));
+                
+                // 2. CCAVENUE PAYMENT INTEGRATION
+                // AAPKA VERCEL BACKEND URL YAHAN DALA HAI
+                const backendUrl = 'https://ccavenue-backend.vercel.app/api/encrypt';
+                
+                // Data jo backend ko jayega encrypt hone ke liye
+                const paymentData = {
+                    merchant_id: '4448120', // APNA MERCHANT ID YAHAN UPDATE KAREIN BAACH ME
                     order_id: uniqueOrderId,
                     currency: 'INR',
-                    amount: finalAmount.toFixed(2), 
+                    amount: finalAmount.toFixed(2), // Amount in format '100.00'
                     redirect_url: 'https://ccavenue-backend.vercel.app/api/response', 
                     cancel_url: 'https://ccavenue-backend.vercel.app/api/response',
                     language: 'EN',
@@ -1162,19 +1179,42 @@
                     billing_email: email
                 };
 
-                // Form ke andar fields dalna
-                for (const key in paramsToBackend) {
-                    const hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = key;
-                    hiddenField.value = paramsToBackend[key];
-                    paymentForm.appendChild(hiddenField);
-                }
-
-                document.body.appendChild(paymentForm);
+                const response = await fetch(backendUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(paymentData)
+                });
                 
-                // Form Submit hote hi Vercel par bhej dega! (No CORS error possible)
-                paymentForm.submit(); 
+                const result = await response.json();
+
+                if(result.encRequest) {
+                    // Lock hua data milne ke baad CCAvenue ka page kholna
+                    const form = document.createElement('form');
+                    form.method = 'POST';
+                    
+                    // TEST MODE URL: https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction
+                    // LIVE MODE URL: https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction
+                    // Abhi ke liye LIVE mode rakha hai, agar test karna hai toh upar wala use karein
+                    form.action = 'https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction'; 
+
+                    const encInput = document.createElement('input');
+                    encInput.type = 'hidden';
+                    encInput.name = 'encRequest';
+                    encInput.value = result.encRequest;
+                    form.appendChild(encInput);
+
+                    const accessInput = document.createElement('input');
+                    accessInput.type = 'hidden';
+                    accessInput.name = 'access_code';
+                    accessInput.value = result.accessCode;
+                    form.appendChild(accessInput);
+
+                    document.body.appendChild(form);
+                    form.submit(); 
+                } else {
+                    showNotification('Payment process me error hai. Kripya thodi der baad koshish karein.', true);
+                    showBtnLoader(false);
+                }
 
             } catch (error) {
                 console.error("Payment Error:", error);
