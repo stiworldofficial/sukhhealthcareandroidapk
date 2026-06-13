@@ -152,15 +152,23 @@
         .modal-close { position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.05); border: none; font-size: 1.1rem; width: 32px; height: 32px; border-radius: 50%; color: var(--color-text); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; z-index: 10; }
         .modal-close:hover { background: rgba(0,0,0,0.1); color: #FF3B30; }
 
-        .chk-header { text-align: center; margin-bottom: 1.2rem; margin-top: 0.5rem; }
+        .chk-header { text-align: center; margin-bottom: 1rem; margin-top: 0.5rem; }
         .chk-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--color-brand); margin-bottom: 6px; }
         .chk-subtitle { color: #666; font-size: 0.85rem; }
+
+        /* NEW PRIVACY NOTICE IN MODAL */
+        .privacy-notice { background-color: #F0F8F5; border: 1px solid #C5E1D4; padding: 12px; border-radius: 8px; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 1.2rem; }
+        .privacy-notice i { color: #1A362D; font-size: 1.2rem; margin-top: 2px; }
+        .privacy-notice-content h4 { color: #1A362D; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
+        .privacy-notice-content p { color: #4A5568; font-size: 0.75rem; line-height: 1.4; }
 
         .form-group { margin-bottom: 1rem; }
         .form-label { display: block; font-weight: 600; margin-bottom: 6px; color: #1D1D1F; font-size: 0.85rem; }
         .form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; box-sizing: border-box; transition: 0.3s; font-family: 'Lato', sans-serif; }
         .form-input:focus { outline: none; border-color: var(--color-brand); box-shadow: 0 0 0 3px rgba(26,54,45,0.1); }
         textarea.form-input { min-height: 70px; resize: vertical; }
+        .field-hint { display: flex; gap: 6px; font-size: 0.75rem; color: #666; margin-top: 5px; align-items: flex-start; }
+        .field-hint i { margin-top: 2px; color: var(--color-premium-gold); }
 
         .delivery-box { background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 1.2rem; }
         .del-option { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
@@ -371,13 +379,22 @@
         <div class="checkout-modal">
             <button class="modal-close" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
             <div class="chk-header">
-                <h2 class="chk-title">Apna Order Yahan Pura Karein</h2>
-                <p class="chk-subtitle">Kripya apni delivery details sahi se bharein.</p>
+                <h2 class="chk-title">Complete Your Order Securely</h2>
+                <p class="chk-subtitle">Please enter your delivery details accurately.</p>
+            </div>
+
+            <!-- PRIVACY AND DISCREET PACKAGING NOTICE -->
+            <div class="privacy-notice">
+                <i class="fa-solid fa-box-archive"></i>
+                <div class="privacy-notice-content">
+                    <h4>100% Discreet Packaging & Privacy</h4>
+                    <p>Your order is shipped in completely plain, unmarked packaging. No one will know what is inside without opening it. Your personal identity and details are kept strictly confidential.</p>
+                </div>
             </div>
 
             <form id="directCheckoutForm" onsubmit="submitOrder(event)">
                 <div class="form-group">
-                    <label class="form-label">Aapka Pura Naam (Full Name) *</label>
+                    <label class="form-label">Full Name *</label>
                     <input type="text" id="chkName" class="form-input" placeholder="Eg: Rahul Kumar" required minlength="3">
                 </div>
                 
@@ -392,8 +409,12 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Ghar ka Pura Pata aur Pincode (Full Address) *</label>
-                    <textarea id="chkAddress" class="form-input" placeholder="House No, Street, Landmark, City, State, Pincode" required minlength="10"></textarea>
+                    <label class="form-label">Full Delivery Address *</label>
+                    <textarea id="chkAddress" class="form-input" placeholder="House No, Street, Landmark, City, State, Pin Code" required minlength="10"></textarea>
+                    <div class="field-hint">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span><strong>Important Note:</strong> If asked for a "Zip Code", please enter your local area's Pin Code.</span>
+                    </div>
                 </div>
                 
                 <div class="delivery-box">
@@ -415,12 +436,12 @@
                 </div>
 
                 <div class="order-summary">
-                    <span>Total Pay Amount:</span>
+                    <span>Total Amount to Pay:</span>
                     <span id="finalTotalDisplay">₹599</span>
                 </div>
 
                 <button type="submit" id="submitBtn" class="btn-submit-order">
-                    <span id="btnText"><i class="fa-solid fa-lock"></i>Deliver iT Now</span>
+                    <span id="btnText"><i class="fa-solid fa-lock"></i> Proceed to Payment</span>
                     <span id="btnLoader" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i> Processing...</span>
                 </button>
                 
@@ -572,6 +593,7 @@
         // ==========================================
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
 
+        // Added async here to fix iPhone issue
         window.submitOrder = async function(e) {
             e.preventDefault();
 
@@ -609,12 +631,18 @@
                 }
 
                 // 1. Send Log to Google Sheets
-                fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
-                    method: 'POST', 
-                    mode: 'no-cors', 
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(orderData)
-                }).catch(e => console.log("Sheet log background error:", e));
+                // FIX FOR iPHONE: Added 'await' to ensure the request completes before the form submits
+                // Safari kills background network requests if the page navigates before completion.
+                try {
+                    await fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+                        method: 'POST', 
+                        mode: 'no-cors', 
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(orderData)
+                    });
+                } catch(sheetError) {
+                    console.log("Sheet log background error:", sheetError);
+                }
                 
                 // 2. Direct Form Submit to CCAvenue Backend (Bypass CORS completely)
                 const paymentForm = document.createElement('form');
@@ -650,7 +678,7 @@
 
             } catch (error) {
                 console.error("Submission Error:", error);
-                alert("Payment connect karne mein dikkat aayi. Kripya dobara koshish karein.");
+                alert("There was an issue connecting to the payment gateway. Please try again.");
                 setFormLoading(false);
             }
         };
