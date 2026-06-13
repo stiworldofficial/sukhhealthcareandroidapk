@@ -93,7 +93,18 @@
         /* Right: Product Details */
         .product-info { width: 100%; }
         .trust-badge-small { display: inline-block; background: rgba(197, 160, 89, 0.15); color: var(--color-premium-gold); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.8rem; letter-spacing: 0.5px; }
-        .p-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--color-brand); line-height: 1.2; margin-bottom: 0.5rem; }
+        
+        /* UPDATE: Heading one line in mobile */
+        .p-title { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(1.2rem, 5vw, 1.8rem); 
+            color: var(--color-brand); 
+            line-height: 1.2; 
+            margin-bottom: 0.5rem; 
+            white-space: nowrap; /* Forces text in a single horizontal line */
+            overflow: hidden;    /* Prevents layout breaking */
+            text-overflow: ellipsis; /* Adds ... if screen is too small */
+        }
         
         .p-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 1.2rem; }
         .stars { color: #FF9F0A; font-size: 1rem; }
@@ -141,7 +152,7 @@
         .benefits-list li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; top: 2px; font-size: 0.85rem; color: #34C759; }
 
         /* =========================================
-           SINGLE CHECKOUT MODAL (POPUP)
+           MODALS & OVERLAYS
            ========================================= */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 5000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 1rem; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
@@ -156,7 +167,7 @@
         .chk-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--color-brand); margin-bottom: 6px; }
         .chk-subtitle { color: #666; font-size: 0.85rem; }
 
-        /* NEW PRIVACY NOTICE IN MODAL */
+        /* PRIVACY NOTICE IN MODAL */
         .privacy-notice { background-color: #F0F8F5; border: 1px solid #C5E1D4; padding: 12px; border-radius: 8px; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 1.2rem; }
         .privacy-notice i { color: #1A362D; font-size: 1.2rem; margin-top: 2px; }
         .privacy-notice-content h4 { color: #1A362D; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
@@ -180,6 +191,15 @@
         .btn-submit-order { width: 100%; background: var(--color-premium-gold); color: #fff; padding: 14px; border: none; border-radius: 8px; font-size: 1.05rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4); display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-submit-order:hover { background: #b08d4b; transform: translateY(-2px); }
         .btn-submit-order:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+        /* SUCCESS MODAL SPECIFIC STYLES */
+        .success-modal { text-align: center; padding: 2.5rem 1.5rem; justify-content: center; }
+        .success-icon { color: #34C759; font-size: 4.5rem; margin-bottom: 1rem; display: inline-block; }
+        .success-modal .chk-title { font-size: 2rem; color: #1D1D1F; margin-bottom: 10px; }
+        .success-modal .chk-subtitle { font-size: 1.05rem; color: #555; margin-bottom: 20px; line-height: 1.5; }
+        .success-order-box { background: rgba(197, 160, 89, 0.1); border: 1px dashed var(--color-premium-gold); border-radius: 8px; padding: 15px; margin-bottom: 20px; }
+        .success-order-box span { display: block; font-size: 0.85rem; color: #666; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        .success-order-box strong { display: block; font-size: 1.4rem; color: var(--color-brand); font-family: monospace; letter-spacing: 1px; }
 
         /* --- STICKY MOBILE CTA --- */
         .sticky-mobile-cta { display: block; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 10px 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); z-index: 4000; padding-bottom: env(safe-area-inset-bottom, 10px); border-top: 1px solid rgba(0,0,0,0.05); }
@@ -218,7 +238,7 @@
             .gallery-wrap { width: 50%; position: sticky; top: 100px; }
             .product-info { width: 50%; padding-top: 1rem; }
             
-            .p-title { font-size: 2.5rem; margin-bottom: 0.8rem; }
+            .p-title { font-size: 2.5rem; white-space: normal; } /* Allow wrapping on desktop if screen is big enough */
             .p-price { font-size: 2.5rem; }
             .p-mrp { font-size: 1.2rem; }
             .tax-text { font-size: 0.85rem; }
@@ -301,7 +321,7 @@
             <!-- Right: Info -->
             <div class="product-info">
                 <div class="trust-badge-small">🔥 Bestseller Product</div>
-                <h1 class="p-title">Kama-XXX-Gold (Ayurvedic Vitality Capsules)</h1>
+                <h1 class="p-title">Kama-XXX-Gold (Ayurvedic Capsules)</h1>
                 
                 <div class="p-rating">
                     <div class="stars">
@@ -379,8 +399,8 @@
         <div class="checkout-modal">
             <button class="modal-close" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
             <div class="chk-header">
-                <h2 class="chk-title">Order Securely</h2>
-                <p class="chk-subtitle">Delivery Details .</p>
+                <h2 class="chk-title">Complete Your Order Securely</h2>
+                <p class="chk-subtitle">Please enter your delivery details accurately.</p>
             </div>
 
             <!-- PRIVACY AND DISCREET PACKAGING NOTICE -->
@@ -441,8 +461,8 @@
                 </div>
 
                 <button type="submit" id="submitBtn" class="btn-submit-order">
-                    <span id="btnText"><i class="fa-solid fa-lock"></i>Deliver iT Now</span>
-                    <span id="btnLoader" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i> Ordring...</span>
+                    <span id="btnText"><i class="fa-solid fa-lock"></i> Proceed to Payment</span>
+                    <span id="btnLoader" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i> Processing...</span>
                 </button>
                 
                 <p style="text-align: center; font-size: 0.75rem; color: #888; margin-top: 15px;">
@@ -450,6 +470,29 @@
                     Payments processed securely via CCAvenue.
                 </p>
             </form>
+        </div>
+    </div>
+
+    <!-- SUCCESS / THANK YOU MODAL -->
+    <div class="modal-overlay" id="successModalOverlay">
+        <div class="checkout-modal success-modal">
+            <button class="modal-close" onclick="closeSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
+            <i class="fa-solid fa-circle-check success-icon"></i>
+            <h2 class="chk-title">Order Successful!</h2>
+            <p class="chk-subtitle">Aapka order successfully place ho gaya hai.</p>
+            
+            <div class="success-order-box">
+                <span>Your Order ID</span>
+                <strong id="displayOrderId">ORD-XXXXXX</strong>
+            </div>
+
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">
+                Aapke order ki saari details, discreet shipping updates aur tracking link aapko jald hi SMS/WhatsApp aur Email par bhej diye jayenge.
+            </p>
+            
+            <button class="btn-buy-huge" onclick="closeSuccessModal()">
+                Continue Shopping
+            </button>
         </div>
     </div>
 
@@ -566,9 +609,31 @@
             document.body.style.overflow = '';
         };
 
-        // Close Modal when clicking outside
+        // Close Checkout Modal when clicking outside
         document.getElementById('checkoutModalOverlay').addEventListener('click', (e) => { 
             if(e.target === document.getElementById('checkoutModalOverlay')) closeCheckoutModal(); 
+        });
+
+        // Close Success Modal
+        window.closeSuccessModal = function() {
+            document.getElementById('successModalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+            // URL clean karna taki refresh par wapas popup na aaye
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.pathname);
+            }
+        };
+
+        // On Page Load: Check URL for Success Parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('status') === 'success') {
+                const orderId = urlParams.get('order_id') || urlParams.get('orderId') || 'N/A';
+                document.getElementById('displayOrderId').innerText = orderId;
+                
+                document.getElementById('successModalOverlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         });
 
         // UI Loading State for Button
@@ -588,12 +653,28 @@
             }
         }
 
+        // Generate Custom Order ID based on User Details
+        function generateCustomOrderId(fullName, mobile) {
+            // Get Initials (Max 2 chars)
+            let nameParts = fullName.trim().split(' ');
+            let initials = (nameParts[0] ? nameParts[0][0] : '') + (nameParts[1] ? nameParts[1][0] : '');
+            initials = initials.toUpperCase() || 'XX';
+            
+            // Get Last 4 digits of Mobile
+            let phoneStr = mobile.trim();
+            let last4 = phoneStr.length >= 4 ? phoneStr.slice(-4) : '0000';
+            
+            // Add Timestamp last 5 digits for uniqueness
+            let timeCode = Date.now().toString().slice(-5);
+            
+            return `ORD-${initials}${last4}-${timeCode}`;
+        }
+
         // ==========================================
         // CCAVENUE & GOOGLE SHEETS ORDER SUBMISSION
         // ==========================================
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
 
-        // Added async here to fix iPhone issue
         window.submitOrder = async function(e) {
             e.preventDefault();
 
@@ -606,9 +687,14 @@
 
             setFormLoading(true);
 
-            const uniqueOrderId = "ORD-" + new Date().getTime() + "-" + Math.floor(Math.random() * 1000);
+            // Naya Custom Order ID Generate Karna
+            const uniqueOrderId = generateCustomOrderId(name, phone);
+            
             const deliveryStr = isExpress ? "Express (2-3 Days, +₹50)" : "Standard (5-7 Days)";
             const productDetails = `Kama-XXX-Gold (Qty: ${currentQty}) | Delivery: ${deliveryStr}`;
+            
+            // Quantity box me currentQty + Order ID Bhejna
+            const sheetQuantity = `${currentQty} (ID: ${uniqueOrderId})`;
 
             const orderData = {
                 action: 'createOrder',
@@ -618,7 +704,7 @@
                 email: email,
                 address: address,
                 product: productDetails,
-                qty: currentQty,
+                qty: sheetQuantity,  
                 amount: finalAmount,
                 status: "Pending (Payment Initialized)", 
                 txnId: ""
@@ -631,20 +717,27 @@
                 }
 
                 // 1. Send Log to Google Sheets
-                // FIX FOR iPHONE: Added 'await' to ensure the request completes before the form submits
-                // Safari kills background network requests if the page navigates before completion.
                 try {
-                    await fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+                    // FIX FOR IPHONE/SAFARI: 
+                    // Content-Type ko 'text/plain' kiya hai preflight block na ho, 
+                    // aur ek chhota Promise.all delay add kiya hai taaki request chali jaye form submit hone se pehle.
+                    const sheetReq = fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
                         method: 'POST', 
                         mode: 'no-cors', 
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 'Content-Type': 'text/plain' },
                         body: JSON.stringify(orderData)
                     });
+                    
+                    // Safari ke background abort issue ko fix karne ke liye 800ms wait karna zaroori hai.
+                    await Promise.all([
+                        sheetReq,
+                        new Promise(resolve => setTimeout(resolve, 800))
+                    ]);
                 } catch(sheetError) {
                     console.log("Sheet log background error:", sheetError);
                 }
                 
-                // 2. Direct Form Submit to CCAvenue Backend (Bypass CORS completely)
+                // 2. Direct Form Submit to CCAvenue Backend
                 const paymentForm = document.createElement('form');
                 paymentForm.method = 'POST';
                 paymentForm.action = 'https://ccavenue-backend.vercel.app/api/encrypt';
