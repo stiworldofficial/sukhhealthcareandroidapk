@@ -152,9 +152,6 @@
         .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); }
         .product-link:hover .product-image { transform: scale(1.08); }
 
-        .quick-add-btn { position: absolute; bottom: 1rem; right: 1rem; height: 44px; width: 44px; border-radius: 50%; background: var(--glass-bg); backdrop-filter: blur(10px); color: var(--color-brand); border: 1px solid rgba(255,255,255,0.5); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .quick-add-btn:hover { background: var(--color-brand); color: #fff; transform: scale(1.1); }
-
         .product-info { padding: 1rem 0.5rem; text-align: center; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fff;}
         .product-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--color-brand); margin: 0; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
 
@@ -359,10 +356,6 @@
 
             <div class="nav-actions">
                 <a href="#trackorder.html" class="nav-link hidden md:block" style="font-size: 0.75rem; color: var(--color-brand); margin-right: 15px;">Track Order</a>
-                <button class="action-btn" onclick="openCart()">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="cart-badge" id="cartCount">0</span>
-                </button>
             </div>
         </nav>
     </header>
@@ -385,25 +378,6 @@
                     <a href="#" class="hover:text-[#C5A059] transition"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#" class="hover:text-[#C5A059] transition"><i class="fa-brands fa-facebook-f"></i></a>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="cart-overlay" id="cartOverlay">
-        <div class="cart-drawer">
-            <div class="cart-header">
-                <h3>Your Bag</h3>
-                <button class="close-cart-btn" onclick="closeCart()"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="cart-items" id="cartItems">
-                <div class="text-center text-gray-400 italic mt-10">Your bag is currently empty.</div>
-            </div>
-            <div class="cart-footer">
-                <div class="cart-total-row">
-                    <span>Total:</span>
-                    <span id="cartTotalAmount">₹0</span>
-                </div>
-                <button class="checkout-btn" onclick="openCheckout('cart')">Secure Checkout</button>
             </div>
         </div>
     </div>
@@ -433,7 +407,43 @@
         
         <div class="store-container">
             <div class="product-grid" id="productGrid">
-                <!-- Products loaded via JS -->
+                
+                <!-- Card 1: Kama-XXX-Gold -->
+                <article class="product-card">
+                    <a href="kama-xxx-gold.html" class="product-link">
+                        <div class="product-image-area">
+                            <img src="kama-xxx-initial.png" alt="Ayurvedic Wellness Supplement" class="product-image" loading="lazy" onerror="this.src='https://via.placeholder.com/350x350?text=Sukh+Vitality'">
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-title" title="Kama-XXX-Gold">Kama-XXX-Gold</h2>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Card 2: Track Order -->
+                <article class="product-card">
+                    <a href="#trackorder.html" class="product-link">
+                        <div class="product-image-area" style="background: var(--color-brand); display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-truck-fast" style="font-size: 3.5rem; color: #fff; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"></i>
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-title" title="Track Your Order">Track Your Order</h2>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Card 3: Wellness Blog -->
+                <article class="product-card">
+                    <a href="#allblogs.html" class="product-link">
+                        <div class="product-image-area" style="background: #F5F5F7; display: flex; align-items: center; justify-content: center;">
+                            <i class="fa-solid fa-book-open" style="font-size: 3.5rem; color: var(--color-brand); transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"></i>
+                        </div>
+                        <div class="product-info">
+                            <h2 class="product-title" title="Wellness Blog">Wellness Blog</h2>
+                        </div>
+                    </a>
+                </article>
+
             </div>
         </div>
     </main>
@@ -503,7 +513,7 @@
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </a>
-        <a href="#store" class="nav-item">
+        <a href="kama-xxx-gold.html" class="nav-item">
             <i class="fa-solid fa-shop"></i>
             <span>Shop</span>
         </a>
@@ -513,7 +523,7 @@
             </div>
             <span class="mt-8 invisible">WA</span>
         </a>
-        <a href="#trackorder.html" class="nav-item">
+        <a href="trackorder.html" class="nav-item">
             <i class="fa-solid fa-truck-fast"></i>
             <span>Track</span>
         </a>
@@ -522,145 +532,6 @@
             <span>Menu</span>
         </a>
     </nav>
-
-    <!-- PRODUCT MODAL -->
-    <div class="modal-overlay" id="productModal">
-        <div class="product-modal">
-            <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
-            
-            <div class="modal-left">
-                <div class="main-img-container">
-                    <img id="modalMainImg" src="" alt="Product View">
-                    <iframe id="modalVideo" class="hidden" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-                <div class="thumbnails-container" id="modalThumbnails"></div>
-            </div>
-            <div class="modal-right">
-                <div class="modal-section">
-                    <h1 class="m-title" id="modalTitle">Product Name</h1>
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="stock-status" id="modalRatingNo"><i class="fa-solid fa-star"></i> 4.9</span>
-                        <div class="star-rating">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                        </div>
-                        <span class="rating-text" id="modalReviews">124 ratings</span>
-                    </div>
-                </div>
-                
-                <div class="modal-section">
-                    <div class="price-block">
-                        <span class="m-discount" id="modalDiscount">-30%</span>
-                        <span class="m-price" id="modalPrice">₹0</span>
-                    </div>
-                    <div class="text-sm text-gray-500 mb-2">
-                        M.R.P.: <span class="m-mrp" id="modalMRP">₹0</span>
-                    </div>
-                    <p style="color: #86868B; font-size: 0.85rem;">Inclusive of all taxes</p>
-                </div>
-
-                <div class="modal-section">
-                    <h3 class="section-heading">Select Quantity</h3>
-                    <div class="fixed-size-badge">
-                        <div class="fixed-size-icon"><i class="fa-solid fa-box"></i></div>
-                        <div class="fixed-size-text" id="modalSizeText">Capsules Pack</div>
-                    </div>
-                </div>
-                
-                <div class="modal-section">
-                    <h3 class="section-heading">About this wellness supplement</h3>
-                    <p class="m-desc" id="modalDesc">Description will appear here.</p>
-                </div>
-                
-                <div class="modal-section">
-                    <h3 class="section-heading">Key Health Benefits</h3>
-                    <ul class="m-benefits" id="modalBenefits"></ul>
-                </div>
-
-                <div class="modal-section !border-none !pb-0">
-                    <div class="mb-4">
-                        <h3 class="section-heading">Key Ingredients</h3>
-                        <p class="m-desc mb-3 text-[0.95rem]" id="modalIngredients"></p>
-                        <h3 class="section-heading">Suggested Use</h3>
-                        <p class="m-desc text-[0.95rem]" id="modalUsage"></p>
-                    </div>
-
-                    <div class="flex flex-col gap-2 mt-4 pt-4 border-t border-[rgba(0,0,0,0.05)]">
-                        <label class="text-sm font-bold text-[#1D1D1F] mb-1">Pack Quantity:</label>
-                        <div class="custom-qty-selector">
-                            <button class="custom-qty-btn" onclick="updateQty(-1)">-</button>
-                            <input type="text" class="custom-qty-input" id="modalQty" value="1" readonly>
-                            <button class="custom-qty-btn" onclick="updateQty(1)">+</button>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn-add-cart" onclick="addToCartFromModal()"><i class="fa-solid fa-cart-plus mr-2"></i> Add to Bag</button>
-                        <button class="btn-buy-now" onclick="openCheckout('buy_now')"><i class="fa-solid fa-bolt mr-2"></i> Buy Now Securely</button>
-                    </div>
-
-                    <div class="secure-badge">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <span>100% Secure transaction via CCAvenue</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CHECKOUT MODAL -->
-    <div class="modal-overlay" id="checkoutModalOverlay">
-        <div class="checkout-modal">
-            <div class="checkout-header">
-                <h2 class="checkout-title">Secure Checkout</h2>
-                <button class="absolute top-4 right-4 bg-gray-100 w-8 h-8 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200" onclick="closeCheckout()"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            
-            <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
-                <div class="checkout-form-group">
-                    <input type="text" id="chkName" class="checkout-input" placeholder="Full Name" required minlength="3">
-                </div>
-                <div class="checkout-form-group">
-                    <input type="tel" id="chkPhone" class="checkout-input" placeholder="Mobile Number (10 digits)" required pattern="[6-9]\d{9}">
-                </div>
-                <div class="checkout-form-group">
-                    <input type="email" id="chkEmail" class="checkout-input" placeholder="Email Address" required>
-                </div>
-                <div class="checkout-form-group">
-                    <textarea id="chkAddress" class="checkout-input checkout-textarea" placeholder="Full Delivery Address with Pincode" required minlength="10"></textarea>
-                </div>
-                
-                <div class="delivery-options-container">
-                    <label style="display:block; font-weight: 600; margin-bottom: 12px; color: #1D1D1F; font-size: 0.95rem;">Delivery Method</label>
-                    <div class="delivery-option">
-                        <label for="deliveryNormal">
-                            <input type="radio" id="deliveryNormal" name="deliveryMethod" value="normal" checked onchange="updateDeliveryCost()">
-                            Standard Delivery (5-7 Days)
-                        </label>
-                        <span class="del-price" style="color: #34C759;">Free</span>
-                    </div>
-                    <div class="delivery-option">
-                        <label for="deliveryFast">
-                            <input type="radio" id="deliveryFast" name="deliveryMethod" value="fast" onchange="updateDeliveryCost()">
-                            Express Delivery (2-3 Days)
-                        </label>
-                        <span class="del-price" style="color: #FF3B30;">+₹50</span>
-                    </div>
-                </div>
-
-                <div class="checkout-summary">
-                    <span>Total Amount:</span>
-                    <span id="checkoutTotalDisplay" style="font-size: 1.5rem; font-family: 'Playfair Display', serif;">₹0</span>
-                </div>
-                
-                <p class="text-xs text-gray-500 text-center mb-4">By placing your order, you agree to our <a href="#" onclick="openLegalModal('terms'); return false;" class="text-[var(--color-brand)] underline">Terms</a> & <a href="#" onclick="openLegalModal('privacy'); return false;" class="text-[var(--color-brand)] underline">Privacy Policy</a>.</p>
-
-                <button type="submit" class="checkout-pay-btn" id="payBtn">
-                    <span id="btnPayText"><i class="fa-solid fa-lock"></i> Pay Securely</span>
-                    <div id="btnPayLoader" class="loader" style="display: none;">Processing...</div>
-                </button>
-            </form>
-        </div>
-    </div>
 
     <!-- LEGAL MODALS CONTAINER -->
     <div class="modal-overlay" id="legalModalOverlay">
@@ -822,419 +693,6 @@
         function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 5000); }
         resetInterval();
 
-        // --- Cart State
-        let cart = [];
-        
-        function openCart() { 
-            document.getElementById('cartOverlay').classList.add('active'); 
-            document.body.style.overflow = 'hidden'; 
-            updateCartUI(); 
-        }
-        
-        window.closeCart = function() { 
-            document.getElementById('cartOverlay').classList.remove('active'); 
-            document.body.style.overflow = ''; 
-        };
-        
-        document.getElementById('cartOverlay').addEventListener('click', (e) => { 
-            if(e.target === document.getElementById('cartOverlay')) closeCart(); 
-        });
-
-        // REBRANDED PRODUCT TO MEET COMPLIANCE
-        const products = [
-            { 
-             id: 1, 
-             name: "Kama-XXX-Gold", 
-             price: "₹599", 
-             mrp: "₹899", 
-             discount: "-30%",
-             size: "5 Capsules",
-             image: "kama-xxx-initial.png", // Retaining file paths as requested
-             gallery: [ 
-                 { type: 'video', id: "DclRWT4lNJ8" },
-                 { type: 'image', url: "kama-xxx-one.webp" }, 
-                 { type: 'image', url: "kama-xxx-two.webp" }, 
-                 { type: 'image', url: "kama-xxx-three.webp" }, 
-                 { type: 'image', url: "kama-xxx-four.webp" },
-                 { type: 'video', id: "O8mFiBKP1B8" }
-             ],
-             reviews: 124, 
-             rating: "4.9", 
-             desc: "An Ayurvedic proprietary medicine crafted with adaptogenic herbs to support daily energy, manage stress, and promote overall vitality and well-being. A natural approach to holistic health.",
-             benefits: [
-                 "Helps manage daily stress and anxiety naturally",
-                 "Supports natural stamina and physical endurance", 
-                 "Promotes overall vitality and general well-being",
-                 "Formulated with pure adaptogenic Ayurvedic herbs",
-                 "Helps maintain healthy energy levels throughout the day"
-             ],
-             ingredients: "Ashwagandha, Shilajit (Purified), Safed Musli, Konch Beej, Vidari Kand, Jaiphal, Sidh Makardhwaj, Loh Bhasm, and essential Ayurvedic botanicals.",
-             usage: "Take 1 capsule at night with lukewarm milk, or as directed by a healthcare professional/physician. Do not exceed recommended dosage."
-            }
-        ];
-
-        let currentModalProduct = null;
-        let currentQty = 1;
-
-        function renderProducts() {
-            const grid = document.getElementById('productGrid'); 
-            if(!grid) return;
-            grid.innerHTML = ''; 
-                
-            products.forEach(product => { 
-                const card = document.createElement('article'); 
-                card.className = 'product-card'; 
-                card.innerHTML = `
-                <div class="product-link" onclick="openModal(${product.id})">
-                    <div class="product-image-area">
-                        <img src="${product.image}" alt="Ayurvedic Wellness Supplement" class="product-image" loading="lazy" onerror="this.src='https://via.placeholder.com/350x350?text=Sukh+Vitality'">
-                        <button class="quick-add-btn" onclick="handleAddToCartFromGrid(event, ${product.id})"><i class="fa-solid fa-plus"></i></button>
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-title" title="${product.name}">${product.name}</h2>
-                    </div>
-                </div>`; 
-                grid.appendChild(card); 
-            }); 
-            
-            const trackCard = document.createElement('article');
-            trackCard.className = 'product-card';
-            trackCard.innerHTML = `
-                <a href="#trackorder.html" class="product-link">
-                    <div class="product-image-area" style="background: var(--color-brand); display: flex; align-items: center; justify-content: center;">
-                        <i class="fa-solid fa-truck-fast" style="font-size: 3.5rem; color: #fff; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"></i>
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-title" title="Track Your Order">Track Your Order</h2>
-                    </div>
-                </a>
-            `;
-            grid.appendChild(trackCard);
-
-            const blogCard = document.createElement('article');
-            blogCard.className = 'product-card';
-            blogCard.innerHTML = `
-                <a href="#allblogs.html" class="product-link">
-                    <div class="product-image-area" style="background: #F5F5F7; display: flex; align-items: center; justify-content: center;">
-                        <i class="fa-solid fa-book-open" style="font-size: 3.5rem; color: var(--color-brand); transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"></i>
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-title" title="Wellness Blog">Wellness Blog</h2>
-                    </div>
-                </a>
-            `;
-            grid.appendChild(blogCard);
-        }
-
-        window.handleAddToCartFromGrid = function(event, productId) { 
-            event.preventDefault(); 
-            event.stopPropagation(); 
-            let prod = products.find(p => p.id === productId); 
-            if(prod) {
-                addItemsToCart(prod, 1); 
-            }
-        };
-
-        function addItemsToCart(product, qty) { 
-            let priceNum = parseInt(product.price.replace(/[^0-9]/g, '')); 
-            let existingItemIndex = cart.findIndex(item => item.id === product.id);
-            if(existingItemIndex !== -1) {
-                cart[existingItemIndex].qty += qty;
-            } else {
-                cart.push({ id: product.id, name: product.name, priceNum: priceNum, priceStr: product.price, image: product.image, size: product.size, qty: qty }); 
-            }
-            updateCartCount(); updateCartUI(); showNotification("Item added to your bag"); 
-        }
-
-        function updateCartCount() {
-            let totalItems = cart.reduce((sum, item) => sum + item.qty, 0); 
-            document.getElementById('cartCount').innerText = totalItems; 
-        }
-
-        window.updateCartItemQty = function(id, change) {
-            let itemIndex = cart.findIndex(i => i.id === id);
-            if(itemIndex !== -1) {
-                cart[itemIndex].qty += change;
-                if(cart[itemIndex].qty <= 0) { removeFromCart(id); } 
-                else { updateCartCount(); updateCartUI(); }
-            }
-        };
-
-        window.removeFromCart = function(itemId) { 
-            cart = cart.filter(item => item.id !== itemId); 
-            updateCartCount(); updateCartUI(); 
-        };
-
-        function updateCartUI() { 
-            const itemsContainer = document.getElementById('cartItems'); 
-            const totalEl = document.getElementById('cartTotalAmount'); 
-            itemsContainer.innerHTML = ''; 
-            let total = 0; 
-            if (cart.length === 0) { 
-                itemsContainer.innerHTML = '<div class="text-center text-gray-400 italic mt-10">Your bag is currently empty.</div>'; 
-            } else { 
-                cart.forEach(item => { 
-                    let itemTotalAmount = item.priceNum * item.qty;
-                    total += itemTotalAmount; 
-                    itemsContainer.innerHTML += `
-                        <div class="cart-item">
-                            <img src="${item.image}" alt="Product" class="cart-item-img" onerror="this.src='https://via.placeholder.com/80x80'">
-                            <div class="cart-item-details">
-                                <div class="cart-item-title">${item.name}</div>
-                                <div class="cart-item-size">Pack: ${item.size}</div>
-                                <div class="cart-qty-control">
-                                    <button class="cart-qty-btn" onclick="updateCartItemQty(${item.id}, -1)">-</button>
-                                    <span class="cart-qty-val">${item.qty}</span>
-                                    <button class="cart-qty-btn" onclick="updateCartItemQty(${item.id}, 1)">+</button>
-                                </div>
-                                <div class="cart-item-price">₹${itemTotalAmount.toLocaleString('en-IN')}</div>
-                                <button class="remove-item-btn" onclick="removeFromCart(${item.id})">Remove</button>
-                            </div>
-                        </div>`; 
-                }); 
-            } 
-            totalEl.innerText = '₹' + total.toLocaleString('en-IN'); 
-        }
-
-        window.changeMainMedia = function(type, data, element) { 
-            document.querySelectorAll('.thumbnail-btn').forEach(btn => btn.classList.remove('active')); 
-            element.classList.add('active'); 
-            const imgEl = document.getElementById('modalMainImg'); 
-            const vidEl = document.getElementById('modalVideo'); 
-            if (type === 'video') { 
-                imgEl.classList.add('hidden'); vidEl.classList.remove('hidden'); 
-                vidEl.src = `https://www.youtube.com/embed/${data}?autoplay=1&mute=1&loop=1&playlist=${data}`; 
-            } else { 
-                vidEl.classList.add('hidden'); imgEl.classList.remove('hidden'); 
-                vidEl.src = ''; imgEl.src = data; 
-            } 
-        };
-
-        window.updateQty = function(change) { 
-            currentQty += change; 
-            if(currentQty < 1) currentQty = 1; 
-            if(currentQty > 20) currentQty = 20; 
-            document.getElementById('modalQty').value = currentQty; 
-        };
-
-        window.openModal = function(id) { 
-            currentModalProduct = products.find(p => p.id === id); 
-            if(!currentModalProduct) return; 
-            
-            const imgEl = document.getElementById('modalMainImg'); 
-            const vidEl = document.getElementById('modalVideo'); 
-            vidEl.src = ''; vidEl.classList.add('hidden'); 
-            imgEl.classList.remove('hidden'); 
-            
-            if (currentModalProduct.gallery[0].type === 'video') {
-                imgEl.classList.add('hidden'); 
-                vidEl.classList.remove('hidden'); 
-                vidEl.src = `https://www.youtube.com/embed/${currentModalProduct.gallery[0].id}?autoplay=1&mute=1&loop=1&playlist=${currentModalProduct.gallery[0].id}`; 
-            } else {
-                imgEl.src = currentModalProduct.gallery[0].url; 
-            }
-            
-            const thumbnailsContainer = document.getElementById('modalThumbnails'); 
-            thumbnailsContainer.innerHTML = ''; 
-            currentModalProduct.gallery.forEach((item, index) => { 
-                const isActive = index === 0 ? 'active' : ''; 
-                if (item.type === 'video') { 
-                    thumbnailsContainer.innerHTML += `<div class="thumbnail-btn ${isActive}" onclick="changeMainMedia('video', '${item.id}', this)"><img src="https://img.youtube.com/vi/${item.id}/hqdefault.jpg" alt="Video"><div class="video-play-icon"><i class="fa-solid fa-play"></i></div></div>`; 
-                } else { 
-                    thumbnailsContainer.innerHTML += `<div class="thumbnail-btn ${isActive}" onclick="changeMainMedia('image', '${item.url}', this)"><img src="${item.url}" alt="Thumbnail" onerror="this.src='https://via.placeholder.com/160x90'"></div>`; 
-                } 
-            }); 
-            
-            document.getElementById('modalTitle').innerText = currentModalProduct.name; 
-            document.getElementById('modalReviews').innerText = `${currentModalProduct.reviews} ratings`; 
-            document.getElementById('modalPrice').innerText = currentModalProduct.price; 
-            document.getElementById('modalMRP').innerText = currentModalProduct.mrp; 
-            document.getElementById('modalDiscount').innerText = currentModalProduct.discount; 
-            document.getElementById('modalSizeText').innerText = currentModalProduct.size; 
-            document.getElementById('modalDesc').innerText = currentModalProduct.desc; 
-            
-            const benefitsList = document.getElementById('modalBenefits'); 
-            benefitsList.innerHTML = ''; 
-            currentModalProduct.benefits.forEach(benefit => { benefitsList.innerHTML += `<li>${benefit}</li>`; }); 
-            
-            document.getElementById('modalIngredients').innerText = currentModalProduct.ingredients; 
-            document.getElementById('modalUsage').innerText = currentModalProduct.usage;
-
-            currentQty = 1; document.getElementById('modalQty').value = currentQty; 
-            document.getElementById('productModal').classList.add('active'); 
-            document.body.style.overflow = 'hidden'; 
-        };
-
-        window.closeModal = function() { 
-            document.getElementById('productModal').classList.remove('active'); 
-            document.body.style.overflow = ''; 
-            document.getElementById('modalVideo').src = ''; 
-            currentModalProduct = null; 
-        };
-
-        window.addToCartFromModal = function() { 
-            if(currentModalProduct) { addItemsToCart(currentModalProduct, currentQty); closeModal(); } 
-        };
-
-        // TRACK PIXEL PURCHASE EVENT ON SUCCESSFUL CHECKOUT
-        function trackPixelPurchase(amount, currency = 'INR') {
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Purchase', {
-                    value: amount,
-                    currency: currency
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', renderProducts);
-        renderProducts();
-
-        // ==========================================
-        // CCAVENUE PAYMENT LOGIC (DIRECT FORM SUBMIT BYPASS)
-        // ==========================================
-        const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
-        
-        let checkoutMode = ''; 
-        let baseAmount = 0; 
-        let finalAmount = 0; 
-        let finalItemsDetails = '';
-
-        window.openCheckout = function(mode) {
-            checkoutMode = mode;
-            if(mode === 'cart') {
-                if(cart.length === 0) {
-                    showNotification("Aapka bag abhi khali hai! Kripya items add karein.", true);
-                    return;
-                }
-                baseAmount = cart.reduce((sum, item) => sum + (item.priceNum * item.qty), 0);
-                finalItemsDetails = cart.map(i => `${i.name} (x${i.qty})`).join(", ");
-                closeCart(); 
-            } else if(mode === 'buy_now') {
-                if(!currentModalProduct) return;
-                baseAmount = parseInt(currentModalProduct.price.replace(/[^0-9]/g, '')) * currentQty;
-                finalItemsDetails = `${currentModalProduct.name} (Qty: ${currentQty})`;
-                closeModal(); 
-            }
-
-            document.getElementById('deliveryNormal').checked = true;
-            finalAmount = baseAmount;
-            document.getElementById('checkoutTotalDisplay').innerText = '₹' + finalAmount.toLocaleString('en-IN');
-            
-            document.getElementById('checkoutModalOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            // Track InitiateCheckout Event
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'InitiateCheckout');
-            }
-        };
-
-        window.closeCheckout = function() {
-            document.getElementById('checkoutModalOverlay').classList.remove('active');
-            document.body.style.overflow = '';
-        };
-
-        document.getElementById('checkoutModalOverlay').addEventListener('click', (e) => { 
-            if(e.target === document.getElementById('checkoutModalOverlay')) closeCheckout(); 
-        });
-
-        window.updateDeliveryCost = function() {
-            const filtration = document.getElementById('deliveryFast').checked;
-            finalAmount = filtration ? baseAmount + 50 : baseAmount;
-            document.getElementById('checkoutTotalDisplay').innerText = '₹' + finalAmount.toLocaleString('en-IN');
-        };
-
-        function showBtnLoader(show) {
-            const btn = document.getElementById('payBtn');
-            const txt = document.getElementById('btnPayText');
-            const ldr = document.getElementById('btnPayLoader');
-            if(show) {
-                btn.disabled = true; txt.style.display = 'none'; ldr.style.display = 'block';
-                btn.classList.add('opacity-70');
-            } else {
-                btn.disabled = false; txt.style.display = 'flex'; ldr.style.display = 'none';
-                btn.classList.remove('opacity-70');
-            }
-        }
-
-        window.handleCheckoutSubmit = async function(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('chkName').value.trim();
-            const phone = document.getElementById('chkPhone').value.trim();
-            const email = document.getElementById('chkEmail').value.trim();
-            const address = document.getElementById('chkAddress').value.trim();
-
-            showBtnLoader(true);
-
-            const uniqueOrderId = "ORD-" + new Date().getTime() + "-" + Math.floor(Math.random() * 1000);
-            const totalQty = checkoutMode === 'cart' ? cart.reduce((sum, item) => sum + item.qty, 0) : currentQty;
-            const isFastDelivery = document.getElementById('deliveryFast').checked;
-            const deliveryMethodStr = isFastDelivery ? " | Delivery: Express (2-3 Days, +₹50)" : " | Delivery: Standard (5-7 Days)";
-
-            const orderData = {
-                action: 'createOrder',
-                orderId: uniqueOrderId,
-                name: name,
-                phone: phone,
-                email: email,
-                address: address,
-                product: finalItemsDetails + deliveryMethodStr,
-                qty: totalQty,
-                amount: finalAmount,
-                status: "Pending (Payment Initialized)", 
-                txnId: ""
-            };
-
-            try {
-                // Trigger Pixel Purchase Event just before redirecting to payment gateway
-                trackPixelPurchase(finalAmount);
-
-                // 1. Google Sheets me Order save karna
-                fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
-                    method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(orderData)
-                }).catch(e => console.log("Sheet log ignored:", e));
-                
-                // 2. NAYA TARIQA: Seedha Form Submit (Isme CORS error 100% nahi aayega!)
-                const paymentForm = document.createElement('form');
-                paymentForm.method = 'POST';
-                // Yahan aapke Vercel serverless function ka URL hai
-                paymentForm.action = 'https://ccavenue-backend.vercel.app/api/encrypt';
-
-                // Data jo backend ko chahiye, wo hidden inputs me dalenge
-                const paramsToBackend = { 
-                    amount: finalAmount.toFixed(2), 
-                    merchant_id: '4448120',
-                    order_id: uniqueOrderId,
-                    currency: 'INR',
-                    redirect_url: 'https://ccavenue-backend.vercel.app/api/response',
-                    cancel_url: 'https://ccavenue-backend.vercel.app/api/response',
-                    language: 'EN',
-                    billing_name: name, 
-                    billing_address: address,
-                    billing_tel: phone, 
-                    billing_email: email 
-                };
-
-                for (const key in paramsToBackend) {
-                    const hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = key;
-                    hiddenField.value = paramsToBackend[key];
-                    paymentForm.appendChild(hiddenField);
-                }
-
-                document.body.appendChild(paymentForm);
-                // Redirects current page directly to Vercel (eliminating all fetch/CORS problems)
-                paymentForm.submit();
-
-            } catch (error) {
-                console.error("Form Creation Error:", error);
-                showNotification("Payment shuru hone me problem hai. Kripya page refresh karein.", true);
-                showBtnLoader(false);
-            }
-        };
     </script>
 </body>
 </html>
