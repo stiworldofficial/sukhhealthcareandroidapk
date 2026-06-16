@@ -27,6 +27,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
     <style>
         /* =========================================
            MOBILE-FIRST HIGH-CONVERSION THEME
@@ -81,8 +84,11 @@
         .gallery-wrap { width: 100%; position: relative; }
         
         /* YouTube Video Format (16:9 Aspect Ratio) */
-        .main-img-container { width: 100%; aspect-ratio: 16/9; background: #fff; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-soft); margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.05); }
-        .main-img-container img { width: 100%; height: 100%; object-fit: cover; }
+        .main-img-container { width: 100%; aspect-ratio: 16/9; background: #fff; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-soft); margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.05); position: relative; touch-action: pan-y; /* Allows vertical scrolling but captures horizontal swipes */ }
+        .main-img-container img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
+        
+        /* Swipe indicators hint */
+        .swipe-hint { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.5); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; pointer-events: none; opacity: 0.8; display: flex; align-items: center; gap: 5px; }
         
         /* Fit 5 Thumbnails perfectly in one row */
         .thumbnails { display: flex; gap: 6px; overflow-x: hidden; padding-bottom: 5px; width: 100%; }
@@ -94,16 +100,15 @@
         .product-info { width: 100%; }
         .trust-badge-small { display: inline-block; background: rgba(197, 160, 89, 0.15); color: var(--color-premium-gold); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.8rem; letter-spacing: 0.5px; }
         
-        /* UPDATE: Heading one line in mobile */
         .p-title { 
             font-family: 'Playfair Display', serif; 
             font-size: clamp(1.2rem, 5vw, 1.8rem); 
             color: var(--color-brand); 
             line-height: 1.2; 
             margin-bottom: 0.5rem; 
-            white-space: nowrap; /* Forces text in a single horizontal line */
-            overflow: hidden;    /* Prevents layout breaking */
-            text-overflow: ellipsis; /* Adds ... if screen is too small */
+            white-space: nowrap; 
+            overflow: hidden;    
+            text-overflow: ellipsis; 
         }
         
         .p-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 1.2rem; }
@@ -195,7 +200,7 @@
         /* SUCCESS MODAL SPECIFIC STYLES */
         .success-modal { text-align: center; padding: 2.5rem 1.5rem; justify-content: center; }
         .success-icon { color: #34C759; font-size: 4.5rem; margin-bottom: 1rem; display: inline-block; }
-        .success-modal .chk-title { font-size: 2rem; color: #1D1D1F; margin-bottom: 10px; }
+        .success-modal .chk-title { font-size: 1.6rem; color: #1D1D1F; margin-bottom: 10px; line-height: 1.3; }
         .success-modal .chk-subtitle { font-size: 1.05rem; color: #555; margin-bottom: 20px; line-height: 1.5; }
         .success-order-box { background: rgba(197, 160, 89, 0.1); border: 1px dashed var(--color-premium-gold); border-radius: 8px; padding: 15px; margin-bottom: 20px; }
         .success-order-box span { display: block; font-size: 0.85rem; color: #666; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
@@ -230,6 +235,10 @@
         .footer-bottom { max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; font-size: 0.8rem; opacity: 0.7; padding-top: 0.5rem; text-align: center; }
         .footer-legal a { color: #fff; text-decoration: none; margin: 0 0.5rem; transition: opacity 0.3s; cursor: pointer; display: inline-block; margin-bottom: 8px;}
 
+        /* Custom Toast Notification */
+        .toast-notification { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1D1D1F; color: #FFF; padding: 12px 24px; border-radius: 8px; font-size: 0.9rem; z-index: 6000; opacity: 0; pointer-events: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); white-space: nowrap; }
+        .toast-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
         /* =========================================
            DESKTOP/TABLET OVERRIDES (min-width: 992px)
            ========================================= */
@@ -259,6 +268,7 @@
 
             .desktop-btn-wrapper { display: block; }
             .sticky-mobile-cta { display: none; }
+            .swipe-hint { display: none; } /* Hide swipe hint on desktop */
             
             .checkout-modal { padding: 2rem; border-radius: var(--radius-xl); }
             .chk-title { font-size: 1.8rem; }
@@ -273,6 +283,7 @@
             .footer-col { flex: 1; min-width: 200px; }
             .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
             .footer-legal a { margin: 0 0 0 1.5rem; display: inline; }
+            .toast-notification { bottom: 30px; }
         }
     </style>
 </head>
@@ -294,25 +305,26 @@
         <section class="landing-container">
             <!-- Left: Gallery -->
             <div class="gallery-wrap">
-                <div class="main-img-container">
+                <div class="main-img-container" id="swipeContainer">
                     <img id="mainImage" src="fssaih.png" alt="Kama-XXX-Gold" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800'">
+                    <div class="swipe-hint"><i class="fa-solid fa-arrows-left-right"></i> Swipe to explore</div>
                 </div>
                 
-                <!-- Only Images, No Videos -->
+                <!-- Thumbnails driving the Swipe UI -->
                 <div class="thumbnails">
-                    <div class="thumb active" onclick="changeImage(this, 'fssaih.png')">
+                    <div class="thumb active" onclick="changeGalleryImage(0)">
                         <img src="fssaih.png" alt="Thumb 1" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=200'">
                     </div>
-                    <div class="thumb" onclick="changeImage(this, 'kama-xxx-one.webp')">
+                    <div class="thumb" onclick="changeGalleryImage(1)">
                         <img src="kama-xxx-one.webp" alt="Thumb 2" onerror="this.src='https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=200'">
                     </div>
-                    <div class="thumb" onclick="changeImage(this, 'kama-xxx-two.webp')">
+                    <div class="thumb" onclick="changeGalleryImage(2)">
                         <img src="kama-xxx-two.webp" alt="Thumb 3" onerror="this.src='https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=200'">
                     </div>
-                    <div class="thumb" onclick="changeImage(this, 'kama-xxx-three.webp')">
+                    <div class="thumb" onclick="changeGalleryImage(3)">
                         <img src="kama-xxx-three.webp" alt="Thumb 4" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=200'">
                     </div>
-                    <div class="thumb" onclick="changeImage(this, 'kama-xxx-four.webp')">
+                    <div class="thumb" onclick="changeGalleryImage(4)">
                         <img src="kama-xxx-four.webp" alt="Thumb 5" onerror="this.src='https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=200'">
                     </div>
                 </div>
@@ -467,7 +479,7 @@
                 
                 <p style="text-align: center; font-size: 0.75rem; color: #888; margin-top: 15px;">
                     By placing this order, you agree to our Terms & Privacy Policy.<br>
-                    Payments processed securely via CCAvenue.
+                    Payments processed securely via Razorpay.
                 </p>
             </form>
         </div>
@@ -478,7 +490,7 @@
         <div class="checkout-modal success-modal">
             <button class="modal-close" onclick="closeSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
             <i class="fa-solid fa-circle-check success-icon"></i>
-            <h2 class="chk-title">Order Successful!</h2>
+            <h2 class="chk-title" id="successTitle">Order Successful!</h2>
             <p class="chk-subtitle">Aapka order successfully place ho gaya hai.</p>
             
             <div class="success-order-box">
@@ -502,6 +514,9 @@
             <i class="fa-solid fa-bolt"></i> Order Now
         </button>
     </div>
+    
+    <!-- Global Custom Toast Notification -->
+    <div id="uiToast" class="toast-notification"></div>
 
     <!-- ORIGINAL FOOTER (Mobile First styling applied) -->
     <footer class="store-footer">
@@ -552,7 +567,7 @@
         <div class="footer-bottom">
             <p>&copy; 2026 SukhHealthcare.com All rights reserved.</p>
             <div class="footer-legal">
-                <span>Secure Payments </span>
+                <span>Secure Payments via Razorpay</span>
             </div>
         </div>
     </footer>
@@ -564,15 +579,81 @@
         let currentQty = 1;
         let finalAmount = basePrice;
         
-        // Product Gallery Logic
-        function changeImage(thumbElement, primarySrc) {
-            // Remove active class from all
-            document.querySelectorAll('.thumb').forEach(el => el.classList.remove('active'));
-            // Add active to clicked
-            thumbElement.classList.add('active');
-            // Change main image
+        // Define Images for Swipe and Click logic
+        const productImages = [
+            'fssaih.png', 
+            'kama-xxx-one.webp', 
+            'kama-xxx-two.webp', 
+            'kama-xxx-three.webp', 
+            'kama-xxx-four.webp'
+        ];
+        let activeImageIndex = 0;
+        
+        // ==========================================
+        // IMAGE GALLERY & SWIPE LOGIC
+        // ==========================================
+        
+        function changeGalleryImage(index) {
+            activeImageIndex = index;
+            updateGalleryUI();
+        }
+        
+        function updateGalleryUI() {
+            // Update Main Image
             const mainImg = document.getElementById('mainImage');
-            mainImg.src = primarySrc;
+            mainImg.style.opacity = '0'; // smooth fade transition
+            setTimeout(() => {
+                mainImg.src = productImages[activeImageIndex];
+                mainImg.style.opacity = '1';
+            }, 150);
+            
+            // Update Active Thumbnails
+            const thumbs = document.querySelectorAll('.thumb');
+            thumbs.forEach((thumb, idx) => {
+                if (idx === activeImageIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        // Swipe Setup variables
+        const swipeContainer = document.getElementById('swipeContainer');
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        swipeContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        swipeContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipeGestures();
+        }, { passive: true });
+
+        function handleSwipeGestures() {
+            const swipeThreshold = 50; // Minimum px distance needed to trigger swipe
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swiped Left -> Move to Next Image
+                activeImageIndex = (activeImageIndex + 1) % productImages.length;
+                updateGalleryUI();
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                // Swiped Right -> Move to Previous Image
+                activeImageIndex = (activeImageIndex - 1 + productImages.length) % productImages.length;
+                updateGalleryUI();
+            }
+        }
+
+        // Custom UI Notification Function (Replaces Alert)
+        function showNotification(message) {
+            const toast = document.getElementById('uiToast');
+            toast.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
         }
 
         // Quantity Logic
@@ -618,23 +699,11 @@
         window.closeSuccessModal = function() {
             document.getElementById('successModalOverlay').classList.remove('active');
             document.body.style.overflow = '';
-            // URL clean karna taki refresh par wapas popup na aaye
+            // Reset URL on close if success parameters exist
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.pathname);
             }
         };
-
-        // On Page Load: Check URL for Success Parameters
-        document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('status') === 'success') {
-                const orderId = urlParams.get('order_id') || urlParams.get('orderId') || 'N/A';
-                document.getElementById('displayOrderId').innerText = orderId;
-                
-                document.getElementById('successModalOverlay').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        });
 
         // UI Loading State for Button
         function setFormLoading(isLoading) {
@@ -671,7 +740,7 @@
         }
 
         // ==========================================
-        // CCAVENUE & GOOGLE SHEETS ORDER SUBMISSION
+        // RAZORPAY & GOOGLE SHEETS ORDER SUBMISSION
         // ==========================================
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
 
@@ -687,15 +756,13 @@
 
             setFormLoading(true);
 
-            // Naya Custom Order ID Generate Karna
+            // Create Unique Order ID
             const uniqueOrderId = generateCustomOrderId(name, phone);
-            
             const deliveryStr = isExpress ? "Express (2-3 Days, +₹50)" : "Standard (5-7 Days)";
             const productDetails = `Kama-XXX-Gold (Qty: ${currentQty}) | Delivery: ${deliveryStr}`;
-            
-            // Quantity box me currentQty + Order ID Bhejna
             const sheetQuantity = `${currentQty} (ID: ${uniqueOrderId})`;
 
+            // 1st Payload to send BEFORE payment
             const orderData = {
                 action: 'createOrder',
                 orderId: uniqueOrderId,
@@ -705,22 +772,14 @@
                 address: address,
                 product: productDetails,
                 qty: sheetQuantity,  
-                amount: finalAmount,
+                amount: finalAmount, // Frontend uses this just for calculation, backend will force 0
                 status: "Pending (Payment Initialized)", 
                 txnId: ""
             };
 
             try {
-                // FB Pixel: Track Purchase Event right before redirect
-                if (typeof fbq !== 'undefined') {
-                    fbq('track', 'Purchase', { value: finalAmount, currency: 'INR' });
-                }
-
-                // 1. Send Log to Google Sheets
+                // 1. Send Background Log to Google Sheets First
                 try {
-                    // FIX FOR IPHONE/SAFARI: 
-                    // Content-Type ko 'text/plain' kiya hai preflight block na ho, 
-                    // aur ek chhota Promise.all delay add kiya hai taaki request chali jaye form submit hone se pehle.
                     const sheetReq = fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
                         method: 'POST', 
                         mode: 'no-cors', 
@@ -728,7 +787,7 @@
                         body: JSON.stringify(orderData)
                     });
                     
-                    // Safari ke background abort issue ko fix karne ke liye 800ms wait karna zaroori hai.
+                    // Small delay to ensure sheet push registers before opening payment popup
                     await Promise.all([
                         sheetReq,
                         new Promise(resolve => setTimeout(resolve, 800))
@@ -736,42 +795,87 @@
                 } catch(sheetError) {
                     console.log("Sheet log background error:", sheetError);
                 }
-                
-                // 2. Direct Form Submit to CCAvenue Backend
-                const paymentForm = document.createElement('form');
-                paymentForm.method = 'POST';
-                paymentForm.action = 'https://ccavenue-backend.vercel.app/api/encrypt';
 
-                const paramsToBackend = { 
-                    amount: finalAmount.toFixed(2), 
-                    merchant_id: '4448120',
-                    order_id: uniqueOrderId,
-                    currency: 'INR',
-                    redirect_url: 'https://ccavenue-backend.vercel.app/api/response',
-                    cancel_url: 'https://ccavenue-backend.vercel.app/api/response',
-                    language: 'EN',
-                    billing_name: name, 
-                    billing_address: address,
-                    billing_tel: phone, 
-                    billing_email: email 
+                // 2. Initialize Razorpay Checkout Option
+                var razorpayOptions = {
+                    "key": "rzp_test_SoQGLL2pS9o5qt", // YOUR RAZORPAY TEST KEY
+                    "amount": finalAmount * 100, // Amount is in paise
+                    "currency": "INR",
+                    "name": "Sukh Healthcare",
+                    "description": productDetails,
+                    "image": "sukh.png", // Company Logo
+                    "handler": function (response) {
+                        // THIS BLOCK RUNS UPON SUCCESSFUL PAYMENT
+                        
+                        // Extract First Name for Welcome Message
+                        const firstName = name.split(' ')[0];
+                        document.getElementById('successTitle').innerText = `Welcome ${firstName}, Order Successful!`;
+                        
+                        // Show Success UI Locally
+                        document.getElementById('displayOrderId').innerText = uniqueOrderId;
+                        closeCheckoutModal();
+                        
+                        document.getElementById('successModalOverlay').classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        
+                        // Fire Pixel Event
+                        if (typeof fbq !== 'undefined') {
+                            fbq('track', 'Purchase', { value: finalAmount, currency: 'INR' });
+                        }
+                        
+                        // 3. Send Payment Confirmation & Transaction ID to Google Sheet
+                        const updateData = {
+                            action: 'updatePayment', 
+                            orderId: uniqueOrderId,
+                            phone: phone, // Added for Failsafe Dual Matching
+                            amount: finalAmount, // Sending actual amount to update the '0'
+                            status: "Completed (Paid)",
+                            txnId: response.razorpay_payment_id // Logs Razorpay Transaction / UPI App ID
+                        };
+                        
+                        // BULLETPROOF FETCH: keepalive guarantees execution even if user closes the tab instantly!
+                        fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+                            method: 'POST', 
+                            mode: 'no-cors', 
+                            keepalive: true, // Crucial for post-payment tab closures
+                            headers: { 'Content-Type': 'text/plain' },
+                            body: JSON.stringify(updateData)
+                        }).catch(err => console.error("Update failed:", err));
+
+                        setFormLoading(false);
+                    },
+                    "prefill": {
+                        "name": name,
+                        "email": email,
+                        "contact": phone
+                    },
+                    "notes": {
+                        "shipping_address": address,
+                        "custom_order_id": uniqueOrderId
+                    },
+                    "theme": {
+                        "color": "#1A362D" // Matches var(--color-brand)
+                    },
+                    "modal": {
+                        "ondismiss": function() {
+                            setFormLoading(false);
+                            showNotification("Payment was cancelled. Please try again.");
+                        }
+                    }
                 };
 
-                // Append hidden inputs
-                for (const key in paramsToBackend) {
-                    const hiddenField = document.createElement('input');
-                    hiddenField.type = 'hidden';
-                    hiddenField.name = key;
-                    hiddenField.value = paramsToBackend[key];
-                    paymentForm.appendChild(hiddenField);
-                }
-
-                // Submit to Vercel
-                document.body.appendChild(paymentForm);
-                paymentForm.submit();
+                // Open Razorpay Widget
+                var rzp1 = new Razorpay(razorpayOptions);
+                rzp1.on('payment.failed', function (response){
+                    setFormLoading(false);
+                    showNotification("Payment Failed: " + response.error.description);
+                });
+                
+                rzp1.open();
 
             } catch (error) {
                 console.error("Submission Error:", error);
-                alert("There was an issue connecting to the payment gateway. Please try again.");
+                showNotification("Issue connecting to payment gateway. Please check your connection.");
                 setFormLoading(false);
             }
         };
