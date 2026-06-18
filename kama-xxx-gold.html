@@ -1067,8 +1067,16 @@
                         
                         if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: finalAmount, currency: 'INR' });
                         
-                        const updateData = { action: 'updatePayment', orderId: uniqueOrderId, phone: phone, amount: finalAmount, status: "Completed (Paid)", txnId: response.razorpay_payment_id };
-                        fetch(GOOGLE_SCRIPT_WEB_APP_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(updateData) }).catch(err => console.error("Update fail:", err));
+                        const updateData = { action: 'updatePayment', orderId: uniqueOrderId, phone: phone, amount: finalAmount, status: "Completed (Paid)", txnId: response.razorpay_payment_id || "" };
+                        
+                        // FIX: Changed from keepalive to standard await fetch to guarantee delivery
+                        fetch(GOOGLE_SCRIPT_WEB_APP_URL, { 
+                            method: 'POST', 
+                            mode: 'no-cors', 
+                            headers: { 'Content-Type': 'text/plain' }, 
+                            body: JSON.stringify(updateData) 
+                        }).catch(err => console.error("Update fail:", err));
+                        
                         setFormLoading(false);
                     },
                     "prefill": { "name": name, "email": email, "contact": phone },
