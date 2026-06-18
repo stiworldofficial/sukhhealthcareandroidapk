@@ -71,26 +71,19 @@
         }
 
         /* --- MOBILE-FIRST LAYOUT --- */
-        .landing-container { 
-            max-width: 1100px; 
-            margin: 0 auto; 
-            padding: 1.5rem 1rem 100px 1rem; /* 100px bottom padding to prevent CTA overlap */
-            display: flex; 
-            flex-direction: column; 
-            gap: 1.5rem; 
-        }
+        .landing-container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 100px 1rem; display: flex; flex-direction: column; gap: 1.5rem; }
         
         /* Left: Images */
         .gallery-wrap { width: 100%; position: relative; }
         
         /* YouTube Video Format (16:9 Aspect Ratio) */
-        .main-img-container { width: 100%; aspect-ratio: 16/9; background: #fff; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-soft); margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.05); position: relative; touch-action: pan-y; /* Allows vertical scrolling but captures horizontal swipes */ }
+        .main-img-container { width: 100%; aspect-ratio: 16/9; background: #fff; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-soft); margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.05); position: relative; touch-action: pan-y; }
         .main-img-container img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
         
         /* Swipe indicators hint */
         .swipe-hint { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.5); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; pointer-events: none; opacity: 0.8; display: flex; align-items: center; gap: 5px; }
         
-        /* Fit 5 Thumbnails perfectly in one row */
+        /* Thumbnails */
         .thumbnails { display: flex; gap: 6px; overflow-x: hidden; padding-bottom: 5px; width: 100%; }
         .thumb { flex: 0 0 calc(20% - 4.8px); aspect-ratio: 16/9; height: auto; border-radius: 8px; cursor: pointer; border: 2px solid transparent; opacity: 0.6; transition: 0.3s; overflow: hidden; }
         .thumb.active { border-color: var(--color-brand); opacity: 1; }
@@ -100,18 +93,9 @@
         .product-info { width: 100%; }
         .trust-badge-small { display: inline-block; background: rgba(197, 160, 89, 0.15); color: var(--color-premium-gold); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.8rem; letter-spacing: 0.5px; }
         
-        .p-title { 
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(1.2rem, 5vw, 1.8rem); 
-            color: var(--color-brand); 
-            line-height: 1.2; 
-            margin-bottom: 0.5rem; 
-            white-space: nowrap; 
-            overflow: hidden;    
-            text-overflow: ellipsis; 
-        }
+        .p-title { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 5vw, 1.8rem); color: var(--color-brand); line-height: 1.2; margin-bottom: 0.5rem; }
         
-        .p-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 1.2rem; }
+        .p-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 1.2rem; flex-wrap: wrap; }
         .stars { color: #FF9F0A; font-size: 1rem; }
         .reviews { color: #666; font-size: 0.85rem; font-weight: 500; }
 
@@ -133,14 +117,34 @@
         .btn-buy-huge { width: 100%; background: var(--color-brand); color: #fff; padding: 16px; border: none; border-radius: var(--radius-md); font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(26,54,45,0.3); display: flex; justify-content: center; align-items: center; gap: 10px; }
         .btn-buy-huge:hover { transform: translateY(-2px); background: #132a22; }
         .pulse-anim { animation: pulse 2s infinite; }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(26,54,45, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(26,54,45, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(26,54,45, 0); }
-        }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(26,54,45, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(26,54,45, 0); } 100% { box-shadow: 0 0 0 0 rgba(26,54,45, 0); } }
 
         .desktop-btn-wrapper { display: none; margin-bottom: 1.5rem; }
+        
+        /* Styled to look like the main order button but slightly smaller */
+        .review-trigger-btn { 
+            background: var(--color-brand); 
+            color: #fff; 
+            padding: 8px 16px; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 0.85rem; 
+            font-weight: 800; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            box-shadow: 0 5px 15px rgba(26,54,45,0.2); 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px; 
+            margin-top: 5px;
+        }
+        .review-trigger-btn:hover { 
+            background: #132a22; 
+            transform: translateY(-2px); 
+            box-shadow: 0 8px 20px rgba(26,54,45,0.3);
+        }
 
         /* Trust Icons */
         .trust-icons { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
@@ -162,6 +166,9 @@
         .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 5000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 1rem; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         
+        /* Used for High Priority Modals (Write Review) so they stack correctly */
+        .modal-overlay.high-z { z-index: 5100; }
+        
         .checkout-modal { background: #fff; width: 100%; max-width: 500px; max-height: 85vh; overflow-y: auto; border-radius: var(--radius-md); padding: 1.25rem; position: relative; transform: scale(0.95) translateY(20px); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 20px 50px rgba(0,0,0,0.15); display: flex; flex-direction: column; margin: auto; }
         .modal-overlay.active .checkout-modal { transform: scale(1) translateY(0); }
         
@@ -172,124 +179,151 @@
         .chk-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--color-brand); margin-bottom: 6px; }
         .chk-subtitle { color: #666; font-size: 0.85rem; }
 
-        /* PRIVACY NOTICE IN MODAL */
-        .privacy-notice { background-color: #F0F8F5; border: 1px solid #C5E1D4; padding: 12px; border-radius: 8px; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 1.2rem; }
-        .privacy-notice i { color: #1A362D; font-size: 1.2rem; margin-top: 2px; }
-        .privacy-notice-content h4 { color: #1A362D; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
-        .privacy-notice-content p { color: #4A5568; font-size: 0.75rem; line-height: 1.4; }
-
+        /* Form styling */
         .form-group { margin-bottom: 1rem; }
         .form-label { display: block; font-weight: 600; margin-bottom: 6px; color: #1D1D1F; font-size: 0.85rem; }
         .form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; box-sizing: border-box; transition: 0.3s; font-family: 'Lato', sans-serif; }
         .form-input:focus { outline: none; border-color: var(--color-brand); box-shadow: 0 0 0 3px rgba(26,54,45,0.1); }
         textarea.form-input { min-height: 70px; resize: vertical; }
-        .field-hint { display: flex; gap: 6px; font-size: 0.75rem; color: #666; margin-top: 5px; align-items: flex-start; }
-        .field-hint i { margin-top: 2px; color: var(--color-premium-gold); }
 
+        /* Checkout specific elements */
+        .privacy-notice { background-color: #F0F8F5; border: 1px solid #C5E1D4; padding: 12px; border-radius: 8px; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 1.2rem; }
+        .privacy-notice i { color: #1A362D; font-size: 1.2rem; margin-top: 2px; }
+        .privacy-notice-content h4 { color: #1A362D; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
+        .privacy-notice-content p { color: #4A5568; font-size: 0.75rem; line-height: 1.4; }
         .delivery-box { background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 1.2rem; }
         .del-option { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
         .del-option:first-child { border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 2px; }
-        .del-option label { font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 0.85rem;}
-
         .order-summary { background: var(--color-brand); color: #fff; padding: 12px 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; margin-bottom: 1.2rem; }
-
         .btn-submit-order { width: 100%; background: var(--color-premium-gold); color: #fff; padding: 14px; border: none; border-radius: 8px; font-size: 1.05rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4); display: flex; justify-content: center; align-items: center; gap: 8px; }
-        .btn-submit-order:hover { background: #b08d4b; transform: translateY(-2px); }
-        .btn-submit-order:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
         /* SUCCESS MODAL SPECIFIC STYLES */
         .success-modal { text-align: center; padding: 2.5rem 1.5rem; justify-content: center; }
         .success-icon { color: #34C759; font-size: 4.5rem; margin-bottom: 1rem; display: inline-block; }
-        .success-modal .chk-title { font-size: 1.6rem; color: #1D1D1F; margin-bottom: 10px; line-height: 1.3; }
-        .success-modal .chk-subtitle { font-size: 1.05rem; color: #555; margin-bottom: 20px; line-height: 1.5; }
         .success-order-box { background: rgba(197, 160, 89, 0.1); border: 1px dashed var(--color-premium-gold); border-radius: 8px; padding: 15px; margin-bottom: 20px; }
         .success-order-box span { display: block; font-size: 0.85rem; color: #666; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
         .success-order-box strong { display: block; font-size: 1.4rem; color: var(--color-brand); font-family: monospace; letter-spacing: 1px; }
+
+        /* =========================================
+           REVIEWS SYSTEM UI
+           ========================================= */
+        .reviews-modal { max-width: 600px; padding: 0; background: #f9f9f9; display: flex; flex-direction: column; height: 90vh; overflow: hidden; }
+        .reviews-header { background: #fff; padding: 15px 20px; border-radius: var(--radius-md) var(--radius-md) 0 0; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center;}
+        .reviews-header h2 { font-family: 'Playfair Display', serif; color: var(--color-brand); font-size: 1.5rem; margin: 0;}
+        
+        /* Review Filter Bar */
+        .review-filters-wrapper { background: #fff; padding: 5px 15px 10px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .review-filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; -ms-overflow-style: none; scrollbar-width: none; }
+        .review-filters::-webkit-scrollbar { display: none; } /* Hide scrollbar */
+        .filter-chip { background: #f0f0f0; border: 1px solid #ddd; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; color: #555; cursor: pointer; white-space: nowrap; transition: 0.2s; }
+        .filter-chip.active { background: var(--color-brand); color: #fff; border-color: var(--color-brand); }
+
+        /* Review List */
+        .reviews-body { padding: 15px; overflow-y: auto; flex: 1; }
+        .review-item { background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.02); }
+        .review-header-info { display: flex; justify-content: space-between; margin-bottom: 8px; align-items: flex-start; }
+        .reviewer-profile { display: flex; gap: 10px; align-items: center; }
+        .reviewer-avatar { width: 35px; height: 35px; background: var(--color-brand); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; flex-shrink: 0;}
+        .reviewer-details h4 { font-size: 0.95rem; color: #1D1D1F; margin: 0; font-weight: 700; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;}
+        .reviewer-phone-mask { font-size: 0.75rem; color: #888; font-weight: normal; }
+        .reviewer-loc { font-size: 0.75rem; color: #888; margin: 0;}
+        .review-date-time { font-size: 0.75rem; color: #999; text-align: right; min-width: 65px;}
+        .review-stars-display { color: #FF9F0A; font-size: 0.85rem; margin-bottom: 8px; }
+        .review-text-content { font-size: 0.9rem; color: #444; line-height: 1.5; margin: 0;}
+
+        /* Write Review Trigger at Bottom */
+        .write-review-footer { padding: 15px; background: #fff; border-top: 1px solid rgba(0,0,0,0.05); border-radius: 0 0 var(--radius-md) var(--radius-md); flex-shrink: 0;}
+        .btn-outline-gold { width: 100%; background: transparent; color: var(--color-brand); border: 2px solid var(--color-premium-gold); padding: 12px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .btn-outline-gold:hover { background: var(--color-premium-gold); color: #fff; }
+
+        /* Write Review Modal Inner Form */
+        .star-rating-input { display: flex; gap: 5px; margin-bottom: 15px; font-size: 1.8rem; color: #ddd; cursor: pointer; justify-content: center;}
+        .star-rating-input i { transition: color 0.2s; }
+        .star-rating-input i.active { color: #FF9F0A; }
+        .review-form-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+        .review-form-row .form-group { flex: 1; min-width: 140px; margin-bottom: 0; }
 
         /* --- STICKY MOBILE CTA --- */
         .sticky-mobile-cta { display: block; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 10px 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); z-index: 4000; padding-bottom: env(safe-area-inset-bottom, 10px); border-top: 1px solid rgba(0,0,0,0.05); }
 
         /* =========================================
-           ORIGINAL FOOTER STYLES (Mobile First)
+           FLOATING WHATSAPP BUTTON
            ========================================= */
-        .store-footer { background: var(--color-brand); color: #fff; padding: 3rem 1.5rem 5rem 1.5rem; position: relative; border-radius: var(--radius-xl) var(--radius-xl) 0 0; margin-top: 2rem; z-index: 10; margin-bottom: 60px; /* Space for Mobile CTA */ }
+        .whatsapp-float {
+            position: fixed;
+            width: 55px;
+            height: 55px;
+            bottom: 85px; /* Above mobile CTA */
+            right: 15px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 32px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+            z-index: 3500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: pulse-wa 2s infinite;
+        }
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.05);
+            color: #FFF;
+        }
+        @keyframes pulse-wa {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* ORIGINAL FOOTER (Mobile First styling applied) */
+        .store-footer { background: var(--color-brand); color: #fff; padding: 3rem 1.5rem 5rem 1.5rem; position: relative; border-radius: var(--radius-xl) var(--radius-xl) 0 0; margin-top: 2rem; z-index: 10; margin-bottom: 60px; }
         .footer-top { display: flex; flex-direction: column; gap: 2.5rem; max-width: 1300px; margin: 0 auto; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 2.5rem; text-align: center; align-items: center; }
-        
         .brand-col { display: flex; flex-direction: column; align-items: center; text-align: center; }
         .brand-col .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .footer-logo-img-icon { width: 30px; height: 30px; object-fit: contain; filter: brightness(0) invert(1); }
         .footer-logo-name-img { height: 26px; width: auto; object-fit: contain; filter: brightness(0) invert(1); }
         .footer-desc { font-size: 0.9rem; line-height: 1.6; opacity: 0.8; margin-bottom: 1.2rem; max-width: 320px; font-weight: 300;}
-        
         .compliance-info { font-size: 0.8rem; opacity: 0.8; line-height: 1.6; margin-bottom: 1.2rem; }
         .compliance-info strong { color: var(--color-premium-gold); font-weight: 600; }
-
         .social-links { display: flex; gap: 1rem; justify-content: center; }
         .social-links a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem; transition: all 0.3s; }
-
         .footer-col h4 { font-family: -apple-system, sans-serif; font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
         .footer-col a { display: block; color: rgba(255,255,255,0.8); text-decoration: none; margin-bottom: 0.8rem; font-size: 0.9rem; transition: all 0.2s; cursor: pointer;}
-        
         .footer-disclaimer { max-width: 1300px; margin: 1.5rem auto; font-size: 0.7rem; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.5; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1.5rem;}
-        
         .footer-bottom { max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; font-size: 0.8rem; opacity: 0.7; padding-top: 0.5rem; text-align: center; }
-        .footer-legal a { color: #fff; text-decoration: none; margin: 0 0.5rem; transition: opacity 0.3s; cursor: pointer; display: inline-block; margin-bottom: 8px;}
-
-        /* Custom Toast Notification */
+        
         .toast-notification { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1D1D1F; color: #FFF; padding: 12px 24px; border-radius: 8px; font-size: 0.9rem; z-index: 6000; opacity: 0; pointer-events: none; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); white-space: nowrap; }
         .toast-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        /* =========================================
-           DESKTOP/TABLET OVERRIDES (min-width: 992px)
-           ========================================= */
+        /* DESKTOP/TABLET OVERRIDES */
         @media (min-width: 992px) {
             .landing-container { flex-direction: row; gap: 4rem; padding: 2rem; }
             .gallery-wrap { width: 50%; position: sticky; top: 100px; }
             .product-info { width: 50%; padding-top: 1rem; }
-            
-            .p-title { font-size: 2.5rem; white-space: normal; } /* Allow wrapping on desktop if screen is big enough */
+            .p-title { font-size: 2.5rem; white-space: normal; } 
             .p-price { font-size: 2.5rem; }
-            .p-mrp { font-size: 1.2rem; }
-            .tax-text { font-size: 0.85rem; }
-            
-            .qty-wrapper { padding: 15px; gap: 20px; }
-            .qty-label { font-size: 1rem; }
-            .qty-btn { width: 36px; height: 36px; font-size: 1.2rem; }
-            .qty-input { width: 40px; font-size: 1.1rem; }
-            .qty-pack-text { font-size: 1rem; }
-            
-            .t-icon i { font-size: 1.8rem; }
-            .t-icon p { font-size: 0.85rem; }
-            
-            .section-heading { font-size: 1.2rem; }
-            .m-desc { font-size: 1rem; }
-            .benefits-list li { font-size: 1rem; padding-left: 1.8rem; }
-            .benefits-list li::before { font-size: 1rem; }
-
             .desktop-btn-wrapper { display: block; }
             .sticky-mobile-cta { display: none; }
-            .swipe-hint { display: none; } /* Hide swipe hint on desktop */
-            
-            .checkout-modal { padding: 2rem; border-radius: var(--radius-xl); }
-            .chk-title { font-size: 1.8rem; }
-            .form-input { padding: 14px 16px; font-size: 1rem; }
-            .btn-submit-order { padding: 16px; font-size: 1.1rem; }
-
-            .store-footer { padding: 5rem 4rem 2rem 4rem; margin-bottom: 0; } /* Remove bottom margin on desktop */
+            .swipe-hint { display: none; }
+            .checkout-modal, .reviews-modal { padding: 2rem; border-radius: var(--radius-xl); max-height: 85vh;}
+            .reviews-modal { padding: 0; } 
+            .store-footer { padding: 5rem 4rem 2rem 4rem; margin-bottom: 0; } 
             .footer-top { flex-direction: row; flex-wrap: wrap; text-align: left; align-items: flex-start; justify-content: space-between; }
             .brand-col { align-items: flex-start; text-align: left; flex: 2; min-width: 300px; }
-            .brand-col .footer-logo { justify-content: flex-start; font-size: 1.8rem; }
-            .social-links { justify-content: flex-start; }
             .footer-col { flex: 1; min-width: 200px; }
             .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
-            .footer-legal a { margin: 0 0 0 1.5rem; display: inline; }
-            .toast-notification { bottom: 30px; }
+            /* Adjust WhatsApp button for Desktop */
+            .whatsapp-float { bottom: 30px; right: 30px; width: 65px; height: 65px; font-size: 38px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- CLEAN TRUST HEADER -->
     <header class="header-wrapper">
         <div class="top-bar">
             ⚡ FREE DELIVERY & 100% SECURE PAYMENT
@@ -301,7 +335,6 @@
     </header>
 
     <main>
-        <!-- PRODUCT DETAILS SECTION -->
         <section class="landing-container">
             <!-- Left: Gallery -->
             <div class="gallery-wrap">
@@ -310,23 +343,12 @@
                     <div class="swipe-hint"><i class="fa-solid fa-arrows-left-right"></i> Swipe to explore</div>
                 </div>
                 
-                <!-- Thumbnails driving the Swipe UI -->
                 <div class="thumbnails">
-                    <div class="thumb active" onclick="changeGalleryImage(0)">
-                        <img src="fssaih.png" alt="Thumb 1" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=200'">
-                    </div>
-                    <div class="thumb" onclick="changeGalleryImage(1)">
-                        <img src="kama-xxx-one.webp" alt="Thumb 2" onerror="this.src='https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=200'">
-                    </div>
-                    <div class="thumb" onclick="changeGalleryImage(2)">
-                        <img src="kama-xxx-two.webp" alt="Thumb 3" onerror="this.src='https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=200'">
-                    </div>
-                    <div class="thumb" onclick="changeGalleryImage(3)">
-                        <img src="kama-xxx-three.webp" alt="Thumb 4" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=200'">
-                    </div>
-                    <div class="thumb" onclick="changeGalleryImage(4)">
-                        <img src="kama-xxx-four.webp" alt="Thumb 5" onerror="this.src='https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=200'">
-                    </div>
+                    <div class="thumb active" onclick="changeGalleryImage(0)"><img src="fssaih.png" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=200'"></div>
+                    <div class="thumb" onclick="changeGalleryImage(1)"><img src="kama-xxx-one.webp" onerror="this.src='https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=200'"></div>
+                    <div class="thumb" onclick="changeGalleryImage(2)"><img src="kama-xxx-two.webp" onerror="this.src='https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=200'"></div>
+                    <div class="thumb" onclick="changeGalleryImage(3)"><img src="kama-xxx-three.webp" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=200'"></div>
+                    <div class="thumb" onclick="changeGalleryImage(4)"><img src="kama-xxx-four.webp" onerror="this.src='https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=200'"></div>
                 </div>
             </div>
 
@@ -341,8 +363,13 @@
                     </div>
                     <span class="reviews">4.9/5 (5,000 Happy Customers)</span>
                 </div>
+                
+                <!-- STYLED REVIEW BUTTON (Looks like Order Now) -->
+                <button class="review-trigger-btn" onclick="openReviewsModal()">
+                    <i class="fa-solid fa-pen-to-square"></i> Write / See Review
+                </button>
 
-                <div class="price-box">
+                <div class="price-box" style="margin-top: 15px;">
                     <span class="p-price">₹599</span>
                     <span class="p-mrp">₹899</span>
                     <span class="p-save">Save 30%</span>
@@ -360,7 +387,7 @@
                     <span class="qty-pack-text">(5 Capsules/Pack)</span>
                 </div>
 
-                <!-- Desktop Buy Button (UP TOP, ONLY ON DESKTOP) -->
+                <!-- Desktop Buy Button -->
                 <div class="desktop-btn-wrapper">
                     <button class="btn-buy-huge pulse-anim" onclick="openCheckoutModal()">
                         <i class="fa-solid fa-bolt"></i> Order Now
@@ -369,21 +396,12 @@
 
                 <!-- Trust Icons -->
                 <div class="trust-icons">
-                    <div class="t-icon">
-                        <i class="fa-solid fa-leaf"></i>
-                        <p>100% Pure<br>Ayurvedic</p>
-                    </div>
-                    <div class="t-icon">
-                        <i class="fa-solid fa-truck-fast"></i>
-                        <p>Free & Fast<br>Delivery</p>
-                    </div>
-                    <div class="t-icon">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <p>Secure<br>Checkout</p>
-                    </div>
+                    <div class="t-icon"><i class="fa-solid fa-leaf"></i><p>100% Pure<br>Ayurvedic</p></div>
+                    <div class="t-icon"><i class="fa-solid fa-truck-fast"></i><p>Free & Fast<br>Delivery</p></div>
+                    <div class="t-icon"><i class="fa-solid fa-shield-halved"></i><p>Secure<br>Checkout</p></div>
                 </div>
 
-                <!-- ORIGINAL TEXT CONTENT -->
+                <!-- Product Details Content -->
                 <h3 class="section-heading">About this wellness supplement</h3>
                 <p class="m-desc">An Ayurvedic proprietary medicine crafted with adaptogenic herbs to support daily energy, manage stress, and promote overall vitality and well-being. A natural approach to holistic health.</p>
 
@@ -406,7 +424,6 @@
         </section>
     </main>
 
-    <!-- DIRECT SINGLE POPUP CHECKOUT FORM -->
     <div class="modal-overlay" id="checkoutModalOverlay">
         <div class="checkout-modal">
             <button class="modal-close" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -452,17 +469,11 @@
                 <div class="delivery-box">
                     <label style="display:block; font-weight: 700; margin-bottom: 6px; font-size: 0.85rem;">Delivery Speed</label>
                     <div class="del-option">
-                        <label>
-                            <input type="radio" name="deliveryMethod" id="delStandard" value="standard" checked onchange="calculateTotal()">
-                            Standard Delivery (5-7 Days)
-                        </label>
+                        <label><input type="radio" name="deliveryMethod" id="delStandard" value="standard" checked onchange="calculateTotal()"> Standard Delivery (5-7 Days)</label>
                         <span style="color: #34C759; font-weight: 700;">FREE</span>
                     </div>
                     <div class="del-option">
-                        <label>
-                            <input type="radio" name="deliveryMethod" id="delExpress" value="express" onchange="calculateTotal()">
-                            Express Delivery (2-3 Days)
-                        </label>
+                        <label><input type="radio" name="deliveryMethod" id="delExpress" value="express" onchange="calculateTotal()"> Express Delivery (2-3 Days)</label>
                         <span style="color: var(--color-accent); font-weight: 700;">+₹50</span>
                     </div>
                 </div>
@@ -478,14 +489,12 @@
                 </button>
                 
                 <p style="text-align: center; font-size: 0.75rem; color: #888; margin-top: 15px;">
-                    By placing this order, you agree to our Terms & Privacy Policy.<br>
-                    Payments processed securely via Razorpay.
+                    By placing this order, you agree to our Terms & Privacy Policy.<br>Payments processed securely via Razorpay.
                 </p>
             </form>
         </div>
     </div>
 
-    <!-- SUCCESS / THANK YOU MODAL -->
     <div class="modal-overlay" id="successModalOverlay">
         <div class="checkout-modal success-modal">
             <button class="modal-close" onclick="closeSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -502,23 +511,97 @@
                 Aapke order ki saari details, discreet shipping updates aur tracking link aapko jald hi SMS/WhatsApp aur Email par bhej diye jayenge.
             </p>
             
-            <button class="btn-buy-huge" onclick="closeSuccessModal()">
-                Continue Shopping
-            </button>
+            <button class="btn-buy-huge" onclick="closeSuccessModal()">Continue Shopping</button>
         </div>
     </div>
 
-    <!-- STICKY MOBILE CTA (Opens Modal) ONLY VISIBLE ON MOBILE -->
+    <!-- REVIEWS MODAL (List only) -->
+    <div class="modal-overlay" id="reviewsModalOverlay">
+        <div class="checkout-modal reviews-modal">
+            <div class="reviews-header">
+                <h2>Customer Reviews</h2>
+                <button class="modal-close" style="position: relative; top: 0; right: 0;" onclick="closeReviewsModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <!-- Category Filter Buttons -->
+            <div class="review-filters-wrapper">
+                <div class="review-filters">
+                    <button class="filter-chip active" data-val="all" onclick="filterReviews('all')">All Reviews</button>
+                    <button class="filter-chip" data-val="5" onclick="filterReviews(5)">5 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                    <button class="filter-chip" data-val="4" onclick="filterReviews(4)">4 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                    <button class="filter-chip" data-val="3" onclick="filterReviews(3)">3 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                    <button class="filter-chip" data-val="2" onclick="filterReviews(2)">2 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                    <button class="filter-chip" data-val="1" onclick="filterReviews(1)">1 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                </div>
+            </div>
+            
+            <div class="reviews-body" id="reviewsListContainer">
+                <!-- Reviews will be injected here via JS -->
+            </div>
+
+            <!-- Bottom Trigger Area -->
+            <div class="write-review-footer">
+                <button class="btn-outline-gold" onclick="openWriteReviewModal()"><i class="fa-solid fa-pen-to-square"></i> Write Your Review</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WRITE REVIEW FORM MODAL (Separate Popup) -->
+    <div class="modal-overlay high-z" id="writeReviewModalOverlay">
+        <div class="checkout-modal">
+            <button class="modal-close" onclick="closeWriteReviewModal()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="chk-header" style="margin-bottom: 15px;">
+                <h2 class="chk-title" style="font-size: 1.3rem;">Write Your Review</h2>
+                <p class="chk-subtitle">Share your authentic experience with us.</p>
+            </div>
+
+            <form id="addReviewForm" onsubmit="submitNewReview(event)">
+                <!-- Centered Big Stars -->
+                <div class="star-rating-input" id="starRatingInput">
+                    <i class="fa-solid fa-star active" data-val="1"></i>
+                    <i class="fa-solid fa-star active" data-val="2"></i>
+                    <i class="fa-solid fa-star active" data-val="3"></i>
+                    <i class="fa-solid fa-star active" data-val="4"></i>
+                    <i class="fa-solid fa-star active" data-val="5"></i>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Name</label>
+                    <input type="text" id="revName" class="form-input" placeholder="Eg: Rahul S." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mobile Number (Kept Confidential)</label>
+                    <input type="tel" id="revPhone" class="form-input" placeholder="10 Digit Number" required pattern="[6-9]\d{9}">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">City / Location</label>
+                    <input type="text" id="revLocation" class="form-input" placeholder="Eg: Mumbai" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Experience</label>
+                    <textarea id="revText" class="form-input" placeholder="How did you feel after using it?..." required style="min-height: 80px;"></textarea>
+                </div>
+                
+                <button type="submit" id="submitReviewBtn" class="btn-submit-order" style="margin-top: 10px;">Post Review</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- STICKY MOBILE CTA -->
     <div class="sticky-mobile-cta">
         <button class="btn-buy-huge" onclick="openCheckoutModal()">
             <i class="fa-solid fa-bolt"></i> Order Now
         </button>
     </div>
     
-    <!-- Global Custom Toast Notification -->
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/919306027053?text=Hello,%20I%20want%20to%20know%20more%20about%20Kama-XXX-Gold" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    
     <div id="uiToast" class="toast-notification"></div>
 
-    <!-- ORIGINAL FOOTER (Mobile First styling applied) -->
     <footer class="store-footer">
         <div class="footer-top">
             <div class="footer-col brand-col">
@@ -566,97 +649,62 @@
 
         <div class="footer-bottom">
             <p>&copy; 2026 SukhHealthcare.com All rights reserved.</p>
-            <div class="footer-legal">
-                <span>Secure Payments via Razorpay</span>
-            </div>
+            <div class="footer-legal"><span>Secure Payments via Razorpay</span></div>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         // Data & Variables
         const basePrice = 599;
         let currentQty = 1;
         let finalAmount = basePrice;
         
-        // Define Images for Swipe and Click logic
-        const productImages = [
-            'fssaih.png', 
-            'kama-xxx-one.webp', 
-            'kama-xxx-two.webp', 
-            'kama-xxx-three.webp', 
-            'kama-xxx-four.webp'
-        ];
+        // Define Images
+        const productImages = ['fssaih.png', 'kama-xxx-one.webp', 'kama-xxx-two.webp', 'kama-xxx-three.webp', 'kama-xxx-four.webp'];
         let activeImageIndex = 0;
         
-        // ==========================================
-        // IMAGE GALLERY & SWIPE LOGIC
-        // ==========================================
-        
+        // Gallery Functions
         function changeGalleryImage(index) {
             activeImageIndex = index;
             updateGalleryUI();
         }
         
         function updateGalleryUI() {
-            // Update Main Image
             const mainImg = document.getElementById('mainImage');
-            mainImg.style.opacity = '0'; // smooth fade transition
+            mainImg.style.opacity = '0';
             setTimeout(() => {
                 mainImg.src = productImages[activeImageIndex];
                 mainImg.style.opacity = '1';
             }, 150);
             
-            // Update Active Thumbnails
             const thumbs = document.querySelectorAll('.thumb');
             thumbs.forEach((thumb, idx) => {
-                if (idx === activeImageIndex) {
-                    thumb.classList.add('active');
-                } else {
-                    thumb.classList.remove('active');
-                }
+                if (idx === activeImageIndex) thumb.classList.add('active');
+                else thumb.classList.remove('active');
             });
         }
 
-        // Swipe Setup variables
+        // Swipe Setup
         const swipeContainer = document.getElementById('swipeContainer');
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        swipeContainer.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        swipeContainer.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipeGestures();
-        }, { passive: true });
+        let touchStartX = 0; let touchEndX = 0;
+        swipeContainer.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        swipeContainer.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipeGestures(); }, { passive: true });
 
         function handleSwipeGestures() {
-            const swipeThreshold = 50; // Minimum px distance needed to trigger swipe
-            if (touchEndX < touchStartX - swipeThreshold) {
-                // Swiped Left -> Move to Next Image
-                activeImageIndex = (activeImageIndex + 1) % productImages.length;
-                updateGalleryUI();
-            }
-            if (touchEndX > touchStartX + swipeThreshold) {
-                // Swiped Right -> Move to Previous Image
-                activeImageIndex = (activeImageIndex - 1 + productImages.length) % productImages.length;
-                updateGalleryUI();
-            }
+            const swipeThreshold = 50; 
+            if (touchEndX < touchStartX - swipeThreshold) { activeImageIndex = (activeImageIndex + 1) % productImages.length; updateGalleryUI(); }
+            if (touchEndX > touchStartX + swipeThreshold) { activeImageIndex = (activeImageIndex - 1 + productImages.length) % productImages.length; updateGalleryUI(); }
         }
 
-        // Custom UI Notification Function (Replaces Alert)
+        // Notifications
         function showNotification(message) {
             const toast = document.getElementById('uiToast');
             toast.innerText = message;
             toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3500);
+            setTimeout(() => { toast.classList.remove('show'); }, 3500);
         }
 
-        // Quantity Logic
+        // Quantity & Price
         window.updateQty = function(change) {
             currentQty += change;
             if(currentQty < 1) currentQty = 1;
@@ -665,24 +713,18 @@
             calculateTotal();
         };
 
-        // Price Calculation Logic
         window.calculateTotal = function() {
             let itemTotal = basePrice * currentQty;
             let isExpress = document.getElementById('delExpress').checked;
             finalAmount = itemTotal + (isExpress ? 50 : 0);
-            
             document.getElementById('finalTotalDisplay').innerText = '₹' + finalAmount.toLocaleString('en-IN');
         };
 
-        // Modal Open & Close Logic
+        // Checkout Modals
         window.openCheckoutModal = function() {
             document.getElementById('checkoutModalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
-            
-            // FB Pixel: Track InitiateCheckout when they click Buy Now
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'InitiateCheckout');
-            }
+            if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
         };
 
         window.closeCheckoutModal = function() {
@@ -690,193 +732,296 @@
             document.body.style.overflow = '';
         };
 
-        // Close Checkout Modal when clicking outside
         document.getElementById('checkoutModalOverlay').addEventListener('click', (e) => { 
             if(e.target === document.getElementById('checkoutModalOverlay')) closeCheckoutModal(); 
         });
 
-        // Close Success Modal
         window.closeSuccessModal = function() {
             document.getElementById('successModalOverlay').classList.remove('active');
             document.body.style.overflow = '';
-            // Reset URL on close if success parameters exist
-            if (window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.pathname);
-            }
+            if (window.history.replaceState) window.history.replaceState(null, null, window.location.pathname);
         };
 
-        // UI Loading State for Button
         function setFormLoading(isLoading) {
             const btn = document.getElementById('submitBtn');
             const txt = document.getElementById('btnText');
             const ldr = document.getElementById('btnLoader');
-            
-            if(isLoading) {
-                btn.disabled = true;
-                txt.style.display = 'none';
-                ldr.style.display = 'block';
-            } else {
-                btn.disabled = false;
-                txt.style.display = 'flex';
-                ldr.style.display = 'none';
-            }
+            if(isLoading) { btn.disabled = true; txt.style.display = 'none'; ldr.style.display = 'block'; } 
+            else { btn.disabled = false; txt.style.display = 'flex'; ldr.style.display = 'none'; }
         }
 
-        // Generate Custom Order ID based on User Details
         function generateCustomOrderId(fullName, mobile) {
-            // Get Initials (Max 2 chars)
             let nameParts = fullName.trim().split(' ');
             let initials = (nameParts[0] ? nameParts[0][0] : '') + (nameParts[1] ? nameParts[1][0] : '');
             initials = initials.toUpperCase() || 'XX';
-            
-            // Get Last 4 digits of Mobile
             let phoneStr = mobile.trim();
             let last4 = phoneStr.length >= 4 ? phoneStr.slice(-4) : '0000';
-            
-            // Add Timestamp last 5 digits for uniqueness
             let timeCode = Date.now().toString().slice(-5);
-            
             return `ORD-${initials}${last4}-${timeCode}`;
         }
 
         // ==========================================
-        // RAZORPAY & GOOGLE SHEETS ORDER SUBMISSION
+        // REVIEWS SYSTEM LOGIC
         // ==========================================
+        let reviewsData = [];
+        let hasRenderedReviews = false;
+        let currentReviewFilter = 'all'; 
+        
+        // 1. Initial 10 High-Quality Hardcoded Reviews with dummy Phone Last 4 Digits
+        const initialReviews = [
+            { name: "Rajesh Kumar", location: "Delhi", rating: 5, phoneLast4: "5421", date: Date.now() - (2 * 86400000), text: "Energy levels are much better throughout the day. Genuine product." },
+            { name: "Vikram S.", location: "Pune", rating: 4, phoneLast4: "8890", date: Date.now() - (5 * 86400000), text: "Fast delivery. Been using for 10 days, feeling good difference in stamina." },
+            { name: "Anil D.", location: "Jaipur", rating: 5, phoneLast4: "1123", date: Date.now() - (8 * 86400000), text: "Very satisfied. Helps a lot with stress and fatigue after long office hours." },
+            { name: "Manoj", location: "Lucknow", rating: 5, phoneLast4: "9988", date: Date.now() - (10 * 86400000), text: "100% pure ayurvedic feel. No side effects. Will order again." },
+            { name: "Sandeep", location: "Chandigarh", rating: 4, phoneLast4: "4456", date: Date.now() - (12 * 86400000), text: "Good product but delivery took 1 day extra. Quality is top notch though." },
+            { name: "Dinesh Patel", location: "Ahmedabad", rating: 5, phoneLast4: "3321", date: Date.now() - (15 * 86400000), text: "Highly recommended for men. Gives a good boost to overall vitality." },
+            { name: "Arun V.", location: "Bangalore", rating: 5, phoneLast4: "7654", date: Date.now() - (20 * 86400000), text: "Using it with warm milk as suggested. Sleeping better and waking up fresh." },
+            { name: "Suraj", location: "Patna", rating: 5, phoneLast4: "0098", date: Date.now() - (25 * 86400000), text: "Original stuff. Packing was very discreet which I really liked. Thanks Sukh Healthcare." },
+            { name: "Karan M.", location: "Hyderabad", rating: 4, phoneLast4: "2244", date: Date.now() - (28 * 86400000), text: "Price is slightly high but quality justifies it. Feeling energetic." },
+            { name: "Ravi T.", location: "Indore", rating: 5, phoneLast4: "5577", date: Date.now() - (30 * 86400000), text: "Best supplement I have tried so far. 5 stars from my side." }
+        ];
+
+        // 2. Dynamic generation for ~150 Extra Reviews
+        function generateBulkReviews() {
+            reviewsData = [...initialReviews]; 
+            const fNames = ["Amit", "Rahul", "Suresh", "Prakash", "Neeraj", "Vikas", "Sanjay", "Deepak", "Sunil", "Pawan", "Gaurav", "Naveen", "Sachin", "Mohit", "Kapil", "Vishal", "Ashish", "Ajay", "Ravi", "Kishore", "Saurabh", "Manish", "Gopal", "Tarun", "Nitin", "Praveen", "Hemant"];
+            const lNames = ["Kumar", "Singh", "Sharma", "Patel", "Verma", "Yadav", "Gupta", "Choudhary", "Mishra", "Das", "D.", "S.", "V.", "M.", "T.", "Rao", "Reddy", "Joshi", "B.", "K."];
+            const citiesList = ["Delhi", "Pune", "Jaipur", "Lucknow", "Chandigarh", "Ahmedabad", "Bangalore", "Patna", "Hyderabad", "Indore", "Mumbai", "Surat", "Kanpur", "Nagpur", "Bhopal", "Thane", "Agra", "Rajkot", "Varanasi", "Amritsar", "Ludhiana", "Meerut", "Noida", "Gurgaon", "Ghaziabad", "Faridabad"];
+            const revTexts = [
+                "Good product. Can feel the difference in my body strength.",
+                "Absolutely amazing results. Takes around 4-5 days to show effect.",
+                "Original herbs inside. Doesn't cause acidity like other products.",
+                "Very fast delivery to my location. Nice packaging.",
+                "This is my third order. Great supplement for daily use.",
+                "I was skeptical first, but it actually works! Full day energy.",
+                "Authentic ayurvedic medicine. Safe to consume with no bad aftertaste.",
+                "Highly effective for daily fatigue. Feeling 10 years younger.",
+                "A bit expensive but worth the money. Health is wealth.",
+                "It really helps calm the mind and gives physical strength.",
+                "Superb product. Thank you Sukh Healthcare for this formulation.",
+                "My stamina has improved significantly. Very happy with the purchase.",
+                "Excellent product. Recommend to everyone dealing with work stress.",
+                "Very fast effect, natural and safe.",
+                "Using daily with milk. Highly satisfied with the result so far.",
+                "Its an okay product. Packaging could be better.", 
+                "Average results so far, waiting for more time.", 
+            ];
+
+            const nowTs = Date.now();
+            const dayMs = 24 * 60 * 60 * 1000;
+            
+            for(let i=0; i<150; i++) {
+                let randomDaysAgo = Math.floor(Math.random() * 150) + 31; 
+                let randomPhone = Math.floor(1000 + Math.random() * 9000).toString(); 
+                
+                let randomVal = Math.random();
+                let genRating = 5;
+                if(randomVal > 0.95) genRating = 2;
+                else if(randomVal > 0.88) genRating = 3;
+                else if(randomVal > 0.60) genRating = 4;
+
+                reviewsData.push({
+                    name: fNames[Math.floor(Math.random()*fNames.length)] + " " + lNames[Math.floor(Math.random()*lNames.length)],
+                    location: citiesList[Math.floor(Math.random()*citiesList.length)],
+                    phoneLast4: randomPhone,
+                    rating: genRating,
+                    date: nowTs - (randomDaysAgo * dayMs),
+                    text: revTexts[Math.floor(Math.random()*revTexts.length)]
+                });
+            }
+            reviewsData.sort((a,b) => b.date - a.date);
+            hasRenderedReviews = true;
+        }
+
+        window.openReviewsModal = function() {
+            if(!hasRenderedReviews) generateBulkReviews();
+            renderReviews();
+            document.getElementById('reviewsModalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeReviewsModal = function() {
+            document.getElementById('reviewsModalOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        document.getElementById('reviewsModalOverlay').addEventListener('click', (e) => { 
+            if(e.target === document.getElementById('reviewsModalOverlay')) closeReviewsModal(); 
+        });
+
+        window.openWriteReviewModal = function() {
+            document.getElementById('writeReviewModalOverlay').classList.add('active');
+        };
+
+        window.closeWriteReviewModal = function() {
+            document.getElementById('writeReviewModalOverlay').classList.remove('active');
+        };
+
+        document.getElementById('writeReviewModalOverlay').addEventListener('click', (e) => { 
+            if(e.target === document.getElementById('writeReviewModalOverlay')) closeWriteReviewModal(); 
+        });
+
+        window.filterReviews = function(ratingFilter) {
+            currentReviewFilter = ratingFilter;
+            
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+                if(chip.getAttribute('data-val') == ratingFilter) {
+                    chip.classList.add('active');
+                }
+            });
+            renderReviews();
+        }
+
+        function formatReviewDate(timestamp) {
+            const dt = new Date(timestamp);
+            return dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit' });
+        }
+
+        function renderReviews() {
+            const container = document.getElementById('reviewsListContainer');
+            container.innerHTML = '';
+
+            let filteredList = reviewsData;
+            if(currentReviewFilter !== 'all') {
+                filteredList = reviewsData.filter(r => r.rating == parseInt(currentReviewFilter));
+            }
+
+            if(filteredList.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding: 30px 10px; color: #888;"><i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; opacity:0.5;"></i><p>No reviews found for this rating.</p></div>';
+                return;
+            }
+
+            filteredList.forEach(review => {
+                let starsHtml = '';
+                for(let i=0; i<5; i++) {
+                    if(i < review.rating) starsHtml += '<i class="fa-solid fa-star"></i>';
+                    else starsHtml += '<i class="fa-regular fa-star" style="color: #ddd;"></i>';
+                }
+                const initial = review.name.charAt(0).toUpperCase();
+                const displayPhone = review.phoneLast4 || "XXXX";
+
+                const html = `
+                    <div class="review-item">
+                        <div class="review-header-info">
+                            <div class="reviewer-profile">
+                                <div class="reviewer-avatar">${initial}</div>
+                                <div class="reviewer-details">
+                                    <h4>${review.name} <span class="reviewer-phone-mask">(+91 xxxxxx${displayPhone})</span></h4>
+                                    <p class="reviewer-loc"><i class="fa-solid fa-location-dot" style="font-size:0.6rem; color:#C5A059;"></i> ${review.location}</p>
+                                </div>
+                            </div>
+                            <div class="review-date-time">${formatReviewDate(review.date)}</div>
+                        </div>
+                        <div class="review-stars-display">${starsHtml}</div>
+                        <p class="review-text-content">${review.text}</p>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        let selectedStarRating = 5;
+        const starIcons = document.querySelectorAll('#starRatingInput i');
+        starIcons.forEach(star => {
+            star.addEventListener('click', function() {
+                selectedStarRating = parseInt(this.getAttribute('data-val'));
+                starIcons.forEach(s => {
+                    if(parseInt(s.getAttribute('data-val')) <= selectedStarRating) {
+                        s.classList.add('active', 'fa-solid'); s.classList.remove('fa-regular');
+                    } else {
+                        s.classList.remove('active', 'fa-solid'); s.classList.add('fa-regular');
+                    }
+                });
+            });
+        });
+
+        // ==========================================
+        // COMMON GOOGLE SHEETS URL (Orders + Reviews)
+        // ==========================================
+        // YAHA APNA NAYA DEPLOY KIYA HUA SCRIPT URL DALEIN
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
+
+        window.submitNewReview = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('revName').value.trim();
+            const phoneStr = document.getElementById('revPhone').value.trim();
+            const location = document.getElementById('revLocation').value.trim();
+            const text = document.getElementById('revText').value.trim();
+
+            if(!name || !phoneStr || !location || !text) { showNotification("Please fill all review fields."); return; }
+            const phoneLast4 = phoneStr.length >= 4 ? phoneStr.slice(-4) : "XXXX";
+
+            reviewsData.unshift({
+                name: name, location: location, phoneLast4: phoneLast4, rating: selectedStarRating, date: Date.now(), text: text
+            });
+
+            filterReviews('all');
+            document.getElementById('reviewsListContainer').scrollTop = 0;
+
+            document.getElementById('addReviewForm').reset();
+            selectedStarRating = 5;
+            starIcons.forEach(s => { s.classList.add('active', 'fa-solid'); s.classList.remove('fa-regular'); });
+            
+            closeWriteReviewModal();
+            showNotification("Review posted successfully!");
+
+            const reviewSheetData = {
+                action: 'submitReview', name: name, phone: phoneStr, location: location, rating: selectedStarRating, text: text, date: new Date().toLocaleString('en-IN')
+            };
+            fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+                method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(reviewSheetData)
+            }).catch(err => console.log("Review sync error:", err));
+        };
 
         window.submitOrder = async function(e) {
             e.preventDefault();
-
-            // Form values
             const name = document.getElementById('chkName').value.trim();
             const phone = document.getElementById('chkPhone').value.trim();
             const email = document.getElementById('chkEmail').value.trim();
             const address = document.getElementById('chkAddress').value.trim();
             const isExpress = document.getElementById('delExpress').checked;
-
             setFormLoading(true);
 
-            // Create Unique Order ID
             const uniqueOrderId = generateCustomOrderId(name, phone);
             const deliveryStr = isExpress ? "Express (2-3 Days, +₹50)" : "Standard (5-7 Days)";
             const productDetails = `Kama-XXX-Gold (Qty: ${currentQty}) | Delivery: ${deliveryStr}`;
             const sheetQuantity = `${currentQty} (ID: ${uniqueOrderId})`;
 
-            // 1st Payload to send BEFORE payment
-            const orderData = {
-                action: 'createOrder',
-                orderId: uniqueOrderId,
-                name: name,
-                phone: phone,
-                email: email,
-                address: address,
-                product: productDetails,
-                qty: sheetQuantity,  
-                amount: finalAmount, // Frontend uses this just for calculation, backend will force 0
-                status: "Pending (Payment Initialized)", 
-                txnId: ""
-            };
+            const orderData = { action: 'createOrder', orderId: uniqueOrderId, name: name, phone: phone, email: email, address: address, product: productDetails, qty: sheetQuantity, amount: finalAmount, status: "Pending (Payment Initialized)", txnId: "" };
 
             try {
-                // 1. Send Background Log to Google Sheets First
                 try {
-                    const sheetReq = fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
-                        method: 'POST', 
-                        mode: 'no-cors', 
-                        headers: { 'Content-Type': 'text/plain' },
-                        body: JSON.stringify(orderData)
-                    });
-                    
-                    // Small delay to ensure sheet push registers before opening payment popup
-                    await Promise.all([
-                        sheetReq,
-                        new Promise(resolve => setTimeout(resolve, 800))
-                    ]);
-                } catch(sheetError) {
-                    console.log("Sheet log background error:", sheetError);
-                }
+                    const sheetReq = fetch(GOOGLE_SCRIPT_WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(orderData) });
+                    await Promise.all([ sheetReq, new Promise(resolve => setTimeout(resolve, 800)) ]);
+                } catch(err) { console.log("Sheet bg err:", err); }
 
-                // 2. Initialize Razorpay Checkout Option
                 var razorpayOptions = {
-                    "key": "rzp_live_T2BkTwTbh69R4C", 
-                    "amount": finalAmount * 100, 
-                    "currency": "INR",
-                    "name": "Sukh Healthcare",
-                    "description": productDetails,
-                    "image": "sukh.png", // Company Logo
+                    "key": "rzp_live_T2BkTwTbh69R4C", "amount": finalAmount * 100, "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
                     "handler": function (response) {
-                        // THIS BLOCK RUNS UPON SUCCESSFUL PAYMENT
-                        
-                        // Extract First Name for Welcome Message
                         const firstName = name.split(' ')[0];
                         document.getElementById('successTitle').innerText = `Welcome ${firstName}, Order Successful!`;
-                        
-                        // Show Success UI Locally
                         document.getElementById('displayOrderId').innerText = uniqueOrderId;
                         closeCheckoutModal();
-                        
                         document.getElementById('successModalOverlay').classList.add('active');
                         document.body.style.overflow = 'hidden';
                         
-                        // Fire Pixel Event
-                        if (typeof fbq !== 'undefined') {
-                            fbq('track', 'Purchase', { value: finalAmount, currency: 'INR' });
-                        }
+                        if (typeof fbq !== 'undefined') fbq('track', 'Purchase', { value: finalAmount, currency: 'INR' });
                         
-                        // 3. Send Payment Confirmation & Transaction ID to Google Sheet
-                        const updateData = {
-                            action: 'updatePayment', 
-                            orderId: uniqueOrderId,
-                            phone: phone, // Added for Failsafe Dual Matching
-                            amount: finalAmount, // Sending actual amount to update the '0'
-                            status: "Completed (Paid)",
-                            txnId: response.razorpay_payment_id // Logs Razorpay Transaction / UPI App ID
-                        };
-                        
-                        // BULLETPROOF FETCH: keepalive guarantees execution even if user closes the tab instantly!
-                        fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
-                            method: 'POST', 
-                            mode: 'no-cors', 
-                            keepalive: true, // Crucial for post-payment tab closures
-                            headers: { 'Content-Type': 'text/plain' },
-                            body: JSON.stringify(updateData)
-                        }).catch(err => console.error("Update failed:", err));
-
+                        const updateData = { action: 'updatePayment', orderId: uniqueOrderId, phone: phone, amount: finalAmount, status: "Completed (Paid)", txnId: response.razorpay_payment_id };
+                        fetch(GOOGLE_SCRIPT_WEB_APP_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(updateData) }).catch(err => console.error("Update fail:", err));
                         setFormLoading(false);
                     },
-                    "prefill": {
-                        "name": name,
-                        "email": email,
-                        "contact": phone
-                    },
-                    "notes": {
-                        "shipping_address": address,
-                        "custom_order_id": uniqueOrderId
-                    },
-                    "theme": {
-                        "color": "#1A362D" // Matches var(--color-brand)
-                    },
-                    "modal": {
-                        "ondismiss": function() {
-                            setFormLoading(false);
-                            showNotification("Payment was cancelled. Please try again.");
-                        }
-                    }
+                    "prefill": { "name": name, "email": email, "contact": phone },
+                    "notes": { "shipping_address": address, "custom_order_id": uniqueOrderId },
+                    "theme": { "color": "#1A362D" },
+                    "modal": { "ondismiss": function() { setFormLoading(false); showNotification("Payment was cancelled. Please try again."); } }
                 };
-
-                // Open Razorpay Widget
                 var rzp1 = new Razorpay(razorpayOptions);
-                rzp1.on('payment.failed', function (response){
-                    setFormLoading(false);
-                    showNotification("Payment Failed: " + response.error.description);
-                });
-                
+                rzp1.on('payment.failed', function (res){ setFormLoading(false); showNotification("Payment Failed: " + res.error.description); });
                 rzp1.open();
-
             } catch (error) {
-                console.error("Submission Error:", error);
-                showNotification("Issue connecting to payment gateway. Please check your connection.");
-                setFormLoading(false);
+                console.error("Error:", error); showNotification("Gateway error. Check connection."); setFormLoading(false);
             }
         };
     </script>
