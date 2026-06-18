@@ -121,33 +121,31 @@
 
         .desktop-btn-wrapper { display: none; margin-bottom: 1.5rem; }
         
-        /* Styled to look like the main order button but slightly smaller */
+        /* NEW STYLED REVIEW BUTTON (Like Order Now but slightly smaller padding) */
         .review-trigger-btn { 
+            width: 100%; 
             background: var(--color-brand); 
             color: #fff; 
-            padding: 8px 16px; 
+            padding: 12px; 
             border: none; 
-            border-radius: 8px; 
-            font-size: 0.85rem; 
+            border-radius: var(--radius-md); 
+            font-size: 1rem; 
             font-weight: 800; 
             text-transform: uppercase; 
-            letter-spacing: 0.5px; 
+            letter-spacing: 1px; 
             cursor: pointer; 
             transition: 0.3s; 
-            box-shadow: 0 5px 15px rgba(26,54,45,0.2); 
-            display: inline-flex; 
+            box-shadow: 0 5px 15px rgba(26,54,45,0.3); 
+            display: flex; 
+            justify-content: center; 
             align-items: center; 
-            gap: 6px; 
+            gap: 8px;
             margin-top: 5px;
         }
-        .review-trigger-btn:hover { 
-            background: #132a22; 
-            transform: translateY(-2px); 
-            box-shadow: 0 8px 20px rgba(26,54,45,0.3);
-        }
+        .review-trigger-btn:hover { background: #132a22; transform: translateY(-2px); }
 
         /* Trust Icons */
-        .trust-icons { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .trust-icons { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); margin-top: 1.5rem;}
         .t-icon { text-align: center; flex: 1; min-width: 80px; }
         .t-icon i { font-size: 1.5rem; color: var(--color-premium-gold); margin-bottom: 8px; }
         .t-icon p { font-size: 0.75rem; font-weight: 600; color: #555; }
@@ -165,8 +163,6 @@
            ========================================= */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); z-index: 5000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 1rem; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        
-        /* Used for High Priority Modals (Write Review) so they stack correctly */
         .modal-overlay.high-z { z-index: 5100; }
         
         .checkout-modal { background: #fff; width: 100%; max-width: 500px; max-height: 85vh; overflow-y: auto; border-radius: var(--radius-md); padding: 1.25rem; position: relative; transform: scale(0.95) translateY(20px); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 20px 50px rgba(0,0,0,0.15); display: flex; flex-direction: column; margin: auto; }
@@ -179,14 +175,12 @@
         .chk-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--color-brand); margin-bottom: 6px; }
         .chk-subtitle { color: #666; font-size: 0.85rem; }
 
-        /* Form styling */
         .form-group { margin-bottom: 1rem; }
         .form-label { display: block; font-weight: 600; margin-bottom: 6px; color: #1D1D1F; font-size: 0.85rem; }
         .form-input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.95rem; box-sizing: border-box; transition: 0.3s; font-family: 'Lato', sans-serif; }
         .form-input:focus { outline: none; border-color: var(--color-brand); box-shadow: 0 0 0 3px rgba(26,54,45,0.1); }
         textarea.form-input { min-height: 70px; resize: vertical; }
 
-        /* Checkout specific elements */
         .privacy-notice { background-color: #F0F8F5; border: 1px solid #C5E1D4; padding: 12px; border-radius: 8px; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 1.2rem; }
         .privacy-notice i { color: #1A362D; font-size: 1.2rem; margin-top: 2px; }
         .privacy-notice-content h4 { color: #1A362D; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
@@ -211,14 +205,12 @@
         .reviews-header { background: #fff; padding: 15px 20px; border-radius: var(--radius-md) var(--radius-md) 0 0; position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center;}
         .reviews-header h2 { font-family: 'Playfair Display', serif; color: var(--color-brand); font-size: 1.5rem; margin: 0;}
         
-        /* Review Filter Bar */
         .review-filters-wrapper { background: #fff; padding: 5px 15px 10px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); }
         .review-filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; -ms-overflow-style: none; scrollbar-width: none; }
-        .review-filters::-webkit-scrollbar { display: none; } /* Hide scrollbar */
+        .review-filters::-webkit-scrollbar { display: none; } 
         .filter-chip { background: #f0f0f0; border: 1px solid #ddd; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; color: #555; cursor: pointer; white-space: nowrap; transition: 0.2s; }
         .filter-chip.active { background: var(--color-brand); color: #fff; border-color: var(--color-brand); }
 
-        /* Review List */
         .reviews-body { padding: 15px; overflow-y: auto; flex: 1; }
         .review-item { background: #fff; padding: 15px; border-radius: 12px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.02); }
         .review-header-info { display: flex; justify-content: space-between; margin-bottom: 8px; align-items: flex-start; }
@@ -242,6 +234,7 @@
         .star-rating-input i.active { color: #FF9F0A; }
         .review-form-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
         .review-form-row .form-group { flex: 1; min-width: 140px; margin-bottom: 0; }
+        .live-badge { background: #E8F5E9; color: #2E7D32; font-size: 0.6rem; padding: 2px 6px; border-radius: 10px; font-weight: bold; border: 1px solid #C8E6C9;}
 
         /* --- STICKY MOBILE CTA --- */
         .sticky-mobile-cta { display: block; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 10px 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); z-index: 4000; padding-bottom: env(safe-area-inset-bottom, 10px); border-top: 1px solid rgba(0,0,0,0.05); }
@@ -250,37 +243,16 @@
            FLOATING WHATSAPP BUTTON
            ========================================= */
         .whatsapp-float {
-            position: fixed;
-            width: 55px;
-            height: 55px;
-            bottom: 85px; /* Above mobile CTA */
-            right: 15px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 32px;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
-            z-index: 3500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            animation: pulse-wa 2s infinite;
+            position: fixed; width: 55px; height: 55px; bottom: 85px; right: 15px;
+            background-color: #25d366; color: #FFF; border-radius: 50%;
+            text-align: center; font-size: 32px; box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+            z-index: 3500; display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; animation: pulse-wa 2s infinite; text-decoration: none;
         }
-        .whatsapp-float:hover {
-            background-color: #128C7E;
-            transform: scale(1.05);
-            color: #FFF;
-        }
-        @keyframes pulse-wa {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
+        .whatsapp-float:hover { background-color: #128C7E; transform: scale(1.05); color: #FFF; }
+        @keyframes pulse-wa { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
-        /* ORIGINAL FOOTER (Mobile First styling applied) */
+        /* ORIGINAL FOOTER */
         .store-footer { background: var(--color-brand); color: #fff; padding: 3rem 1.5rem 5rem 1.5rem; position: relative; border-radius: var(--radius-xl) var(--radius-xl) 0 0; margin-top: 2rem; z-index: 10; margin-bottom: 60px; }
         .footer-top { display: flex; flex-direction: column; gap: 2.5rem; max-width: 1300px; margin: 0 auto; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 2.5rem; text-align: center; align-items: center; }
         .brand-col { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -317,7 +289,6 @@
             .brand-col { align-items: flex-start; text-align: left; flex: 2; min-width: 300px; }
             .footer-col { flex: 1; min-width: 200px; }
             .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
-            /* Adjust WhatsApp button for Desktop */
             .whatsapp-float { bottom: 30px; right: 30px; width: 65px; height: 65px; font-size: 38px; }
         }
     </style>
@@ -364,8 +335,8 @@
                     <span class="reviews">4.9/5 (5,000 Happy Customers)</span>
                 </div>
                 
-                <!-- STYLED REVIEW BUTTON (Looks like Order Now) -->
-                <button class="review-trigger-btn" onclick="openReviewsModal()">
+                <!-- NEW STYLED BUTTON -->
+                <button type="button" class="review-trigger-btn" onclick="openReviewsModal()">
                     <i class="fa-solid fa-pen-to-square"></i> Write / See Review
                 </button>
 
@@ -380,16 +351,16 @@
                 <div class="qty-wrapper">
                     <span class="qty-label">Pack Quantity:</span>
                     <div class="qty-selector">
-                        <button class="qty-btn" onclick="updateQty(-1)">-</button>
+                        <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
                         <input type="text" id="productQty" class="qty-input" value="1" readonly>
-                        <button class="qty-btn" onclick="updateQty(1)">+</button>
+                        <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
                     </div>
                     <span class="qty-pack-text">(5 Capsules/Pack)</span>
                 </div>
 
                 <!-- Desktop Buy Button -->
                 <div class="desktop-btn-wrapper">
-                    <button class="btn-buy-huge pulse-anim" onclick="openCheckoutModal()">
+                    <button type="button" class="btn-buy-huge pulse-anim" onclick="openCheckoutModal()">
                         <i class="fa-solid fa-bolt"></i> Order Now
                     </button>
                 </div>
@@ -426,7 +397,7 @@
 
     <div class="modal-overlay" id="checkoutModalOverlay">
         <div class="checkout-modal">
-            <button class="modal-close" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="modal-close" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
             <div class="chk-header">
                 <h2 class="chk-title">Order Securely</h2>
                 <p class="chk-subtitle">Please enter your delivery details accurately.</p>
@@ -497,7 +468,7 @@
 
     <div class="modal-overlay" id="successModalOverlay">
         <div class="checkout-modal success-modal">
-            <button class="modal-close" onclick="closeSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="modal-close" onclick="closeSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
             <i class="fa-solid fa-circle-check success-icon"></i>
             <h2 class="chk-title" id="successTitle">Order Successful!</h2>
             <p class="chk-subtitle">Aapka order successfully place ho gaya hai.</p>
@@ -511,7 +482,7 @@
                 Aapke order ki saari details, discreet shipping updates aur tracking link aapko jald hi SMS/WhatsApp aur Email par bhej diye jayenge.
             </p>
             
-            <button class="btn-buy-huge" onclick="closeSuccessModal()">Continue Shopping</button>
+            <button type="button" class="btn-buy-huge" onclick="closeSuccessModal()">Continue Shopping</button>
         </div>
     </div>
 
@@ -520,28 +491,28 @@
         <div class="checkout-modal reviews-modal">
             <div class="reviews-header">
                 <h2>Customer Reviews</h2>
-                <button class="modal-close" style="position: relative; top: 0; right: 0;" onclick="closeReviewsModal()"><i class="fa-solid fa-xmark"></i></button>
+                <button type="button" class="modal-close" style="position: relative; top: 0; right: 0;" onclick="closeReviewsModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <!-- Category Filter Buttons -->
             <div class="review-filters-wrapper">
                 <div class="review-filters">
-                    <button class="filter-chip active" data-val="all" onclick="filterReviews('all')">All Reviews</button>
-                    <button class="filter-chip" data-val="5" onclick="filterReviews(5)">5 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
-                    <button class="filter-chip" data-val="4" onclick="filterReviews(4)">4 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
-                    <button class="filter-chip" data-val="3" onclick="filterReviews(3)">3 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
-                    <button class="filter-chip" data-val="2" onclick="filterReviews(2)">2 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
-                    <button class="filter-chip" data-val="1" onclick="filterReviews(1)">1 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                    <button type="button" class="filter-chip active" data-val="all" onclick="filterReviews('all')">All Reviews</button>
+                    <button type="button" class="filter-chip" data-val="5" onclick="filterReviews(5)">5 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                    <button type="button" class="filter-chip" data-val="4" onclick="filterReviews(4)">4 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                    <button type="button" class="filter-chip" data-val="3" onclick="filterReviews(3)">3 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                    <button type="button" class="filter-chip" data-val="2" onclick="filterReviews(2)">2 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
+                    <button type="button" class="filter-chip" data-val="1" onclick="filterReviews(1)">1 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
                 </div>
             </div>
             
             <div class="reviews-body" id="reviewsListContainer">
-                <!-- Reviews will be injected here via JS -->
+                <div style="text-align: center; color: #888; padding: 20px;"><i class="fa-solid fa-spinner fa-spin"></i> Loading reviews...</div>
             </div>
 
             <!-- Bottom Trigger Area -->
             <div class="write-review-footer">
-                <button class="btn-outline-gold" onclick="openWriteReviewModal()"><i class="fa-solid fa-pen-to-square"></i> Write Your Review</button>
+                <button type="button" class="btn-outline-gold" onclick="openWriteReviewModal()"><i class="fa-solid fa-pen-to-square"></i> Write Your Review</button>
             </div>
         </div>
     </div>
@@ -549,7 +520,7 @@
     <!-- WRITE REVIEW FORM MODAL (Separate Popup) -->
     <div class="modal-overlay high-z" id="writeReviewModalOverlay">
         <div class="checkout-modal">
-            <button class="modal-close" onclick="closeWriteReviewModal()"><i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="modal-close" onclick="closeWriteReviewModal()"><i class="fa-solid fa-xmark"></i></button>
             <div class="chk-header" style="margin-bottom: 15px;">
                 <h2 class="chk-title" style="font-size: 1.3rem;">Write Your Review</h2>
                 <p class="chk-subtitle">Share your authentic experience with us.</p>
@@ -590,7 +561,7 @@
 
     <!-- STICKY MOBILE CTA -->
     <div class="sticky-mobile-cta">
-        <button class="btn-buy-huge" onclick="openCheckoutModal()">
+        <button type="button" class="btn-buy-huge" onclick="openCheckoutModal()">
             <i class="fa-solid fa-bolt"></i> Order Now
         </button>
     </div>
@@ -671,11 +642,13 @@
         
         function updateGalleryUI() {
             const mainImg = document.getElementById('mainImage');
-            mainImg.style.opacity = '0';
-            setTimeout(() => {
-                mainImg.src = productImages[activeImageIndex];
-                mainImg.style.opacity = '1';
-            }, 150);
+            if(mainImg) {
+                mainImg.style.opacity = '0';
+                setTimeout(() => {
+                    mainImg.src = productImages[activeImageIndex];
+                    mainImg.style.opacity = '1';
+                }, 150);
+            }
             
             const thumbs = document.querySelectorAll('.thumb');
             thumbs.forEach((thumb, idx) => {
@@ -686,22 +659,26 @@
 
         // Swipe Setup
         const swipeContainer = document.getElementById('swipeContainer');
-        let touchStartX = 0; let touchEndX = 0;
-        swipeContainer.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-        swipeContainer.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipeGestures(); }, { passive: true });
-
-        function handleSwipeGestures() {
-            const swipeThreshold = 50; 
-            if (touchEndX < touchStartX - swipeThreshold) { activeImageIndex = (activeImageIndex + 1) % productImages.length; updateGalleryUI(); }
-            if (touchEndX > touchStartX + swipeThreshold) { activeImageIndex = (activeImageIndex - 1 + productImages.length) % productImages.length; updateGalleryUI(); }
+        if(swipeContainer) {
+            let touchStartX = 0; let touchEndX = 0;
+            swipeContainer.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+            swipeContainer.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipeGestures(); }, { passive: true });
+            
+            function handleSwipeGestures() {
+                const swipeThreshold = 50; 
+                if (touchEndX < touchStartX - swipeThreshold) { activeImageIndex = (activeImageIndex + 1) % productImages.length; updateGalleryUI(); }
+                if (touchEndX > touchStartX + swipeThreshold) { activeImageIndex = (activeImageIndex - 1 + productImages.length) % productImages.length; updateGalleryUI(); }
+            }
         }
 
         // Notifications
         function showNotification(message) {
             const toast = document.getElementById('uiToast');
-            toast.innerText = message;
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3500);
+            if(toast) {
+                toast.innerText = message;
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3500);
+            }
         }
 
         // Quantity & Price
@@ -709,7 +686,8 @@
             currentQty += change;
             if(currentQty < 1) currentQty = 1;
             if(currentQty > 10) currentQty = 10;
-            document.getElementById('productQty').value = currentQty;
+            const qtyInput = document.getElementById('productQty');
+            if(qtyInput) qtyInput.value = currentQty;
             calculateTotal();
         };
 
@@ -717,37 +695,50 @@
             let itemTotal = basePrice * currentQty;
             let isExpress = document.getElementById('delExpress').checked;
             finalAmount = itemTotal + (isExpress ? 50 : 0);
-            document.getElementById('finalTotalDisplay').innerText = '₹' + finalAmount.toLocaleString('en-IN');
+            const totalDisplay = document.getElementById('finalTotalDisplay');
+            if(totalDisplay) totalDisplay.innerText = '₹' + finalAmount.toLocaleString('en-IN');
         };
 
         // Checkout Modals
         window.openCheckoutModal = function() {
-            document.getElementById('checkoutModalOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
-            if (typeof fbq !== 'undefined') fbq('track', 'InitiateCheckout');
+            const overlay = document.getElementById('checkoutModalOverlay');
+            if(overlay) {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout');
+            }
         };
 
         window.closeCheckoutModal = function() {
-            document.getElementById('checkoutModalOverlay').classList.remove('active');
-            document.body.style.overflow = '';
+            const overlay = document.getElementById('checkoutModalOverlay');
+            if(overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         };
 
-        document.getElementById('checkoutModalOverlay').addEventListener('click', (e) => { 
-            if(e.target === document.getElementById('checkoutModalOverlay')) closeCheckoutModal(); 
-        });
+        const chkOverlay = document.getElementById('checkoutModalOverlay');
+        if(chkOverlay) {
+            chkOverlay.addEventListener('click', (e) => { 
+                if(e.target === chkOverlay) closeCheckoutModal(); 
+            });
+        }
 
         window.closeSuccessModal = function() {
-            document.getElementById('successModalOverlay').classList.remove('active');
-            document.body.style.overflow = '';
-            if (window.history.replaceState) window.history.replaceState(null, null, window.location.pathname);
+            const overlay = document.getElementById('successModalOverlay');
+            if(overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                if (window.history.replaceState) window.history.replaceState(null, null, window.location.pathname);
+            }
         };
 
         function setFormLoading(isLoading) {
             const btn = document.getElementById('submitBtn');
             const txt = document.getElementById('btnText');
             const ldr = document.getElementById('btnLoader');
-            if(isLoading) { btn.disabled = true; txt.style.display = 'none'; ldr.style.display = 'block'; } 
-            else { btn.disabled = false; txt.style.display = 'flex'; ldr.style.display = 'none'; }
+            if(isLoading && btn && txt && ldr) { btn.disabled = true; txt.style.display = 'none'; ldr.style.display = 'block'; } 
+            else if (btn && txt && ldr) { btn.disabled = false; txt.style.display = 'flex'; ldr.style.display = 'none'; }
         }
 
         function generateCustomOrderId(fullName, mobile) {
@@ -761,13 +752,50 @@
         }
 
         // ==========================================
+        // COMMON GOOGLE SHEETS URL (Orders + Reviews)
+        // ==========================================
+        const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycby7yiMFophy_T1pcJvGmvqdNq4JA_z1oeTa-PA77K4Ttk8SY0jkru_rDhMa-Jtl-BqT/exec";
+
+        // ==========================================
         // REVIEWS SYSTEM LOGIC
         // ==========================================
         let reviewsData = [];
+        let liveReviews = [];
         let hasRenderedReviews = false;
         let currentReviewFilter = 'all'; 
+
+        // Live Reviews Fetch automatically in background safely
+        async function fetchLiveReviews() {
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_WEB_APP_URL + "?action=getReviews", { method: "GET", redirect: "follow" });
+                const text = await response.text(); 
+                try {
+                    const data = JSON.parse(text);
+                    if(data && Array.isArray(data)) {
+                        liveReviews = data.map(r => ({
+                            name: r.name,
+                            location: r.location,
+                            phoneLast4: r.phone ? String(r.phone).slice(-4) : "XXXX",
+                            rating: parseInt(r.rating) || 5,
+                            date: new Date(r.date).getTime() || Date.now(),
+                            text: r.text,
+                            isLive: true
+                        }));
+                        
+                        if(hasRenderedReviews) {
+                            generateBulkReviews();
+                            renderReviews();
+                        }
+                    }
+                } catch(parseErr) {
+                    // Fail silently if JSON is invalid (e.g., if Google returns an HTML page instead of JSON)
+                    console.log("Waiting for live sync to be fully setup.");
+                }
+            } catch(e) { console.log("Live fetch skipped or delayed."); }
+        }
+        fetchLiveReviews(); // Starts instantly on page load
         
-        // 1. Initial 10 High-Quality Hardcoded Reviews with dummy Phone Last 4 Digits
+        // Initial 10 High-Quality Hardcoded Reviews
         const initialReviews = [
             { name: "Rajesh Kumar", location: "Delhi", rating: 5, phoneLast4: "5421", date: Date.now() - (2 * 86400000), text: "Energy levels are much better throughout the day. Genuine product." },
             { name: "Vikram S.", location: "Pune", rating: 4, phoneLast4: "8890", date: Date.now() - (5 * 86400000), text: "Fast delivery. Been using for 10 days, feeling good difference in stamina." },
@@ -781,9 +809,10 @@
             { name: "Ravi T.", location: "Indore", rating: 5, phoneLast4: "5577", date: Date.now() - (30 * 86400000), text: "Best supplement I have tried so far. 5 stars from my side." }
         ];
 
-        // 2. Dynamic generation for ~150 Extra Reviews
         function generateBulkReviews() {
-            reviewsData = [...initialReviews]; 
+            // Merge Live Fetched Reviews with Initial Ones
+            let combined = [...liveReviews, ...initialReviews]; 
+            
             const fNames = ["Amit", "Rahul", "Suresh", "Prakash", "Neeraj", "Vikas", "Sanjay", "Deepak", "Sunil", "Pawan", "Gaurav", "Naveen", "Sachin", "Mohit", "Kapil", "Vishal", "Ashish", "Ajay", "Ravi", "Kishore", "Saurabh", "Manish", "Gopal", "Tarun", "Nitin", "Praveen", "Hemant"];
             const lNames = ["Kumar", "Singh", "Sharma", "Patel", "Verma", "Yadav", "Gupta", "Choudhary", "Mishra", "Das", "D.", "S.", "V.", "M.", "T.", "Rao", "Reddy", "Joshi", "B.", "K."];
             const citiesList = ["Delhi", "Pune", "Jaipur", "Lucknow", "Chandigarh", "Ahmedabad", "Bangalore", "Patna", "Hyderabad", "Indore", "Mumbai", "Surat", "Kanpur", "Nagpur", "Bhopal", "Thane", "Agra", "Rajkot", "Varanasi", "Amritsar", "Ludhiana", "Meerut", "Noida", "Gurgaon", "Ghaziabad", "Faridabad"];
@@ -810,6 +839,7 @@
             const nowTs = Date.now();
             const dayMs = 24 * 60 * 60 * 1000;
             
+            // Add Dummy 150 Reviews
             for(let i=0; i<150; i++) {
                 let randomDaysAgo = Math.floor(Math.random() * 150) + 31; 
                 let randomPhone = Math.floor(1000 + Math.random() * 9000).toString(); 
@@ -820,7 +850,7 @@
                 else if(randomVal > 0.88) genRating = 3;
                 else if(randomVal > 0.60) genRating = 4;
 
-                reviewsData.push({
+                combined.push({
                     name: fNames[Math.floor(Math.random()*fNames.length)] + " " + lNames[Math.floor(Math.random()*lNames.length)],
                     location: citiesList[Math.floor(Math.random()*citiesList.length)],
                     phoneLast4: randomPhone,
@@ -829,37 +859,53 @@
                     text: revTexts[Math.floor(Math.random()*revTexts.length)]
                 });
             }
-            reviewsData.sort((a,b) => b.date - a.date);
+            // Sort to ensure newly fetched reviews and new local reviews stay on top
+            combined.sort((a,b) => b.date - a.date);
+            reviewsData = combined;
             hasRenderedReviews = true;
         }
 
         window.openReviewsModal = function() {
             if(!hasRenderedReviews) generateBulkReviews();
             renderReviews();
-            document.getElementById('reviewsModalOverlay').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            const overlay = document.getElementById('reviewsModalOverlay');
+            if(overlay) {
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
         };
 
         window.closeReviewsModal = function() {
-            document.getElementById('reviewsModalOverlay').classList.remove('active');
-            document.body.style.overflow = '';
+            const overlay = document.getElementById('reviewsModalOverlay');
+            if(overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         };
 
-        document.getElementById('reviewsModalOverlay').addEventListener('click', (e) => { 
-            if(e.target === document.getElementById('reviewsModalOverlay')) closeReviewsModal(); 
-        });
+        const revOverlay = document.getElementById('reviewsModalOverlay');
+        if(revOverlay) {
+            revOverlay.addEventListener('click', (e) => { 
+                if(e.target === revOverlay) closeReviewsModal(); 
+            });
+        }
 
         window.openWriteReviewModal = function() {
-            document.getElementById('writeReviewModalOverlay').classList.add('active');
+            const overlay = document.getElementById('writeReviewModalOverlay');
+            if(overlay) overlay.classList.add('active');
         };
 
         window.closeWriteReviewModal = function() {
-            document.getElementById('writeReviewModalOverlay').classList.remove('active');
+            const overlay = document.getElementById('writeReviewModalOverlay');
+            if(overlay) overlay.classList.remove('active');
         };
 
-        document.getElementById('writeReviewModalOverlay').addEventListener('click', (e) => { 
-            if(e.target === document.getElementById('writeReviewModalOverlay')) closeWriteReviewModal(); 
-        });
+        const wRevOverlay = document.getElementById('writeReviewModalOverlay');
+        if(wRevOverlay) {
+            wRevOverlay.addEventListener('click', (e) => { 
+                if(e.target === wRevOverlay) closeWriteReviewModal(); 
+            });
+        }
 
         window.filterReviews = function(ratingFilter) {
             currentReviewFilter = ratingFilter;
@@ -880,6 +926,7 @@
 
         function renderReviews() {
             const container = document.getElementById('reviewsListContainer');
+            if(!container) return;
             container.innerHTML = '';
 
             let filteredList = reviewsData;
@@ -900,6 +947,9 @@
                 }
                 const initial = review.name.charAt(0).toUpperCase();
                 const displayPhone = review.phoneLast4 || "XXXX";
+                
+                // Show "Verified" badge for Live reviews fetched from sheet
+                const liveBadge = review.isLive ? '<span class="live-badge"><i class="fa-solid fa-check"></i> Verified</span>' : '';
 
                 const html = `
                     <div class="review-item">
@@ -911,7 +961,10 @@
                                     <p class="reviewer-loc"><i class="fa-solid fa-location-dot" style="font-size:0.6rem; color:#C5A059;"></i> ${review.location}</p>
                                 </div>
                             </div>
-                            <div class="review-date-time">${formatReviewDate(review.date)}</div>
+                            <div class="review-date-time" style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+                                ${liveBadge}
+                                <span>${formatReviewDate(review.date)}</span>
+                            </div>
                         </div>
                         <div class="review-stars-display">${starsHtml}</div>
                         <p class="review-text-content">${review.text}</p>
@@ -936,12 +989,6 @@
             });
         });
 
-        // ==========================================
-        // COMMON GOOGLE SHEETS URL (Orders + Reviews)
-        // ==========================================
-        // YAHA APNA NAYA DEPLOY KIYA HUA SCRIPT URL DALEIN
-        const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
-
         window.submitNewReview = function(e) {
             e.preventDefault();
             const name = document.getElementById('revName').value.trim();
@@ -953,11 +1000,12 @@
             const phoneLast4 = phoneStr.length >= 4 ? phoneStr.slice(-4) : "XXXX";
 
             reviewsData.unshift({
-                name: name, location: location, phoneLast4: phoneLast4, rating: selectedStarRating, date: Date.now(), text: text
+                name: name, location: location, phoneLast4: phoneLast4, rating: selectedStarRating, date: Date.now(), text: text, isLive: true
             });
 
             filterReviews('all');
-            document.getElementById('reviewsListContainer').scrollTop = 0;
+            const reviewsContainer = document.getElementById('reviewsListContainer');
+            if(reviewsContainer) reviewsContainer.scrollTop = 0;
 
             document.getElementById('addReviewForm').reset();
             selectedStarRating = 5;
@@ -967,7 +1015,7 @@
             showNotification("Review posted successfully!");
 
             const reviewSheetData = {
-                action: 'submitReview', name: name, phone: phoneStr, location: location, rating: selectedStarRating, text: text, date: new Date().toLocaleString('en-IN')
+                action: 'submitReview', name: name, phone: phoneStr, location: location, rating: selectedStarRating, text: text, date: new Date().toISOString()
             };
             fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
                 method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(reviewSheetData)
@@ -983,6 +1031,13 @@
             const isExpress = document.getElementById('delExpress').checked;
             setFormLoading(true);
 
+            // Ad-blocker check for Razorpay
+            if (typeof Razorpay === 'undefined') {
+                showNotification("Payment Gateway blocked. Please disable your Ad-Blocker/Brave Shields and refresh.");
+                setFormLoading(false);
+                return;
+            }
+
             const uniqueOrderId = generateCustomOrderId(name, phone);
             const deliveryStr = isExpress ? "Express (2-3 Days, +₹50)" : "Standard (5-7 Days)";
             const productDetails = `Kama-XXX-Gold (Qty: ${currentQty}) | Delivery: ${deliveryStr}`;
@@ -997,16 +1052,20 @@
                 } catch(err) { console.log("Sheet bg err:", err); }
 
                 var razorpayOptions = {
-                    "key": "rzp_live_T2BkTwTbh69R4C", "amount": finalAmount * 100, "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
+                    "key": "rzp_test_SoQGLL2pS9o5qt", "amount": finalAmount * 100, "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
                     "handler": function (response) {
                         const firstName = name.split(' ')[0];
                         document.getElementById('successTitle').innerText = `Welcome ${firstName}, Order Successful!`;
                         document.getElementById('displayOrderId').innerText = uniqueOrderId;
                         closeCheckoutModal();
-                        document.getElementById('successModalOverlay').classList.add('active');
-                        document.body.style.overflow = 'hidden';
                         
-                        if (typeof fbq !== 'undefined') fbq('track', 'Purchase', { value: finalAmount, currency: 'INR' });
+                        const successModal = document.getElementById('successModalOverlay');
+                        if(successModal) {
+                            successModal.classList.add('active');
+                            document.body.style.overflow = 'hidden';
+                        }
+                        
+                        if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: finalAmount, currency: 'INR' });
                         
                         const updateData = { action: 'updatePayment', orderId: uniqueOrderId, phone: phone, amount: finalAmount, status: "Completed (Paid)", txnId: response.razorpay_payment_id };
                         fetch(GOOGLE_SCRIPT_WEB_APP_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(updateData) }).catch(err => console.error("Update fail:", err));
@@ -1021,7 +1080,9 @@
                 rzp1.on('payment.failed', function (res){ setFormLoading(false); showNotification("Payment Failed: " + res.error.description); });
                 rzp1.open();
             } catch (error) {
-                console.error("Error:", error); showNotification("Gateway error. Check connection."); setFormLoading(false);
+                console.error("Error:", error); 
+                showNotification("Gateway error. Check connection."); 
+                setFormLoading(false);
             }
         };
     </script>
