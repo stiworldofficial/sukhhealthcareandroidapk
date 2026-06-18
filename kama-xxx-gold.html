@@ -332,7 +332,7 @@
                     <div class="stars">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <span class="reviews">4.9/5 (5,000 Happy Customers)</span>
+                    <span class="reviews">4.1/5 (5,000 Happy Customers)</span>
                 </div>
                 
                 <!-- NEW STYLED BUTTON -->
@@ -1052,7 +1052,7 @@
                 } catch(err) { console.log("Sheet bg err:", err); }
 
                 var razorpayOptions = {
-                    "key": "rzp_test_SoQGLL2pS9o5qt", "amount": finalAmount * 100, "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
+                    "key": "rzp_live_T2BkTwTbh69R4C", "amount": finalAmount * 100, "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
                     "handler": function (response) {
                         const firstName = name.split(' ')[0];
                         document.getElementById('successTitle').innerText = `Welcome ${firstName}, Order Successful!`;
