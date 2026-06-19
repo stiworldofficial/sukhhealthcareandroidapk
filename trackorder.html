@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Track Your Order | Sukh Healthcare</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* */
+        /* =========================================
+           GLOBAL VARIABLES & BASE SETTINGS
+           ========================================= */
+        :root {
+            --color-bg-base: #F9FAF9; 
+            --color-brand: #1A362D;      
+            --color-premium-gold: #C5A059; 
+            --color-text: #1D1D1F;       
+            --color-accent: #FF3B30; 
+            --radius-xl: 24px;
+            --radius-md: 14px;
+        }
+
+        html { font-size: 16px; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        
+        body { 
+            background-color: var(--color-bg-base); 
+            font-family: 'Lato', sans-serif; 
+            color: var(--color-text); 
+            overflow-x: hidden;
+            padding-top: 60px; /* Header ke liye space */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* */
+        /* --- ORIGINAL HEADER (UNCHANGED) --- */
+        .header-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 3000; background: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .top-bar { background-color: var(--color-brand); color: #fff; text-align: center; padding: 6px 10px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; line-height: 1.3; }
+        .navbar { padding: 10px 15px; display: flex; justify-content: center; align-items: center; }
+        .nav-logo-icon { width: 30px; height: 30px; object-fit: contain; margin-right: 8px; }
+        .nav-title-img { height: 26px; width: auto; }
+
+        @media (min-width: 768px) {
+            .top-bar { font-size: 0.8rem; letter-spacing: 1px; }
+            .nav-logo-icon { width: 32px; height: 32px; }
+            .nav-title-img { height: 28px; }
+        }
+
+        /* */
+        /* --- BACKGROUND IMAGE SETTINGS (track.png) --- */
+        /* Yeh background sabhi devices par responsive rahega */
+        .bg-image {
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100vw; height: 100vh;
+            background: url('track.png') no-repeat center center;
+            background-size: cover;
+            z-index: -2; 
+        }
+        /* Ek halka dark overlay taaki design ultra pro max lage aur text clear padha ja sake */
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: -1;
+        }
+
+        /* */
+        /* --- MAIN TRACKING SECTION --- */
+        .track-main {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 1.5rem;
+            min-height: 70vh;
+            z-index: 10;
+        }
+
+        .tracking-container {
+            width: 100%; 
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* */
+        /* =========================================
+           iOS 26 ULTRA MODERN SEARCH BAR 
+           ========================================= */
+        /* Background frosted white jisse text clear dikhe */
+        .search-wrapper { 
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border-radius: 999px; 
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            display: flex; 
+            align-items: center; /* Ensures perfect vertical centering */
+            justify-content: space-between;
+            padding: 8px 8px 8px 25px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15), inset 0 2px 0 rgba(255,255,255,0.6);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        .search-wrapper:focus-within {
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.2), inset 0 2px 0 rgba(255,255,255,0.8);
+            border-color: #fff;
+        }
+
+        /* Input ka text color dark rakha hai taaki clear visible ho */
+        .search-input {
+            flex: 1; 
+            padding: 10px 0; /* Reduced padding slightly to prevent pushing container height */
+            margin: 0;
+            background: transparent; 
+            border: none;
+            font-size: 1.05rem; 
+            color: #1D1D1F !important; 
+            font-weight: 600; 
+            outline: none; 
+            width: 100%;
+        }
+        
+        .search-input::placeholder { color: rgba(29, 29, 31, 0.5); font-weight: 500; }
+        
+        /* Search button styles */
+        .search-btn {
+            width: 52px; height: 52px; 
+            flex-shrink: 0; /* Prevents button from shrinking */
+            background: var(--color-brand); 
+            color: #fff;
+            border: none; 
+            border-radius: 50%;
+            font-size: 1.3rem; cursor: pointer; 
+            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(26, 54, 45, 0.4);
+            margin-left: 10px; /* Space between input and button */
+        }
+        .search-btn:hover { 
+            transform: scale(1.05); 
+            background: #11251e;
+        }
+
+        /* */
+        /* --- LOADER & ERROR MESSAGES --- */
+        .loader { display: none; color: #ffffff; font-size: 2.5rem; margin: 40px 0; text-align: center; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));}
+        
+        .error-msg { 
+            display: none; color: #fff; 
+            background: rgba(255, 59, 48, 0.8); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            padding: 16px 24px; border-radius: var(--radius-md); 
+            font-size: 1rem; font-weight: 600; margin-top: 30px; 
+            text-align: center; width: 100%;
+            box-shadow: 0 10px 30px rgba(255, 59, 48, 0.3);
+            animation: fadeIn 0.4s ease;
+        }
+
+        /* */
+        /* =========================================
+           ULTRA PRO MAX ORDER CARDS (GLASSMORPHISM)
+           ========================================= */
+        #resultsContainer { display: flex; flex-direction: column; gap: 25px; margin-top: 40px; width: 100%; }
+
+        .order-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            border-radius: var(--radius-xl);
+            padding: 30px 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            color: #ffffff;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .o-header { border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 20px; margin-bottom: 25px; }
+        .o-id { font-size: 0.9rem; color: rgba(255,255,255,0.7); font-weight: 700; letter-spacing: 1.5px; margin-bottom: 8px; text-transform: uppercase; }
+        .o-product { font-size: 1.3rem; font-family: 'Playfair Display', serif; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+        .o-details { font-size: 0.9rem; color: #e0e0e0; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 15px; font-weight: 500;}
+        .o-details span i { color: var(--color-premium-gold); margin-right: 5px; }
+
+        /* */
+        /* --- MODERN STEPPER (iOS 26 Style) --- */
+        .stepper { display: flex; flex-direction: column; position: relative; margin-top: 10px; }
+        /* Vertical Line */
+        .stepper::before { 
+            content: ''; position: absolute; 
+            left: 21px; top: 15px; bottom: 35px; 
+            width: 2px; background: rgba(255,255,255,0.15); 
+            z-index: 1; 
+        }
+        
+        .step { display: flex; gap: 20px; position: relative; z-index: 2; margin-bottom: 30px; }
+        .step:last-child { margin-bottom: 0; }
+        
+        /* Default Icon State (Pending) */
+        .step-icon { 
+            width: 44px; height: 44px; border-radius: 50%; 
+            background: rgba(255,255,255,0.1); 
+            backdrop-filter: blur(10px); 
+            color: rgba(255,255,255,0.4); 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 1.1rem; flex-shrink: 0; 
+            transition: all 0.4s ease; 
+            border: 2px solid rgba(255,255,255,0.2); 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .step-content { flex: 1; padding-top: 6px; }
+        .step-title { font-size: 1.05rem; font-weight: 700; color: rgba(255,255,255,0.5); letter-spacing: 0.3px;}
+        .step-date { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-top: 4px; font-weight: 500; }
+        .step-desc { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 6px; display: none; line-height: 1.4; }
+
+        /* Active State (Completed Steps) - Vibrant Green */
+        .step.active .step-icon { 
+            background: #34C759; 
+            border-color: #34C759; 
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(52, 199, 89, 0.4);
+        }
+        .step.active .step-title { color: #fff; }
+        .step.active .step-date { color: rgba(255,255,255,0.8); }
+        .step.active .step-desc { display: block; }
+        
+        /* Current State (In Transit) - Premium Gold Glow */
+        .step.current .step-icon { 
+            background: var(--color-premium-gold); 
+            border-color: var(--color-premium-gold); 
+            color: #fff;
+            animation: pulse-gold 2s infinite; 
+        }
+        .step.current .step-title { color: #fff; font-weight: 800; }
+        
+        @keyframes pulse-gold { 
+            0% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.6); } 
+            70% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0); } 
+        }
+
+        /* */
+        /* --- ORIGINAL FOOTER (UNCHANGED) --- */
+        .store-footer { background: var(--color-brand); color: #fff; padding: 3rem 1.5rem 2rem 1.5rem; position: relative; border-radius: var(--radius-xl) var(--radius-xl) 0 0; z-index: 10; margin-top: auto;}
+        .footer-top { display: flex; flex-direction: column; gap: 2.5rem; max-width: 1300px; margin: 0 auto; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 2.5rem; text-align: center; align-items: center; }
+        .brand-col { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .brand-col .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .footer-logo-img-icon { width: 30px; height: 30px; object-fit: contain; filter: brightness(0) invert(1); }
+        .footer-logo-name-img { height: 26px; width: auto; object-fit: contain; filter: brightness(0) invert(1); }
+        .footer-desc { font-size: 0.9rem; line-height: 1.6; opacity: 0.8; margin-bottom: 1.2rem; max-width: 320px; font-weight: 300;}
+        .compliance-info { font-size: 0.8rem; opacity: 0.8; line-height: 1.6; margin-bottom: 1.2rem; }
+        .compliance-info strong { color: var(--color-premium-gold); font-weight: 600; }
+        .social-links { display: flex; gap: 1rem; justify-content: center; }
+        .social-links a { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem; transition: all 0.3s; }
+        .footer-col h4 { font-family: -apple-system, sans-serif; font-size: 1rem; font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col a { display: block; color: rgba(255,255,255,0.8); text-decoration: none; margin-bottom: 0.8rem; font-size: 0.9rem; transition: all 0.2s; cursor: pointer;}
+        .footer-disclaimer { max-width: 1300px; margin: 1.5rem auto; font-size: 0.7rem; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.5; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1.5rem;}
+        .footer-bottom { max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; font-size: 0.8rem; opacity: 0.7; padding-top: 0.5rem; text-align: center; }
+        
+        @media (min-width: 992px) {
+            .store-footer { padding: 5rem 4rem 2rem 4rem; } 
+            .footer-top { flex-direction: row; flex-wrap: wrap; text-align: left; align-items: flex-start; justify-content: space-between; }
+            .brand-col { align-items: flex-start; text-align: left; flex: 2; min-width: 300px; }
+            .footer-col { flex: 1; min-width: 200px; }
+            .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- -->
+    <header class="header-wrapper">
+        <div class="top-bar">
+            ⚡ FREE DELIVERY & 100% SECURE PAYMENT
+        </div>
+        <div class="navbar">
+            <a href="index.html" style="display:flex; align-items:center; text-decoration:none;">
+                <img src="sukh.png" alt="Sukh Icon" class="nav-logo-icon" onerror="this.style.display='none'">
+                <img src="sukhname.png" alt="Sukh" class="nav-title-img" onerror="this.outerHTML='<h1 style=\'font-family: Playfair Display, serif; font-size: 1.5rem; color: #1A362D; font-weight: bold;\'>SUKH HEALTHCARE</h1>'">
+            </a>
+        </div>
+    </header>
+
+    <!-- -->
+    <!-- Background Images -->
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- -->
+    <main class="track-main">
+        <div class="tracking-container">
+            <!-- iOS 26 Animated Search Form -->
+            <form onsubmit="trackOrder(event)" style="width: 100%;">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" class="search-input" required autocomplete="off">
+                    <button type="submit" class="search-btn" id="searchBtn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div id="loading" class="loader"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+            <div id="errorMsg" class="error-msg"></div>
+
+            <!-- Yahapar Tracking Results Dikhaye Jayenge -->
+            <div id="resultsContainer"></div>
+        </div>
+    </main>
+
+    <!-- -->
+    <footer class="store-footer">
+        <div class="footer-top">
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    <img src="sukh.png" alt="Sukh Icon" class="footer-logo-img-icon">
+                    <img src="sukhname.png" alt="Sukh Name" class="footer-logo-name-img">
+                </div>
+                <p class="footer-desc">Crafting pure, botanical wellness through ancient Ayurvedic wisdom and modern science to support your daily vitality.</p>
+                <div class="compliance-info">
+                    <strong>Sukh Healthcare </strong><br>
+                    House No 23/786, Krishna Nagar,<br>
+                    Near Hindu Vidya Peeth School, Kath Mandi,<br>
+                    Sonipat, Haryana 131001, India<br>
+                    Email: healthcaresukh@gmail.com<br>
+                    Phone: +91-9306027053<br>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <a href="index.html">Shop Wellness</a>
+                <a href="#">Track Order</a>
+                <a href="about-us.html">About Us</a>
+                <a href="contact-us.html">Contact Us</a>
+            </div>
+            <div class="footer-col">
+                <h4>Legal & Policies</h4>
+                <a href="terms-and-conditions.html">Terms & Conditions</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="refund-and-cancellation.html">Refund & Cancellation Policy</a>
+                <a href="shipping-and-delivery-policy.html">Shipping & Delivery Policy</a>
+            </div>
+        </div>
+        <div class="footer-disclaimer">
+            <strong>Disclaimer:</strong> The statements regarding these products have not been evaluated by the Food and Drug Administration or Ayush Ministry. These products are dietary supplements and are not intended to diagnose, treat, cure, or prevent any disease. Always consult with a qualified healthcare professional prior to beginning any diet, exercise program, or dietary supplement. Results may vary from person to person.
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SukhHealthcare.com All rights reserved.</p>
+            <div class="footer-legal"><span>Secure Payments via Razorpay</span></div>
+        </div>
+    </footer>
+
+    <script>
+        /* */
+        // ==========================================
+        // APNA GOOGLE SCRIPT URL YAHAN DAALEIN
+        // ==========================================
+        const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
+
+        // --- ANIMATED PLACEHOLDER TYPING EFFECT KO IMPROVE KIYA GAYA ---
+        const inputElement = document.getElementById('searchInput');
+        const textToType = "Apna Order ID ya Mobile number darj karein...";
+        let i = 0;
+        let typingTimeout;
+        let isTypingActive = true;
+        
+        function typeWriterPlaceholder() {
+            if (!isTypingActive) return;
+            if (i < textToType.length) {
+                inputElement.setAttribute('placeholder', inputElement.getAttribute('placeholder') + textToType.charAt(i));
+                i++;
+                typingTimeout = setTimeout(typeWriterPlaceholder, 50); 
+            } else {
+                typingTimeout = setTimeout(() => {
+                    if (isTypingActive) {
+                        inputElement.setAttribute('placeholder', '');
+                        i = 0;
+                        typeWriterPlaceholder();
+                    }
+                }, 3000); 
+            }
+        }
+        
+        inputElement.setAttribute('placeholder', '');
+        typeWriterPlaceholder();
+
+        // User jab click kare toh animation rok de taaki text clear dikhe
+        inputElement.addEventListener('focus', () => {
+            isTypingActive = false;
+            clearTimeout(typingTimeout);
+            inputElement.setAttribute('placeholder', 'Order ID / Mobile Number');
+        });
+
+        /* */
+        // Helper: Calculate Estimated Dates based on Speed
+        function calculateEstimates(orderDateStr, isExpress) {
+            let baseDate = new Date(); 
+            if(orderDateStr) {
+                let datePart = orderDateStr.split(',')[0].trim();
+                let parts = datePart.split(/[\/\-]/); 
+                if(parts.length === 3) baseDate = new Date(parts[2], parts[1]-1, parts[0]);
+            }
+
+            function addDays(days) {
+                let d = new Date(baseDate);
+                d.setDate(d.getDate() + days);
+                return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+            }
+
+            if (isExpress) return { dispatch: addDays(1), outForDelivery: addDays(2), delivered: addDays(3) };
+            else return { dispatch: addDays(2), outForDelivery: addDays(4), delivered: addDays(6) };
+        }
+
+        /* */
+        // --- TRACKING LOGIC ---
+        async function trackOrder(e) {
+            e.preventDefault();
+            const inputVal = document.getElementById('searchInput').value.trim();
+            if(!inputVal) return;
+
+            const resContainer = document.getElementById('resultsContainer');
+            const errBox = document.getElementById('errorMsg');
+            
+            resContainer.innerHTML = '';
+            errBox.style.display = 'none';
+            
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('searchBtn').style.opacity = '0.5';
+            document.getElementById('searchBtn').disabled = true;
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_WEB_APP_URL + "?action=trackOrder&query=" + encodeURIComponent(inputVal), {
+                    method: 'GET'
+                });
+                
+                const rawText = await response.text();
+                let data;
+                
+                try {
+                    data = JSON.parse(rawText);
+                } catch (parseError) {
+                    throw new Error("API request block ho gayi hai. Kripya check karein.");
+                }
+
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('searchBtn').style.opacity = '1';
+                document.getElementById('searchBtn').disabled = false;
+
+                if(data.found && data.orders && data.orders.length > 0) {
+                    
+                    data.orders.forEach((order, index) => {
+                        const isExpress = order.product.toLowerCase().includes('express');
+                        const estimates = calculateEstimates(order.date, isExpress);
+                        
+                        const s1 = order.status1 || "Order Processing";
+                        const s2 = order.status2;
+                        const s3 = order.status3;
+                        const s4 = order.status4;
+
+                        let step1Class = 'active'; 
+                        let step2Class = s2 ? 'active' : '';
+                        let step3Class = s3 ? 'active' : '';
+                        let step4Class = s4 ? 'active' : '';
+                        
+                        // Current status ke liye gold ring add karna
+                        if(!s2) step1Class += ' current';
+                        else if(!s3) step2Class += ' current';
+                        else if(!s4) step3Class += ' current';
+                        else step4Class += ' current';
+
+                        // Card Animation delay ke liye logic
+                        const delay = index * 0.2;
+
+                        const cardHtml = `
+                            <div class="order-card" style="animation-delay: ${delay}s">
+                                <div class="o-header">
+                                    <div class="o-id">${order.orderId}</div>
+                                    <div class="o-product">${order.product.split('|')[0].trim()}</div>
+                                    <div class="o-details">
+                                        <span><i class="fa-solid fa-user"></i> ${order.name}</span>
+                                        <span><i class="fa-solid fa-phone"></i> +91 ${order.phone}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="stepper">
+                                    <div class="step ${step1Class}">
+                                        <div class="step-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                                        <div class="step-content">
+                                            <div class="step-title">${s1}</div>
+                                            <div class="step-date">Placed: ${order.date}</div>
+                                            <div class="step-desc">Your order is being processed by our team.</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="step ${step2Class}">
+                                        <div class="step-icon"><i class="fa-solid fa-box"></i></div>
+                                        <div class="step-content">
+                                            <div class="step-title">${s2 ? s2 : 'Dispatched'}</div>
+                                            <div class="step-date">Est. ${estimates.dispatch}</div>
+                                            <div class="step-desc">Your order has been handed over to our courier partner.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="step ${step3Class}">
+                                        <div class="step-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                                        <div class="step-content">
+                                            <div class="step-title">${s3 ? s3 : 'Out for delivery'}</div>
+                                            <div class="step-date">Est. ${estimates.outForDelivery}</div>
+                                            <div class="step-desc">Your package is out for delivery in your city.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="step ${step4Class}">
+                                        <div class="step-icon"><i class="fa-solid fa-house-chimney"></i></div>
+                                        <div class="step-content">
+                                            <div class="step-title">${s4 ? s4 : 'Delivered'}</div>
+                                            <div class="step-date">Est. ${estimates.delivered}</div>
+                                            <div class="step-desc">Your package has been successfully delivered.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        resContainer.insertAdjacentHTML('beforeend', cardHtml);
+                    });
+
+                } else {
+                    errBox.innerText = data.error || "Koi order nahi mila in details ke sath.";
+                    errBox.style.display = 'block';
+                }
+
+            } catch(err) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('searchBtn').style.opacity = '1';
+                document.getElementById('searchBtn').disabled = false;
+                
+                errBox.innerText = err.message || "Network Error. Kripya dobara try karein.";
+                errBox.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
