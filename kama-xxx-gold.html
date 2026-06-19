@@ -54,6 +54,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
     <!-- Razorpay Checkout Script -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     
+    
     <style>
         /* =========================================
            MOBILE-FIRST HIGH-CONVERSION THEME
@@ -100,14 +101,11 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
         /* Left: Images */
         .gallery-wrap { width: 100%; position: relative; }
         
-        /* YouTube Video Format (16:9 Aspect Ratio) */
         .main-img-container { width: 100%; aspect-ratio: 16/9; background: #fff; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-soft); margin-bottom: 1rem; border: 1px solid rgba(0,0,0,0.05); position: relative; touch-action: pan-y; }
         .main-img-container img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s ease; }
         
-        /* Swipe indicators hint */
         .swipe-hint { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.5); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; pointer-events: none; opacity: 0.8; display: flex; align-items: center; gap: 5px; }
         
-        /* Thumbnails */
         .thumbnails { display: flex; gap: 6px; overflow-x: hidden; padding-bottom: 5px; width: 100%; }
         .thumb { flex: 0 0 calc(20% - 4.8px); aspect-ratio: 16/9; height: auto; border-radius: 8px; cursor: pointer; border: 2px solid transparent; opacity: 0.6; transition: 0.3s; overflow: hidden; }
         .thumb.active { border-color: var(--color-brand); opacity: 1; }
@@ -137,39 +135,26 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
         .qty-input { width: 36px; text-align: center; border: none; background: transparent; font-size: 1.05rem; font-weight: 700; pointer-events: none; }
         .qty-pack-text { font-weight: 600; color: #666; font-size: 0.85rem; }
 
-        /* BUTTONS */
+        /* CENTERED BUTTONS (Order & Review together) */
+        .action-buttons-centered {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
         .btn-buy-huge { width: 100%; background: var(--color-brand); color: #fff; padding: 16px; border: none; border-radius: var(--radius-md); font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; box-shadow: 0 10px 25px rgba(26,54,45,0.3); display: flex; justify-content: center; align-items: center; gap: 10px; }
         .btn-buy-huge:hover { transform: translateY(-2px); background: #132a22; }
         .pulse-anim { animation: pulse 2s infinite; }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(26,54,45, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(26,54,45, 0); } 100% { box-shadow: 0 0 0 0 rgba(26,54,45, 0); } }
 
-        .desktop-btn-wrapper { display: none; margin-bottom: 1.5rem; }
-        
-        /* NEW STYLED REVIEW BUTTON (Like Order Now but slightly smaller padding) */
-        .review-trigger-btn { 
-            width: 100%; 
-            background: var(--color-brand); 
-            color: #fff; 
-            padding: 12px; 
-            border: none; 
-            border-radius: var(--radius-md); 
-            font-size: 1rem; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            box-shadow: 0 5px 15px rgba(26,54,45,0.3); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 8px;
-            margin-top: 5px;
-        }
-        .review-trigger-btn:hover { background: #132a22; transform: translateY(-2px); }
+        /* The Outline review button exactly matching Order Now in size but outlined */
+        .btn-review-outline { width: 100%; background: transparent; color: var(--color-brand); border: 2px solid var(--color-brand); padding: 14px; border-radius: var(--radius-md); font-size: 1.05rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-review-outline:hover { background: var(--color-brand); color: #fff; }
 
         /* Trust Icons */
-        .trust-icons { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); margin-top: 1.5rem;}
+        .trust-icons { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); }
         .t-icon { text-align: center; flex: 1; min-width: 80px; }
         .t-icon i { font-size: 1.5rem; color: var(--color-premium-gold); margin-bottom: 8px; }
         .t-icon p { font-size: 0.75rem; font-weight: 600; color: #555; }
@@ -181,6 +166,12 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
         .benefits-list { list-style: none; padding: 0; margin: 0 0 1.5rem 0; display: flex; flex-direction: column; gap: 8px; }
         .benefits-list li { position: relative; padding-left: 1.6rem; font-size: 0.9rem; color: #1D1D1F; font-weight: 500; }
         .benefits-list li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; top: 2px; font-size: 0.85rem; color: #34C759; }
+
+        /* PRODUCT PAGE PRIVACY NOTICE */
+        .product-privacy-notice { background-color: #F0F8F5; border: 1px solid #C5E1D4; padding: 15px; border-radius: 12px; display: flex; align-items: flex-start; gap: 12px; margin: 1.5rem 0; }
+        .product-privacy-notice i { color: #1A362D; font-size: 1.5rem; margin-top: 2px; }
+        .product-privacy-notice h4 { color: #1A362D; font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+        .product-privacy-notice p { color: #4A5568; font-size: 0.85rem; line-height: 1.5; }
 
         /* =========================================
            MODALS & OVERLAYS
@@ -231,7 +222,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
         
         .review-filters-wrapper { background: #fff; padding: 5px 15px 10px 15px; border-bottom: 1px solid rgba(0,0,0,0.05); }
         .review-filters { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; -ms-overflow-style: none; scrollbar-width: none; }
-        .review-filters::-webkit-scrollbar { display: none; } 
+        .review-filters::-webkit-scrollbar { display: none; }
         .filter-chip { background: #f0f0f0; border: 1px solid #ddd; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; color: #555; cursor: pointer; white-space: nowrap; transition: 0.2s; }
         .filter-chip.active { background: var(--color-brand); color: #fff; border-color: var(--color-brand); }
 
@@ -247,21 +238,16 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
         .review-stars-display { color: #FF9F0A; font-size: 0.85rem; margin-bottom: 8px; }
         .review-text-content { font-size: 0.9rem; color: #444; line-height: 1.5; margin: 0;}
 
-        /* Write Review Trigger at Bottom */
         .write-review-footer { padding: 15px; background: #fff; border-top: 1px solid rgba(0,0,0,0.05); border-radius: 0 0 var(--radius-md) var(--radius-md); flex-shrink: 0;}
         .btn-outline-gold { width: 100%; background: transparent; color: var(--color-brand); border: 2px solid var(--color-premium-gold); padding: 12px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 8px; }
         .btn-outline-gold:hover { background: var(--color-premium-gold); color: #fff; }
 
-        /* Write Review Modal Inner Form */
         .star-rating-input { display: flex; gap: 5px; margin-bottom: 15px; font-size: 1.8rem; color: #ddd; cursor: pointer; justify-content: center;}
         .star-rating-input i { transition: color 0.2s; }
         .star-rating-input i.active { color: #FF9F0A; }
         .review-form-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
         .review-form-row .form-group { flex: 1; min-width: 140px; margin-bottom: 0; }
         .live-badge { background: #E8F5E9; color: #2E7D32; font-size: 0.6rem; padding: 2px 6px; border-radius: 10px; font-weight: bold; border: 1px solid #C8E6C9;}
-
-        /* --- STICKY MOBILE CTA --- */
-        .sticky-mobile-cta { display: block; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 10px 15px; box-shadow: 0 -4px 15px rgba(0,0,0,0.1); z-index: 4000; padding-bottom: env(safe-area-inset-bottom, 10px); border-top: 1px solid rgba(0,0,0,0.05); }
 
         /* =========================================
            FLOATING WHATSAPP BUTTON
@@ -303,8 +289,11 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
             .product-info { width: 50%; padding-top: 1rem; }
             .p-title { font-size: 2.5rem; white-space: normal; } 
             .p-price { font-size: 2.5rem; }
-            .desktop-btn-wrapper { display: block; }
-            .sticky-mobile-cta { display: none; }
+            
+            /* Align centered buttons to left on desktop */
+            .action-buttons-centered { display: flex; flex-direction: row; justify-content: flex-start; align-items: stretch; }
+            .btn-buy-huge, .btn-review-outline { width: auto; padding: 16px 30px; flex: 1; }
+            
             .swipe-hint { display: none; }
             .checkout-modal, .reviews-modal { padding: 2rem; border-radius: var(--radius-xl); max-height: 85vh;}
             .reviews-modal { padding: 0; } 
@@ -356,15 +345,10 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                     <div class="stars">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <span class="reviews">4.1/5 (5,000+ Happy Customers)</span>
+                    <span class="reviews">4.9/5 (5,000 Happy Customers)</span>
                 </div>
-                
-                <!-- NEW STYLED BUTTON -->
-                <button type="button" class="review-trigger-btn" onclick="openReviewsModal()">
-                    <i class="fa-solid fa-pen-to-square"></i> Write / See Review
-                </button>
 
-                <div class="price-box" style="margin-top: 15px;">
+                <div class="price-box">
                     <span class="p-price">₹599</span>
                     <span class="p-mrp">₹899</span>
                     <span class="p-save">Save 30%</span>
@@ -382,10 +366,13 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                     <span class="qty-pack-text">(5 Capsules/Pack)</span>
                 </div>
 
-                <!-- Desktop Buy Button -->
-                <div class="desktop-btn-wrapper">
+                <!-- CENTERED BUTTONS (Order Now + Write Review side by side or stacked nicely) -->
+                <div class="action-buttons-centered">
                     <button type="button" class="btn-buy-huge pulse-anim" onclick="openCheckoutModal()">
                         <i class="fa-solid fa-bolt"></i> Order Now
+                    </button>
+                    <button type="button" class="btn-review-outline" onclick="openReviewsModal()">
+                        <i class="fa-solid fa-pen-to-square"></i> Write / See Review
                     </button>
                 </div>
 
@@ -399,6 +386,15 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 <!-- Product Details Content -->
                 <h3 class="section-heading">About this wellness supplement</h3>
                 <p class="m-desc">An Ayurvedic proprietary medicine crafted with adaptogenic herbs to support daily energy, manage stress, and promote overall vitality and well-being. A natural approach to holistic health.</p>
+
+                <!-- DISCREET PACKAGING NOTICE IN PRODUCT SECTION -->
+                <div class="product-privacy-notice">
+                    <i class="fa-solid fa-box-archive"></i>
+                    <div>
+                        <h4>100% Discreet Packaging & Privacy</h4>
+                        <p>Your order is shipped in completely plain, unmarked packaging. No one will know what is inside without opening it. Your personal identity and details are kept strictly confidential.</p>
+                    </div>
+                </div>
 
                 <h3 class="section-heading">Key Health Benefits</h3>
                 <ul class="benefits-list">
@@ -427,7 +423,6 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 <p class="chk-subtitle">Please enter your delivery details accurately.</p>
             </div>
 
-            <!-- PRIVACY AND DISCREET PACKAGING NOTICE -->
             <div class="privacy-notice">
                 <i class="fa-solid fa-box-archive"></i>
                 <div class="privacy-notice-content">
@@ -506,11 +501,11 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 Aapke order ki saari details, discreet shipping updates aur tracking link aapko jald hi SMS/WhatsApp aur Email par bhej diye jayenge.
             </p>
             
-            <button type="button" class="btn-buy-huge" onclick="closeSuccessModal()">Continue Shopping</button>
+            <button type="button" class="btn-buy-huge" onclick="window.location.href='trackorder.html'">Track Your Order</button>
         </div>
     </div>
 
-    <!-- REVIEWS MODAL (List only) -->
+    <!-- REVIEWS MODAL -->
     <div class="modal-overlay" id="reviewsModalOverlay">
         <div class="checkout-modal reviews-modal">
             <div class="reviews-header">
@@ -518,7 +513,6 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 <button type="button" class="modal-close" style="position: relative; top: 0; right: 0;" onclick="closeReviewsModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
-            <!-- Category Filter Buttons -->
             <div class="review-filters-wrapper">
                 <div class="review-filters">
                     <button type="button" class="filter-chip active" data-val="all" onclick="filterReviews('all')">All Reviews</button>
@@ -534,14 +528,13 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 <div style="text-align: center; color: #888; padding: 20px;"><i class="fa-solid fa-spinner fa-spin"></i> Loading reviews...</div>
             </div>
 
-            <!-- Bottom Trigger Area -->
             <div class="write-review-footer">
                 <button type="button" class="btn-outline-gold" onclick="openWriteReviewModal()"><i class="fa-solid fa-pen-to-square"></i> Write Your Review</button>
             </div>
         </div>
     </div>
 
-    <!-- WRITE REVIEW FORM MODAL (Separate Popup) -->
+    <!-- WRITE REVIEW FORM MODAL -->
     <div class="modal-overlay high-z" id="writeReviewModalOverlay">
         <div class="checkout-modal">
             <button type="button" class="modal-close" onclick="closeWriteReviewModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -551,7 +544,6 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
             </div>
 
             <form id="addReviewForm" onsubmit="submitNewReview(event)">
-                <!-- Centered Big Stars -->
                 <div class="star-rating-input" id="starRatingInput">
                     <i class="fa-solid fa-star active" data-val="1"></i>
                     <i class="fa-solid fa-star active" data-val="2"></i>
@@ -581,13 +573,6 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 <button type="submit" id="submitReviewBtn" class="btn-submit-order" style="margin-top: 10px;">Post Review</button>
             </form>
         </div>
-    </div>
-
-    <!-- STICKY MOBILE CTA -->
-    <div class="sticky-mobile-cta">
-        <button type="button" class="btn-buy-huge" onclick="openCheckoutModal()">
-            <i class="fa-solid fa-bolt"></i> Order Now
-        </button>
     </div>
     
     <!-- FLOATING WHATSAPP BUTTON -->
@@ -624,7 +609,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
             <div class="footer-col">
                 <h4>Explore</h4>
                 <a href="#">Shop Wellness</a>
-                <a href="#trackorder.html">Track Order</a>
+                <a href="trackorder.html">Track Order</a>
                 <a href="about-us.html">About Us</a>
                 <a href="contact-us.html">Contact Us</a>
             </div>
@@ -649,45 +634,24 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
     </footer>
 
     <script>
-        // Data & Variables
-        const basePrice = 599;
-        let currentQty = 1;
-        let finalAmount = basePrice;
-        
-        // Define Images
+        const basePrice = 599; let currentQty = 1; let finalAmount = basePrice;
         const productImages = ['fssaih.png', 'kama-xxx-one.webp', 'kama-xxx-two.webp', 'kama-xxx-three.webp', 'kama-xxx-four.webp'];
         let activeImageIndex = 0;
         
-        // Gallery Functions
-        function changeGalleryImage(index) {
-            activeImageIndex = index;
-            updateGalleryUI();
-        }
+        function changeGalleryImage(index) { activeImageIndex = index; updateGalleryUI(); }
         
         function updateGalleryUI() {
             const mainImg = document.getElementById('mainImage');
-            if(mainImg) {
-                mainImg.style.opacity = '0';
-                setTimeout(() => {
-                    mainImg.src = productImages[activeImageIndex];
-                    mainImg.style.opacity = '1';
-                }, 150);
-            }
-            
+            if(mainImg) { mainImg.style.opacity = '0'; setTimeout(() => { mainImg.src = productImages[activeImageIndex]; mainImg.style.opacity = '1'; }, 150); }
             const thumbs = document.querySelectorAll('.thumb');
-            thumbs.forEach((thumb, idx) => {
-                if (idx === activeImageIndex) thumb.classList.add('active');
-                else thumb.classList.remove('active');
-            });
+            thumbs.forEach((thumb, idx) => { if (idx === activeImageIndex) thumb.classList.add('active'); else thumb.classList.remove('active'); });
         }
 
-        // Swipe Setup
         const swipeContainer = document.getElementById('swipeContainer');
         if(swipeContainer) {
             let touchStartX = 0; let touchEndX = 0;
             swipeContainer.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
             swipeContainer.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipeGestures(); }, { passive: true });
-            
             function handleSwipeGestures() {
                 const swipeThreshold = 50; 
                 if (touchEndX < touchStartX - swipeThreshold) { activeImageIndex = (activeImageIndex + 1) % productImages.length; updateGalleryUI(); }
@@ -695,131 +659,78 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
             }
         }
 
-        // Notifications
         function showNotification(message) {
             const toast = document.getElementById('uiToast');
-            if(toast) {
-                toast.innerText = message;
-                toast.classList.add('show');
-                setTimeout(() => { toast.classList.remove('show'); }, 3500);
-            }
+            if(toast) { toast.innerText = message; toast.classList.add('show'); setTimeout(() => { toast.classList.remove('show'); }, 3500); }
         }
 
-        // Quantity & Price
         window.updateQty = function(change) {
-            currentQty += change;
-            if(currentQty < 1) currentQty = 1;
-            if(currentQty > 10) currentQty = 10;
-            const qtyInput = document.getElementById('productQty');
-            if(qtyInput) qtyInput.value = currentQty;
-            calculateTotal();
+            currentQty += change; if(currentQty < 1) currentQty = 1; if(currentQty > 10) currentQty = 10;
+            const qtyInput = document.getElementById('productQty'); if(qtyInput) qtyInput.value = currentQty; calculateTotal();
         };
 
         window.calculateTotal = function() {
-            let itemTotal = basePrice * currentQty;
-            let isExpress = document.getElementById('delExpress').checked;
+            let itemTotal = basePrice * currentQty; let isExpress = document.getElementById('delExpress').checked;
             finalAmount = itemTotal + (isExpress ? 50 : 0);
             const totalDisplay = document.getElementById('finalTotalDisplay');
             if(totalDisplay) totalDisplay.innerText = '₹' + finalAmount.toLocaleString('en-IN');
         };
 
-        // Checkout Modals
         window.openCheckoutModal = function() {
             const overlay = document.getElementById('checkoutModalOverlay');
-            if(overlay) {
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout');
-            }
+            if(overlay) { overlay.classList.add('active'); document.body.style.overflow = 'hidden'; if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout'); }
         };
 
         window.closeCheckoutModal = function() {
             const overlay = document.getElementById('checkoutModalOverlay');
-            if(overlay) {
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+            if(overlay) { overlay.classList.remove('active'); document.body.style.overflow = ''; }
         };
 
         const chkOverlay = document.getElementById('checkoutModalOverlay');
-        if(chkOverlay) {
-            chkOverlay.addEventListener('click', (e) => { 
-                if(e.target === chkOverlay) closeCheckoutModal(); 
-            });
-        }
+        if(chkOverlay) chkOverlay.addEventListener('click', (e) => { if(e.target === chkOverlay) closeCheckoutModal(); });
 
         window.closeSuccessModal = function() {
             const overlay = document.getElementById('successModalOverlay');
-            if(overlay) {
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-                if (window.history.replaceState) window.history.replaceState(null, null, window.location.pathname);
-            }
+            if(overlay) { overlay.classList.remove('active'); document.body.style.overflow = ''; if (window.history.replaceState) window.history.replaceState(null, null, window.location.pathname); }
         };
 
         function setFormLoading(isLoading) {
-            const btn = document.getElementById('submitBtn');
-            const txt = document.getElementById('btnText');
-            const ldr = document.getElementById('btnLoader');
+            const btn = document.getElementById('submitBtn'); const txt = document.getElementById('btnText'); const ldr = document.getElementById('btnLoader');
             if(isLoading && btn && txt && ldr) { btn.disabled = true; txt.style.display = 'none'; ldr.style.display = 'block'; } 
             else if (btn && txt && ldr) { btn.disabled = false; txt.style.display = 'flex'; ldr.style.display = 'none'; }
         }
 
         function generateCustomOrderId(fullName, mobile) {
-            let nameParts = fullName.trim().split(' ');
-            let initials = (nameParts[0] ? nameParts[0][0] : '') + (nameParts[1] ? nameParts[1][0] : '');
-            initials = initials.toUpperCase() || 'XX';
-            let phoneStr = mobile.trim();
-            let last4 = phoneStr.length >= 4 ? phoneStr.slice(-4) : '0000';
-            let timeCode = Date.now().toString().slice(-5);
-            return `ORD-${initials}${last4}-${timeCode}`;
+            let nameParts = fullName.trim().split(' '); let initials = (nameParts[0] ? nameParts[0][0] : '') + (nameParts[1] ? nameParts[1][0] : '');
+            initials = initials.toUpperCase() || 'XX'; let phoneStr = mobile.trim(); let last4 = phoneStr.length >= 4 ? phoneStr.slice(-4) : '0000';
+            let timeCode = Date.now().toString().slice(-5); return `ORD-${initials}${last4}-${timeCode}`;
         }
 
         // ==========================================
-        // COMMON GOOGLE SHEETS URL (Orders + Reviews)
+        // APNA NAYA GOOGLE SCRIPT URL YAHAN DAALEIN
         // ==========================================
         const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx3AUe6p-UdlQ1B_L4ZfEv3kiGcI1Tjh_mgNKO5MokTIua0lbY7wZVUHAyKKplvU7w/exec";
 
-        // ==========================================
-        // REVIEWS SYSTEM LOGIC
-        // ==========================================
-        let reviewsData = [];
-        let liveReviews = [];
-        let hasRenderedReviews = false;
-        let currentReviewFilter = 'all'; 
+        let reviewsData = []; let liveReviews = []; let hasRenderedReviews = false; let currentReviewFilter = 'all'; 
 
-        // Live Reviews Fetch automatically in background safely
         async function fetchLiveReviews() {
             try {
-                const response = await fetch(GOOGLE_SCRIPT_WEB_APP_URL + "?action=getReviews", { method: "GET", redirect: "follow" });
+                const response = await fetch(GOOGLE_SCRIPT_WEB_APP_URL + "?action=getReviews", { method: "GET" });
                 const text = await response.text(); 
                 try {
                     const data = JSON.parse(text);
                     if(data && Array.isArray(data)) {
                         liveReviews = data.map(r => ({
-                            name: r.name,
-                            location: r.location,
-                            phoneLast4: r.phone ? String(r.phone).slice(-4) : "XXXX",
-                            rating: parseInt(r.rating) || 5,
-                            date: new Date(r.date).getTime() || Date.now(),
-                            text: r.text,
-                            isLive: true
+                            name: r.name, location: r.location, phoneLast4: r.phone ? String(r.phone).slice(-4) : "XXXX",
+                            rating: parseInt(r.rating) || 5, date: new Date(r.date).getTime() || Date.now(), text: r.text, isLive: true
                         }));
-                        
-                        if(hasRenderedReviews) {
-                            generateBulkReviews();
-                            renderReviews();
-                        }
+                        if(hasRenderedReviews) { generateBulkReviews(); renderReviews(); }
                     }
-                } catch(parseErr) {
-                    // Fail silently if JSON is invalid (e.g., if Google returns an HTML page instead of JSON)
-                    console.log("Waiting for live sync to be fully setup.");
-                }
-            } catch(e) { console.log("Live fetch skipped or delayed."); }
+                } catch(parseErr) {}
+            } catch(e) {}
         }
-        fetchLiveReviews(); // Starts instantly on page load
+        fetchLiveReviews();
         
-        // Initial 10 High-Quality Hardcoded Reviews
         const initialReviews = [
             { name: "Rajesh Kumar", location: "Delhi", rating: 5, phoneLast4: "5421", date: Date.now() - (2 * 86400000), text: "Energy levels are much better throughout the day. Genuine product." },
             { name: "Vikram S.", location: "Pune", rating: 4, phoneLast4: "8890", date: Date.now() - (5 * 86400000), text: "Fast delivery. Been using for 10 days, feeling good difference in stamina." },
@@ -834,146 +745,57 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
         ];
 
         function generateBulkReviews() {
-            // Merge Live Fetched Reviews with Initial Ones
             let combined = [...liveReviews, ...initialReviews]; 
-            
             const fNames = ["Amit", "Rahul", "Suresh", "Prakash", "Neeraj", "Vikas", "Sanjay", "Deepak", "Sunil", "Pawan", "Gaurav", "Naveen", "Sachin", "Mohit", "Kapil", "Vishal", "Ashish", "Ajay", "Ravi", "Kishore", "Saurabh", "Manish", "Gopal", "Tarun", "Nitin", "Praveen", "Hemant"];
             const lNames = ["Kumar", "Singh", "Sharma", "Patel", "Verma", "Yadav", "Gupta", "Choudhary", "Mishra", "Das", "D.", "S.", "V.", "M.", "T.", "Rao", "Reddy", "Joshi", "B.", "K."];
             const citiesList = ["Delhi", "Pune", "Jaipur", "Lucknow", "Chandigarh", "Ahmedabad", "Bangalore", "Patna", "Hyderabad", "Indore", "Mumbai", "Surat", "Kanpur", "Nagpur", "Bhopal", "Thane", "Agra", "Rajkot", "Varanasi", "Amritsar", "Ludhiana", "Meerut", "Noida", "Gurgaon", "Ghaziabad", "Faridabad"];
-            const revTexts = [
-                "Good product. Can feel the difference in my body strength.",
-                "Absolutely amazing results. Takes around 4-5 days to show effect.",
-                "Original herbs inside. Doesn't cause acidity like other products.",
-                "Very fast delivery to my location. Nice packaging.",
-                "This is my third order. Great supplement for daily use.",
-                "I was skeptical first, but it actually works! Full day energy.",
-                "Authentic ayurvedic medicine. Safe to consume with no bad aftertaste.",
-                "Highly effective for daily fatigue. Feeling 10 years younger.",
-                "A bit expensive but worth the money. Health is wealth.",
-                "It really helps calm the mind and gives physical strength.",
-                "Superb product. Thank you Sukh Healthcare for this formulation.",
-                "My stamina has improved significantly. Very happy with the purchase.",
-                "Excellent product. Recommend to everyone dealing with work stress.",
-                "Very fast effect, natural and safe.",
-                "Using daily with milk. Highly satisfied with the result so far.",
-                "Its an okay product. Packaging could be better.", 
-                "Average results so far, waiting for more time.", 
-            ];
+            const revTexts = ["Good product. Can feel the difference in my body strength.", "Absolutely amazing results. Takes around 4-5 days to show effect.", "Original herbs inside. Doesn't cause acidity like other products.", "Very fast delivery to my location. Nice packaging.", "This is my third order. Great supplement for daily use.", "I was skeptical first, but it actually works! Full day energy.", "Authentic ayurvedic medicine. Safe to consume with no bad aftertaste.", "Highly effective for daily fatigue. Feeling 10 years younger.", "A bit expensive but worth the money. Health is wealth.", "It really helps calm the mind and gives physical strength.", "Superb product. Thank you Sukh Healthcare for this formulation.", "My stamina has improved significantly. Very happy with the purchase.", "Excellent product. Recommend to everyone dealing with work stress.", "Very fast effect, natural and safe.", "Using daily with milk. Highly satisfied with the result so far.", "Its an okay product. Packaging could be better.", "Average results so far, waiting for more time."];
 
-            const nowTs = Date.now();
-            const dayMs = 24 * 60 * 60 * 1000;
-            
-            // Add Dummy 150 Reviews
+            const nowTs = Date.now(); const dayMs = 24 * 60 * 60 * 1000;
             for(let i=0; i<150; i++) {
-                let randomDaysAgo = Math.floor(Math.random() * 150) + 31; 
-                let randomPhone = Math.floor(1000 + Math.random() * 9000).toString(); 
-                
-                let randomVal = Math.random();
-                let genRating = 5;
-                if(randomVal > 0.95) genRating = 2;
-                else if(randomVal > 0.88) genRating = 3;
-                else if(randomVal > 0.60) genRating = 4;
-
-                combined.push({
-                    name: fNames[Math.floor(Math.random()*fNames.length)] + " " + lNames[Math.floor(Math.random()*lNames.length)],
-                    location: citiesList[Math.floor(Math.random()*citiesList.length)],
-                    phoneLast4: randomPhone,
-                    rating: genRating,
-                    date: nowTs - (randomDaysAgo * dayMs),
-                    text: revTexts[Math.floor(Math.random()*revTexts.length)]
-                });
+                let randomDaysAgo = Math.floor(Math.random() * 150) + 31; let randomPhone = Math.floor(1000 + Math.random() * 9000).toString(); 
+                let randomVal = Math.random(); let genRating = 5; if(randomVal > 0.95) genRating = 2; else if(randomVal > 0.88) genRating = 3; else if(randomVal > 0.60) genRating = 4;
+                combined.push({ name: fNames[Math.floor(Math.random()*fNames.length)] + " " + lNames[Math.floor(Math.random()*lNames.length)], location: citiesList[Math.floor(Math.random()*citiesList.length)], phoneLast4: randomPhone, rating: genRating, date: nowTs - (randomDaysAgo * dayMs), text: revTexts[Math.floor(Math.random()*revTexts.length)] });
             }
-            // Sort to ensure newly fetched reviews and new local reviews stay on top
-            combined.sort((a,b) => b.date - a.date);
-            reviewsData = combined;
-            hasRenderedReviews = true;
+            combined.sort((a,b) => b.date - a.date); reviewsData = combined; hasRenderedReviews = true;
         }
 
         window.openReviewsModal = function() {
-            if(!hasRenderedReviews) generateBulkReviews();
-            renderReviews();
-            const overlay = document.getElementById('reviewsModalOverlay');
-            if(overlay) {
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+            if(!hasRenderedReviews) generateBulkReviews(); renderReviews();
+            const overlay = document.getElementById('reviewsModalOverlay'); if(overlay) { overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
         };
 
         window.closeReviewsModal = function() {
-            const overlay = document.getElementById('reviewsModalOverlay');
-            if(overlay) {
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
+            const overlay = document.getElementById('reviewsModalOverlay'); if(overlay) { overlay.classList.remove('active'); document.body.style.overflow = ''; }
         };
 
         const revOverlay = document.getElementById('reviewsModalOverlay');
-        if(revOverlay) {
-            revOverlay.addEventListener('click', (e) => { 
-                if(e.target === revOverlay) closeReviewsModal(); 
-            });
-        }
+        if(revOverlay) revOverlay.addEventListener('click', (e) => { if(e.target === revOverlay) closeReviewsModal(); });
 
-        window.openWriteReviewModal = function() {
-            const overlay = document.getElementById('writeReviewModalOverlay');
-            if(overlay) overlay.classList.add('active');
-        };
-
-        window.closeWriteReviewModal = function() {
-            const overlay = document.getElementById('writeReviewModalOverlay');
-            if(overlay) overlay.classList.remove('active');
-        };
+        window.openWriteReviewModal = function() { const overlay = document.getElementById('writeReviewModalOverlay'); if(overlay) overlay.classList.add('active'); };
+        window.closeWriteReviewModal = function() { const overlay = document.getElementById('writeReviewModalOverlay'); if(overlay) overlay.classList.remove('active'); };
 
         const wRevOverlay = document.getElementById('writeReviewModalOverlay');
-        if(wRevOverlay) {
-            wRevOverlay.addEventListener('click', (e) => { 
-                if(e.target === wRevOverlay) closeWriteReviewModal(); 
-            });
-        }
+        if(wRevOverlay) wRevOverlay.addEventListener('click', (e) => { if(e.target === wRevOverlay) closeWriteReviewModal(); });
 
         window.filterReviews = function(ratingFilter) {
             currentReviewFilter = ratingFilter;
-            
-            document.querySelectorAll('.filter-chip').forEach(chip => {
-                chip.classList.remove('active');
-                if(chip.getAttribute('data-val') == ratingFilter) {
-                    chip.classList.add('active');
-                }
-            });
+            document.querySelectorAll('.filter-chip').forEach(chip => { chip.classList.remove('active'); if(chip.getAttribute('data-val') == ratingFilter) { chip.classList.add('active'); } });
             renderReviews();
         }
 
-        function formatReviewDate(timestamp) {
-            const dt = new Date(timestamp);
-            return dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit' });
-        }
+        function formatReviewDate(timestamp) { const dt = new Date(timestamp); return dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit' }); }
 
         function renderReviews() {
-            const container = document.getElementById('reviewsListContainer');
-            if(!container) return;
-            container.innerHTML = '';
+            const container = document.getElementById('reviewsListContainer'); if(!container) return; container.innerHTML = '';
+            let filteredList = reviewsData; if(currentReviewFilter !== 'all') filteredList = reviewsData.filter(r => r.rating == parseInt(currentReviewFilter));
 
-            let filteredList = reviewsData;
-            if(currentReviewFilter !== 'all') {
-                filteredList = reviewsData.filter(r => r.rating == parseInt(currentReviewFilter));
-            }
-
-            if(filteredList.length === 0) {
-                container.innerHTML = '<div style="text-align:center; padding: 30px 10px; color: #888;"><i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; opacity:0.5;"></i><p>No reviews found for this rating.</p></div>';
-                return;
-            }
+            if(filteredList.length === 0) { container.innerHTML = '<div style="text-align:center; padding: 30px 10px; color: #888;"><i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; opacity:0.5;"></i><p>No reviews found for this rating.</p></div>'; return; }
 
             filteredList.forEach(review => {
-                let starsHtml = '';
-                for(let i=0; i<5; i++) {
-                    if(i < review.rating) starsHtml += '<i class="fa-solid fa-star"></i>';
-                    else starsHtml += '<i class="fa-regular fa-star" style="color: #ddd;"></i>';
-                }
-                const initial = review.name.charAt(0).toUpperCase();
-                const displayPhone = review.phoneLast4 || "XXXX";
-                
-                // Show "Verified" badge for Live reviews fetched from sheet
-                const liveBadge = review.isLive ? '<span class="live-badge"><i class="fa-solid fa-check"></i> Verified</span>' : '';
+                let starsHtml = ''; for(let i=0; i<5; i++) { if(i < review.rating) starsHtml += '<i class="fa-solid fa-star"></i>'; else starsHtml += '<i class="fa-regular fa-star" style="color: #ddd;"></i>'; }
+                const initial = review.name.charAt(0).toUpperCase(); const displayPhone = review.phoneLast4 || "XXXX";
+                const liveBadge = review.isLive ? '<span style="background: #E8F5E9; color: #2E7D32; font-size: 0.6rem; padding: 2px 6px; border-radius: 10px; font-weight: bold; border: 1px solid #C8E6C9;"><i class="fa-solid fa-check"></i> Verified</span>' : '';
 
                 const html = `
                     <div class="review-item">
@@ -985,10 +807,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                                     <p class="reviewer-loc"><i class="fa-solid fa-location-dot" style="font-size:0.6rem; color:#C5A059;"></i> ${review.location}</p>
                                 </div>
                             </div>
-                            <div class="review-date-time" style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
-                                ${liveBadge}
-                                <span>${formatReviewDate(review.date)}</span>
-                            </div>
+                            <div class="review-date-time" style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">${liveBadge}<span>${formatReviewDate(review.date)}</span></div>
                         </div>
                         <div class="review-stars-display">${starsHtml}</div>
                         <p class="review-text-content">${review.text}</p>
@@ -1003,64 +822,35 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
         starIcons.forEach(star => {
             star.addEventListener('click', function() {
                 selectedStarRating = parseInt(this.getAttribute('data-val'));
-                starIcons.forEach(s => {
-                    if(parseInt(s.getAttribute('data-val')) <= selectedStarRating) {
-                        s.classList.add('active', 'fa-solid'); s.classList.remove('fa-regular');
-                    } else {
-                        s.classList.remove('active', 'fa-solid'); s.classList.add('fa-regular');
-                    }
-                });
+                starIcons.forEach(s => { if(parseInt(s.getAttribute('data-val')) <= selectedStarRating) { s.classList.add('active', 'fa-solid'); s.classList.remove('fa-regular'); } else { s.classList.remove('active', 'fa-solid'); s.classList.add('fa-regular'); } });
             });
         });
 
         window.submitNewReview = function(e) {
             e.preventDefault();
-            const name = document.getElementById('revName').value.trim();
-            const phoneStr = document.getElementById('revPhone').value.trim();
-            const location = document.getElementById('revLocation').value.trim();
-            const text = document.getElementById('revText').value.trim();
-
+            const name = document.getElementById('revName').value.trim(); const phoneStr = document.getElementById('revPhone').value.trim(); const location = document.getElementById('revLocation').value.trim(); const text = document.getElementById('revText').value.trim();
             if(!name || !phoneStr || !location || !text) { showNotification("Please fill all review fields."); return; }
             const phoneLast4 = phoneStr.length >= 4 ? phoneStr.slice(-4) : "XXXX";
 
-            reviewsData.unshift({
-                name: name, location: location, phoneLast4: phoneLast4, rating: selectedStarRating, date: Date.now(), text: text, isLive: true
-            });
-
+            reviewsData.unshift({ name: name, location: location, phoneLast4: phoneLast4, rating: selectedStarRating, date: Date.now(), text: text, isLive: true });
             filterReviews('all');
-            const reviewsContainer = document.getElementById('reviewsListContainer');
-            if(reviewsContainer) reviewsContainer.scrollTop = 0;
+            const reviewsContainer = document.getElementById('reviewsListContainer'); if(reviewsContainer) reviewsContainer.scrollTop = 0;
 
-            document.getElementById('addReviewForm').reset();
-            selectedStarRating = 5;
+            document.getElementById('addReviewForm').reset(); selectedStarRating = 5;
             starIcons.forEach(s => { s.classList.add('active', 'fa-solid'); s.classList.remove('fa-regular'); });
             
-            closeWriteReviewModal();
-            showNotification("Review posted successfully!");
+            closeWriteReviewModal(); showNotification("Review posted successfully!");
 
-            const reviewSheetData = {
-                action: 'submitReview', name: name, phone: phoneStr, location: location, rating: selectedStarRating, text: text, date: new Date().toISOString()
-            };
-            fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
-                method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(reviewSheetData)
-            }).catch(err => console.log("Review sync error:", err));
+            const reviewSheetData = { action: 'submitReview', name: name, phone: phoneStr, location: location, rating: selectedStarRating, text: text, date: new Date().toISOString() };
+            fetch(GOOGLE_SCRIPT_WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(reviewSheetData) }).catch(err => console.log("Review sync error:", err));
         };
 
         window.submitOrder = async function(e) {
             e.preventDefault();
-            const name = document.getElementById('chkName').value.trim();
-            const phone = document.getElementById('chkPhone').value.trim();
-            const email = document.getElementById('chkEmail').value.trim();
-            const address = document.getElementById('chkAddress').value.trim();
-            const isExpress = document.getElementById('delExpress').checked;
+            const name = document.getElementById('chkName').value.trim(); const phone = document.getElementById('chkPhone').value.trim(); const email = document.getElementById('chkEmail').value.trim(); const address = document.getElementById('chkAddress').value.trim(); const isExpress = document.getElementById('delExpress').checked;
             setFormLoading(true);
 
-            // Ad-blocker check for Razorpay
-            if (typeof Razorpay === 'undefined') {
-                showNotification("Payment Gateway blocked. Please disable your Ad-Blocker/Brave Shields and refresh.");
-                setFormLoading(false);
-                return;
-            }
+            if (typeof Razorpay === 'undefined') { showNotification("Payment Gateway blocked. Please disable your Ad-Blocker/Brave Shields and refresh."); setFormLoading(false); return; }
 
             const uniqueOrderId = generateCustomOrderId(name, phone);
             const deliveryStr = isExpress ? "Express (2-3 Days, +₹50)" : "Standard (5-7 Days)";
@@ -1076,7 +866,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 } catch(err) { console.log("Sheet bg err:", err); }
 
                 var razorpayOptions = {
-                    "key": "rzp_live_T2BkTwTbh69R4C", "amount": finalAmount * 100, "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
+                    "key": "rzp_test_SoQGLL2pS9o5qt", "amount": finalAmount * 100, "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
                     "handler": function (response) {
                         const firstName = name.split(' ')[0];
                         document.getElementById('successTitle').innerText = `Welcome ${firstName}, Order Successful!`;
@@ -1084,22 +874,14 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                         closeCheckoutModal();
                         
                         const successModal = document.getElementById('successModalOverlay');
-                        if(successModal) {
-                            successModal.classList.add('active');
-                            document.body.style.overflow = 'hidden';
-                        }
+                        if(successModal) { successModal.classList.add('active'); document.body.style.overflow = 'hidden'; }
                         
                         if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: finalAmount, currency: 'INR' });
                         
-                        const updateData = { action: 'updatePayment', orderId: uniqueOrderId, phone: phone, amount: finalAmount, status: "Completed (Paid)", txnId: response.razorpay_payment_id || "" };
+                        const updateData = { action: 'updatePayment', orderId: uniqueOrderId, phone: phone, amount: finalAmount, status: "Completed (Paid)", txnId: response.razorpay_payment_id };
                         
-                        // FIX: Changed from keepalive to standard await fetch to guarantee delivery
-                        fetch(GOOGLE_SCRIPT_WEB_APP_URL, { 
-                            method: 'POST', 
-                            mode: 'no-cors', 
-                            headers: { 'Content-Type': 'text/plain' }, 
-                            body: JSON.stringify(updateData) 
-                        }).catch(err => console.error("Update fail:", err));
+                        // Sent silently in background so user doesn't face lag
+                        fetch(GOOGLE_SCRIPT_WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(updateData) }).catch(err => console.error("Update fail:", err));
                         
                         setFormLoading(false);
                     },
@@ -1112,9 +894,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 rzp1.on('payment.failed', function (res){ setFormLoading(false); showNotification("Payment Failed: " + res.error.description); });
                 rzp1.open();
             } catch (error) {
-                console.error("Error:", error); 
-                showNotification("Gateway error. Check connection."); 
-                setFormLoading(false);
+                console.error("Error:", error); showNotification("Gateway error. Check connection."); setFormLoading(false);
             }
         };
     </script>
