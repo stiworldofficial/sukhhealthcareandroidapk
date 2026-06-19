@@ -5,23 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Sukh Healthcare | Kama-XXX-Gold</title>
     
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1304818407936934'); // <-- APNA PIXEL ID YAHAN DALEIN
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
+    <!-- Meta Pixel Code with Manual Advanced Matching -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+/* STEP 1: USER DATA OBJECT
+  Yahan par user ki A-Z details define ki gayi hain. 
+  IMPORTANT: In hardcoded values ko hata kar aapko apni website ka dynamic data 
+  (variables) yahan pass karna hoga (jaise login hone ke baad user ka data).
+*/
+var userData = {
+    em: 'user@email.com',     // User ka Email (lowercase mein)
+    ph: '919876543210',       // Phone number (Country code ke saath, bina + sign ke)
+    fn: 'ram',                // First Name (lowercase)
+    ln: 'kumar',              // Last Name (lowercase)
+    ct: 'delhi',              // City (lowercase)
+    st: 'dl',                 // State (2-letter code, lowercase)
+    zp: '110001',             // Zip/Postal Code
+    country: 'in',            // Country (2-letter ISO code, lowercase)
+    ge: 'm',                  // Gender ('m' for male, 'f' for female)
+    db: '19950815'            // Date of birth (YYYYMMDD format mein)
+};
+
+/* STEP 2: PIXEL INITIALIZATION
+  Ab hum Pixel ID ke saath 'userData' ko bhi bhej rahe hain.
+*/
+fbq('init', '1304818407936934', userData); 
+
+// Track PageView Event
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
