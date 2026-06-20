@@ -26,7 +26,7 @@ var userData = {
     ph: '919876543210',       // Phone number (Country code ke saath, bina + sign ke)
     fn: 'ram',                // First Name (lowercase)
     ln: 'kumar',              // Last Name (lowercase)
-    ct: 'delhi',              // City (lowercase)
+    ct: 'delhi',              // State (lowercase)
     st: 'dl',                 // State (2-letter code, lowercase)
     zp: '110001',             // Zip/Postal Code
     country: 'in',            // Country (2-letter ISO code, lowercase)
@@ -349,11 +349,11 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 </div>
 
                 <div class="price-box">
-                    <span class="p-price">₹599</span>
+                    <span class="p-price">₹445</span>
                     <span class="p-mrp">₹899</span>
-                    <span class="p-save">Save 30%</span>
+                    <span class="p-save">Save 50%</span>
                 </div>
-                <span class="tax-text">Inclusive of all taxes. Free Shipping.</span>
+                <span class="tax-text">+ 12% GST Extra (6% CGST & 6% SGST). Free Standard Shipping.</span>
 
                 <!-- QTY SECTION -->
                 <div class="qty-wrapper">
@@ -450,7 +450,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 <div class="form-group">
                     <label class="form-label">Full Delivery Address *</label>
                     <textarea id="chkAddress" class="form-input" placeholder="House No, Street, Landmark, City, State, Pin Code" required minlength="10"></textarea>
-                    <div class="field-hint">
+                    <div class="field-hint" style="font-size: 0.8rem; color: #666; margin-top: 4px;">
                         <i class="fa-solid fa-circle-info"></i>
                         <span><strong>Important Note:</strong> If asked for a "Zip Code", please enter your local area's Pin Code.</span>
                     </div>
@@ -464,13 +464,28 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                     </div>
                     <div class="del-option">
                         <label><input type="radio" name="deliveryMethod" id="delExpress" value="express" onchange="calculateTotal()"> Express Delivery (2-3 Days)</label>
-                        <span style="color: var(--color-accent); font-weight: 700;">+₹50</span>
+                        <span style="color: var(--color-accent); font-weight: 700;">+₹30</span>
+                    </div>
+                </div>
+
+                <div class="tax-breakdown-box" style="background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 1.2rem; font-size: 0.85rem; color: #555;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span>Item Base Price:</span> <span id="summaryBasePrice">₹445.00</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span>CGST (6%):</span> <span id="summaryCGST">₹26.70</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px; border-bottom: 1px solid #eee; padding-bottom: 4px;">
+                        <span>SGST (6%):</span> <span id="summarySGST">₹26.70</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-weight: 700; color: #1D1D1F; margin-top: 4px;">
+                        <span>Total Product Price (Inc. GST):</span> <span id="summaryTotal">₹498.40</span>
                     </div>
                 </div>
 
                 <div class="order-summary">
                     <span>Order-is-Ready-To-Deliver -:</span>
-                    <span id="finalTotalDisplay">₹599</span>
+                    <span id="finalTotalDisplay">₹498.40</span>
                 </div>
 
                 <button type="submit" id="submitBtn" class="btn-submit-order">
@@ -634,7 +649,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
     </footer>
 
     <script>
-        const basePrice = 599; let currentQty = 1; let finalAmount = basePrice;
+        const basePrice = 445; let currentQty = 1; let finalAmount = basePrice;
         const productImages = ['fssaih.png', 'kama-xxx-one.webp', 'kama-xxx-two.webp', 'kama-xxx-three.webp', 'kama-xxx-four.webp'];
         let activeImageIndex = 0;
         
@@ -670,13 +685,35 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
         };
 
         window.calculateTotal = function() {
-            let itemTotal = basePrice * currentQty; let isExpress = document.getElementById('delExpress').checked;
-            finalAmount = itemTotal + (isExpress ? 50 : 0);
+            let itemBaseTotal = basePrice * currentQty; 
+            
+            // 12% GST Extra ON TOP of the base price
+            let cgst = itemBaseTotal * 0.06;
+            let sgst = itemBaseTotal * 0.06;
+            let itemTotalWithGst = itemBaseTotal + cgst + sgst;
+
+            let isExpress = document.getElementById('delExpress').checked;
+            let deliveryFee = isExpress ? 30 : 0;
+            
+            finalAmount = itemTotalWithGst + deliveryFee;
+
             const totalDisplay = document.getElementById('finalTotalDisplay');
-            if(totalDisplay) totalDisplay.innerText = '₹' + finalAmount.toLocaleString('en-IN');
+            if(totalDisplay) totalDisplay.innerText = '₹' + finalAmount.toFixed(2);
+            
+            // Updating the breakdown UI dynamically
+            const sBase = document.getElementById('summaryBasePrice');
+            const sCGST = document.getElementById('summaryCGST');
+            const sSGST = document.getElementById('summarySGST');
+            const sTotal = document.getElementById('summaryTotal');
+            
+            if(sBase) sBase.innerText = '₹' + itemBaseTotal.toFixed(2);
+            if(sCGST) sCGST.innerText = '₹' + cgst.toFixed(2);
+            if(sSGST) sSGST.innerText = '₹' + sgst.toFixed(2);
+            if(sTotal) sTotal.innerText = '₹' + itemTotalWithGst.toFixed(2) + (isExpress ? ' (+₹30 Delivery)' : '');
         };
 
         window.openCheckoutModal = function() {
+            calculateTotal(); // update breakdown before opening
             const overlay = document.getElementById('checkoutModalOverlay');
             if(overlay) { overlay.classList.add('active'); document.body.style.overflow = 'hidden'; if (typeof window.fbq === 'function') window.fbq('track', 'InitiateCheckout'); }
         };
@@ -853,11 +890,11 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
             if (typeof Razorpay === 'undefined') { showNotification("Payment Gateway blocked. Please disable your Ad-Blocker/Brave Shields and refresh."); setFormLoading(false); return; }
 
             const uniqueOrderId = generateCustomOrderId(name, phone);
-            const deliveryStr = isExpress ? "Express (2-3 Days, +₹50)" : "Standard (5-7 Days)";
+            const deliveryStr = isExpress ? "Express (2-3 Days, +₹30)" : "Standard (5-7 Days)";
             const productDetails = `Kama-XXX-Gold (Qty: ${currentQty}) | Delivery: ${deliveryStr}`;
             const sheetQuantity = `${currentQty} (ID: ${uniqueOrderId})`;
 
-            const orderData = { action: 'createOrder', orderId: uniqueOrderId, name: name, phone: phone, email: email, address: address, product: productDetails, qty: sheetQuantity, amount: finalAmount, status: "Pending (Payment Initialized)", txnId: "" };
+            const orderData = { action: 'createOrder', orderId: uniqueOrderId, name: name, phone: phone, email: email, address: address, product: productDetails, qty: sheetQuantity, amount: finalAmount.toFixed(2), status: "Pending (Payment Initialized)", txnId: "" };
 
             try {
                 try {
@@ -866,7 +903,9 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                 } catch(err) { console.log("Sheet bg err:", err); }
 
                 var razorpayOptions = {
-                    "key": "rzp_live_T2BkTwTbh69R4C", "amount": finalAmount * 100, "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
+                    "key": "rzp_live_T2BkTwTbh69R4C", 
+                    "amount": Math.round(finalAmount * 100), // Ensures floating precision does not break API call
+                    "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
                     "handler": function (response) {
                         const firstName = name.split(' ')[0];
                         document.getElementById('successTitle').innerText = `Welcome ${firstName}, Order Successful!`;
@@ -878,7 +917,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"
                         
                         if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: finalAmount, currency: 'INR' });
                         
-                        const updateData = { action: 'updatePayment', orderId: uniqueOrderId, phone: phone, amount: finalAmount, status: "Completed (Paid)", txnId: response.razorpay_payment_id };
+                        const updateData = { action: 'updatePayment', orderId: uniqueOrderId, phone: phone, amount: finalAmount.toFixed(2), status: "Completed (Paid)", txnId: response.razorpay_payment_id };
                         
                         // Sent silently in background so user doesn't face lag
                         fetch(GOOGLE_SCRIPT_WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(updateData) }).catch(err => console.error("Update fail:", err));
