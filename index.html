@@ -1,679 +1,638 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Sukh Healthcare | Premium Wellness Store</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Shauryahomeshield | Ac Services | Electric Fencing | Water Tank Controling System</title>
     
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        'whitesmoke': '#f5f5f5',
+                        'apple-accent': '#0A84FF',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* =========================================
-           iOS 26.5 ULTRA-LUXURY THEME
-           ========================================= */
-        :root {
-            --color-bg-base: #F5F5F7; 
-            --color-brand: #1A362D;      
-            --color-gold: #D4AF37;       
-            --color-premium-gold: #C5A059; 
-            --color-text: #1D1D1F;       
-            
-            --glass-bg: rgba(255, 255, 255, 0.75);
-            --glass-blur: blur(25px) saturate(180%);
-            --radius-xl: 32px;
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
-            --shadow-float: 0 20px 50px rgba(0,0,0,0.15);
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e5e7eb; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
 
-        html { font-size: 16px; scroll-behavior: smooth; }
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-        
-        body { 
-            background-color: var(--color-bg-base); 
-            font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif; 
-            color: var(--color-text); 
+        body {
+            background: radial-gradient(circle at 50% 10%, #ffffff 0%, #f5f5f5 60%, #e5e5e5 100%);
             overflow-x: hidden;
-            padding-top: 76px; 
+            background-attachment: fixed;
+            color: #1f2937; 
         }
 
-        /* =========================================
-           HEADER & NAVBAR
-           ========================================= */
-        .header-wrapper { position: fixed; top: 0; left: 0; width: 100%; z-index: 3000; }
-        .top-bar { background-color: var(--color-brand); color: var(--color-premium-gold); text-align: center; display: flex; align-items: center; justify-content: center; height: 36px; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; transition: height 0.4s ease, opacity 0.4s ease; overflow: hidden; }
-        .header-wrapper.scrolled .top-bar { height: 0; opacity: 0; }
-        
-        .navbar { background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); border-bottom: 1px solid rgba(0, 0, 0, 0.05); padding: 1.25rem 4rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.4s ease; }
-        .header-wrapper.scrolled .navbar { padding: 0.8rem 4rem; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
-
-        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.4rem; color: var(--color-brand); cursor: pointer; transition: color 0.3s ease; }
-        .mobile-menu-btn:hover { color: var(--color-premium-gold); }
-        .nav-brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; z-index: 10; }
-        .nav-logo-icon { width: 32px; height: 32px; object-fit: contain; display: block; }
-        .nav-title-img { height: 32px; width: auto; display: block; }
-
-        .nav-links { display: flex; gap: 2.5rem; align-items: center; position: absolute; left: 50%; transform: translateX(-50%); }
-        .nav-link { text-decoration: none; color: var(--color-text); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; position: relative; transition: color 0.3s ease; }
-        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 0; height: 2px; border-radius: 2px; background-color: var(--color-premium-gold); transition: width 0.3s ease; }
-        .nav-link:hover { color: var(--color-premium-gold); }
-        .nav-link:hover::after { width: 100%; }
-
-        .nav-actions { display: flex; gap: 1.8rem; align-items: center; z-index: 10; }
-        .action-btn { background: none; border: none; color: var(--color-brand); font-size: 1.3rem; cursor: pointer; position: relative; transition: transform 0.3s ease, color 0.3s ease; }
-        .action-btn:hover { color: var(--color-premium-gold); transform: translateY(-2px); }
-        .cart-badge { position: absolute; top: -6px; right: -8px; background: var(--color-premium-gold); color: #fff; font-size: 0.65rem; font-weight: 700; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 2px 5px rgba(197, 160, 89, 0.4); }
-
-        /* --- MOBILE SIDEBAR --- */
-        .sidebar-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 3500; display: flex; align-items: center; justify-content: flex-start; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 1rem; }
-        .sidebar-overlay.active { opacity: 1; pointer-events: auto; }
-        .sidebar { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid rgba(255,255,255,0.4); width: 320px; max-width: 90vw; height: auto; max-height: calc(100vh - 150px); overflow-y: auto; border-radius: var(--radius-xl); padding: 4rem 2rem 2.5rem 2rem; position: relative; transform: translateX(-100%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: var(--shadow-float); display: flex; flex-direction: column; gap: 2rem; }
-        .sidebar-overlay.active .sidebar { transform: translateX(0); }
-        
-        .close-sidebar-btn { position: absolute; top: 2.5rem; right: 1.5rem; background: rgba(0,0,0,0.05); border: none; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; color: var(--color-text); cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
-        
-        .sidebar-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--color-brand); text-align: center; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(0, 0, 0, 0.05); display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .sidebar-logo-img-icon { width: 38px; height: 38px; object-fit: contain; }
-        .sidebar-logo-name-img { height: 34px; width: auto; object-fit: contain; }
-        
-        .sidebar-links { display: flex; flex-direction: column; gap: 1rem; margin-top: auto; margin-bottom: auto; }
-        .sidebar-links a { background: rgba(255,255,255,0.5); padding: 1rem; border-radius: var(--radius-md); text-decoration: none; color: var(--color-text); font-size: 1.05rem; font-weight: 600; letter-spacing: 0.05em; transition: all 0.3s; text-align: center;}
-        
-        /* --- CART DRAWER SYSTEM --- */
-        .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(5px); z-index: 3500; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 1rem; display: flex; justify-content: flex-end;}
-        .cart-overlay.active { opacity: 1; pointer-events: auto; }
-        .cart-drawer { width: 420px; max-width: 90vw; height: 100%; background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid rgba(255,255,255,0.4); border-radius: var(--radius-xl); box-shadow: var(--shadow-float); transform: translateX(120%); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; overflow: hidden; }
-        .cart-overlay.active .cart-drawer { transform: translateX(0); }
-        .cart-header { padding: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.5); }
-        .cart-header h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 0; color: var(--color-brand); }
-        .close-cart-btn { background: rgba(0,0,0,0.05); width: 36px; height: 36px; border-radius: 50%; border: none; color: var(--color-text); font-size: 1.2rem; cursor: pointer; transition: all 0.3s; display: flex; justify-content: center; align-items: center; }
-        
-        .cart-items { flex-grow: 1; overflow-y: auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
-        .cart-item { background: #fff; border-radius: var(--radius-md); padding: 1rem; display: flex; gap: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.02); position: relative;}
-        .cart-item-img { width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius-sm); background: #f9f9f9;}
-        .cart-item-details { flex-grow: 1; display: flex; flex-direction: column; justify-content: center;}
-        .cart-item-title { font-size: 0.95rem; font-weight: 700; color: var(--color-brand); margin-bottom: 0.2rem; line-height: 1.2;}
-        .cart-item-size { font-size: 0.8rem; color: #666; margin-bottom: 0.4rem; font-weight: 600;}
-        .cart-item-price { font-size: 1rem; font-weight: 800; color: #1D1D1F; }
-        
-        .cart-qty-control { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 8px; border-radius: 99px; padding: 4px 8px; background: #F5F5F7; width: fit-content; }
-        .cart-qty-btn { background: #fff; border: none; width: 24px; height: 24px; border-radius: 50%; font-weight: bold; color: var(--color-brand); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .cart-qty-val { font-size: 0.9rem; font-weight: 700; width: 16px; text-align: center; }
-        .remove-item-btn { position: absolute; bottom: 1rem; right: 1rem; background: rgba(255,59,48,0.1); border: none; color: #FF3B30; padding: 4px 10px; border-radius: 99px; font-size: 0.75rem; cursor: pointer; font-weight: 700; transition: all 0.2s;}
-        
-        .cart-footer { padding: 1.5rem; background: rgba(255,255,255,0.8); border-top: 1px solid rgba(0,0,0,0.05); }
-        .cart-total-row { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 800; color: var(--color-brand); margin-bottom: 1rem; }
-        .checkout-btn { width: 100%; background: var(--color-brand); color: #fff; border: none; padding: 1.2rem; border-radius: 99px; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 20px rgba(26,54,45, 0.2);}
-
-        /* --- Image Slider Hero --- */
-        .slider-container { position: relative; width: 100%; aspect-ratio: 1536 / 1024; overflow: hidden; background: #E8F0E8; }
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.5s ease-in-out, transform 8s ease-out; transform: scale(1.05); z-index: 1; }
-        .slide.active { opacity: 1; transform: scale(1); z-index: 2; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; object-position: center center; }
-        .slider-dots { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 12px; background: rgba(0,0,0,0.2); padding: 8px 16px; border-radius: 99px; backdrop-filter: blur(10px); }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.5); cursor: pointer; transition: all 0.3s ease; }
-        .dot.active { background: #fff; transform: scale(1.3); }
-
-        /* --- Luxury Store Area --- */
-        .store-section { padding: 1.5rem 0 6rem 0; scroll-margin-top: 100px; }
-        .section-header { margin-bottom: 3.5rem; text-align: center; }
-        .section-subtitle { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--color-premium-gold); margin-bottom: 0.5rem; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 600; color: var(--color-brand); letter-spacing: -0.02em; }
-        .store-container { max-width: 1300px; margin: 0 auto; padding: 0 3rem; }
-
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 350px)); justify-content: center; gap: 3.5rem 2.5rem; transition: opacity 0.3s ease; }
-        .product-card { width: 100%; max-width: 350px; background: #fff; border-radius: var(--radius-xl); overflow: hidden; display: flex; flex-direction: column; height: 100%; margin: 0 auto; box-shadow: var(--shadow-soft); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: 1px solid rgba(0,0,0,0.02); }
-        .product-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--shadow-float); }
-        .product-link { text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%; cursor: pointer; }
-        
-        .product-image-area { width: 100%; aspect-ratio: 1920 / 1080; position: relative; overflow: hidden; background: #F5F5F7; }
-        .product-image-area::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.1) 0%, transparent 40%); pointer-events: none; }
-        .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1); }
-        .product-link:hover .product-image { transform: scale(1.08); }
-
-        .product-info { padding: 1rem 0.5rem; text-align: center; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fff;}
-        .product-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--color-brand); margin: 0; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-
-        /* =========================================
-           PRODUCT MODAL
-           ========================================= */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); z-index: 2500; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 1rem; }
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .product-modal { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid rgba(255,255,255,0.5); width: 1000px; max-width: 100%; height: auto; max-height: 90vh; border-radius: var(--radius-xl); overflow: hidden; position: relative; transform: scale(0.95) translateY(20px); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: var(--shadow-float); display: flex; flex-direction: row; margin: auto; }
-        .modal-overlay.active .product-modal { transform: scale(1) translateY(0); }
-        
-        .modal-close { position: absolute; top: 1.2rem; right: 1.2rem; background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(0,0,0,0.05); font-size: 1.2rem; color: #FF3B30; cursor: pointer; transition: all 0.3s; z-index: 50; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        
-        .modal-left { width: 45%; background: rgba(255,255,255,0.6); display: flex; flex-direction: column; padding: 2.5rem; border-right: 1px solid rgba(0,0,0,0.05); position: relative; }
-        .main-img-container { width: 100%; aspect-ratio: 16 / 9; max-width: 100%; height: auto; margin: 0 auto 1.5rem auto; border-radius: var(--radius-lg); overflow: hidden; background: #000; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03); position: relative; }
-        .main-img-container img, .main-img-container iframe { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; transition: opacity 0.3s ease; border: none; }
-        .main-img-container img { background: #fff; mix-blend-multiply: multiply; }
-        
-        .thumbnails-container { display: flex; gap: 8px; justify-content: space-between; flex-wrap: nowrap; width: 100%; }
-        .thumbnail-btn { flex: 1; min-width: 0; aspect-ratio: 16 / 9; height: auto; border-radius: var(--radius-sm); overflow: hidden; border: 2px solid transparent; cursor: pointer; transition: all 0.2s; background: #000; opacity: 0.6; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .thumbnail-btn.active { border-color: var(--color-brand); opacity: 1; }
-        .thumbnail-btn img { width: 100%; height: 100%; object-fit: cover; }
-        .video-play-icon { position: absolute; inset: 0; background: rgba(0,0,0,0.2); backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
-
-        .modal-right { width: 55%; padding: 2.5rem 3rem; overflow-y: auto; background: rgba(255,255,255,0.8); }
-        .modal-section { padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .modal-section:last-child { border-bottom: none; }
-        
-        .m-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--color-brand); line-height: 1.1; margin-bottom: 0.8rem; letter-spacing: -0.02em; }
-        .star-rating { color: #FF9F0A; font-size: 1rem; letter-spacing: 2px; }
-        .rating-text { color: #0066CC; font-size: 0.9rem; font-weight: 500; cursor: pointer; margin-left: 8px;}
-        
-        .price-block { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
-        .m-discount { color: #FF3B30; font-size: 1.2rem; font-weight: 600; background: rgba(255,59,48,0.1); padding: 4px 8px; border-radius: 8px; }
-        .m-price { font-size: 2.4rem; font-weight: 700; color: #1D1D1F; font-family: -apple-system, sans-serif; letter-spacing: -1px;}
-        .m-mrp { color: #86868B; text-decoration: line-through; font-size: 1rem; }
-        .stock-status { color: #34C759; font-size: 0.95rem; font-weight: 600; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; background: rgba(52,199,89,0.1); padding: 4px 10px; border-radius: 99px; }
-        
-        .section-heading { font-family: -apple-system, sans-serif; font-size: 1.1rem; font-weight: 600; color: #1D1D1F; margin-bottom: 12px; }
-        .m-desc { font-size: 1rem; line-height: 1.6; color: #515154; }
-        
-        .m-benefits { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;}
-        .m-benefits li { position: relative; padding-left: 1.8rem; font-size: 0.95rem; color: #1D1D1F; font-weight: 500;}
-        .m-benefits li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; left: 0; top: 2px; font-size: 0.9rem; color: #34C759; }
-
-        .fixed-size-badge { display: inline-flex; background: #F5F5F7; border-radius: 12px; overflow: hidden; padding: 4px; border: 1px solid rgba(0,0,0,0.05); }
-        .fixed-size-badge .fixed-size-icon { background: #fff; color: var(--color-brand); width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .fixed-size-badge .fixed-size-text { color: #1D1D1F; padding: 0 16px; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; }
-
-        .custom-qty-selector { display: inline-flex; background: #F5F5F7; border-radius: 99px; padding: 4px; align-items: center; }
-        .custom-qty-btn { background: #fff; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; font-weight: 500; color: #1D1D1F; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: transform 0.2s; }
-        .custom-qty-input { width: 40px; border: none; background: transparent; text-align: center; font-size: 1.1rem; font-weight: 600; color: #1D1D1F; pointer-events: none; }
-
-        .action-buttons { display: flex; gap: 15px; margin-top: 24px; }
-        .btn-add-cart { flex: 1; background: #F5F5F7; border: none; border-radius: 99px; padding: 16px; font-size: 1rem; font-weight: 600; color: var(--color-brand); cursor: pointer; transition: all 0.3s; }
-        .btn-buy-now { flex: 1; background: var(--color-brand); border: none; border-radius: 99px; padding: 16px; font-size: 1rem; font-weight: 600; color: #fff; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 20px rgba(26,54,45,0.2); }
-        
-        .secure-badge { display: flex; align-items: center; justify-content: center; gap: 8px; color: #86868B; font-size: 0.85rem; margin-top: 20px; font-weight: 500;}
-
-        /* =========================================
-           CHECKOUT MODAL
-           ========================================= */
-        .checkout-modal { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid rgba(255,255,255,0.5); width: 400px; max-width: 95vw; max-height: 90vh; overflow-y: auto; border-radius: var(--radius-xl); padding: 2rem; position: relative; transform: scale(0.95) translateY(20px); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: var(--shadow-float); display: flex; flex-direction: column; margin: auto; }
-        #checkoutModalOverlay.active .checkout-modal { transform: scale(1) translateY(0); }
-        #checkoutModalOverlay { z-index: 4000; padding: 1rem; }
-        
-        .checkout-header { margin-bottom: 1.5rem; text-align: center; }
-        .checkout-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--color-brand); }
-        
-        .checkout-form-group { margin-bottom: 1rem; }
-        .checkout-input { width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--radius-md); font-size: 0.95rem; font-family: -apple-system, sans-serif; transition: all 0.3s; }
-        .checkout-input:focus { outline: none; background: #fff; border-color: var(--color-brand); box-shadow: 0 0 0 4px rgba(26,54,45,0.1); }
-        .checkout-textarea { resize: vertical; min-height: 80px; }
-        
-        .checkout-summary { background: #fff; padding: 16px; border-radius: var(--radius-md); margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.2rem; color: var(--color-text); box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
-        
-        .delivery-options-container { background: #fff; padding: 16px; border-radius: var(--radius-md); margin-bottom: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
-        .delivery-option { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .delivery-option:last-child { border-bottom: none; padding-bottom: 0; }
-        .delivery-option label { font-size: 0.95rem; font-weight: 500; color: #1D1D1F; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-        .del-price { font-weight: 600; }
-
-        .checkout-pay-btn { width: 100%; background: var(--color-brand); color: #fff; border: none; border-radius: 99px; padding: 16px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 20px rgba(26,54,45,0.2); display: flex; justify-content: center; align-items: center; gap: 10px;}
-        .checkout-pay-btn.opacity-70 { opacity: 0.7; cursor: not-allowed; transform: none; }
-
-        /* =========================================
-           LEGAL MODALS (Privacy, Terms, Refund, Shipping)
-           ========================================= */
-        .legal-modal { background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid rgba(255,255,255,0.5); width: 800px; max-width: 95vw; height: 80vh; border-radius: var(--radius-xl); padding: 2.5rem; position: relative; transform: scale(0.95) translateY(20px); transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: var(--shadow-float); display: flex; flex-direction: column; margin: auto; }
-        .modal-overlay.active .legal-modal { transform: scale(1) translateY(0); }
-        .legal-content { flex-grow: 1; overflow-y: auto; padding-right: 15px; font-size: 0.95rem; line-height: 1.6; color: #515154; }
-        .legal-content h2 { color: var(--color-brand); font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1.5rem; }
-        .legal-content h3 { color: #1D1D1F; font-size: 1.2rem; margin: 1.5rem 0 0.5rem 0; font-family: -apple-system, sans-serif; }
-        .legal-content p, .legal-content ul { margin-bottom: 1rem; }
-        .legal-content ul { padding-left: 20px; list-style-type: disc; }
-        .legal-content::-webkit-scrollbar { width: 6px; }
-        .legal-content::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
-
-        /* =========================================
-           UPDATED FOOTER (Strong Compliance)
-           ========================================= */
-        .store-footer { background: var(--color-brand); color: #fff; padding: 5rem 4rem 2rem; position: relative; border-radius: var(--radius-xl) var(--radius-xl) 0 0; margin-top: -20px; z-index: 10;}
-        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 4rem; max-width: 1300px; margin: 0 auto; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 3rem; }
-        
-        .brand-col { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
-        .brand-col .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #fff; margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: flex-start; gap: 10px; }
-        .footer-logo-img-icon { width: 34px; height: 34px; object-fit: contain; filter: brightness(0) invert(1); }
-        .footer-logo-name-img { height: 30px; width: auto; object-fit: contain; filter: brightness(0) invert(1); }
-        .footer-desc { font-size: 0.95rem; line-height: 1.7; opacity: 0.8; margin-bottom: 1.5rem; max-width: 320px; font-weight: 300;}
-        
-        /* Compliance Details added in Footer */
-        .compliance-info { font-size: 0.85rem; opacity: 0.8; line-height: 1.6; margin-bottom: 1.5rem; }
-        .compliance-info strong { color: var(--color-premium-gold); font-weight: 600; }
-
-        .social-links { display: flex; gap: 1rem; justify-content: flex-start; }
-        .social-links a { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.1rem; transition: all 0.3s; }
-        .social-links a:hover { background: #fff; color: var(--color-brand); transform: scale(1.1); }
-
-        .footer-col h4 { font-family: -apple-system, sans-serif; font-size: 1.1rem; font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
-        .footer-col a { display: block; color: rgba(255,255,255,0.8); text-decoration: none; margin-bottom: 1rem; font-size: 0.95rem; transition: all 0.2s; cursor: pointer;}
-        .footer-col a:hover { color: #fff; transform: translateX(4px); }
-
-        .footer-disclaimer { max-width: 1300px; margin: 2rem auto; font-size: 0.75rem; color: rgba(255,255,255,0.5); text-align: center; line-height: 1.5; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 2rem;}
-        
-        .footer-bottom { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; opacity: 0.7; padding-top: 1rem;}
-        .footer-legal a { color: #fff; text-decoration: none; margin-left: 1.5rem; transition: opacity 0.3s; cursor: pointer; }
-        .footer-legal a:hover { opacity: 1; text-decoration: underline;}
-
-        .toast { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.95); backdrop-filter: var(--glass-blur); color: #1D1D1F; padding: 1rem 2rem; border-radius: 99px; font-size: 0.95rem; font-weight: 600; box-shadow: var(--shadow-float); transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 5000; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(0,0,0,0.05);}
-        .toast.show { bottom: 40px; }
-
-        /* --- MOBILE BOTTOM NAVIGATION --- */
-        .mobile-bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px); border-top: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-around; align-items: center; height: 65px; z-index: 2900; padding-bottom: env(safe-area-inset-bottom); }
-        @media (min-width: 768px) { .mobile-bottom-nav { display: none; } }
-        .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #86868B; font-size: 0.65rem; font-weight: 600; text-decoration: none; gap: 4px; width: 20%; transition: color 0.3s; }
-        .nav-item.active, .nav-item:hover { color: var(--color-brand); }
-        .nav-item i { font-size: 1.25rem; }
-        
-        .wa-floating-btn { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 2rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); border: 4px solid var(--color-bg-base); z-index: 3001; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-
-        /* Media Queries */
-        @media (max-width: 1024px) {
-            .nav-links { display: none; } 
-            .mobile-menu-btn { display: block; } 
-            .footer-top { grid-template-columns: 1fr 1fr; gap: 3rem; }
-            .product-modal { flex-direction: column; height: 85vh; display: block; overflow-y: auto; overflow-x: hidden; }
-            .modal-left { width: 100%; padding: 1.5rem; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.05); }
-            .modal-right { width: 100%; padding: 2rem; }
+        #main-wrapper {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s;
+            width: 100%;
+            position: relative;
+            z-index: 10;
         }
 
-        @media (max-width: 640px) {
-            html { font-size: 14px; }
-            body { padding-top: 90px; padding-bottom: 80px; } 
-            .navbar { padding: 35px 1rem 1rem 1rem; }
-            .header-wrapper.scrolled .navbar { padding: 25px 1rem 0.8rem 1rem; }
-            
-            .product-grid { grid-template-columns: minmax(280px, 350px); justify-content: center; gap: 3.5rem; }
-            .store-container { padding: 0 1rem; }
-            .section-title { font-size: 1.6rem; } 
-            .video-section { padding: 3rem 1rem; }
-            .store-footer { padding: 4rem 1.5rem 6rem; } 
-            .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
-            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-            .footer-legal a { margin: 0 0.5rem; display: block; margin-bottom: 10px;}
-            
-            .modal-overlay, .cart-overlay { padding-top: 90px !important; padding-bottom: 85px !important; padding-left: 1rem !important; padding-right: 1rem !important; align-items: center !important; justify-content: center !important; }
-            
-            .product-modal, .checkout-modal, .cart-drawer, .legal-modal { height: 100% !important; max-height: 100% !important; width: 100% !important; border-radius: var(--radius-lg) !important; margin: 0 !important; display: flex !important; flex-direction: column !important; }
-            
-            .cart-drawer { transform: scale(0.95) translateY(20px) !important; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important; }
-            .cart-overlay.active .cart-drawer { transform: scale(1) translateY(0) !important; }
-            
-            .product-modal { overflow-y: auto !important; overflow-x: hidden !important;}
-            .checkout-modal { overflow-y: auto !important; }
-            .cart-items { overflow-y: auto !important; flex-grow: 1; }
-            
-            .modal-left { border-bottom: 1px solid rgba(0,0,0,0.05); }
-            .modal-right { overflow-y: visible !important; padding: 1.5rem; }
-            
-            .m-title { font-size: 1.5rem; }
-            .action-buttons { flex-direction: column; }
-            .brand-col { align-items: center; text-align: center;}
-            .social-links { justify-content: center;}
+        body.modal-open #main-wrapper {
+            transform: scale(0.97); 
+            filter: blur(8px);
+            pointer-events: none;
         }
+
+        /* --- ULTRA PRO MAX MODALS (GLASSMORPHISM) --- */
+        .custom-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(15, 23, 42, 0.4); 
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            z-index: 9999;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease;
+            display: flex; justify-content: center; align-items: center;
+            padding: 1rem;
+        }
+        .custom-overlay.active { opacity: 1; pointer-events: all; }
+
+        .custom-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            width: 100%; max-width: 440px;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: 0 40px 60px -15px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.4);
+            transform: translateY(40px) scale(0.92);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .custom-box::-webkit-scrollbar { display: none; }
+        .custom-overlay.active .custom-box { transform: translateY(0) scale(1); opacity: 1; }
+
+        .premium-input {
+            width: 100%; background: rgba(243, 244, 246, 0.7); border: 1px solid rgba(229, 231, 235, 0.8);
+            border-radius: 1.25rem; padding: 0.875rem 1.25rem; font-size: 0.875rem; font-weight: 500; color: #1f2937;
+            transition: all 0.3s ease;
+        }
+        .premium-input:focus { outline: none; background: #ffffff; border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1); }
+        
+        .premium-btn {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+            color: white; font-weight: 700; border-radius: 1.25rem; padding: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .premium-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 35px -5px rgba(59, 130, 246, 0.6); }
+
+        .auth-form { display: none; animation: slideUpFade 0.4s ease forwards; }
+        .auth-form.active { display: block; }
+        @keyframes slideUpFade { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .loader-spinner { border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid white; border-radius: 50%; width: 22px; height: 22px; animation: spin 1s linear infinite; display: none; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .profile-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); margin: -2.5rem -2.5rem 1.5rem -2.5rem;
+            padding: 3rem 2rem 2rem 2rem; border-radius: 2rem 2rem 1.5rem 1.5rem; text-align: center; position: relative; overflow: hidden;
+        }
+
+        @keyframes auto-pulse-float {
+            0% { transform: translateY(0) scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.2), 0 0 20px currentColor; }
+            50% { transform: translateY(-12px) scale(1.1); box-shadow: 0 15px 25px rgba(0,0,0,0.2), 0 0 35px currentColor; }
+            100% { transform: translateY(0) scale(1); box-shadow: 0 5px 15px rgba(0,0,0,0.2), 0 0 20px currentColor; }
+        }
+        .auto-hover-icon { animation: auto-pulse-float 2.5s infinite ease-in-out; position: relative; }
+        
+        .card-11d { transform-style: preserve-3d; perspective: 1000px; cursor: pointer; }
+        .glare { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; mix-blend-mode: overlay; }
+        .dynamic-island { background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(0, 0, 0, 0.05); }
+        .hero-slide { opacity: 0; transition: opacity 1.5s ease-in-out; z-index: 1; }
+        .hero-slide.active { opacity: 1; z-index: 2; }
+        
+        .fetch-loader { border: 3px solid #e5e7eb; border-top: 3px solid #3b82f6; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; display: inline-block; }
     </style>
 </head>
-<body>
+<body class="font-sans pt-24"> 
 
-    <header class="header-wrapper" id="headerWrapper">
-        <nav class="navbar">
-            <button class="mobile-menu-btn" id="openSidebarBtn"><i class="fa-solid fa-bars-staggered"></i></button>
-            <a href="#" class="nav-brand">
-                <img src="sukh.png" alt="Sukh Icon" class="nav-logo-icon">
-                <img src="sukhname.png" alt="Sukh" class="nav-title-img">
-            </a>
-
-            <div class="nav-links">
-                <a href="#" class="nav-link">Shop</a>
-                <a href="#" class="nav-link">Philosophy</a>
-                <a href="#" class="nav-link">Journal</a>
-            </div>
-
-            <div class="nav-actions">
-                <a href="#trackorder.html" class="nav-link hidden md:block" style="font-size: 0.75rem; color: var(--color-brand); margin-right: 15px;">Track Order</a>
-            </div>
-        </nav>
-    </header>
-
-    <div class="sidebar-overlay" id="sidebarOverlay">
-        <div class="sidebar" id="sidebar">
-            <button class="close-sidebar-btn" onclick="closeSidebar()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="sidebar-logo">
-                <img src="sukh.png" alt="Sukh Icon" class="sidebar-logo-img-icon">
-                <img src="sukhname.png" alt="Sukh Name" class="sidebar-logo-name-img">
-            </div>
-            <div class="sidebar-links">
-                <a href="#">Shop Wellness</a>
-                <a href="#">Our Philosophy</a>
-                <a href="#">Track Order</a>
-                <a href="#" onclick="openLegalModal('contact'); return false;">Contact Us</a>
-            </div>
-            <div class="mt-auto pt-6 border-t border-gray-200">
-                <div class="flex gap-4 text-xl text-[#1A362D] justify-center">
-                    <a href="#" class="hover:text-[#C5A059] transition"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover:text-[#C5A059] transition"><i class="fa-brands fa-facebook-f"></i></a>
+    <div id="main-wrapper">
+        <!-- Dynamic Island Navbar -->
+        <div class="fixed top-4 w-full z-50 flex justify-center px-4" id="navbar-wrapper">
+            <nav class="dynamic-island w-full max-w-6xl rounded-[2.5rem] px-4 py-3 flex justify-between items-center shadow-lg shadow-gray-200/50">
+                
+                <div class="flex items-center cursor-pointer group" onclick="window.location.href='index.html'">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform overflow-hidden z-10 flex-shrink-0">
+                        <img src="shsl.png" class="w-full h-full object-cover" alt="Logo Icon" onerror="this.src='https://via.placeholder.com/40x40?text=S'">
+                    </div>
+                    <img src="shslname.png" class="h-5 sm:h-6 md:h-7 object-contain ml-3 hidden sm:block" alt="ElectroTech Logo" onerror="this.style.display='none'">
                 </div>
+
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#home" class="text-sm font-bold text-gray-600 hover:text-blue-600 transition-all">Home</a>
+                    <a href="#services" class="text-sm font-bold text-gray-600 hover:text-blue-600 transition-all">Services</a>
+                    <a href="#products" class="text-sm font-bold text-gray-600 hover:text-blue-600 transition-all">Features</a>
+                </div>
+
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <!-- Bold Phone Number -->
+                    <a href="tel:+919876543210" class="hidden md:flex items-center gap-2 bg-gray-100/80 px-4 py-1.5 rounded-full border border-gray-200 text-gray-900 font-black text-sm hover:bg-blue-50 transition-colors">
+                        <i class="fa-solid fa-phone text-blue-600"></i> +91 98765 43210
+                    </a>
+
+                    <!-- Guest View -->
+                    <button onclick="openAuthModal()" id="login-btn-header" class="bg-gray-900 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-600 transition-all flex items-center gap-2 shadow-md">
+                        <i class="fa-regular fa-user"></i> <span class="hidden sm:inline">Login / Signup</span>
+                    </button>
+                    
+                    <!-- Logged In View Profile Icon -->
+                    <div id="profile-section-header" class="hidden flex items-center gap-2 bg-blue-50/80 backdrop-blur-md px-2 py-1.5 rounded-full border border-blue-100 cursor-pointer hover:bg-blue-100 transition shadow-sm group" onclick="openProfileModal()">
+                        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 text-white flex items-center justify-center font-bold text-sm shadow-md group-hover:scale-105 transition-transform" id="header-user-initial">A</div>
+                        <span class="text-sm font-bold text-blue-900 hidden sm:block pr-3" id="header-user-name">User</span>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <section id="home" class="relative w-full aspect-video max-w-[1920px] mx-auto bg-black overflow-hidden shadow-xl z-10">
+            <img src="acservice.png" onerror="this.src='https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=1600&auto=format&fit=crop'" alt="Technology" class="hero-slide active absolute inset-0 w-full h-full object-cover">
+            <img src="electricfencing.png" onerror="this.src='https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=1600&auto=format&fit=crop'" alt="Electric Setup" class="hero-slide absolute inset-0 w-full h-full object-cover">
+            <img src="autometic.png" onerror="this.src='https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=1600&auto=format&fit=crop'" alt="Cooling AC" class="hero-slide absolute inset-0 w-full h-full object-cover">
+            <img src="fencingstore.png" onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1600&auto=format&fit=crop'" alt="Tank Tech" class="hero-slide absolute inset-0 w-full h-full object-cover">
+            <img src="electricfencing.png" onerror="this.src='https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=1600&auto=format&fit=crop'" alt="Smart System" class="hero-slide absolute inset-0 w-full h-full object-cover">
+        </section>
+
+        <!-- Core Services Section (3 CARDS ONLY) -->
+        <section id="services" class="py-10 md:py-24 relative px-4 sm:px-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-8 md:mb-16">
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-gray-900 mb-4">Serv<span class="text-blue-600">ices</span></h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 auto-rows-max">
+                    <a href="electric-fencing.html" class="card-11d block w-full h-[280px] md:h-[350px] rounded-[2.5rem] border border-gray-200 bg-white group shadow-lg hover:shadow-2xl relative overflow-hidden transition-shadow">
+                        <div class="glare rounded-[2.5rem]"></div>
+                        <img src="fencingworld.png" onerror="this.src='https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=800&auto=format&fit=crop'" class="card-11d-image absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700" alt="Fencing">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4 z-20 flex justify-center">
+                            <div class="bg-white/20 backdrop-blur-xl border border-white/30 rounded-full py-2.5 px-6 flex items-center justify-center shadow-lg transform transition-all duration-500 group-hover:bg-blue-600 group-hover:border-blue-500">
+                                <h3 class="text-lg font-bold text-white tracking-tight">Zhatka Machine</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="ac-service.html" class="card-11d block w-full h-[280px] md:h-[350px] rounded-[2.5rem] border border-gray-200 bg-white group shadow-lg hover:shadow-2xl relative overflow-hidden transition-shadow">
+                        <div class="glare rounded-[2.5rem]"></div>
+                        <img src="acserviceworld.png" onerror="this.src='https://images.unsplash.com/photo-1558346547-195f2cb26be1?q=80&w=800&auto=format&fit=crop'" class="card-11d-image absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700" alt="AC">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4 z-20 flex justify-center">
+                            <div class="bg-white/20 backdrop-blur-xl border border-white/30 rounded-full py-2.5 px-6 flex items-center justify-center shadow-lg transform transition-all duration-500 group-hover:bg-blue-600 group-hover:border-blue-500">
+                                <h3 class="text-lg font-bold text-white tracking-tight">AC Services</h3>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="tank-alarm.html" class="card-11d block w-full h-[280px] md:h-[350px] rounded-[2.5rem] border border-gray-200 bg-white group shadow-lg hover:shadow-2xl relative overflow-hidden transition-shadow">
+                        <div class="glare rounded-[2.5rem]"></div>
+                        <img src="wateralarm.png" onerror="this.src='https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=800&auto=format&fit=crop'" class="card-11d-image absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-110 transition-transform duration-700" alt="Tank">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4 z-20 flex justify-center">
+                            <div class="bg-white/20 backdrop-blur-xl border border-white/30 rounded-full py-2.5 px-6 flex items-center justify-center shadow-lg transform transition-all duration-500 group-hover:bg-blue-600 group-hover:border-blue-500">
+                                <h3 class="text-lg font-bold text-white tracking-tight">Tank Alarm</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro Components -->
+        <section id="products" class="py-24 relative">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex flex-col lg:flex-row gap-16 items-center">
+                    <div class="lg:w-[55%] w-full">
+                        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">Pro Components & <br><span class="text-blue-600">Hardware</span></h2>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed font-medium">Premium grade spare parts, custom-built micro PCBs, and high-efficiency power modules for all your professional machines.</p>
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <li class="flex items-start gap-4 bg-white p-5 rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                                <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center border border-blue-100 flex-shrink-0"><i class="fa-solid fa-microchip text-blue-600"></i></div>
+                                <div><h4 class="text-gray-900 font-bold text-lg mb-1">Custom PCBs</h4><p class="text-gray-500 text-sm leading-snug">Engineered for extreme durability.</p></div>
+                            </li>
+                            <li class="flex items-start gap-4 bg-white p-5 rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                                <div class="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100 flex-shrink-0"><i class="fa-solid fa-car-battery text-emerald-600"></i></div>
+                                <div><h4 class="text-gray-900 font-bold text-lg mb-1">Power Units</h4><p class="text-gray-500 text-sm leading-snug">High voltage & strong backup.</p></div>
+                            </li>
+                            <li class="flex items-start gap-4 bg-white p-5 rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                                <div class="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100 flex-shrink-0"><i class="fa-solid fa-satellite-dish text-purple-600"></i></div>
+                                <div><h4 class="text-gray-900 font-bold text-lg mb-1">Controllers</h4><p class="text-gray-500 text-sm leading-snug">Automated smart alarm systems.</p></div>
+                            </li>
+                            <li class="flex items-start gap-4 bg-white p-5 rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                                <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center border border-orange-100 flex-shrink-0"><i class="fa-solid fa-gears text-orange-600"></i></div>
+                                <div><h4 class="text-gray-900 font-bold text-lg mb-1">Spare Parts</h4><p class="text-gray-500 text-sm leading-snug">High-grade materials & accessories.</p></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lg:w-[45%] w-full relative">
+                        <div class="grid grid-cols-2 gap-4 md:gap-5 relative group cursor-pointer">
+                            <div class="flex flex-col gap-4 md:gap-5 translate-y-8 transform transition-transform duration-500 group-hover:-translate-y-2">
+                                <div class="rounded-3xl overflow-hidden shadow-lg border border-gray-200 h-48 md:h-56 relative">
+                                    <img src="fencingworld.png" onerror="this.src='https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=400&auto=format&fit=crop'" class="w-full h-full object-cover" alt="Fencing Tech">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                    <span class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 text-gray-900 font-bold rounded-full text-xs shadow-sm">Zhatka Tech</span>
+                                </div>
+                                <div class="rounded-3xl overflow-hidden shadow-lg border border-gray-200 h-56 md:h-64 relative">
+                                    <img src="wateralarm.png" onerror="this.src='https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=400&auto=format&fit=crop'" class="w-full h-full object-cover" alt="Tank Alarms">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                    <span class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 text-gray-900 font-bold rounded-full text-xs shadow-sm">Smart Alarms</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-4 md:gap-5 -translate-y-4 transform transition-transform duration-500 group-hover:translate-y-2">
+                                <div class="rounded-3xl overflow-hidden shadow-lg border border-gray-200 h-56 md:h-64 relative">
+                                    <img src="acserviceworld.png" onerror="this.src='https://images.unsplash.com/photo-1558346547-195f2cb26be1?q=80&w=400&auto=format&fit=crop'" class="w-full h-full object-cover" alt="AC Services">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                    <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md px-3 py-1 text-gray-900 font-bold rounded-full text-xs shadow-sm">AC Care</span>
+                                </div>
+                                <div class="rounded-3xl overflow-hidden shadow-lg border border-gray-200 h-48 md:h-56 relative">
+                                    <img src="shauryastore.png" onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=400&auto=format&fit=crop'" class="w-full h-full object-cover" alt="Store Parts">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                                    <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md px-3 py-1 text-gray-900 font-bold rounded-full text-xs shadow-sm">Spare Parts</span>
+                                </div>
+                            </div>
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600/95 backdrop-blur-xl w-[4.5rem] h-[4.5rem] rounded-full flex flex-col items-center justify-center text-white shadow-[0_0_30px_rgba(37,99,235,0.4)] border-4 border-white transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 z-30">
+                                <i class="fa-solid fa-microchip text-xl mb-0.5"></i>
+                                <span class="text-[10px] font-black uppercase tracking-wider">PRO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="relative mt-20 bg-white/80 backdrop-blur-3xl border-t border-gray-200 pt-20 pb-10">
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <div class="md:col-span-2 text-center md:text-left">
+                        <div class="flex items-center justify-center md:justify-start gap-4 mb-6">
+                            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center shadow-md overflow-hidden flex-shrink-0">
+                                <img src="shsl.png" class="w-full h-full object-cover" alt="Logo Icon" onerror="this.src='https://via.placeholder.com/40x40?text=S'">
+                            </div>
+                            <img src="shslname.png" class="h-8 md:h-9 object-contain" alt="ElectroTech Logo" onerror="this.style.display='none'">
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed max-w-sm font-medium mb-8 mx-auto md:mx-0">
+                            Pioneering electrical safety and automation across India. Delivering premium zhatka machines, AC care, and smart alarms.
+                        </p>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h4 class="text-gray-900 font-bold text-lg mb-6 uppercase tracking-wider">Quick Links</h4>
+                        <ul class="space-y-4">
+                            <li><a href="#home" class="text-gray-500 hover:text-blue-600 transition-colors inline-flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs"></i> Home</a></li>
+                            <li><a href="#services" class="text-gray-500 hover:text-blue-600 transition-colors inline-flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs"></i> Services</a></li>
+                            <li><a href="#products" class="text-gray-500 hover:text-blue-600 transition-colors inline-flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs"></i> Store</a></li>
+                        </ul>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h4 class="text-gray-900 font-bold text-lg mb-6 uppercase tracking-wider">Contact</h4>
+                        <ul class="space-y-4 inline-block text-left">
+                            <li class="flex items-start gap-3 text-gray-500"><i class="fa-solid fa-location-dot mt-1 text-blue-500"></i><span>123 Innovation Drive,<br>Tech Park, Delhi 110001</span></li>
+                            <li class="flex items-center gap-3 text-gray-500"><i class="fa-solid fa-phone text-blue-500"></i><a href="tel:+919876543210" class="hover:text-gray-900 transition-colors">+91 98765 43210</a></li>
+                            <li class="flex items-center gap-3 text-gray-500"><i class="fa-solid fa-envelope text-blue-500"></i><a href="mailto:hello@electrotech.com" class="hover:text-gray-900 transition-colors">hello@electrotech.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+                    <p class="text-gray-500 text-sm">© 2026 ElectroTech India. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div> 
+
+    <!-- Whatsapp Floating Icon -->
+    <div class="fixed bottom-8 right-6 z-[200]">
+        <a href="https://wa.me/919876543210" target="_blank" class="auto-hover-icon w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center text-3xl hover:bg-green-600 transition-colors shadow-lg">
+            <i class="fa-brands fa-whatsapp text-white"></i>
+        </a>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ULTRA PRO MAX AUTH MODAL                   -->
+    <!-- ========================================== -->
+    <div class="custom-overlay" id="auth-overlay">
+        <div class="custom-box">
+            <button onclick="closeModal('auth-overlay')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 bg-gray-100/50 hover:bg-gray-200 w-8 h-8 rounded-full flex items-center justify-center transition-all z-50">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6 mt-2">
+                <div class="w-14 h-14 mx-auto bg-gradient-to-tr from-blue-600 to-blue-400 text-white rounded-[1rem] shadow-lg flex items-center justify-center text-2xl mb-4 transform -rotate-6"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3 class="text-2xl font-black text-gray-900 tracking-tight" id="auth-title">Welcome Back</h3>
+                <p class="text-gray-500 text-sm mt-1" id="auth-subtitle">Login to access premium services.</p>
+            </div>
+            <form id="login-form" class="auth-form active" onsubmit="handleAuth(event, 'login')">
+                <div class="space-y-4">
+                    <div><input type="email" id="login-email" required class="premium-input" placeholder="Email Address"></div>
+                    <div><input type="password" id="login-password" required class="premium-input" placeholder="Password"></div>
+                    <button type="submit" id="login-btn" class="w-full premium-btn mt-2">
+                        <span class="btn-text">Log In</span><div class="loader-spinner"></div>
+                    </button>
+                    <p class="text-center text-sm text-gray-500 mt-5">Don't have an account? <a href="#" onclick="switchAuth('signup')" class="text-blue-600 font-bold hover:text-blue-700 transition">Create one</a></p>
+                </div>
+            </form>
+            <form id="signup-form" class="auth-form" onsubmit="handleAuth(event, 'signup')">
+                <div class="space-y-3">
+                    <input type="text" id="signup-name" required class="premium-input" placeholder="Full Name">
+                    <input type="tel" id="signup-phone" required class="premium-input" placeholder="Phone Number">
+                    <input type="email" id="signup-email" required class="premium-input" placeholder="Email Address">
+                    <textarea id="signup-address" required rows="2" class="premium-input" placeholder="Complete Address"></textarea>
+                    <input type="password" id="signup-password" required class="premium-input" placeholder="Create Password">
+                    <button type="submit" id="signup-btn" class="w-full premium-btn mt-2">
+                        <span class="btn-text">Sign Up</span><div class="loader-spinner"></div>
+                    </button>
+                    <p class="text-center text-sm text-gray-500 mt-4">Already have an account? <a href="#" onclick="switchAuth('login')" class="text-blue-600 font-bold hover:text-blue-700 transition">Log in</a></p>
+                </div>
+            </form>
+            <div id="auth-error" class="hidden text-red-500 text-sm text-center font-bold mt-5 bg-red-50 py-3 rounded-xl border border-red-100"></div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ULTRA PRO MAX PROFILE MODAL                -->
+    <!-- ========================================== -->
+    <div class="custom-overlay" id="profile-overlay">
+        <div class="custom-box !p-0 overflow-hidden !max-w-md">
+            <div class="profile-header">
+                <button onclick="closeModal('profile-overlay')" class="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 w-8 h-8 rounded-full flex items-center justify-center transition-all z-10 backdrop-blur-sm">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="w-24 h-24 mx-auto bg-white text-blue-600 rounded-[2rem] flex items-center justify-center text-4xl font-black mb-4 shadow-[0_0_40px_rgba(255,255,255,0.2)] border-4 border-white/20 backdrop-blur-md relative z-10" id="profile-avatar">U</div>
+                <h3 class="text-2xl font-black text-white tracking-tight relative z-10" id="profile-name">User Name</h3>
+                <p class="text-blue-200 text-sm font-medium mt-1 relative z-10" id="profile-email">user@email.com</p>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div class="bg-gray-50/80 p-4 rounded-2xl border border-gray-100">
+                        <i class="fa-solid fa-phone text-blue-500 mb-2"></i>
+                        <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-0.5">Phone</p>
+                        <p class="text-sm font-semibold text-gray-800 truncate" id="profile-phone">-</p>
+                    </div>
+                    <div class="bg-gray-50/80 p-4 rounded-2xl border border-gray-100">
+                        <i class="fa-solid fa-location-dot text-blue-500 mb-2"></i>
+                        <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-0.5">Location</p>
+                        <p class="text-sm font-semibold text-gray-800 truncate" id="profile-address" title="Address">-</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-sm font-bold text-gray-900">Meeting History & Status</h4>
+                        <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md">Live</span>
+                    </div>
+                    <div class="activity-list max-h-48 overflow-y-auto pr-1 space-y-3" id="profile-activities">
+                        <div class="bg-gray-50/80 border border-gray-100 p-4 rounded-2xl flex items-center justify-center" id="no-activity-msg">
+                            <p class="text-gray-400 text-sm font-medium">No recent activity found.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="logout()" class="w-full mt-6 bg-red-50 text-red-600 font-bold rounded-xl py-3.5 hover:bg-red-100 transition-colors border border-red-100 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-power-off"></i> Sign Out
+                </button>
             </div>
         </div>
     </div>
 
-    <section class="slider-container" id="heroSlider">
-        <div class="slide active">
-            <img src="fssaih.png" alt="Ayurvedic Wellness & Vitality" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=1536&h=1024'">
-        </div>
-        <div class="slide">
-            <img src="slidertwo.webp" alt="Natural Herbs Extract" onerror="this.src='https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=1536&h=1024'">
-        </div>
-        <div class="slide">
-            <img src="sliderthree.webp" alt="Premium Healthcare Ritual" onerror="this.src='https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=1536&h=1024'">
-        </div>
-        <div class="slider-dots">
-            <div class="dot active" onclick="goToSlide(0)"></div>
-            <div class="dot" onclick="goToSlide(1)"></div>
-            <div class="dot" onclick="goToSlide(2)"></div>
-        </div>
-    </section>
-
-    <main class="store-section" id="store">
-        <div class="section-header">
-            <div class="section-subtitle">Premium Wellness Collection</div>
-            <h2 class="section-title">Elevate Your Daily Routine</h2>
-        </div>
-        
-        <div class="store-container">
-            <div class="product-grid" id="productGrid">
-                
-                <!-- Card 1: Kama-XXX-Gold -->
-                <article class="product-card">
-                    <a href="kama-xxx-gold.html" class="product-link">
-                        <div class="product-image-area">
-                            <img src="kama-xxx-initial.png" alt="Ayurvedic Wellness Supplement" class="product-image" loading="lazy" onerror="this.src='https://via.placeholder.com/350x350?text=Sukh+Vitality'">
-                        </div>
-                        <div class="product-info">
-                            <h2 class="product-title" title="Kama-XXX-Gold">Kama-XXX-Gold</h2>
-                        </div>
-                    </a>
-                </article>
-
-                <!-- Card 2: Track Order -->
-                <article class="product-card">
-                    <a href="trackorder.html" class="product-link">
-                        <div class="product-image-area">
-                            <img src="track.png" alt="Ayurvedic Wellness Supplement" class="product-image" loading="lazy" onerror="this.src='https://via.placeholder.com/350x350?text=Sukh+Vitality'">
-                        </div>
-                        <div class="product-info">
-                            <h2 class="product-title" title="Track Your Order">Track Your Order</h2>
-                        </div>
-                    </a>
-                </article>
-
-                <!-- Card 3: Wellness Blog -->
-                <article class="product-card">
-                    <a href="#allblogs.html" class="product-link">
-                        <div class="product-image-area" style="background: #F5F5F7; display: flex; align-items: center; justify-content: center;">
-                            <i class="fa-solid fa-book-open" style="font-size: 3.5rem; color: var(--color-brand); transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"></i>
-                        </div>
-                        <div class="product-info">
-                            <h2 class="product-title" title="Wellness Blog">Wellness Blog</h2>
-                        </div>
-                    </a>
-                </article>
-
+    <!-- ========================================== -->
+    <!-- SUCCESS POPUP MODAL                        -->
+    <!-- ========================================== -->
+    <div class="custom-overlay" id="success-overlay">
+        <div class="custom-box text-center py-8">
+            <div class="w-20 h-20 mx-auto bg-gradient-to-br from-green-400 to-emerald-500 text-white rounded-full flex items-center justify-center text-4xl mb-6 shadow-xl transform scale-110">
+                <i class="fa-solid fa-check"></i>
             </div>
-        </div>
-    </main>
-
-    <!-- UPDATED COMPLIANT FOOTER -->
-    <footer class="store-footer">
-        <div class="footer-top">
-            <div class="footer-col brand-col">
-                <div class="footer-logo">
-                    <img src="sukh.png" alt="Sukh Icon" class="footer-logo-img-icon">
-                    <img src="sukhname.png" alt="Sukh Name" class="footer-logo-name-img">
-                </div>
-                <p class="footer-desc">Crafting pure, botanical wellness through ancient Ayurvedic wisdom and modern science to support your daily vitality.</p>
-                
-                <div class="compliance-info">
-                    <strong>Sukh Healthcare </strong><br>
-                    House No 23/786, Krishna Nagar,<br>
-                    Near Hindu Vidya Peeth School, Kath Mandi,<br>
-                    Sonipat, Haryana 131001, India<br>
-                    Email: healthcaresukh@gmail.com<br>
-                    Phone: +91-9306027053<br>
-                </div>
-
-                <div class="social-links">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Explore</h4>
-                <a href="kama-xxx-gold.html">Shop Wellness</a>
-                <a href="trackorder.html">Track Order</a>
-                <a href="about-us.html">About Us</a>
-                <a href="contact-us.html">Contact Us</a>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Legal & Policies</h4>
-                <a href="terms-and-conditions.html">Terms & Conditions</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="refund-and-cancellation.html">Refund & Cancellation Policy</a>
-                <a href="shipping-and-delivery-policy.html">Shipping & Delivery Policy</a>
-            </div>
-        </div>
-
-        <div class="footer-disclaimer">
-            <strong>Disclaimer:</strong> The statements regarding these products have not been evaluated by the Food and Drug Administration or Ayush Ministry. These products are dietary supplements and are not intended to diagnose, treat, cure, or prevent any disease. Always consult with a qualified healthcare professional prior to beginning any diet, exercise program, or dietary supplement. Results may vary from person to person.
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 SukhHealthcare.com All rights reserved.</p>
-            <div class="footer-legal">
-                <span>Secure Payments </span>
-            </div>
-        </div>
-    </footer>
-
-    <div class="toast" id="toastMsg">
-        <i class="fa-solid fa-check-circle" id="toastIcon" style="color: #34C759; font-size: 1.2rem;"></i>
-        <span id="toastText">Item added to your bag</span>
-    </div>
-
-    <!-- MOBILE BOTTOM NAVIGATION -->
-    <nav class="mobile-bottom-nav md:hidden">
-        <a href="#" class="nav-item active">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </a>
-        <a href="kama-xxx-gold.html" class="nav-item">
-            <i class="fa-solid fa-shop"></i>
-            <span>Shop</span>
-        </a>
-        <a href="https://wa.me/9306027053" target="_blank" class="nav-item relative">
-            <div class="wa-floating-btn">
-                <i class="fa-brands fa-whatsapp"></i>
-            </div>
-            <span class="mt-8 invisible">WA</span>
-        </a>
-        <a href="trackorder.html" class="nav-item">
-            <i class="fa-solid fa-truck-fast"></i>
-            <span>Track</span>
-        </a>
-        <a href="#" class="nav-item" onclick="openSidebar(); return false;">
-            <i class="fa-solid fa-bars"></i>
-            <span>Menu</span>
-        </a>
-    </nav>
-
-    <!-- LEGAL MODALS CONTAINER -->
-    <div class="modal-overlay" id="legalModalOverlay">
-        <div class="legal-modal">
-            <button class="modal-close" onclick="closeLegalModal()"><i class="fa-solid fa-xmark"></i></button>
-            <div class="legal-content" id="legalModalContent">
-                <!-- Content will be injected via JS -->
-            </div>
+            <h3 class="text-3xl font-black text-gray-900 mb-2 tracking-tight" id="success-title">Success!</h3>
+            <p class="text-gray-500 text-sm mb-8 font-medium leading-relaxed px-4" id="success-msg">Welcome to Shauryahomeshield.</p>
+            <button onclick="closeModal('success-overlay')" class="w-full premium-btn !bg-gradient-to-r !from-gray-800 !to-gray-900 !shadow-none hover:!shadow-xl">
+                Awesome, thanks!
+            </button>
         </div>
     </div>
 
     <script>
-        // --- CUSTOM NOTIFICATION SYSTEM (Replaces alerts) ---
-        window.showNotification = function(msg, isError = false) {
-            const toast = document.getElementById('toastMsg');
-            const icon = document.getElementById('toastIcon');
-            const text = document.getElementById('toastText');
-            
-            text.innerText = msg;
-            if(isError) {
-                icon.className = "fa-solid fa-circle-exclamation";
-                icon.style.color = "#FF3B30";
-            } else {
-                icon.className = "fa-solid fa-check-circle";
-                icon.style.color = "#34C759";
-            }
-            
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 4000);
-        };
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNgDZlEYE_poLgN3Hfd8rEMNx0XO0kzaAOJd2iNXVw9QwQw5x3TlV7KWKCHk9-dd-0/exec"; 
 
-        // --- Legal Modals Content & Logic
-        const legalContents = {
-            terms: `
-                <h2>Terms & Conditions</h2>
-                <p><strong>Effective Date:</strong> January 1, 2026</p>
-                <p>Welcome to Sukh Healthcare. By accessing or using our website, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
-                <h3>1. Introduction</h3>
-                <p>This website is operated by Sukh Healthcare. Throughout the site, the terms "we", "us" and "our" refer to Sukh Healthcare. The use of this website is subject to the following terms of use.</p>
-                <h3>2. Age Restriction</h3>
-                <p>You must be at least 18 years of age to use this website and purchase our products. By using this website you warrant that you are at least 18 years old.</p>
-                <h3>3. Product Information & Disclaimer</h3>
-                <p>The products sold on this website are Ayurvedic dietary supplements. They are not intended to diagnose, treat, cure, or prevent any disease. Information provided is for educational purposes only and is not a substitute for professional medical advice.</p>
-                <h3>4. Pricing and Payment (No COD)</h3>
-                <p>All prices are subject to change without notice. We strictly do not provide Cash on Delivery (COD) services for any products/orders. All payments on our website are accepted only through online payment methods such as UPI, Debit Card, Credit Card, Net Banking, and Wallets. We do not store any credit card or payment information on our servers.</p>
-                <h3>5. Contact Information</h3>
-                <p>Questions about the Terms of Service should be sent to us at healthcaresukh@gmail.com.</p>
-            `,
-            privacy: `
-                <h2>Privacy Policy</h2>
-                <p><strong>Effective Date:</strong> January 1, 2026</p>
-                <p>Sukh Healthcare values your privacy. This Privacy Policy outlines how we collect, use, and protect your personal information.</p>
-                <h3>1. Information We Collect</h3>
-                <p>We collect personal information such as your name, email address, phone number, and shipping address when you place an order. Payment details are processed securely by our payment gateway and are not stored by us.</p>
-                <h3>2. How We Use Your Information</h3>
-                <p>We use your information to process transactions, deliver products, send order updates, and respond to customer service requests.</p>
-                <h3>3. Data Protection</h3>
-                <p>We implement a variety of security measures to maintain the safety of your personal information. We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties without your consent.</p>
-                <h3>4. Cookies</h3>
-                <p>Our website uses cookies to enhance user experience and track cart sessions.</p>
-            `,
-            refund: `
-                <h2>Refund & Cancellation Policy</h2>
-                <p><strong>Effective Date:</strong> January 1, 2026</p>
-                <h3>1. Cancellation Policy</h3>
-                <p>Orders can be cancelled within 10 hours of placing them or before they are dispatched, whichever is earlier. To cancel an order, please email us at healthcaresukh@gmail.com. Once dispatched, orders cannot be cancelled.</p>
-                <h3>2. Refund Policy</h3>
-                <p>We accept return and refund requests within 7 days of delivery <strong>only if the product received is damaged, defective, or incorrect</strong>. For hygiene and safety reasons, opened or used health supplements cannot be returned.</p>
-                <h3>3. Process for Refund</h3>
-                <p>To initiate a return, please send an unboxing video and images of the product to healthcaresukh@gmail.com. Once verified, refunds will be processed to the original mode of payment within 5-7 working days.</p>
-            `,
-            shipping: `
-                <h2>Shipping Policy</h2>
-                <p><strong>Effective Date:</strong> January 1, 2026</p>
-                <h3>1. Processing Time</h3>
-                <p>All orders are processed within 24-48 business hours after receiving the confirmation email. <strong>Please note: We do not offer Cash on Delivery (COD). All orders must be fully prepaid via online payment methods.</strong> You will receive another notification when your order has shipped.</p>
-                <h3>2. Shipping Rates and Estimates</h3>
-                <ul>
-                    <li><strong>Standard Delivery:</strong> 5-7 Business Days (Free on prepaid orders)</li>
-                    <li><strong>Express Delivery:</strong> 2-3 Business Days (₹50 additional charge)</li>
-                </ul>
-                <h3>3. Service Areas</h3>
-                <p>Currently, we ship to all major pincodes across India through our delivery partners.</p>
-                <h3>4. Order Tracking</h3>
-                <p>Once your order is shipped, a tracking link will be provided via SMS/Email to monitor the status of your delivery.</p>
-            `,
-            contact: `
-                <h2>Contact Us</h2>
-                <p>We are here to assist you with any questions about our products or your order.</p>
-                <h3>Registered Office Address</h3>
-                <p>Sukh Healthcare<br>House No 23/786, Krishna Nagar,<br>Near Hindu Vidya Peeth School, Kath Mandi,<br>Sonipat, Haryana 131001, India</p>
-                <h3>Get in Touch</h3>
-                <ul>
-                    <li><strong>Email:</strong> healthcaresukh@gmail.com (Response within 24 hours)</li>
-                    <li><strong>Phone/WhatsApp:</strong> +91-9306027053 (Mon-Sat, 10 AM to 6 PM)</li>
-                </ul>
-            `
-        };
-
-        window.openLegalModal = function(type) {
-            const content = legalContents[type];
-            if(content) {
-                document.getElementById('legalModalContent').innerHTML = content;
-                document.getElementById('legalModalOverlay').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-        };
-
-        window.closeLegalModal = function() {
-            document.getElementById('legalModalOverlay').classList.remove('active');
-            document.body.style.overflow = '';
-        };
-
-        document.getElementById('legalModalOverlay').addEventListener('click', (e) => { 
-            if(e.target === document.getElementById('legalModalOverlay')) closeLegalModal(); 
+        document.addEventListener('DOMContentLoaded', () => {
+            updateHeaderUI();
         });
 
-        // --- UI scroll logic
-        window.addEventListener('scroll', () => {
-            const headerWrapper = document.getElementById('headerWrapper');
-            if(window.scrollY > 40) {
-                headerWrapper.classList.add('scrolled');
-            } else {
-                headerWrapper.classList.remove('scrolled');
-            }
-        });
-
-        // --- Sidebar Logic
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        function openSidebar() {
-            sidebarOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; 
-        }
-        function closeSidebar() {
-            sidebarOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        document.getElementById('openSidebarBtn').addEventListener('click', openSidebar);
-        if(sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', (e) => {
-                if(e.target === sidebarOverlay) closeSidebar();
+        // 3D Effects
+        if (window.matchMedia("(hover: hover)").matches) {
+            const cards = document.querySelectorAll('.card-11d');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const rotateX = (((e.clientY - rect.top) - rect.height/2) / (rect.height/2)) * -12; 
+                    const rotateY = (((e.clientX - rect.left) - rect.width/2) / (rect.width/2)) * 12;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+                });
+                card.addEventListener('mouseenter', () => card.style.transition = 'none');
             });
         }
 
-        // --- Hero Slider Logic
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        let currentSlide = 0;
-        let slideInterval;
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
-            currentSlide = index;
+        const slides = document.querySelectorAll('.hero-slide');
+        if(slides.length > 0) {
+            let currentSlide = 0;
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000); 
         }
-        function nextSlide() { let next = (currentSlide + 1) % slides.length; showSlide(next); }
-        window.goToSlide = function(index) { showSlide(index); resetInterval(); };
-        function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 5000); }
-        resetInterval();
 
+        function updateHeaderUI() {
+            const userStr = localStorage.getItem('sh_user');
+            const loginBtn = document.getElementById('login-btn-header');
+            const profileSec = document.getElementById('profile-section-header');
+            
+            if (userStr) {
+                const user = JSON.parse(userStr);
+                loginBtn.classList.add('hidden');
+                profileSec.classList.remove('hidden');
+                document.getElementById('header-user-name').innerText = user.name.split(' ')[0];
+                document.getElementById('header-user-initial').innerText = user.name.charAt(0).toUpperCase();
+            } else {
+                loginBtn.classList.remove('hidden');
+                profileSec.classList.add('hidden');
+            }
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+
+        function openAuthModal() {
+            document.getElementById('auth-error').classList.add('hidden');
+            switchAuth('login');
+            openModal('auth-overlay');
+        }
+
+        function switchAuth(type) {
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            document.getElementById('auth-error').classList.add('hidden');
+
+            if (type === 'signup') {
+                document.getElementById('login-form').classList.remove('active');
+                document.getElementById('signup-form').classList.add('active');
+                title.innerText = "Create Account";
+                subtitle.innerText = "Setup your secure profile in seconds.";
+            } else {
+                document.getElementById('signup-form').classList.remove('active');
+                document.getElementById('login-form').classList.add('active');
+                title.innerText = "Welcome Back";
+                subtitle.innerText = "Login to access premium services.";
+            }
+        }
+
+        function showSuccessModal(title, message) {
+            document.getElementById('success-title').innerText = title;
+            document.getElementById('success-msg').innerText = message;
+            openModal('success-overlay');
+        }
+
+        function toggleLoading(formId, isLoading) {
+            const btn = document.querySelector(`#${formId} button[type="submit"]`);
+            const txt = btn.querySelector('.btn-text');
+            const spinner = btn.querySelector('.loader-spinner');
+            if (isLoading) { txt.style.display = 'none'; spinner.style.display = 'block'; btn.disabled = true; } 
+            else { txt.style.display = 'block'; spinner.style.display = 'none'; btn.disabled = false; }
+        }
+
+        async function handleAuth(e, action) {
+            e.preventDefault();
+            const formId = action === 'login' ? 'login-form' : 'signup-form';
+            toggleLoading(formId, true);
+            const errDiv = document.getElementById('auth-error');
+            errDiv.classList.add('hidden');
+
+            let payload = { action: action };
+            if (action === 'signup') {
+                payload.name = document.getElementById('signup-name').value;
+                payload.phone = document.getElementById('signup-phone').value;
+                payload.email = document.getElementById('signup-email').value;
+                payload.address = document.getElementById('signup-address').value;
+                payload.password = document.getElementById('signup-password').value;
+            } else {
+                payload.email = document.getElementById('login-email').value;
+                payload.password = document.getElementById('login-password').value;
+            }
+
+            try {
+                const response = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    localStorage.setItem('sh_user', JSON.stringify(result.user));
+                    closeModal('auth-overlay');
+                    updateHeaderUI();
+                    showSuccessModal(action === 'signup' ? "Account Created!" : "Welcome Back!", `Hello, ${result.user.name}. Aapka swagat hai.`);
+                } else {
+                    errDiv.innerText = result.message; errDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                errDiv.innerText = "Network error. Kripya thodi der me try karein."; errDiv.classList.remove('hidden');
+            } finally { toggleLoading(formId, false); }
+        }
+
+        function logout() {
+            localStorage.removeItem('sh_user');
+            updateHeaderUI();
+            closeModal('profile-overlay');
+        }
+
+        function openProfileModal() {
+            const userStr = localStorage.getItem('sh_user');
+            if(!userStr) return;
+            const user = JSON.parse(userStr);
+            
+            document.getElementById('profile-avatar').innerText = user.name.charAt(0).toUpperCase();
+            document.getElementById('profile-name').innerText = user.name;
+            document.getElementById('profile-email').innerText = user.email;
+            document.getElementById('profile-phone').innerText = user.phone;
+            document.getElementById('profile-address').innerText = user.address || 'Address not provided';
+            
+            openModal('profile-overlay');
+            fetchActivities(user.email);
+        }
+
+        async function fetchActivities(email) {
+            const actContainer = document.getElementById('profile-activities');
+            actContainer.innerHTML = '<div class="text-center py-6"><div class="fetch-loader"></div><p class="text-xs text-gray-500 mt-2 font-medium">Syncing with server...</p></div>';
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'get_activities', email: email })
+                });
+                const result = await response.json();
+                
+                actContainer.innerHTML = '';
+
+                if (result.status === 'success' && result.activities.length > 0) {
+                    result.activities.forEach(act => {
+                        const div = document.createElement('div');
+                        div.className = 'bg-white border border-gray-100 p-4 rounded-2xl shadow-sm mb-3 relative overflow-hidden';
+                        
+                        let statusColor = 'text-amber-600 bg-amber-50 border-amber-200';
+                        let statusIcon = 'fa-clock';
+                        let st = (act.status || '').toLowerCase();
+                        
+                        if(st.includes('confirm') || st.includes('done')) { statusColor = 'text-emerald-600 bg-emerald-50 border-emerald-200'; statusIcon = 'fa-check-double'; }
+                        if(st.includes('cancel')) { statusColor = 'text-red-600 bg-red-50 border-red-200'; statusIcon = 'fa-ban'; }
+
+                        div.innerHTML = `
+                            <div class="flex items-start gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-calendar-check text-blue-500"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-sm font-bold text-gray-800 truncate">${act.serviceName}</p>
+                                    <p class="text-[11px] font-bold text-gray-400 mt-0.5"><i class="fa-regular fa-calendar mr-1"></i> Date: ${act.meetingDate}</p>
+                                    <p class="text-[11px] font-bold text-gray-400"><i class="fa-regular fa-clock mr-1"></i> Time: ${act.meetingTime}</p>
+                                </div>
+                            </div>
+                            <div class="p-3 rounded-xl border ${statusColor} text-[11px] font-semibold whitespace-normal break-words leading-relaxed relative">
+                                <span class="font-black uppercase tracking-wider text-[9px] opacity-70 block mb-1"><i class="fa-solid ${statusIcon} mr-1"></i> Update from Admin</span>
+                                ${act.status || 'Pending Review'}
+                            </div>
+                        `;
+                        actContainer.appendChild(div);
+                    });
+                } else {
+                    actContainer.innerHTML = '<div class="bg-gray-50/80 border border-gray-100 p-5 rounded-2xl flex flex-col items-center justify-center text-center"><div class="w-12 h-12 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center mb-2"><i class="fa-solid fa-folder-open"></i></div><p class="text-gray-500 text-sm font-bold">No History Found</p><p class="text-xs text-gray-400 mt-1">Your bookings will appear here.</p></div>';
+                }
+            } catch(e) {
+                actContainer.innerHTML = '<div class="text-red-500 text-xs font-bold text-center py-4 bg-red-50 rounded-xl border border-red-100">Failed to sync data. Please check connection.</div>';
+            }
+        }
     </script>
 </body>
 </html>
