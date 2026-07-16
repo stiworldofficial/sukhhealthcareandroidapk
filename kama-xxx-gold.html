@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Sukh Healthcare | Kama-XXX-Gold</title>
+    <title>Sukh Healthcare | कामा-XXX-गोल्ड</title>
     
     <!-- Meta Pixel Code with Manual Advanced Matching -->
 <!-- Meta Pixel Code -->
@@ -210,9 +210,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
         .privacy-notice i { color: #1A362D; font-size: 1.2rem; margin-top: 2px; }
         .privacy-notice-content h4 { color: #1A362D; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
         .privacy-notice-content p { color: #4A5568; font-size: 0.75rem; line-height: 1.4; }
-        .delivery-box { background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 1.2rem; }
-        .del-option { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; }
-        .del-option:first-child { border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 2px; }
+        
         .order-summary { background: var(--color-brand); color: #fff; padding: 12px 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; font-weight: 700; margin-bottom: 1.2rem; }
         .btn-submit-order { width: 100%; background: var(--color-premium-gold); color: #fff; padding: 14px; border: none; border-radius: 8px; font-size: 1.05rem; font-weight: 800; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4); display: flex; justify-content: center; align-items: center; gap: 8px; }
 
@@ -314,13 +312,46 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
             .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
             .whatsapp-float { bottom: 30px; right: 30px; width: 65px; height: 65px; font-size: 38px; }
         }
+
+        /* INITIAL VIDEO POPUP STYLES */
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        .video-action-buttons.show {
+            display: flex !important;
+            animation: slideUp 0.4s ease forwards;
+        }
     </style>
 </head>
 <body>
 
+    <!-- INITIAL LOAD VIDEO POPUP -->
+    <div class="modal-overlay active" id="initialVideoModal" style="z-index: 9999; display: flex; background: rgba(0,0,0,0.9);">
+        <div class="checkout-modal" style="padding: 0; background: #000; overflow: hidden; width: 95%; max-width: 800px; aspect-ratio: 16/9; height: auto; max-height: 85vh; display: flex; flex-direction: column; position: relative; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+            <!-- YouTube Player Container -->
+            <div id="yt-player-container" style="flex: 1; width: 100%; height: 100%;"></div>
+            
+            <!-- Hidden Action Buttons (Appears After Video Ends) -->
+            <div class="video-action-buttons" id="videoActionButtons" style="display: none; position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.85); padding: 20px 15px; backdrop-filter: blur(5px); justify-content: center; gap: 10px; z-index: 10; border-top: 1px solid rgba(255,255,255,0.1);">
+                <button type="button" class="v-btn" style="background: #333; color: #fff; padding: 12px 10px; border-radius: 8px; border: none; font-weight: bold; flex: 1; cursor: pointer; font-size: 0.9rem;" onclick="closeVideoModal()">
+                    <i class="fa-solid fa-xmark"></i> बंद करें
+                </button>
+                <button type="button" class="v-btn" style="background: #25d366; color: #fff; padding: 12px 10px; border-radius: 8px; border: none; font-weight: bold; flex: 1; cursor: pointer; font-size: 0.9rem;" onclick="repeatVideo()">
+                    <i class="fa-solid fa-rotate-right"></i> दोबारा चलाएं
+                </button>
+                <button type="button" class="v-btn pulse-anim" style="background: var(--color-premium-gold); color: #fff; padding: 12px 15px; border-radius: 8px; border: none; font-weight: bold; flex: 1.5; cursor: pointer; font-size: 0.9rem;" onclick="videoToOrder()">
+                    <i class="fa-solid fa-bolt"></i> अभी ऑर्डर करें
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- END INITIAL LOAD VIDEO POPUP -->
+
+
     <header class="header-wrapper">
         <div class="top-bar">
-            ⚡ FREE DELIVERY & 100% SECURE PAYMENT
+            ⚡ फ्री डिलीवरी और 100% सुरक्षित पेमेंट
         </div>
         <div class="navbar">
             <img src="sukh.png" alt="Sukh Icon" class="nav-logo-icon" onerror="this.style.display='none'">
@@ -334,7 +365,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
             <div class="gallery-wrap">
                 <div class="main-img-container" id="swipeContainer">
                     <img id="mainImage" src="fssaih.png" alt="Kama-XXX-Gold" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800'">
-                    <div class="swipe-hint"><i class="fa-solid fa-arrows-left-right"></i> Swipe to explore</div>
+                    <div class="swipe-hint"><i class="fa-solid fa-arrows-left-right"></i> देखने के लिए स्वाइप करें</div>
                 </div>
                 
                 <div class="thumbnails">
@@ -348,78 +379,78 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
 
             <!-- Right: Info -->
             <div class="product-info">
-                <div class="trust-badge-small">🔥 Bestseller Product</div>
-                <h1 class="p-title">Kama-XXX-Gold (Ayurvedic Capsules)</h1>
+                <div class="trust-badge-small">🔥 बेस्टसेलर प्रोडक्ट</div>
+                <h1 class="p-title">कामा-XXX-गोल्ड (आयुर्वेदिक कैप्सूल)</h1>
                 
                 <div class="p-rating">
                     <div class="stars">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
                     </div>
-                    <span class="reviews">4.1/5 (5,000+ Happy Customers)</span>
+                    <span class="reviews">4.1/5 (5,000+ संतुष्ट ग्राहक)</span>
                 </div>
 
                 <div class="price-box">
                     <span class="p-price">₹445</span>
                     <span class="p-mrp">₹899</span>
-                    <span class="p-save">Save 50%</span>
+                    <span class="p-save">50% की बचत</span>
                 </div>
-                <span class="tax-text">+ 12% GST Extra (6% CGST & 6% SGST). Free Standard Shipping.</span>
+                <span class="tax-text">+ 12% GST अतिरिक्त (6% CGST और 6% SGST)। फ्री स्टैंडर्ड डिलीवरी।</span>
 
                 <!-- QTY SECTION -->
                 <div class="qty-wrapper">
-                    <span class="qty-label">Pack Quantity:</span>
+                    <span class="qty-label">पैक की मात्रा:</span>
                     <div class="qty-selector">
                         <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
                         <input type="text" id="productQty" class="qty-input" value="1" readonly>
                         <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
                     </div>
-                    <span class="qty-pack-text">(5 Capsules/Pack)</span>
+                    <span class="qty-pack-text">(5 कैप्सूल/पैक)</span>
                 </div>
 
                 <!-- CENTERED BUTTONS (Order Now + Write Review side by side or stacked nicely) -->
                 <div class="action-buttons-centered">
                     <button type="button" class="btn-buy-huge pulse-anim" onclick="openCheckoutModal()">
-                        <i class="fa-solid fa-bolt"></i> Order Now
+                        <i class="fa-solid fa-bolt"></i> अभी ऑर्डर करें
                     </button>
                     <button type="button" class="btn-review-outline" onclick="openReviewsModal()">
-                        <i class="fa-solid fa-pen-to-square"></i> Write / See Review
+                        <i class="fa-solid fa-pen-to-square"></i> रिव्यू लिखें / देखें
                     </button>
                 </div>
 
                 <!-- Trust Icons -->
                 <div class="trust-icons">
-                    <div class="t-icon"><i class="fa-solid fa-leaf"></i><p>100% Pure<br>Ayurvedic</p></div>
-                    <div class="t-icon"><i class="fa-solid fa-truck-fast"></i><p>Free & Fast<br>Delivery</p></div>
-                    <div class="t-icon"><i class="fa-solid fa-shield-halved"></i><p>Secure<br>Checkout</p></div>
+                    <div class="t-icon"><i class="fa-solid fa-leaf"></i><p>100% शुद्ध<br>आयुर्वेदिक</p></div>
+                    <div class="t-icon"><i class="fa-solid fa-truck-fast"></i><p>फ्री और फास्ट<br>डिलीवरी</p></div>
+                    <div class="t-icon"><i class="fa-solid fa-shield-halved"></i><p>सुरक्षित<br>पेमेंट</p></div>
                 </div>
 
                 <!-- Product Details Content -->
-                <h3 class="section-heading">About this wellness supplement</h3>
-                <p class="m-desc">An Ayurvedic proprietary medicine crafted with adaptogenic herbs to support daily energy, manage stress, and promote overall vitality and well-being. A natural approach to holistic health.</p>
+                <h3 class="section-heading">इस सप्लीमेंट के बारे में</h3>
+                <p class="m-desc">दैनिक ऊर्जा बढ़ाने, तनाव को कम करने और समग्र जीवन शक्ति को बढ़ावा देने के लिए एडाप्टोजेनिक जड़ी-बूटियों से निर्मित एक आयुर्वेदिक दवा। संपूर्ण स्वास्थ्य के लिए एक प्राकृतिक दृष्टिकोण।</p>
 
                 <!-- DISCREET PACKAGING NOTICE IN PRODUCT SECTION -->
                 <div class="product-privacy-notice">
                     <i class="fa-solid fa-box-archive"></i>
                     <div>
-                        <h4>100% Discreet Packaging & Privacy</h4>
-                        <p>Your order is shipped in completely plain, unmarked packaging. No one will know what is inside without opening it. Your personal identity and details are kept strictly confidential.</p>
+                        <h4>100% गुप्त पैकिंग और प्राइवेसी</h4>
+                        <p>आपका ऑर्डर पूरी तरह से सादे, बिना किसी मार्क वाले बॉक्स में भेजा जाता है। बिना खोले किसी को पता नहीं चलेगा कि अंदर क्या है। आपकी व्यक्तिगत जानकारी पूरी तरह गुप्त रखी जाती है।</p>
                     </div>
                 </div>
 
-                <h3 class="section-heading">Key Health Benefits</h3>
+                <h3 class="section-heading">मुख्य स्वास्थ्य लाभ</h3>
                 <ul class="benefits-list">
-                    <li>Helps manage daily stress and anxiety naturally</li>
-                    <li>Supports natural stamina and physical endurance</li>
-                    <li>Promotes overall vitality and general well-being</li>
-                    <li>Formulated with pure adaptogenic Ayurvedic herbs</li>
-                    <li>Helps maintain healthy energy levels throughout the day</li>
+                    <li>रोजमर्रा के तनाव और चिंता को प्राकृतिक रूप से कम करने में मददगार</li>
+                    <li>प्राकृतिक स्टैमिना और शारीरिक क्षमता बढ़ाता है</li>
+                    <li>समग्र जीवन शक्ति और अच्छे स्वास्थ्य को बढ़ावा देता है</li>
+                    <li>शुद्ध आयुर्वेदिक जड़ी-बूटियों (एडाप्टोजेनिक) से तैयार</li>
+                    <li>दिन भर शरीर में स्वस्थ ऊर्जा बनाए रखने में मदद करता है</li>
                 </ul>
 
-                <h3 class="section-heading">Key Ingredients</h3>
-                <p class="m-desc">Ashwagandha, Shilajit (Purified), Safed Musli, Konch Beej, Vidari Kand, Jaiphal, Sidh Makardhwaj, Loh Bhasm, and essential Ayurvedic botanicals.</p>
+                <h3 class="section-heading">मुख्य सामग्री (जड़ी-बूटियां)</h3>
+                <p class="m-desc">अश्वगंधा, शिलाजीत (शुद्ध), सफेद मूसली, कोंच बीज, विदारी कंद, जायफल, सिद्ध मकरध्वज, लौह भस्म, और आवश्यक आयुर्वेदिक जड़ी-बूटियां।</p>
                 
-                <h3 class="section-heading">Suggested Use</h3>
-                <p class="m-desc">Take 1 capsule at night with lukewarm milk, or as directed by a healthcare professional/physician. Do not exceed recommended dosage.</p>
+                <h3 class="section-heading">उपयोग की विधि</h3>
+                <p class="m-desc">रात को 1 कैप्सूल हल्के गर्म दूध के साथ लें, या किसी स्वास्थ्य विशेषज्ञ/चिकित्सक के निर्देशानुसार लें। बताई गई खुराक से अधिक न लें।</p>
                 
             </div>
         </section>
@@ -429,58 +460,46 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
         <div class="checkout-modal">
             <button type="button" class="modal-close" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
             <div class="chk-header">
-                <h2 class="chk-title">Order Securely</h2>
-                <p class="chk-subtitle">Please enter your delivery details accurately.</p>
+                <h2 class="chk-title">सुरक्षित ऑर्डर करें</h2>
+                <p class="chk-subtitle">कृपया अपनी डिलीवरी की जानकारी सही-सही भरें।</p>
             </div>
 
             <div class="privacy-notice">
                 <i class="fa-solid fa-box-archive"></i>
                 <div class="privacy-notice-content">
-                    <h4>100% Discreet Packaging & Privacy</h4>
-                    <p>Your order is shipped in completely plain, unmarked packaging. No one will know what is inside without opening it. Your personal identity and details are kept strictly confidential.</p>
+                    <h4>100% गुप्त पैकिंग और प्राइवेसी</h4>
+                    <p>आपका ऑर्डर पूरी तरह से सादे, बिना किसी मार्क वाले बॉक्स में भेजा जाता है। बिना खोले किसी को पता नहीं चलेगा कि अंदर क्या है। आपकी व्यक्तिगत जानकारी पूरी तरह गुप्त रखी जाती है।</p>
                 </div>
             </div>
 
             <form id="directCheckoutForm" onsubmit="submitOrder(event)">
                 <div class="form-group">
-                    <label class="form-label">Full Name *</label>
-                    <input type="text" id="chkName" class="form-input" placeholder="Eg: Rahul Kumar" required minlength="3">
+                    <label class="form-label">पूरा नाम *</label>
+                    <input type="text" id="chkName" class="form-input" placeholder="जैसे: राहुल कुमार" required minlength="3">
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">WhatsApp / Mobile Number *</label>
-                    <input type="tel" id="chkPhone" class="form-input" placeholder="10 Digit Number" required pattern="[6-9]\d{9}">
+                    <label class="form-label">व्हाट्सएप / मोबाइल नंबर *</label>
+                    <input type="tel" id="chkPhone" class="form-input" placeholder="10 अंकों का नंबर" required pattern="[6-9]\d{9}">
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Email ID *</label>
-                    <input type="email" id="chkEmail" class="form-input" placeholder="Eg: rahul@email.com" required>
+                    <label class="form-label">ईमेल आईडी *</label>
+                    <input type="email" id="chkEmail" class="form-input" placeholder="जैसे: rahul@email.com" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Full Delivery Address *</label>
-                    <textarea id="chkAddress" class="form-input" placeholder="House No, Street, Landmark, City, State, Pin Code" required minlength="10"></textarea>
+                    <label class="form-label">पूरा डिलीवरी पता *</label>
+                    <textarea id="chkAddress" class="form-input" placeholder="मकान नंबर, गली, लैंडमार्क, शहर, राज्य, पिन कोड" required minlength="10"></textarea>
                     <div class="field-hint" style="font-size: 0.8rem; color: #666; margin-top: 4px;">
                         <i class="fa-solid fa-circle-info"></i>
-                        <span><strong>Important Note:</strong> If asked for a "Zip Code", please enter your local area's Pin Code.</span>
+                        <span><strong>महत्वपूर्ण नोट:</strong> यदि "ज़िप कोड (Zip Code)" पूछा जाए, तो कृपया अपने स्थानीय एरिया का पिन कोड दर्ज करें।</span>
                     </div>
                 </div>
                 
-                <div class="delivery-box">
-                    <label style="display:block; font-weight: 700; margin-bottom: 6px; font-size: 0.85rem;">Delivery Speed</label>
-                    <div class="del-option">
-                        <label><input type="radio" name="deliveryMethod" id="delStandard" value="standard" checked onchange="calculateTotal()"> Standard Delivery (5-7 Days)</label>
-                        <span style="color: #34C759; font-weight: 700;">FREE</span>
-                    </div>
-                    <div class="del-option">
-                        <label><input type="radio" name="deliveryMethod" id="delExpress" value="express" onchange="calculateTotal()"> Express Delivery (2-3 Days)</label>
-                        <span style="color: var(--color-accent); font-weight: 700;">+₹30</span>
-                    </div>
-                </div>
-
                 <div class="tax-breakdown-box" style="background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 1.2rem; font-size: 0.85rem; color: #555;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-                        <span>Item Base Price:</span> <span id="summaryBasePrice">₹445.00</span>
+                        <span>उत्पाद की मूल कीमत:</span> <span id="summaryBasePrice">₹445.00</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                         <span>CGST (6%):</span> <span id="summaryCGST">₹26.70</span>
@@ -489,22 +508,22 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
                         <span>SGST (6%):</span> <span id="summarySGST">₹26.70</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; font-weight: 700; color: #1D1D1F; margin-top: 4px;">
-                        <span>Total Product Price (Inc. GST):</span> <span id="summaryTotal">₹498.40</span>
+                        <span>कुल कीमत (GST सहित):</span> <span id="summaryTotal">₹498.40</span>
                     </div>
                 </div>
 
                 <div class="order-summary">
-                    <span>Order-is-Ready-To-Deliver -:</span>
+                    <span>ऑर्डर-डिलीवर-होने-के-लिए-तैयार-है -:</span>
                     <span id="finalTotalDisplay">₹498.40</span>
                 </div>
 
                 <button type="submit" id="submitBtn" class="btn-submit-order">
-                    <span id="btnText"><i class="fa-solid fa-lock"></i>  Deliver-iT-Now</span>
-                    <span id="btnLoader" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i> Processing...</span>
+                    <span id="btnText"><i class="fa-solid fa-lock"></i>  अभी-डिलीवर-करें</span>
+                    <span id="btnLoader" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i> प्रोसेस हो रहा है...</span>
                 </button>
                 
                 <p style="text-align: center; font-size: 0.75rem; color: #888; margin-top: 15px;">
-                    By placing this order, you agree to our Terms & Privacy Policy.<br>Payments processed securely via Razorpay.
+                    यह ऑर्डर देकर, आप हमारी नियम एवं शर्तों और प्राइवेसी पॉलिसी से सहमत होते हैं।<br>पेमेंट रेज़रपे (Razorpay) द्वारा सुरक्षित रूप से प्रोसेस किया जाता है।
                 </p>
             </form>
         </div>
@@ -514,19 +533,19 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
         <div class="checkout-modal success-modal">
             <button type="button" class="modal-close" onclick="closeSuccessModal()"><i class="fa-solid fa-xmark"></i></button>
             <i class="fa-solid fa-circle-check success-icon"></i>
-            <h2 class="chk-title" id="successTitle">Order Successful!</h2>
-            <p class="chk-subtitle">Aapka order successfully place ho gaya hai.</p>
+            <h2 class="chk-title" id="successTitle">ऑर्डर सफल रहा!</h2>
+            <p class="chk-subtitle">आपका ऑर्डर सफलतापूर्वक प्लेस हो गया है।</p>
             
             <div class="success-order-box">
-                <span>Your Order ID</span>
+                <span>आपकी ऑर्डर आईडी</span>
                 <strong id="displayOrderId">ORD-XXXXXX</strong>
             </div>
 
             <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px;">
-                Aapke order ki saari details, discreet shipping updates aur tracking link aapko jald hi SMS/WhatsApp aur Email par bhej diye jayenge.
+                आपके ऑर्डर की सारी डिटेल्स, गुप्त शिपिंग अपडेट्स और ट्रैकिंग लिंक आपको जल्द ही SMS/WhatsApp और ईमेल पर भेज दिए जाएंगे।
             </p>
             
-            <button type="button" class="btn-buy-huge" onclick="window.location.href='trackorder.html'">Track Your Order</button>
+            <button type="button" class="btn-buy-huge" onclick="window.location.href='trackorder.html'">अपना ऑर्डर ट्रैक करें</button>
         </div>
     </div>
 
@@ -534,13 +553,13 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
     <div class="modal-overlay" id="reviewsModalOverlay">
         <div class="checkout-modal reviews-modal">
             <div class="reviews-header">
-                <h2>Customer Reviews</h2>
+                <h2>ग्राहक समीक्षाएं (Reviews)</h2>
                 <button type="button" class="modal-close" style="position: relative; top: 0; right: 0;" onclick="closeReviewsModal()"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <div class="review-filters-wrapper">
                 <div class="review-filters">
-                    <button type="button" class="filter-chip active" data-val="all" onclick="filterReviews('all')">All Reviews</button>
+                    <button type="button" class="filter-chip active" data-val="all" onclick="filterReviews('all')">सभी रिव्यू</button>
                     <button type="button" class="filter-chip" data-val="5" onclick="filterReviews(5)">5 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
                     <button type="button" class="filter-chip" data-val="4" onclick="filterReviews(4)">4 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
                     <button type="button" class="filter-chip" data-val="3" onclick="filterReviews(3)">3 <i class="fa-solid fa-star" style="font-size:0.7rem;"></i></button>
@@ -550,11 +569,11 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
             </div>
             
             <div class="reviews-body" id="reviewsListContainer">
-                <div style="text-align: center; color: #888; padding: 20px;"><i class="fa-solid fa-spinner fa-spin"></i> Loading reviews...</div>
+                <div style="text-align: center; color: #888; padding: 20px;"><i class="fa-solid fa-spinner fa-spin"></i> रिव्यू लोड हो रहे हैं...</div>
             </div>
 
             <div class="write-review-footer">
-                <button type="button" class="btn-outline-gold" onclick="openWriteReviewModal()"><i class="fa-solid fa-pen-to-square"></i> Write Your Review</button>
+                <button type="button" class="btn-outline-gold" onclick="openWriteReviewModal()"><i class="fa-solid fa-pen-to-square"></i> अपना रिव्यू लिखें</button>
             </div>
         </div>
     </div>
@@ -564,8 +583,8 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
         <div class="checkout-modal">
             <button type="button" class="modal-close" onclick="closeWriteReviewModal()"><i class="fa-solid fa-xmark"></i></button>
             <div class="chk-header" style="margin-bottom: 15px;">
-                <h2 class="chk-title" style="font-size: 1.3rem;">Write Your Review</h2>
-                <p class="chk-subtitle">Share your authentic experience with us.</p>
+                <h2 class="chk-title" style="font-size: 1.3rem;">अपना रिव्यू लिखें</h2>
+                <p class="chk-subtitle">हमारे साथ अपना वास्तविक अनुभव साझा करें।</p>
             </div>
 
             <form id="addReviewForm" onsubmit="submitNewReview(event)">
@@ -578,24 +597,24 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Your Name</label>
-                    <input type="text" id="revName" class="form-input" placeholder="Eg: Rahul S." required>
+                    <label class="form-label">आपका नाम</label>
+                    <input type="text" id="revName" class="form-input" placeholder="जैसे: राहुल एस." required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Mobile Number (Kept Confidential)</label>
-                    <input type="tel" id="revPhone" class="form-input" placeholder="10 Digit Number" required pattern="[6-9]\d{9}">
+                    <label class="form-label">मोबाइल नंबर (गुप्त रखा जाएगा)</label>
+                    <input type="tel" id="revPhone" class="form-input" placeholder="10 अंकों का नंबर" required pattern="[6-9]\d{9}">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">City / Location</label>
-                    <input type="text" id="revLocation" class="form-input" placeholder="Eg: Mumbai" required>
+                    <label class="form-label">शहर / स्थान</label>
+                    <input type="text" id="revLocation" class="form-input" placeholder="जैसे: मुंबई" required>
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label">Your Experience</label>
-                    <textarea id="revText" class="form-input" placeholder="How did you feel after using it?..." required style="min-height: 80px;"></textarea>
+                    <label class="form-label">आपका अनुभव</label>
+                    <textarea id="revText" class="form-input" placeholder="उपयोग करने के बाद आपको कैसा लगा?..." required style="min-height: 80px;"></textarea>
                 </div>
                 
-                <button type="submit" id="submitReviewBtn" class="btn-submit-order" style="margin-top: 10px;">Post Review</button>
+                <button type="submit" id="submitReviewBtn" class="btn-submit-order" style="margin-top: 10px;">रिव्यू पोस्ट करें</button>
             </form>
         </div>
     </div>
@@ -614,15 +633,15 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
                     <img src="sukh.png" alt="Sukh Icon" class="footer-logo-img-icon">
                     <img src="sukhname.png" alt="Sukh Name" class="footer-logo-name-img">
                 </div>
-                <p class="footer-desc">Crafting pure, botanical wellness through ancient Ayurvedic wisdom and modern science to support your daily vitality.</p>
+                <p class="footer-desc">आपकी दैनिक ऊर्जा और जीवन शक्ति के लिए, प्राचीन आयुर्वेदिक ज्ञान और आधुनिक विज्ञान के माध्यम से शुद्ध और वानस्पतिक (botanical) स्वास्थ्य उत्पाद तैयार करना।</p>
                 
                 <div class="compliance-info">
                     <strong>Sukh Healthcare </strong><br>
-                    House No 23/786, Krishna Nagar,<br>
-                    Near Hindu Vidya Peeth School, Kath Mandi,<br>
-                    Sonipat, Haryana 131001, India<br>
-                    Email: healthcaresukh@gmail.com<br>
-                    Phone: +91-9306027053<br>
+                    मकान नंबर 23/786, कृष्णा नगर,<br>
+                    हिंदू विद्या पीठ स्कूल के पास, काठ मंडी,<br>
+                    सोनीपत, हरियाणा 131001, भारत<br>
+                    ईमेल: healthcaresukh@gmail.com<br>
+                    फोन: +91-9306027053<br>
                 </div>
 
                 <div class="social-links">
@@ -632,31 +651,98 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
             </div>
             
             <div class="footer-col">
-                <h4>Explore</h4>
-                <a href="kama-xxx-gold.html#">Shop Wellness</a>
-                <a href="trackorder.html">Track Order</a>
-                <a href="about-us.html">About Us</a>
-                <a href="contact-us.html">Contact Us</a>
+                <h4>एक्सप्लोर करें</h4>
+                <a href="kama-xxx-gold.html#">उत्पाद खरीदें</a>
+                <a href="trackorder.html">ऑर्डर ट्रैक करें</a>
+                <a href="about-us.html">हमारे बारे में</a>
+                <a href="contact-us.html">संपर्क करें</a>
             </div>
             
             <div class="footer-col">
-                <h4>Legal & Policies</h4>
-                <a href="terms-and-conditions.html">Terms & Conditions</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="refund-and-cancellation.html">Refund & Cancellation Policy</a>
-                <a href="shipping-and-delivery-policy.html">Shipping & Delivery Policy</a>
+                <h4>कानूनी और नीतियां</h4>
+                <a href="terms-and-conditions.html">नियम और शर्तें</a>
+                <a href="privacy-policy.html">गोपनीयता नीति</a>
+                <a href="refund-and-cancellation.html">रिफंड और कैंसिलेशन पॉलिसी</a>
+                <a href="shipping-and-delivery-policy.html">शिपिंग और डिलीवरी पॉलिसी</a>
             </div>
         </div>
 
         <div class="footer-disclaimer">
-            <strong>Disclaimer:</strong> The statements regarding these products have not been evaluated by the Food and Drug Administration or Ayush Ministry. These products are dietary supplements and are not intended to diagnose, treat, cure, or prevent any disease. Always consult with a qualified healthcare professional prior to beginning any diet, exercise program, or dietary supplement. Results may vary from person to person.
+            <strong>अस्वीकरण (Disclaimer):</strong> इन उत्पादों के संबंध में दिए गए बयानों का मूल्यांकन खाद्य एवं औषधि प्रशासन (FDA) या आयुष मंत्रालय द्वारा नहीं किया गया है। ये उत्पाद आहार अनुपूरक (dietary supplements) हैं और इनका उद्देश्य किसी भी बीमारी का निदान, उपचार, इलाज या रोकथाम करना नहीं है। कोई भी आहार, व्यायाम कार्यक्रम या सप्लीमेंट शुरू करने से पहले हमेशा किसी योग्य स्वास्थ्य पेशेवर/डॉक्टर से सलाह लें। परिणाम हर व्यक्ति में अलग-अलग हो सकते हैं।
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 SukhHealthcare.com All rights reserved.</p>
-            <div class="footer-legal"><span>Secure Payments via Razorpay</span></div>
+            <p>&copy; 2026 SukhHealthcare.com सर्वाधिकार सुरक्षित।</p>
+            <div class="footer-legal"><span>रेज़रपे द्वारा सुरक्षित पेमेंट</span></div>
         </div>
     </footer>
+
+    <!-- YOUTUBE IFRAME API SCRIPT -->
+    <script>
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var ytPlayer;
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('yt-player-container', {
+                videoId: 'FQZtOBR8OKI',
+                playerVars: {
+                    'playsinline': 1,
+                    'autoplay': 1,
+                    'mute': 1, // Muted by default to ensure autoplay works seamlessly in all browsers
+                    'rel': 0,
+                    'controls': 1,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Guarantee body can't scroll initially
+            document.body.style.overflow = 'hidden'; 
+            event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+            // When the video ends
+            if (event.data == YT.PlayerState.ENDED) {
+                document.getElementById('videoActionButtons').classList.add('show');
+            } 
+            // If the user replays it manually, hide buttons
+            else if (event.data == YT.PlayerState.PLAYING) {
+                document.getElementById('videoActionButtons').classList.remove('show');
+            }
+        }
+
+        function closeVideoModal() {
+            document.getElementById('initialVideoModal').classList.remove('active');
+            document.body.style.overflow = ''; // Restore page scrolling
+            if(ytPlayer && ytPlayer.pauseVideo) {
+                ytPlayer.pauseVideo();
+            }
+        }
+
+        function repeatVideo() {
+            document.getElementById('videoActionButtons').classList.remove('show');
+            if(ytPlayer && ytPlayer.seekTo) {
+                ytPlayer.seekTo(0);
+                ytPlayer.playVideo();
+            }
+        }
+
+        function videoToOrder() {
+            closeVideoModal();
+            openCheckoutModal(); // Call your existing checkout function
+        }
+    </script>
+    <!-- YOUTUBE IFRAME API SCRIPT END -->
 
     <script>
         const basePrice = 445; let currentQty = 1; let finalAmount = basePrice;
@@ -701,11 +787,8 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
             let cgst = itemBaseTotal * 0.06;
             let sgst = itemBaseTotal * 0.06;
             let itemTotalWithGst = itemBaseTotal + cgst + sgst;
-
-            let isExpress = document.getElementById('delExpress').checked;
-            let deliveryFee = isExpress ? 30 : 0;
             
-            finalAmount = itemTotalWithGst + deliveryFee;
+            finalAmount = itemTotalWithGst;
 
             const totalDisplay = document.getElementById('finalTotalDisplay');
             if(totalDisplay) totalDisplay.innerText = '₹' + finalAmount.toFixed(2);
@@ -719,7 +802,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
             if(sBase) sBase.innerText = '₹' + itemBaseTotal.toFixed(2);
             if(sCGST) sCGST.innerText = '₹' + cgst.toFixed(2);
             if(sSGST) sSGST.innerText = '₹' + sgst.toFixed(2);
-            if(sTotal) sTotal.innerText = '₹' + itemTotalWithGst.toFixed(2) + (isExpress ? ' (+₹30 Delivery)' : '');
+            if(sTotal) sTotal.innerText = '₹' + itemTotalWithGst.toFixed(2);
         };
 
         window.openCheckoutModal = function() {
@@ -789,16 +872,16 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
         fetchLiveReviews();
         
         const initialReviews = [
-            { name: "Rajesh Kumar", location: "Delhi", rating: 5, phoneLast4: "5421", date: Date.now() - (2 * 86400000), text: "Energy levels are much better throughout the day. Genuine product." },
-            { name: "Vikram S.", location: "Pune", rating: 4, phoneLast4: "8890", date: Date.now() - (5 * 86400000), text: "Fast delivery. Been using for 10 days, feeling good difference in stamina." },
-            { name: "Anil D.", location: "Jaipur", rating: 5, phoneLast4: "1123", date: Date.now() - (8 * 86400000), text: "Very satisfied. Helps a lot with stress and fatigue after long office hours." },
-            { name: "Manoj", location: "Lucknow", rating: 5, phoneLast4: "9988", date: Date.now() - (10 * 86400000), text: "100% pure ayurvedic feel. No side effects. Will order again." },
-            { name: "Sandeep", location: "Chandigarh", rating: 4, phoneLast4: "4456", date: Date.now() - (12 * 86400000), text: "Good product but delivery took 1 day extra. Quality is top notch though." },
-            { name: "Dinesh Patel", location: "Ahmedabad", rating: 5, phoneLast4: "3321", date: Date.now() - (15 * 86400000), text: "Highly recommended for men. Gives a good boost to overall vitality." },
-            { name: "Arun V.", location: "Bangalore", rating: 5, phoneLast4: "7654", date: Date.now() - (20 * 86400000), text: "Using it with warm milk as suggested. Sleeping better and waking up fresh." },
-            { name: "Suraj", location: "Patna", rating: 5, phoneLast4: "0098", date: Date.now() - (25 * 86400000), text: "Original stuff. Packing was very discreet which I really liked. Thanks Sukh Healthcare." },
-            { name: "Karan M.", location: "Hyderabad", rating: 4, phoneLast4: "2244", date: Date.now() - (28 * 86400000), text: "Price is slightly high but quality justifies it. Feeling energetic." },
-            { name: "Ravi T.", location: "Indore", rating: 5, phoneLast4: "5577", date: Date.now() - (30 * 86400000), text: "Best supplement I have tried so far. 5 stars from my side." }
+            { name: "Rajesh Kumar", location: "Delhi", rating: 5, phoneLast4: "5421", date: Date.now() - (2 * 86400000), text: "दिनभर एनर्जी लेवल बहुत अच्छा रहता है। असली प्रोडक्ट है।" },
+            { name: "Vikram S.", location: "Pune", rating: 4, phoneLast4: "8890", date: Date.now() - (5 * 86400000), text: "फास्ट डिलीवरी। 10 दिन से इस्तेमाल कर रहा हूं, स्टैमिना में अच्छा फर्क महसूस हो रहा है।" },
+            { name: "Anil D.", location: "Jaipur", rating: 5, phoneLast4: "1123", date: Date.now() - (8 * 86400000), text: "पूरी तरह संतुष्ट। ऑफिस के लंबे समय के काम के बाद होने वाले तनाव और थकान को दूर करने में बहुत मदद करता है।" },
+            { name: "Manoj", location: "Lucknow", rating: 5, phoneLast4: "9988", date: Date.now() - (10 * 86400000), text: "100% शुद्ध आयुर्वेदिक अहसास। कोई साइड इफेक्ट नहीं। मैं दोबारा ऑर्डर करूंगा।" },
+            { name: "Sandeep", location: "Chandigarh", rating: 4, phoneLast4: "4456", date: Date.now() - (12 * 86400000), text: "प्रोडक्ट अच्छा है लेकिन डिलीवरी में 1 दिन ज्यादा लगा। वैसे क्वालिटी बहुत बढ़िया है।" },
+            { name: "Dinesh Patel", location: "Ahmedabad", rating: 5, phoneLast4: "3321", date: Date.now() - (15 * 86400000), text: "पुरुषों के लिए बहुत बढ़िया। पूरे शरीर में अच्छी ऊर्जा देता है।" },
+            { name: "Arun V.", location: "Bangalore", rating: 5, phoneLast4: "7654", date: Date.now() - (20 * 86400000), text: "सुझाए अनुसार गर्म दूध के साथ ले रहा हूं। नींद अच्छी आ रही है और सुबह ताजगी महसूस होती है।" },
+            { name: "Suraj", location: "Patna", rating: 5, phoneLast4: "0098", date: Date.now() - (25 * 86400000), text: "एकदम असली चीज। पैकिंग बहुत गुप्त थी जो मुझे बहुत पसंद आई। सुख हेल्थकेयर का धन्यवाद।" },
+            { name: "Karan M.", location: "Hyderabad", rating: 4, phoneLast4: "2244", date: Date.now() - (28 * 86400000), text: "कीमत थोड़ी ज्यादा है लेकिन क्वालिटी इसे सही साबित करती है। काफी एनर्जेटिक महसूस कर रहा हूं।" },
+            { name: "Ravi T.", location: "Indore", rating: 5, phoneLast4: "5577", date: Date.now() - (30 * 86400000), text: "अब तक का सबसे अच्छा सप्लीमेंट जो मैंने ट्राई किया है। मेरी तरफ से 5 स्टार।" }
         ];
 
         function generateBulkReviews() {
@@ -806,7 +889,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
             const fNames = ["Amit", "Rahul", "Suresh", "Prakash", "Neeraj", "Vikas", "Sanjay", "Deepak", "Sunil", "Pawan", "Gaurav", "Naveen", "Sachin", "Mohit", "Kapil", "Vishal", "Ashish", "Ajay", "Ravi", "Kishore", "Saurabh", "Manish", "Gopal", "Tarun", "Nitin", "Praveen", "Hemant"];
             const lNames = ["Kumar", "Singh", "Sharma", "Patel", "Verma", "Yadav", "Gupta", "Choudhary", "Mishra", "Das", "D.", "S.", "V.", "M.", "T.", "Rao", "Reddy", "Joshi", "B.", "K."];
             const citiesList = ["Delhi", "Pune", "Jaipur", "Lucknow", "Chandigarh", "Ahmedabad", "Bangalore", "Patna", "Hyderabad", "Indore", "Mumbai", "Surat", "Kanpur", "Nagpur", "Bhopal", "Thane", "Agra", "Rajkot", "Varanasi", "Amritsar", "Ludhiana", "Meerut", "Noida", "Gurgaon", "Ghaziabad", "Faridabad"];
-            const revTexts = ["Good product. Can feel the difference in my body strength.", "Absolutely amazing results. Takes around 4-5 days to show effect.", "Original herbs inside. Doesn't cause acidity like other products.", "Very fast delivery to my location. Nice packaging.", "This is my third order. Great supplement for daily use.", "I was skeptical first, but it actually works! Full day energy.", "Authentic ayurvedic medicine. Safe to consume with no bad aftertaste.", "Highly effective for daily fatigue. Feeling 10 years younger.", "A bit expensive but worth the money. Health is wealth.", "It really helps calm the mind and gives physical strength.", "Superb product. Thank you Sukh Healthcare for this formulation.", "My stamina has improved significantly. Very happy with the purchase.", "Excellent product. Recommend to everyone dealing with work stress.", "Very fast effect, natural and safe.", "Using daily with milk. Highly satisfied with the result so far.", "Its an okay product. Packaging could be better.", "Average results so far, waiting for more time."];
+            const revTexts = ["अच्छा प्रोडक्ट है। शरीर में ताकत का अहसास होता है।", "बहुत ही शानदार परिणाम। असर दिखने में 4-5 दिन लगते हैं।", "इसमें असली जड़ी-बूटियां हैं। गैस या एसिडिटी नहीं करता।", "मेरे शहर में डिलीवरी बहुत तेज थी। पैकिंग भी अच्छी थी।", "यह मेरा तीसरा ऑर्डर है। रोज इस्तेमाल के लिए बेहतरीन।", "मुझे पहले डाउट था, लेकिन यह सच में काम करता है! पूरे दिन एनर्जी रहती है।", "असली आयुर्वेदिक दवा। खाने में सुरक्षित और कोई बुरा स्वाद नहीं।", "रोजाना की थकान के लिए बहुत असरदार। मैं खुद को काफी तरोताजा महसूस कर रहा हूं।", "थोड़ा महंगा है लेकिन पैसे वसूल हैं। सेहत ही असली दौलत है।", "यह सच में दिमाग को शांत करता है और शरीर को ताकत देता है।", "शानदार प्रोडक्ट। इस फॉर्मूले के लिए सुख हेल्थकेयर को धन्यवाद।", "मेरे स्टैमिना में काफी सुधार हुआ है। इसे खरीद कर बहुत खुश हूं।", "उत्कृष्ट प्रोडक्ट। काम के तनाव से जूझ रहे हर व्यक्ति को इसे लेना चाहिए।", "बहुत तेज असर, पूरी तरह प्राकृतिक और सुरक्षित।", "दूध के साथ रोज ले रहा हूं। अब तक के परिणाम से पूरी तरह संतुष्ट हूं।", "प्रोडक्ट ठीक है। पैकिंग थोड़ी और अच्छी हो सकती थी।", "अब तक एवरेज रिजल्ट है, थोड़ा और समय दे रहा हूं।"];
 
             const nowTs = Date.now(); const dayMs = 24 * 60 * 60 * 1000;
             for(let i=0; i<150; i++) {
@@ -847,7 +930,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
             const container = document.getElementById('reviewsListContainer'); if(!container) return; container.innerHTML = '';
             let filteredList = reviewsData; if(currentReviewFilter !== 'all') filteredList = reviewsData.filter(r => r.rating == parseInt(currentReviewFilter));
 
-            if(filteredList.length === 0) { container.innerHTML = '<div style="text-align:center; padding: 30px 10px; color: #888;"><i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; opacity:0.5;"></i><p>No reviews found for this rating.</p></div>'; return; }
+            if(filteredList.length === 0) { container.innerHTML = '<div style="text-align:center; padding: 30px 10px; color: #888;"><i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 10px; opacity:0.5;"></i><p>इस रेटिंग के लिए कोई रिव्यू नहीं मिला।</p></div>'; return; }
 
             filteredList.forEach(review => {
                 let starsHtml = ''; for(let i=0; i<5; i++) { if(i < review.rating) starsHtml += '<i class="fa-solid fa-star"></i>'; else starsHtml += '<i class="fa-regular fa-star" style="color: #ddd;"></i>'; }
@@ -886,7 +969,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
         window.submitNewReview = function(e) {
             e.preventDefault();
             const name = document.getElementById('revName').value.trim(); const phoneStr = document.getElementById('revPhone').value.trim(); const location = document.getElementById('revLocation').value.trim(); const text = document.getElementById('revText').value.trim();
-            if(!name || !phoneStr || !location || !text) { showNotification("Please fill all review fields."); return; }
+            if(!name || !phoneStr || !location || !text) { showNotification("कृपया रिव्यू के सभी फील्ड भरें।"); return; }
             const phoneLast4 = phoneStr.length >= 4 ? phoneStr.slice(-4) : "XXXX";
 
             reviewsData.unshift({ name: name, location: location, phoneLast4: phoneLast4, rating: selectedStarRating, date: Date.now(), text: text, isLive: true });
@@ -896,7 +979,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
             document.getElementById('addReviewForm').reset(); selectedStarRating = 5;
             starIcons.forEach(s => { s.classList.add('active', 'fa-solid'); s.classList.remove('fa-regular'); });
             
-            closeWriteReviewModal(); showNotification("Review posted successfully!");
+            closeWriteReviewModal(); showNotification("रिव्यू सफलतापूर्वक पोस्ट हो गया!");
 
             const reviewSheetData = { action: 'submitReview', name: name, phone: phoneStr, location: location, rating: selectedStarRating, text: text, date: new Date().toISOString() };
             fetch(GOOGLE_SCRIPT_WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(reviewSheetData) }).catch(err => console.log("Review sync error:", err));
@@ -904,13 +987,13 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
 
         window.submitOrder = async function(e) {
             e.preventDefault();
-            const name = document.getElementById('chkName').value.trim(); const phone = document.getElementById('chkPhone').value.trim(); const email = document.getElementById('chkEmail').value.trim(); const address = document.getElementById('chkAddress').value.trim(); const isExpress = document.getElementById('delExpress').checked;
+            const name = document.getElementById('chkName').value.trim(); const phone = document.getElementById('chkPhone').value.trim(); const email = document.getElementById('chkEmail').value.trim(); const address = document.getElementById('chkAddress').value.trim();
             setFormLoading(true);
 
-            if (typeof Razorpay === 'undefined') { showNotification("Payment Gateway blocked. Please disable your Ad-Blocker/Brave Shields and refresh."); setFormLoading(false); return; }
+            if (typeof Razorpay === 'undefined') { showNotification("पेमेंट गेटवे ब्लॉक है। कृपया अपना एड-ब्लॉकर/ब्रेव शील्ड बंद करें और रिफ्रेश करें।"); setFormLoading(false); return; }
 
             const uniqueOrderId = generateCustomOrderId(name, phone);
-            const deliveryStr = isExpress ? "Express (2-3 Days, +₹30)" : "Standard (5-7 Days)";
+            const deliveryStr = "Standard (5-7 Days)";
             const productDetails = `Kama-XXX-Gold (Qty: ${currentQty}) | Delivery: ${deliveryStr}`;
             const sheetQuantity = `${currentQty} (ID: ${uniqueOrderId})`;
 
@@ -928,7 +1011,7 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
                     "currency": "INR", "name": "Sukh Healthcare", "description": productDetails, "image": "sukh.png",
                     "handler": function (response) {
                         const firstName = name.split(' ')[0];
-                        document.getElementById('successTitle').innerText = `Welcome ${firstName}, Order Successful!`;
+                        document.getElementById('successTitle').innerText = `बधाई ${firstName}, ऑर्डर सफल रहा!`;
                         document.getElementById('displayOrderId').innerText = uniqueOrderId;
                         closeCheckoutModal();
                         
@@ -947,13 +1030,13 @@ src="https://www.facebook.com/tr?id=1304818407936934&ev=PageView&noscript=1"/>
                     "prefill": { "name": name, "email": email, "contact": phone },
                     "notes": { "shipping_address": address, "custom_order_id": uniqueOrderId },
                     "theme": { "color": "#1A362D" },
-                    "modal": { "ondismiss": function() { setFormLoading(false); showNotification("Payment was cancelled. Please try again."); } }
+                    "modal": { "ondismiss": function() { setFormLoading(false); showNotification("पेमेंट कैंसिल हो गया। कृपया पुनः प्रयास करें।"); } }
                 };
                 var rzp1 = new Razorpay(razorpayOptions);
-                rzp1.on('payment.failed', function (res){ setFormLoading(false); showNotification("Payment Failed: " + res.error.description); });
+                rzp1.on('payment.failed', function (res){ setFormLoading(false); showNotification("पेमेंट विफल रहा: " + res.error.description); });
                 rzp1.open();
             } catch (error) {
-                console.error("Error:", error); showNotification("Gateway error. Check connection."); setFormLoading(false);
+                console.error("Error:", error); showNotification("गेटवे एरर। अपना इंटरनेट कनेक्शन चेक करें।"); setFormLoading(false);
             }
         };
     </script>
