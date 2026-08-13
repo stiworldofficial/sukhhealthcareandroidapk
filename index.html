@@ -541,6 +541,7 @@
             margin-top: 5px;
         }
 
+        /* === MODAL STYLES - COMPACT FORM === */
         .modal-overlay { 
             position: fixed; 
             inset: 0; 
@@ -586,30 +587,44 @@
             z-index: 10; 
         }
 
-        .form-group { margin-bottom: 1rem; }
-        .form-label { display: block; font-weight: 500; margin-bottom: 5px; color: #333; font-size: 0.9rem; }
+        /* FORM COMPACT: height reduced ~30%, spacing reduced ~40% */
+        .form-group { 
+            margin-bottom: 0.6rem;  /* was 1rem -> reduced ~40% */
+        }
+        .form-label { 
+            display: block; 
+            font-weight: 500; 
+            margin-bottom: 3px;  /* was 5px -> reduced ~40% */
+            color: #333; 
+            font-size: 0.85rem; 
+        }
         .form-input { 
             width: 100%; 
-            padding: 10px; 
+            padding: 7px 10px;   /* was 10px -> reduced ~30% */
             border: 1px solid var(--color-border); 
             border-radius: var(--radius-md); 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             font-family: var(--font-main); 
+            height: 38px;        /* explicit height ~30% less than typical 50px */
         }
         .form-input:focus { outline: none; border-color: var(--color-brand); }
-        textarea.form-input { min-height: 80px; resize: vertical; }
+        textarea.form-input { 
+            min-height: 60px;    /* was 80px -> reduced 25% */
+            resize: vertical; 
+            height: auto;
+        }
         
         .btn-submit-order { 
             width: 100%; 
             background: var(--color-brand); 
             color: #fff; 
-            padding: 14px; 
+            padding: 12px;      /* was 14px -> slightly reduced */
             border: none; 
             border-radius: var(--radius-md); 
-            font-size: 1.05rem; 
+            font-size: 1rem; 
             font-weight: 600; 
             cursor: pointer; 
-            margin-top: 10px; 
+            margin-top: 8px;    /* reduced from 10px */
         }
 
         /* SUCCESS MODAL */
@@ -793,7 +808,7 @@
             padding: 10px; 
             border-radius: 8px; 
             border: 1px solid #ddd; 
-            margin-bottom: 1.2rem; 
+            margin-bottom: 1rem; 
         }
         .del-option { 
             display: flex; 
@@ -816,34 +831,36 @@
             align-items: center; 
             font-size: 1rem; 
             font-weight: 700; 
-            margin-bottom: 1.2rem; 
+            margin-bottom: 1rem; 
         }
         .cart-item-preview {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 10px 0;
+            padding: 8px 0;      /* reduced from 10px */
             border-bottom: 1px solid #eee;
-            margin-bottom: 10px;
+            margin-bottom: 8px;   /* reduced from 10px */
         }
         .cart-item-preview img {
-            width: 60px;
-            height: 60px;
+            width: 50px;          /* reduced from 60px */
+            height: 50px;
             object-fit: contain;
             background: #f9f9f9;
             border-radius: 6px;
         }
         .cart-item-details {
             flex: 1;
-            font-size: 0.9rem;
+            font-size: 0.85rem;   /* slightly smaller */
         }
         .cart-item-details strong {
             display: block;
             font-weight: 600;
             color: #111;
+            font-size: 0.9rem;
         }
         .cart-item-details span {
             color: #555;
+            font-size: 0.8rem;
         }
 
         /* ===== RESPONSIVE BREAKPOINTS ===== */
@@ -854,6 +871,7 @@
             .p-title { font-size: 1.2rem; }
             .p-price { font-size: 1.4rem; }
             .banner-section { border-radius: 8px; }
+            .checkout-modal { padding: 1rem; }
         }
 
         @media (min-width: 641px) and (max-width: 768px) {
@@ -1217,23 +1235,23 @@
     <div class="modal-overlay" id="checkoutModalOverlay">
         <div class="checkout-modal">
             <button type="button" class="modal-close" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
-            <h2 style="font-size: 1.5rem; color: var(--color-brand); margin-bottom: 5px; text-align: center; font-weight: 600;">Secure Checkout</h2>
-            <p style="text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 20px;">Please enter your delivery details accurately.</p>
+            <h2 style="font-size: 1.3rem; color: var(--color-brand); margin-bottom: 4px; text-align: center; font-weight: 600;">Secure Checkout</h2>
+            <p style="text-align: center; color: #666; font-size: 0.8rem; margin-bottom: 12px;">Please enter your delivery details accurately.</p>
 
             <!-- Cart Item Preview -->
             <div class="cart-item-preview">
-                <img src="kama-xxx-initial.webp" alt="Product" id="checkoutProductImg" onerror="this.src='https://placehold.co/60x60/f0f0f0/333?text=Product'">
+                <img src="kama-xxx-initial.webp" alt="Product" id="checkoutProductImg" onerror="this.src='https://placehold.co/50x50/f0f0f0/333?text=Product'">
                 <div class="cart-item-details">
                     <strong>Sukh Kama-XXX-Gold</strong>
                     <span id="checkoutQtyDisplay">Qty: 1</span> | <span id="checkoutPriceDisplay">₹445.00</span>
                 </div>
             </div>
 
-            <div class="product-privacy-notice" style="margin-bottom: 20px; border-radius: 8px; padding: 12px;">
-                <i class="fa-solid fa-box-archive" style="font-size: 1.2rem;"></i>
+            <div class="product-privacy-notice" style="margin-bottom: 12px; border-radius: 8px; padding: 10px; background: #F0F8F5;">
+                <i class="fa-solid fa-box-archive" style="font-size: 1rem;"></i>
                 <div>
-                    <h4 style="font-size: 0.9rem; margin-bottom: 2px;">100% गुप्त पैकिंग</h4>
-                    <p style="font-size: 0.8rem; margin: 0;">सादे बॉक्स में डिलीवरी।</p>
+                    <h4 style="font-size: 0.8rem; margin-bottom: 2px;">100% गुप्त पैकिंग</h4>
+                    <p style="font-size: 0.75rem; margin: 0;">सादे बॉक्स में डिलीवरी।</p>
                 </div>
             </div>
 
@@ -1256,14 +1274,13 @@
                 </div>
                 
                 <div class="delivery-box" style="display: none;">
-                    <!-- removed express delivery option -->
                     <div class="del-option">
                         <span>Standard Delivery (5-7 Days)</span>
                         <span style="color: #34C759; font-weight: 700;">FREE</span>
                     </div>
                 </div>
 
-                <div style="background: #f9f9f9; padding: 12px; border-radius: 8px; margin-bottom: 15px; font-weight: 600; display: flex; justify-content: space-between; border: 1px solid var(--color-border);">
+                <div style="background: #f9f9f9; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; font-weight: 600; display: flex; justify-content: space-between; border: 1px solid var(--color-border); font-size: 0.95rem;">
                     <span>Total to pay:</span> <span id="modalTotalDisp">₹445.00</span>
                 </div>
 
@@ -1272,7 +1289,7 @@
                     <span id="btnLoader" style="display: none;"><i class="fa-solid fa-spinner fa-spin"></i> Processing...</span>
                 </button>
                 
-                <p style="text-align: center; font-size: 0.75rem; color: #888; margin-top: 15px;">
+                <p style="text-align: center; font-size: 0.7rem; color: #888; margin-top: 10px;">
                     By placing this order, you agree to our Terms & Privacy Policy.<br>Payments processed securely via Razorpay.
                 </p>
             </form>
@@ -1434,13 +1451,11 @@
             let cgst = itemBaseTotal * 0.06;
             let sgst = itemBaseTotal * 0.06;
             let itemTotalWithGst = itemBaseTotal + cgst + sgst;
-            // No express delivery option
             finalAmount = itemTotalWithGst;
 
             const totalDisplay = document.getElementById('modalTotalDisp');
             if(totalDisplay) totalDisplay.innerText = '₹' + finalAmount.toFixed(2);
             
-            // Update checkout preview
             const qtyDisplay = document.getElementById('checkoutQtyDisplay');
             const priceDisplay = document.getElementById('checkoutPriceDisplay');
             if(qtyDisplay) qtyDisplay.innerText = 'Qty: ' + currentQty;
@@ -1450,7 +1465,6 @@
         function addToCart() {
             cartCount += currentQty;
             document.getElementById('cartBadge').innerText = cartCount;
-            // Open checkout modal with updated qty
             openCheckoutModal();
         }
 
@@ -1482,7 +1496,6 @@
         // ============================================
         window.openCheckoutModal = function() {
             calculateTotal();
-            // Update checkout preview image
             const img = document.getElementById('checkoutProductImg');
             if(img) img.src = productImages[activeImageIndex] || 'kama-xxx-initial.webp';
             const overlay = document.getElementById('checkoutModalOverlay');
@@ -1562,7 +1575,6 @@
             const deliveryStr = "Standard (5-7 Days)";
             const productDetails = `Kama-XXX-Gold (Qty: ${currentQty}) | Delivery: ${deliveryStr}`;
             
-            // Calculate final amount
             let itemBaseTotal = basePrice * currentQty; 
             let cgst = itemBaseTotal * 0.06;
             let sgst = itemBaseTotal * 0.06;
@@ -1584,7 +1596,6 @@
             };
 
             try {
-                // Send to Google Sheet in background
                 try {
                     fetch(GOOGLE_SCRIPT_WEB_APP_URL, { 
                         method: 'POST', 
@@ -1602,7 +1613,6 @@
                     "description": productDetails, 
                     "image": "sukh.png",
                     "handler": function (response) {
-                        const firstName = name.split(' ')[0];
                         document.getElementById('displayOrderId').innerText = uniqueOrderId;
                         closeCheckoutModal();
                         
@@ -1797,7 +1807,6 @@
                 container.insertAdjacentHTML('beforeend', html);
             });
 
-            // Update "See More" button visibility
             const seeMoreBtn = document.getElementById('seeMoreReviewsBtn');
             if(seeMoreBtn) {
                 if(reviewDisplayLimit >= allReviews.length) {
@@ -1808,7 +1817,6 @@
             }
         }
 
-        // See More Reviews
         document.getElementById('seeMoreReviewsBtn').addEventListener('click', function() {
             reviewDisplayLimit += 10;
             if(reviewDisplayLimit > allReviews.length) reviewDisplayLimit = allReviews.length;
@@ -1816,7 +1824,6 @@
             renderReviewsList();
         });
 
-        // Initialize fetching
         document.addEventListener("DOMContentLoaded", () => {
             fetchLiveReviews();
             startAutoSlide();
