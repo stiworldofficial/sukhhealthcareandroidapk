@@ -151,7 +151,7 @@
             width: 100%; 
             height: 100%; 
             object-fit: contain; 
-            transition: opacity 0.3s ease; 
+            transition: opacity 0.8s ease; 
             max-width: 512px;
             max-height: 512px;
         }
@@ -541,25 +541,6 @@
             margin-top: 5px;
         }
 
-        .whatsapp-float {
-            position: fixed; 
-            width: 55px; 
-            height: 55px; 
-            bottom: 100px; 
-            left: 15px;
-            background-color: #25d366; 
-            color: #FFF; 
-            border-radius: 50%;
-            text-align: center; 
-            font-size: 32px; 
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
-            z-index: 3500; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            text-decoration: none;
-        }
-
         .modal-overlay { 
             position: fixed; 
             inset: 0; 
@@ -837,6 +818,33 @@
             font-weight: 700; 
             margin-bottom: 1.2rem; 
         }
+        .cart-item-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+        }
+        .cart-item-preview img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+        .cart-item-details {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        .cart-item-details strong {
+            display: block;
+            font-weight: 600;
+            color: #111;
+        }
+        .cart-item-details span {
+            color: #555;
+        }
 
         /* ===== RESPONSIVE BREAKPOINTS ===== */
         @media (max-width: 640px) {
@@ -871,7 +879,6 @@
             .footer-col { flex: 1; min-width: 200px; }
             .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
             .store-footer { padding: 4rem 3rem 2rem 3rem; margin-bottom: 0; }
-            .whatsapp-float { left: 20px; }
         }
 
         @media (min-width: 1025px) {
@@ -880,7 +887,6 @@
             .p-title { font-size: 2rem; }
             .p-price { font-size: 2.2rem; }
             .store-footer { padding: 5rem 4rem 2rem 4rem; }
-            .whatsapp-float { left: 30px; bottom: 110px; }
             .footer-top { 
                 flex-direction: row; 
                 flex-wrap: wrap; 
@@ -892,6 +898,9 @@
             .footer-col { flex: 1; min-width: 200px; }
             .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
         }
+
+        /* hide whatsapp float */
+        .whatsapp-float { display: none !important; }
     </style>
 </head>
 <body>
@@ -917,7 +926,7 @@
     <main class="main-container">
         <section class="gallery-section">
             <div class="main-img-container" id="swipeContainer">
-                <img id="mainImage" src="fssaih.png" alt="Kama-XXX-Gold" onerror="this.src='https://placehold.co/512x512/f0f0f0/333?text=Product'">
+                <img id="mainImage" src="kama-xxx-initial.webp" alt="Kama-XXX-Gold" onerror="this.src='https://placehold.co/512x512/f0f0f0/333?text=Product'">
             </div>
             <div class="gallery-dots">
                 <div class="dot active" onclick="changeGalleryImage(0)"></div>
@@ -1191,6 +1200,10 @@
             <div id="dynamic-reviews-container">
                 <div style="text-align: center; color: #888; padding: 20px;"><i class="fa-solid fa-spinner fa-spin"></i> लोड हो रहा है...</div>
             </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="seeMoreReviewsBtn" class="btn-view-reviews" style="background: var(--color-brand); color: #fff; border: none; padding: 10px 30px; border-radius: 25px; font-size: 1rem; cursor: pointer; font-family: var(--font-main);">See More Reviews</button>
+            </div>
         </section>
     </main>
 
@@ -1199,12 +1212,8 @@
             <button type="button" class="btn-add-cart" onclick="addToCart()">ADD TO CART</button>
             <button type="button" class="btn-buy-now" onclick="openCheckoutModal()">BUY IT NOW</button>
         </div>
-        <div class="domain-tag">sukhhealthcare.com</div>
+        
     </div>
-
-    <a href="https://wa.me/919306027053" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
 
     <!-- CHECKOUT MODAL -->
     <div class="modal-overlay" id="checkoutModalOverlay">
@@ -1212,6 +1221,15 @@
             <button type="button" class="modal-close" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
             <h2 style="font-size: 1.5rem; color: var(--color-brand); margin-bottom: 5px; text-align: center; font-weight: 600;">Secure Checkout</h2>
             <p style="text-align: center; color: #666; font-size: 0.9rem; margin-bottom: 20px;">Please enter your delivery details accurately.</p>
+
+            <!-- Cart Item Preview -->
+            <div class="cart-item-preview">
+                <img src="kama-xxx-initial.webp" alt="Product" id="checkoutProductImg" onerror="this.src='https://placehold.co/60x60/f0f0f0/333?text=Product'">
+                <div class="cart-item-details">
+                    <strong>Sukh Kama-XXX-Gold</strong>
+                    <span id="checkoutQtyDisplay">Qty: 1</span> | <span id="checkoutPriceDisplay">₹445.00</span>
+                </div>
+            </div>
 
             <div class="product-privacy-notice" style="margin-bottom: 20px; border-radius: 8px; padding: 12px;">
                 <i class="fa-solid fa-box-archive" style="font-size: 1.2rem;"></i>
@@ -1239,15 +1257,11 @@
                     <textarea id="chkAddress" class="form-input" required minlength="10"></textarea>
                 </div>
                 
-                <div class="delivery-box">
-                    <label style="display:block; font-weight: 700; margin-bottom: 6px; font-size: 0.85rem;">Delivery Speed</label>
+                <div class="delivery-box" style="display: none;">
+                    <!-- removed express delivery option -->
                     <div class="del-option">
-                        <label><input type="radio" name="deliveryMethod" id="delStandard" value="standard" checked onchange="calculateTotal()"> Standard Delivery (5-7 Days)</label>
+                        <span>Standard Delivery (5-7 Days)</span>
                         <span style="color: #34C759; font-weight: 700;">FREE</span>
-                    </div>
-                    <div class="del-option">
-                        <label><input type="radio" name="deliveryMethod" id="delExpress" value="express" onchange="calculateTotal()"> Express Delivery (2-3 Days)</label>
-                        <span style="color: var(--color-accent); font-weight: 700;">+₹30</span>
                     </div>
                 </div>
 
@@ -1345,14 +1359,16 @@
 
     <script>
         // ============================================
-        // GALLERY
+        // GALLERY - Auto Slide every 3 seconds
         // ============================================
         const productImages = ['kama-xxx-initial.webp', 'kama-xxx-one.webp', 'kama-xxx-two.webp', 'kama-xxx-three.webp', 'kama-xxx-four.webp'];
         let activeImageIndex = 0;
+        let autoSlideInterval;
         
         function changeGalleryImage(index) { 
             activeImageIndex = index; 
             updateGalleryUI(); 
+            resetAutoSlide();
         }
         
         function updateGalleryUI() {
@@ -1371,6 +1387,21 @@
             });
         }
 
+        function startAutoSlide() {
+            if (autoSlideInterval) clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(() => {
+                activeImageIndex = (activeImageIndex + 1) % productImages.length;
+                updateGalleryUI();
+            }, 3000);
+        }
+
+        function resetAutoSlide() {
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+        }
+
         const swipeContainer = document.getElementById('swipeContainer');
         if(swipeContainer) {
             let touchStartX = 0; let touchEndX = 0;
@@ -1378,8 +1409,8 @@
             swipeContainer.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleSwipeGestures(); }, { passive: true });
             function handleSwipeGestures() {
                 const swipeThreshold = 50; 
-                if (touchEndX < touchStartX - swipeThreshold) { activeImageIndex = (activeImageIndex + 1) % productImages.length; updateGalleryUI(); }
-                if (touchEndX > touchStartX + swipeThreshold) { activeImageIndex = (activeImageIndex - 1 + productImages.length) % productImages.length; updateGalleryUI(); }
+                if (touchEndX < touchStartX - swipeThreshold) { activeImageIndex = (activeImageIndex + 1) % productImages.length; updateGalleryUI(); resetAutoSlide(); }
+                if (touchEndX > touchStartX + swipeThreshold) { activeImageIndex = (activeImageIndex - 1 + productImages.length) % productImages.length; updateGalleryUI(); resetAutoSlide(); }
             }
         }
 
@@ -1405,20 +1436,24 @@
             let cgst = itemBaseTotal * 0.06;
             let sgst = itemBaseTotal * 0.06;
             let itemTotalWithGst = itemBaseTotal + cgst + sgst;
-
-            let isExpress = document.getElementById('delExpress') ? document.getElementById('delExpress').checked : false;
-            let deliveryFee = isExpress ? 30 : 0;
-            
-            finalAmount = itemTotalWithGst + deliveryFee;
+            // No express delivery option
+            finalAmount = itemTotalWithGst;
 
             const totalDisplay = document.getElementById('modalTotalDisp');
             if(totalDisplay) totalDisplay.innerText = '₹' + finalAmount.toFixed(2);
+            
+            // Update checkout preview
+            const qtyDisplay = document.getElementById('checkoutQtyDisplay');
+            const priceDisplay = document.getElementById('checkoutPriceDisplay');
+            if(qtyDisplay) qtyDisplay.innerText = 'Qty: ' + currentQty;
+            if(priceDisplay) priceDisplay.innerText = '₹' + (basePrice * currentQty).toFixed(2);
         }
 
         function addToCart() {
             cartCount += currentQty;
             document.getElementById('cartBadge').innerText = cartCount;
-            showNotification(`${currentQty} item(s) added to cart.`);
+            // Open checkout modal with updated qty
+            openCheckoutModal();
         }
 
         // ============================================
@@ -1449,6 +1484,9 @@
         // ============================================
         window.openCheckoutModal = function() {
             calculateTotal();
+            // Update checkout preview image
+            const img = document.getElementById('checkoutProductImg');
+            if(img) img.src = productImages[activeImageIndex] || 'kama-xxx-initial.webp';
             const overlay = document.getElementById('checkoutModalOverlay');
             if(overlay) { overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
         };
@@ -1508,7 +1546,6 @@
             const phone = document.getElementById('chkPhone').value.trim(); 
             const email = document.getElementById('chkEmail').value.trim(); 
             const address = document.getElementById('chkAddress').value.trim(); 
-            const isExpress = document.getElementById('delExpress') ? document.getElementById('delExpress').checked : false;
             
             if(!name || !phone || !email || !address) {
                 showNotification("Please fill all required fields.");
@@ -1524,16 +1561,15 @@
             }
 
             const uniqueOrderId = generateCustomOrderId(name, phone);
-            const deliveryStr = isExpress ? "Express (2-3 Days, +₹30)" : "Standard (5-7 Days)";
+            const deliveryStr = "Standard (5-7 Days)";
             const productDetails = `Kama-XXX-Gold (Qty: ${currentQty}) | Delivery: ${deliveryStr}`;
             
-            // Calculate final amount again
+            // Calculate final amount
             let itemBaseTotal = basePrice * currentQty; 
             let cgst = itemBaseTotal * 0.06;
             let sgst = itemBaseTotal * 0.06;
             let itemTotalWithGst = itemBaseTotal + cgst + sgst;
-            let deliveryFee = isExpress ? 30 : 0;
-            let totalAmount = itemTotalWithGst + deliveryFee;
+            let totalAmount = itemTotalWithGst;
 
             const orderData = { 
                 action: 'createOrder', 
@@ -1624,10 +1660,12 @@
         };
 
         // ============================================
-        // REVIEWS LOGIC
+        // REVIEWS LOGIC with "See More" button
         // ============================================
         let reviewsData = []; 
         let liveReviews = [];
+        let reviewDisplayLimit = 10;
+        let allReviews = [];
 
         async function fetchLiveReviews() {
             try {
@@ -1687,7 +1725,8 @@
             }
             
             combined.sort((a,b) => b.date - a.date); 
-            reviewsData = combined; 
+            allReviews = combined;
+            reviewsData = combined.slice(0, reviewDisplayLimit);
             
             const baseMockCount = 10409;
             const totalDisplayCount = baseMockCount + liveReviews.length;
@@ -1726,7 +1765,7 @@
             if(!container) return; 
             container.innerHTML = '';
             
-            const displayList = reviewsData.slice(0, 10);
+            const displayList = reviewsData.slice(0, reviewDisplayLimit);
 
             displayList.forEach(review => {
                 let starsHtml = ''; 
@@ -1759,11 +1798,31 @@
                 `;
                 container.insertAdjacentHTML('beforeend', html);
             });
+
+            // Update "See More" button visibility
+            const seeMoreBtn = document.getElementById('seeMoreReviewsBtn');
+            if(seeMoreBtn) {
+                if(reviewDisplayLimit >= allReviews.length) {
+                    seeMoreBtn.style.display = 'none';
+                } else {
+                    seeMoreBtn.style.display = 'block';
+                }
+            }
         }
+
+        // See More Reviews
+        document.getElementById('seeMoreReviewsBtn').addEventListener('click', function() {
+            reviewDisplayLimit += 10;
+            if(reviewDisplayLimit > allReviews.length) reviewDisplayLimit = allReviews.length;
+            reviewsData = allReviews.slice(0, reviewDisplayLimit);
+            renderReviewsList();
+        });
 
         // Initialize fetching
         document.addEventListener("DOMContentLoaded", () => {
             fetchLiveReviews();
+            startAutoSlide();
+            calculateTotal();
         });
     </script>
 </body>
