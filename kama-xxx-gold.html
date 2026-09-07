@@ -241,19 +241,20 @@
                 </ul>
 
                 <!-- Actions Container -->
-                <div class="flex flex-col sm:flex-row gap-4 mb-6">
-                    <!-- Qty -->
-                    <div class="flex items-center border border-gray-300 rounded-lg h-12 w-full sm:w-32 bg-white">
+                <div class="flex flex-col gap-3 mb-6">
+                    
+                    <!-- Qty (Kept as before, but width adjusted to fit nicely if needed, though usually it's fine) -->
+                    <div class="flex items-center border border-gray-300 rounded-lg h-12 w-32 bg-white mx-auto sm:mx-0 mb-2">
                         <button type="button" class="w-10 h-full flex items-center justify-center text-gray-600 hover:bg-gray-50 rounded-l-lg transition" onclick="updateQty(-1)"><i class="fa-solid fa-minus text-xs"></i></button>
                         <input type="number" id="productQty" class="w-full h-full text-center font-semibold text-gray-900 border-none bg-transparent outline-none p-0" value="1" readonly>
                         <button type="button" class="w-10 h-full flex items-center justify-center text-gray-600 hover:bg-gray-50 rounded-r-lg transition" onclick="updateQty(1)"><i class="fa-solid fa-plus text-xs"></i></button>
                     </div>
 
                     <!-- Add to Cart -->
-                    <button class="flex-1 h-12 border-2 border-brand text-brand font-bold text-sm rounded-lg hover:bg-gray-50 transition uppercase tracking-wide" onclick="addToCart()">Add to Cart</button>
+                    <button class="w-full py-3 sm:py-3.5 border-2 border-brand text-brand font-bold text-[15px] rounded-full hover:bg-gray-50 transition uppercase tracking-wide bg-white" onclick="addToCart()">Add to Cart</button>
                     
                     <!-- Buy Now -->
-                    <button class="flex-1 h-12 bg-brand text-white font-bold text-sm rounded-lg hover:bg-brandHover transition uppercase tracking-wide shadow-lg shadow-brand/20" onclick="openCheckoutModal()">Buy It Now</button>
+                    <button class="w-full py-3 sm:py-3.5 bg-brand text-white font-bold text-[15px] rounded-full hover:bg-brandHover transition uppercase tracking-wide shadow-[0_4px_10px_rgba(26,54,45,0.4)]" onclick="openCheckoutModal()">Buy It Now</button>
                 </div>
 
                 <!-- Trust Badges -->
@@ -420,16 +421,16 @@
                 <div class="text-xs opacity-80">Fast & Secure Checkout</div>
             </div>
             <div class="flex gap-3 w-full sm:w-auto">
-                 <button class="flex-1 sm:flex-none border border-white/30 bg-transparent text-white px-4 py-2.5 rounded-lg font-bold hover:bg-white/10 transition whitespace-nowrap text-sm" onclick="addToCart()">ADD TO CART</button>
-                 <button class="flex-1 sm:flex-none bg-white text-brand px-6 py-2.5 rounded-lg font-bold shadow hover:bg-gray-100 transition whitespace-nowrap text-sm" onclick="openCheckoutModal()">BUY IT NOW</button>
+                 <button class="flex-1 sm:flex-none border-2 border-white/80 bg-transparent text-white px-6 py-2.5 rounded-full font-bold hover:bg-white/10 transition whitespace-nowrap text-[13px] tracking-wide" onclick="addToCart()">ADD TO CART</button>
+                 <button class="flex-1 sm:flex-none bg-white text-brand px-8 py-2.5 rounded-full font-bold shadow hover:bg-gray-100 transition whitespace-nowrap text-[13px] tracking-wide" onclick="openCheckoutModal()">BUY IT NOW</button>
             </div>
         </div>
     </div>
     
-    <!-- Mobile specific sticky bar -->
-    <div class="fixed bottom-0 left-0 w-full z-40 bg-white border-t border-gray-200 p-3 flex gap-3 md:hidden shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
-        <button class="flex-1 border-2 border-brand text-brand rounded-lg font-bold text-sm tracking-wide" onclick="addToCart()">ADD TO CART</button>
-        <button class="flex-1 bg-brand text-white rounded-lg font-bold text-sm tracking-wide py-3.5" onclick="openCheckoutModal()">BUY IT NOW</button>
+    <!-- Mobile specific sticky bar (Redesigned based on the image) -->
+    <div class="fixed bottom-0 left-0 w-full z-40 bg-white/95 backdrop-blur-sm border-t border-gray-200 px-4 py-3 flex flex-col gap-2.5 md:hidden shadow-[0_-10px_20px_-10px_rgba(0,0,0,0.1)] pb-5">
+        <button class="w-full py-3 border-2 border-brand text-brand bg-white rounded-full font-bold text-[15px] tracking-wide" onclick="addToCart()">ADD TO CART</button>
+        <button class="w-full py-3 bg-brand text-white rounded-full font-bold text-[15px] tracking-wide shadow-[0_4px_10px_rgba(26,54,45,0.4)]" onclick="openCheckoutModal()">BUY IT NOW</button>
     </div>
 
     <!-- CHECKOUT MODAL -->
@@ -662,9 +663,12 @@
                 else thumb.classList.remove('active'); 
             });
             
-            // Scroll thumbnail into view if needed
-            if(thumbs[activeImageIndex]) {
-                thumbs[activeImageIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            // Scroll thumbnail smoothly without causing page to jump
+            const thumbsContainer = document.getElementById('thumbnailsContainer');
+            if(thumbsContainer && thumbs[activeImageIndex]) {
+                const thumb = thumbs[activeImageIndex];
+                const scrollLeft = thumb.offsetLeft - (thumbsContainer.offsetWidth / 2) + (thumb.offsetWidth / 2);
+                thumbsContainer.scrollTo({ left: scrollLeft, behavior: 'smooth' });
             }
         }
 
