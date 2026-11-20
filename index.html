@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>AURA GOLD | 4K Luxury OTT Platform</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,12 +39,63 @@
     </script>
 
     <style>
+        /* Android WebView Safe-Area Variables (Status Bar & System Navigation Bar) */
+        :root {
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-left: env(safe-area-inset-left, 0px);
+            --safe-right: env(safe-area-inset-right, 0px);
+        }
+
+        /* Full-Height App Shell Layout for Android WebView (Prevents Header & Footer Overlay) */
+        html {
+            height: 100%;
+            overflow: hidden;
+        }
+
         /* Strict Color Palette & Golden Shine Custom Styles */
         body {
             background-color: #16161A;
             color: #FFFFFF;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
+            height: 100%;
+            height: 100dvh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            overscroll-behavior: none;
+        }
+
+        /* Safe-Area Aware Header & Footer for Android WebView */
+        .webview-header {
+            padding-top: calc(0.875rem + var(--safe-top));
+        }
+
+        .webview-footer {
+            padding-bottom: calc(0.5rem + var(--safe-bottom));
+        }
+
+        /* Dedicated Smooth Scroll Area strictly between Header and Footer */
+        #mainScrollArea {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
+        }
+
+        /* Safe-Area Adjustments for Reel Modal & Toast inside Android WebView */
+        .reel-safe-top {
+            top: calc(1rem + var(--safe-top));
+        }
+
+        .reel-safe-bottom {
+            bottom: calc(1.5rem + var(--safe-bottom));
+        }
+
+        .reel-actions-safe-bottom {
+            bottom: calc(5rem + var(--safe-bottom));
+        }
+
+        .toast-safe-top {
+            top: calc(5rem + var(--safe-top));
         }
 
         /* Metallic Golden Shine Text */
@@ -209,10 +260,10 @@
         }
     </style>
 </head>
-<body class="bg-lightblack-800 text-white min-h-screen flex flex-col justify-between pb-20 md:pb-24 select-none">
+<body class="bg-lightblack-800 text-white flex flex-col select-none">
 
-    <!-- ==================== 1. TOP HEADER ==================== -->
-    <header class="sticky top-0 z-50 bg-lightblack-900/90 backdrop-blur-md border-b border-gold/30 px-4 lg:px-10 py-3.5 transition-all">
+    <!-- ==================== 1. TOP HEADER (NON-OVERLAYING DOCKED HEADER) ==================== -->
+    <header class="webview-header flex-none relative z-50 bg-lightblack-900/95 backdrop-blur-md border-b border-gold/30 px-4 lg:px-10 pb-3.5 transition-all">
         <div class="max-w-7xl mx-auto flex items-center justify-between relative">
             <!-- Left Side Logo (Swapped as requested) -->
             <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.href='index.html'">
@@ -237,67 +288,70 @@
         </div>
     </header>
 
-    <!-- ==================== 2. HERO 4096x2160 AUTOMATIC VIDEO PLAYER & DYNAMIC SECTIONS ==================== -->
-    <main id="home" class="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-10 pt-4">
-        <div class="relative w-full rounded-2xl overflow-hidden gold-border shadow-[0_10px_40px_rgba(0,0,0,0.8)] bg-lightblack-900 aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9]">
-            
-            <!-- Automatic HTML5 Video Element -->
-            <video 
-                id="heroVideo"
-                class="w-full h-full object-cover brightness-90 scale-105 transition-transform duration-1000"
-                autoplay 
-                muted 
-                loop 
-                playsinline
-                poster="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=85"
-            >
-                <source id="heroVideoSource" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
-            </video>
+    <!-- ==================== 2. SCROLLABLE CONTENT WRAPPER (NEVER OVERLAPS HEADER OR FOOTER) ==================== -->
+    <div id="mainScrollArea" class="flex-1 w-full overflow-y-auto overflow-x-hidden">
+        <!-- HERO 4096x2160 AUTOMATIC VIDEO PLAYER & DYNAMIC SECTIONS -->
+        <main id="home" class="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-10 pt-4">
+            <div class="relative w-full rounded-2xl overflow-hidden gold-border shadow-[0_10px_40px_rgba(0,0,0,0.8)] bg-lightblack-900 aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9]">
+                
+                <!-- Automatic HTML5 Video Element -->
+                <video 
+                    id="heroVideo"
+                    class="w-full h-full object-cover brightness-90 scale-105 transition-transform duration-1000"
+                    autoplay 
+                    muted 
+                    loop 
+                    playsinline
+                    poster="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=85"
+                >
+                    <source id="heroVideoSource" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+                </video>
 
-            <!-- Dark Charcoal & Gold Vignette Overlay -->
-            <div class="absolute inset-0 bg-gradient-to-t from-lightblack-800 via-lightblack-900/40 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-lightblack-900/90 via-lightblack-900/30 to-transparent"></div>
+                <!-- Dark Charcoal & Gold Vignette Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-lightblack-800 via-lightblack-900/40 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-lightblack-900/90 via-lightblack-900/30 to-transparent"></div>
 
-            <!-- Top-Right Resolution & Live Indicator (As per wireframe 4096x2160 requirement) -->
-            <div class="absolute top-3 right-3 sm:top-5 sm:right-5 flex items-center space-x-2 bg-lightblack-900/85 backdrop-blur-md px-3 py-1.5 rounded-lg gold-border">
-                <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
-                <span class="text-[11px] sm:text-xs font-bold tracking-widest gold-shine-text">4096 × 2160 DCI 4K • AUTO</span>
-            </div>
-
-            <!-- Bottom-Left Movie/Show Details & Controls -->
-            <div class="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 max-w-xl z-10 flex flex-col justify-end">
-                <div class="inline-flex items-center space-x-2 mb-2">
-                    <span id="heroBadge" class="gold-shine-bg text-[10px] px-2.5 py-0.5 rounded font-extrabold uppercase tracking-widest">#1 Trending</span>
-                    <span id="heroCategory" class="text-white/90 text-xs font-medium bg-lightblack-700/80 px-2.5 py-0.5 rounded border border-white/15">Web Series • Royal • UHD</span>
+                <!-- Top-Right Resolution & Live Indicator (As per wireframe 4096x2160 requirement) -->
+                <div class="absolute top-3 right-3 sm:top-5 sm:right-5 flex items-center space-x-2 bg-lightblack-900/85 backdrop-blur-md px-3 py-1.5 rounded-lg gold-border">
+                    <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
+                    <span class="text-[11px] sm:text-xs font-bold tracking-widest gold-shine-text">4096 × 2160 DCI 4K • AUTO</span>
                 </div>
 
-                <h1 id="heroTitle" class="font-royal text-2xl sm:text-4xl md:text-5xl font-extrabold gold-shine-text tracking-wide drop-shadow-lg leading-tight">
-                    DYNASTY OF LIGHT
-                </h1>
+                <!-- Bottom-Left Movie/Show Details & Controls -->
+                <div class="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 max-w-xl z-10 flex flex-col justify-end">
+                    <div class="inline-flex items-center space-x-2 mb-2">
+                        <span id="heroBadge" class="gold-shine-bg text-[10px] px-2.5 py-0.5 rounded font-extrabold uppercase tracking-widest">#1 Trending</span>
+                        <span id="heroCategory" class="text-white/90 text-xs font-medium bg-lightblack-700/80 px-2.5 py-0.5 rounded border border-white/15">Web Series • Royal • UHD</span>
+                    </div>
 
-                <p id="heroDesc" class="text-white/80 text-xs sm:text-sm mt-2 line-clamp-2 sm:line-clamp-none font-normal leading-relaxed">
-                    Experience true 4096×2160 cinema resolution. In an empire built on secrets and gold, rival heirs clash across eight gripping episodes for the eternal throne.
-                </p>
+                    <h1 id="heroTitle" class="font-royal text-2xl sm:text-4xl md:text-5xl font-extrabold gold-shine-text tracking-wide drop-shadow-lg leading-tight">
+                        DYNASTY OF LIGHT
+                    </h1>
 
-                <!-- Action Button: Sirf Ek "Watch Now" Button -->
-                <div class="flex items-center mt-4 sm:mt-6">
-                    <a id="heroWatchNowLink" href="watch-series.html" class="gold-shine-bg px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm flex items-center space-x-2.5 shadow-lg">
-                        <i class="fa-solid fa-play text-lightblack-900"></i>
-                        <span class="uppercase tracking-wider font-extrabold">Watch Now</span>
-                    </a>
+                    <p id="heroDesc" class="text-white/80 text-xs sm:text-sm mt-2 line-clamp-2 sm:line-clamp-none font-normal leading-relaxed">
+                        Experience true 4096×2160 cinema resolution. In an empire built on secrets and gold, rival heirs clash across eight gripping episodes for the eternal throne.
+                    </p>
+
+                    <!-- Action Button: Sirf Ek "Watch Now" Button -->
+                    <div class="flex items-center mt-4 sm:mt-6">
+                        <a id="heroWatchNowLink" href="watch-series.html" class="gold-shine-bg px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm flex items-center space-x-2.5 shadow-lg">
+                            <i class="fa-solid fa-play text-lightblack-900"></i>
+                            <span class="uppercase tracking-wider font-extrabold">Watch Now</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- ==================== 3. CONTENT SECTIONS (WIREFRAME ROWS) ==================== -->
-        <!-- Dynamic Container where the 3 Heading + 4 Show Thumbnail grids are rendered per selected Bottom Nav Icon -->
-        <div id="ottSectionsContainer" class="mt-8 space-y-10 pb-12">
-            <!-- Populated via JavaScript below based on active tab -->
-        </div>
-    </main>
+            <!-- ==================== 3. CONTENT SECTIONS (WIREFRAME ROWS) ==================== -->
+            <!-- Dynamic Container where the 3 Heading + 4 Show Thumbnail grids are rendered per selected Bottom Nav Icon -->
+            <div id="ottSectionsContainer" class="mt-8 space-y-10 pb-8">
+                <!-- Populated via JavaScript below based on active tab -->
+            </div>
+        </main>
+    </div>
 
-    <!-- ==================== 4. BOTTOM HEADER / NAVIGATION BAR ==================== -->
-    <footer class="fixed bottom-0 left-0 right-0 z-50 bg-lightblack-900/95 backdrop-blur-lg border-t border-gold/40 py-2 px-3 sm:px-4 shadow-[0_-8px_25px_rgba(0,0,0,0.85)]">
+    <!-- ==================== 4. BOTTOM HEADER / NAVIGATION BAR (NON-OVERLAYING DOCKED FOOTER) ==================== -->
+    <footer class="webview-footer flex-none relative z-50 w-full bg-lightblack-900/95 backdrop-blur-lg border-t border-gold/40 pt-2 px-3 sm:px-4 shadow-[0_-8px_25px_rgba(0,0,0,0.85)]">
         <div class="max-w-7xl mx-auto flex items-center justify-around w-full gap-1">
             <!-- 1. Short Film (Amber-Orange Gradient Squircle UI) -->
             <button type="button" data-tab="short-films" onclick="switchCategoryTab('short-films')" class="nav-btn group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
@@ -344,7 +398,7 @@
     <!-- ==================== 5. NATIVE REEL POPUP MODAL (5TH ICON - YT SHORTS AS APP REELS) ==================== -->
     <div id="reelPopupModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-lightblack-900/95 backdrop-blur-xl sm:p-4">
         <!-- Close Button -->
-        <button onclick="closeReelPopup()" class="fixed top-4 right-4 z-[65] w-10 h-10 rounded-full bg-lightblack-900/80 gold-border flex items-center justify-center text-white hover:text-gold transition shadow-lg">
+        <button onclick="closeReelPopup()" class="reel-safe-top fixed right-4 z-[65] w-10 h-10 rounded-full bg-lightblack-900/80 gold-border flex items-center justify-center text-white hover:text-gold transition shadow-lg">
             <i class="fa-solid fa-xmark text-lg"></i>
         </button>
 
@@ -391,13 +445,39 @@
     </div>
 
     <!-- ==================== 7. NOTIFICATION TOAST ==================== -->
-    <div id="toastBox" class="fixed top-20 right-5 z-[70] hidden bg-lightblack-900 gold-border px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all">
+    <div id="toastBox" class="toast-safe-top fixed right-5 z-[70] hidden bg-lightblack-900 gold-border px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all">
         <i class="fa-solid fa-circle-check text-gold text-lg"></i>
         <span id="toastMessage" class="text-white text-xs sm:text-sm font-semibold">Playing Show in 4K!</span>
     </div>
 
     <!-- ==================== JAVASCRIPT LOGIC ==================== -->
     <script>
+        /**
+         * Optional Android WebView Bridge Helper:
+         * Agar aapka Android app manually status bar / nav bar height pass karna chahe,
+         * toh WebView se `window.setAndroidSafeArea(statusBarPx, navBarPx)` call kar sakte hain.
+         */
+        window.setAndroidSafeArea = function (topPx = 0, bottomPx = 0) {
+            try {
+                document.documentElement.style.setProperty("--safe-top", `${topPx}px`);
+                document.documentElement.style.setProperty("--safe-bottom", `${bottomPx}px`);
+            } catch (err) {
+                console.error("Failed to set Android safe area:", err);
+            }
+        };
+
+        /**
+         * Scroll main content wrapper cleanly to top inside App Shell layout
+         */
+        function scrollMainToTop() {
+            const scrollArea = document.getElementById("mainScrollArea");
+            if (scrollArea) {
+                scrollArea.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        }
+
         /**
          * COMPLETE TAB-WISE CATALOG FOR ALL 4 MAIN SCREENS
          * Center Icon ("web-series") is set as the Default Screen on load.
@@ -663,7 +743,7 @@
                 }
 
                 if (shouldScrollTop) {
-                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    scrollMainToTop();
                 }
             } catch (error) {
                 console.error("Error switching category screen:", error);
@@ -774,7 +854,7 @@
             video.load();
             video.play().catch(() => {});
 
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            scrollMainToTop();
             showToast(`Now Playing "${title}" in 4096×2160 4K`);
         }
 
@@ -887,7 +967,7 @@
                         <div onclick="toggleReelMute(${idx})" class="absolute inset-0 z-10 cursor-pointer bg-gradient-to-t from-lightblack-900/90 via-transparent to-lightblack-900/50"></div>
 
                         <!-- Top Native App Reels Header -->
-                        <div class="absolute top-4 left-4 z-20 flex items-center space-x-2 pointer-events-none">
+                        <div class="reel-safe-top absolute left-4 z-20 flex items-center space-x-2 pointer-events-none">
                             <span class="gold-shine-bg text-[10px] px-2.5 py-1 rounded-full font-extrabold uppercase tracking-widest">
                                 <i class="fa-solid fa-bolt mr-1"></i>REELS
                             </span>
@@ -895,7 +975,7 @@
                         </div>
 
                         <!-- Right-Side Native Action Buttons (Like, Sound, Share, Watch Full) -->
-                        <div class="absolute right-3 bottom-20 z-20 flex flex-col items-center space-y-5">
+                        <div class="reel-actions-safe-bottom absolute right-3 z-20 flex flex-col items-center space-y-5">
                             <!-- Like Button -->
                             <button onclick="toggleReelLike(this)" class="flex flex-col items-center group focus:outline-none">
                                 <div class="w-11 h-11 rounded-full bg-lightblack-900/70 backdrop-blur-md gold-border flex items-center justify-center text-white group-hover:scale-110 transition">
@@ -930,7 +1010,7 @@
                         </div>
 
                         <!-- Bottom-Left Native Reel Title & Caption -->
-                        <div class="absolute bottom-6 left-4 right-16 z-20 pointer-events-none">
+                        <div class="reel-safe-bottom absolute left-4 right-16 z-20 pointer-events-none">
                             <h4 class="font-royal text-sm sm:text-base font-extrabold gold-shine-text uppercase tracking-wide drop-shadow">
                                 ${reel.title}
                             </h4>
@@ -945,7 +1025,6 @@
             const modal = document.getElementById("reelPopupModal");
             modal.classList.remove("hidden");
             modal.classList.add("flex");
-            document.body.style.overflow = "hidden";
 
             setupReelObserver();
         }
@@ -987,7 +1066,6 @@
             const modal = document.getElementById("reelPopupModal");
             modal.classList.add("hidden");
             modal.classList.remove("flex");
-            document.body.style.overflow = "";
 
             // Resume hero promo video
             const heroVideo = document.getElementById("heroVideo");
