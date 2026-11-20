@@ -1,37 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KAMA-XXX GOLD | Premium Ayurvedic Vitality Supplement</title>
-    
-    <!-- Tailwind CSS for styling -->
+    <title>AURA GOLD | 4K Luxury OTT Platform</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts (Poppins for a classic, clean look) -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Cinzel for Royal Gold Vibe & Plus Jakarta Sans for Modern UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Custom Tailwind Config for Brand Colors -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            green: '#0f3c2b', // Dark Ayurvedic Green
-                            lightGreen: '#1b5a41',
-                            gold: '#d4af37',  // Premium gold
-                            lightGold: '#fbf8f1', // Off-white for background
+                        lightblack: {
+                            900: '#0F0F12', /* Deepest Light-Black */
+                            800: '#16161A', /* Primary Background */
+                            700: '#202026', /* Card Background */
+                            600: '#2C2C35'  /* Border / Hover */
+                        },
+                        gold: {
+                            light: '#FFF3B0',
+                            DEFAULT: '#D4AF37',
+                            metallic: '#AA7C11',
+                            shine: '#F3E5AB'
                         }
                     },
                     fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                    },
-                    screens: {
-                        'xs': '400px', // Extra small breakpoint
+                        royal: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
                     }
                 }
             }
@@ -39,302 +39,1026 @@
     </script>
 
     <style>
-        /* Smooth scrolling aur base styles */
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; }
-        
-        /* Gold gradient text ke liye */
-        .text-gradient-gold {
-            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        /* Strict Color Palette & Golden Shine Custom Styles */
+        body {
+            background-color: #16161A;
+            color: #FFFFFF;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Metallic Golden Shine Text */
+        .gold-shine-text {
+            background: linear-gradient(
+                to right, 
+                #BF953F 0%, 
+                #FCF6BA 25%, 
+                #B38728 50%, 
+                #FBF5B7 75%, 
+                #AA771C 100%
+            );
+            background-size: 200% auto;
+            color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
+            animation: shineText 4s linear infinite;
         }
 
-        /* Gold button hover effect */
-        .btn-gold {
-            background: linear-gradient(to right, #d4af37, #e5c158);
+        /* Metallic Golden Shine Background (Buttons & Badges) */
+        .gold-shine-bg {
+            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 35%, #D4AF37 65%, #AA771C 100%);
+            background-size: 200% 200%;
+            color: #0F0F12;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
             transition: all 0.3s ease;
         }
-        .btn-gold:hover {
-            background: linear-gradient(to right, #e5c158, #d4af37);
+
+        .gold-shine-bg:hover {
+            background-position: right center;
+            box-shadow: 0 6px 28px rgba(252, 246, 186, 0.6);
             transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(212, 175, 55, 0.4);
         }
 
-        /* Fade animation views switch karne ke liye */
-        .fade-in {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Golden Border & Glow */
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.35);
         }
 
-        /* Gateway Compliance: Ensure text is professional and not exaggerated */
-        .compliance-text {
-            color: #64748b;
-            font-size: 0.875rem;
-            line-height: 1.25rem;
+        .gold-border-glow:hover {
+            border-color: #FCF6BA;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+        }
+
+        /* Animated Shimmer Sweep on Thumbnail Hover */
+        .thumbnail-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .thumbnail-card::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(252, 246, 186, 0.35) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            transition: all 0.65s ease;
+            pointer-events: none;
+        }
+
+        .thumbnail-card:hover::after {
+            left: 130%;
+        }
+
+        .thumbnail-card:hover {
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        @keyframes shineText {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Smooth Screen Transition on Tab Switch */
+        @keyframes tabFadeIn {
+            from {
+                opacity: 0.35;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-fade-in {
+            animation: tabFadeIn 0.35s ease-out forwards;
+        }
+
+        /* Active Bottom Nav Tab Indicator */
+        .nav-btn {
+            position: relative;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        .nav-btn.active-nav::before {
+            content: "";
+            position: absolute;
+            top: -9px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 32px;
+            height: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #BF953F, #FCF6BA, #AA771C);
+            box-shadow: 0 0 12px rgba(252, 246, 186, 0.9);
+        }
+
+        .nav-btn.active-nav .nav-icon-wrap {
+            transform: scale(1.12);
+            box-shadow: 0 0 18px rgba(252, 246, 186, 0.55);
+        }
+
+        .nav-btn.active-nav .nav-label {
+            color: #FCF6BA !important;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Custom Gold Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F0F12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #BF953F, #FCF6BA, #AA771C);
+            border-radius: 10px;
+        }
+
+        /* Hide Scrollbar for Native Reel Swipe Experience */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Crop YouTube Shorts Top Title & Bottom Logo to look 100% Native */
+        .native-reel-iframe {
+            position: absolute;
+            top: -12%;
+            left: -6%;
+            width: 112%;
+            height: 124%;
+            border: 0;
+            pointer-events: none;
         }
     </style>
 </head>
-<body class="text-gray-800 antialiased flex flex-col min-h-screen">
+<body class="bg-lightblack-800 text-white min-h-screen flex flex-col justify-between pb-20 md:pb-24 select-none">
 
-    <!-- Navbar / Header -->
-    <nav class="fixed w-full z-50 bg-white shadow-md border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-            <div class="flex justify-between items-center h-16 sm:h-20">
-                <div class="flex items-center cursor-pointer overflow-hidden flex-shrink min-w-0" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
-                    <!-- Brand Logo / Text -->
-                    <span class="font-extrabold text-xl sm:text-2xl md:text-3xl text-brand-green tracking-tight flex items-center truncate">
-                        <i class="fas fa-leaf text-brand-gold mr-1 sm:mr-2 text-lg sm:text-xl flex-shrink-0"></i>
-                        <span class="truncate">KAMA-<span class="text-brand-gold mx-0.5 sm:mx-1">XXX</span></span> <span class="text-xs sm:text-sm md:text-lg mt-1 font-semibold text-gray-600 hidden xs:inline-block ml-1">GOLD</span>
-                    </span>
+    <!-- ==================== 1. TOP HEADER ==================== -->
+    <header class="sticky top-0 z-50 bg-lightblack-900/90 backdrop-blur-md border-b border-gold/30 px-4 lg:px-10 py-3.5 transition-all">
+        <div class="max-w-7xl mx-auto flex items-center justify-between relative">
+            <!-- Left Side Logo (Swapped as requested) -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="w-10 h-10 rounded-lg gold-shine-bg flex items-center justify-center shadow-lg">
+                    <!-- Aap yaha apna <img src="logo.png"> ya icon laga sakte hain -->
+                    <i class="fa-solid fa-crown text-lightblack-900 text-xl"></i>
                 </div>
-                <div class="flex-shrink-0 ml-2">
-                    <button onclick="goToProductPage()" class="btn-gold text-brand-green font-bold py-1.5 px-3 sm:py-2.5 sm:px-6 rounded-full shadow-md hover:shadow-lg transition-all text-xs sm:text-sm md:text-base flex items-center whitespace-nowrap">
-                        <i class="fas fa-shopping-cart mr-1 sm:mr-2"></i> Order Now
-                    </button>
+            </div>
+
+            <!-- Center Text (Logo Name Placeholder - Aap yaha apna naam dal sakte hain) -->
+            <div class="flex items-center space-x-3 cursor-pointer absolute left-1/2 transform -translate-x-1/2" onclick="window.location.href='index.html'">
+                <div class="text-center">
+                    <span class="font-royal text-lg md:text-xl font-extrabold tracking-wider gold-shine-text block leading-none">YOUR LOGO NAME</span>
+                    <span class="text-[9px] tracking-[0.2em] text-white/70 font-semibold uppercase">4K Cinema Edition</span>
+                </div>
+            </div>
+
+            <!-- Right Side Profile Icon (Swapped as requested) -->
+            <a href="profile.html" class="w-9 h-9 rounded-full bg-lightblack-700 gold-border flex items-center justify-center text-gold hover:bg-white hover:text-lightblack-900 transition">
+                <i class="fa-solid fa-user text-sm"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- ==================== 2. HERO 4096x2160 AUTOMATIC VIDEO PLAYER & DYNAMIC SECTIONS ==================== -->
+    <main id="home" class="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-10 pt-4">
+        <div class="relative w-full rounded-2xl overflow-hidden gold-border shadow-[0_10px_40px_rgba(0,0,0,0.8)] bg-lightblack-900 aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9]">
+            
+            <!-- Automatic HTML5 Video Element -->
+            <video 
+                id="heroVideo"
+                class="w-full h-full object-cover brightness-90 scale-105 transition-transform duration-1000"
+                autoplay 
+                muted 
+                loop 
+                playsinline
+                poster="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=85"
+            >
+                <source id="heroVideoSource" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+            </video>
+
+            <!-- Dark Charcoal & Gold Vignette Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-lightblack-800 via-lightblack-900/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-lightblack-900/90 via-lightblack-900/30 to-transparent"></div>
+
+            <!-- Top-Right Resolution & Live Indicator (As per wireframe 4096x2160 requirement) -->
+            <div class="absolute top-3 right-3 sm:top-5 sm:right-5 flex items-center space-x-2 bg-lightblack-900/85 backdrop-blur-md px-3 py-1.5 rounded-lg gold-border">
+                <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
+                <span class="text-[11px] sm:text-xs font-bold tracking-widest gold-shine-text">4096 × 2160 DCI 4K • AUTO</span>
+            </div>
+
+            <!-- Bottom-Left Movie/Show Details & Controls -->
+            <div class="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 max-w-xl z-10 flex flex-col justify-end">
+                <div class="inline-flex items-center space-x-2 mb-2">
+                    <span id="heroBadge" class="gold-shine-bg text-[10px] px-2.5 py-0.5 rounded font-extrabold uppercase tracking-widest">#1 Trending</span>
+                    <span id="heroCategory" class="text-white/90 text-xs font-medium bg-lightblack-700/80 px-2.5 py-0.5 rounded border border-white/15">Web Series • Royal • UHD</span>
+                </div>
+
+                <h1 id="heroTitle" class="font-royal text-2xl sm:text-4xl md:text-5xl font-extrabold gold-shine-text tracking-wide drop-shadow-lg leading-tight">
+                    DYNASTY OF LIGHT
+                </h1>
+
+                <p id="heroDesc" class="text-white/80 text-xs sm:text-sm mt-2 line-clamp-2 sm:line-clamp-none font-normal leading-relaxed">
+                    Experience true 4096×2160 cinema resolution. In an empire built on secrets and gold, rival heirs clash across eight gripping episodes for the eternal throne.
+                </p>
+
+                <!-- Action Button: Sirf Ek "Watch Now" Button -->
+                <div class="flex items-center mt-4 sm:mt-6">
+                    <a id="heroWatchNowLink" href="watch-series.html" class="gold-shine-bg px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm flex items-center space-x-2.5 shadow-lg">
+                        <i class="fa-solid fa-play text-lightblack-900"></i>
+                        <span class="uppercase tracking-wider font-extrabold">Watch Now</span>
+                    </a>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <!-- Main Content Container -->
-    <main class="pt-16 sm:pt-20 flex-grow">
-
-        <!-- ========================================== -->
-        <!-- HOME PAGE SECTION -->
-        <!-- ========================================== -->
-        <div id="home-page" class="fade-in block">
-            
-            <!-- Hero Section (Gateway Compliant) -->
-            <section class="bg-brand-green text-white relative overflow-hidden">
-                <!-- Abstract Background -->
-                <div class="absolute inset-0 opacity-5">
-                    <div class="w-full h-full" style="background-image: radial-gradient(#d4af37 2px, transparent 2px); background-size: 30px 30px;"></div>
-                </div>
-                
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 relative z-10 flex flex-col md:flex-row items-center">
-                    
-                    <!-- Text Content -->
-                    <div class="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
-                        <div class="inline-flex items-center bg-brand-lightGreen text-brand-gold border border-brand-gold/30 font-semibold px-4 py-1.5 rounded-full text-sm mb-6 shadow-sm">
-                            <i class="fas fa-leaf mr-2"></i> 100% Ayurvedic Supplement
-                        </div>
-                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-                            Natural Energy Aur Vitality Ka <span class="text-gradient-gold">Samadhan</span>
-                        </h1>
-                        <p class="text-base md:text-lg text-gray-300 mb-8 max-w-lg mx-auto md:mx-0 font-light leading-relaxed">
-                            15 shuddh Ayurvedic herbs se bana ek premium formula jo thakan dur karne, stamina badhane aur overall health ko behtar banane me madad karta hai.
-                        </p>
-                        
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
-                            <button onclick="goToProductPage()" class="w-full sm:w-auto btn-gold text-brand-green text-lg font-bold py-3.5 px-8 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] flex justify-center items-center">
-                                Order Now
-                                <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                            </button>
-                            <div class="flex flex-col items-center sm:items-start text-xs text-brand-gold mt-3 sm:mt-0 ml-0 sm:ml-4 bg-brand-green/50 p-2 rounded-lg border border-brand-gold/20">
-                                <span class="flex items-center"><i class="fas fa-shield-alt mr-1"></i> FSSAI Certified</span>
-                                <span class="text-gray-400 mt-0.5">Safe & Effective</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Product Image -->
-                    <div class="md:w-1/2 flex justify-center items-center">
-                        <div class="relative group">
-                            <!-- Glow effect -->
-                            <div class="absolute inset-0 bg-brand-gold rounded-full filter blur-[60px] opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
-                            <!-- Image -->
-                            <img src="kama-xxx-initial.webp" alt="Kama XXX Gold Bottle" class="relative z-10 w-64 md:w-80 lg:w-96 object-contain drop-shadow-2xl transform transition-transform duration-500 group-hover:scale-105 group-hover:-translate-y-2">
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Gateway Compliant Benefits Section -->
-            <section class="py-16 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-4xl font-extrabold text-brand-green mb-4">Ayurveda Ki Taqat</h2>
-                        <div class="w-20 h-1 bg-brand-gold mx-auto rounded-full"></div>
-                        <p class="mt-4 max-w-2xl mx-auto compliance-text">Ek surakshit aur natural tarika apni dincharya me josh aur sfurti laane ka. Bina kisi artificial chemicals ke.</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                        <!-- Benefit 1 -->
-                        <div class="bg-brand-lightGold rounded-2xl p-8 text-center shadow-sm border border-brand-gold/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                            <div class="w-16 h-16 mx-auto bg-white text-brand-gold rounded-2xl shadow-sm flex items-center justify-center text-2xl mb-6">
-                                <i class="fas fa-bolt"></i>
-                            </div>
-                            <h3 class="font-bold text-xl mb-3 text-brand-green">Energy Boost</h3>
-                            <p class="text-sm text-gray-600">Din bhar ki thakan ko dur kare aur natural energy level ko banaye rakhe.</p>
-                        </div>
-                        
-                        <!-- Benefit 2 -->
-                        <div class="bg-brand-lightGold rounded-2xl p-8 text-center shadow-sm border border-brand-gold/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                            <div class="w-16 h-16 mx-auto bg-white text-brand-gold rounded-2xl shadow-sm flex items-center justify-center text-2xl mb-6">
-                                <i class="fas fa-running"></i>
-                            </div>
-                            <h3 class="font-bold text-xl mb-3 text-brand-green">Stamina & Vitality</h3>
-                            <p class="text-sm text-gray-600">Sharirik kshamata (stamina) badhane me sahayak pure ingredients.</p>
-                        </div>
-
-                        <!-- Benefit 3 -->
-                        <div class="bg-brand-lightGold rounded-2xl p-8 text-center shadow-sm border border-brand-gold/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                            <div class="w-16 h-16 mx-auto bg-white text-brand-gold rounded-2xl shadow-sm flex items-center justify-center text-2xl mb-6">
-                                <i class="fas fa-leaf"></i>
-                            </div>
-                            <h3 class="font-bold text-xl mb-3 text-brand-green">100% Herbal</h3>
-                            <p class="text-sm text-gray-600">Kewal chune hue Ayurvedic herbs (jadibutiyan), koi rasayan nahi.</p>
-                        </div>
-
-                        <!-- Benefit 4 -->
-                        <div class="bg-brand-lightGold rounded-2xl p-8 text-center shadow-sm border border-brand-gold/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                            <div class="w-16 h-16 mx-auto bg-white text-brand-gold rounded-2xl shadow-sm flex items-center justify-center text-2xl mb-6">
-                                <i class="fas fa-shield-heart"></i>
-                            </div>
-                            <h3 class="font-bold text-xl mb-3 text-brand-green">Safe to Use</h3>
-                            <p class="text-sm text-gray-600">Daily use ke liye surakshit. FSSAI guidelines ke anusar nirmit.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Ingredients Info Banner -->
-            <section class="py-16 bg-gray-50 border-t border-b border-gray-200">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
-                        <div class="lg:w-1/2 text-center lg:text-left">
-                            <h2 class="text-3xl md:text-4xl font-bold text-brand-green mb-6 leading-tight">15 Powerful Ayurvedic Herbs Ka Premium Mishran</h2>
-                            <p class="mb-8 compliance-text">Humne prachin Ayurveda ke sabse shaktishali tatvon ko milakar ek 'Double Power Formula' taiyar kiya hai, jo aapki immunity aur strength ko naturally support karta hai.</p>
-                            
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-                                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-start">
-                                    <i class="fas fa-check-circle text-brand-gold mt-1 mr-3 text-lg"></i>
-                                    <div>
-                                        <h4 class="font-bold text-gray-800">Sudh Shilajit</h4>
-                                        <p class="text-xs text-gray-500 mt-1">Energy, immunity aur overall vitality ke liye jana jata hai.</p>
-                                    </div>
-                                </div>
-                                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-start">
-                                    <i class="fas fa-check-circle text-brand-gold mt-1 mr-3 text-lg"></i>
-                                    <div>
-                                        <h4 class="font-bold text-gray-800">Ashwagandha</h4>
-                                        <p class="text-xs text-gray-500 mt-1">Stress relief aur sharirik taqat badhane me madadgar.</p>
-                                    </div>
-                                </div>
-                                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-start">
-                                    <i class="fas fa-check-circle text-brand-gold mt-1 mr-3 text-lg"></i>
-                                    <div>
-                                        <h4 class="font-bold text-gray-800">Safed Musli</h4>
-                                        <p class="text-xs text-gray-500 mt-1">Natural stamina aur performance booster.</p>
-                                    </div>
-                                </div>
-                                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-start">
-                                    <i class="fas fa-check-circle text-brand-gold mt-1 mr-3 text-lg"></i>
-                                    <div>
-                                        <h4 class="font-bold text-gray-800">Sidh Makardhwaj</h4>
-                                        <p class="text-xs text-gray-500 mt-1">Ayurvedic rasayana jo sharir ko mazbooti deta hai.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="lg:w-1/2 flex justify-center w-full">
-                            <!-- Showing the ingredients graphic -->
-                            <div class="relative w-full max-w-md">
-                                <div class="absolute -inset-4 bg-brand-gold/20 rounded-2xl transform rotate-3 scale-105"></div>
-                                <img src="kama-xxx-one.webp" alt="Ayurvedic Ingredients" class="relative z-10 w-full rounded-xl shadow-2xl border-4 border-white bg-white">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Bottom CTA & Trust Section -->
-            <section class="py-16 md:py-24 bg-white text-center relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-gold to-transparent opacity-50"></div>
-                <div class="max-w-3xl mx-auto px-4 relative z-10">
-                    <span class="text-brand-gold font-bold tracking-widest text-sm uppercase mb-2 block">Take Charge of Your Health</span>
-                    <h2 class="text-3xl md:text-5xl font-extrabold text-brand-green mb-8">Ek Swasth Aur Urjawan Jivan Ki Shuruat Karein</h2>
-                    
-                    <div class="bg-gray-50 p-6 rounded-2xl inline-block mb-10 border border-gray-100 shadow-inner">
-                        <img src="kama-xxx-four.webp" alt="FSSAI Certificate" class="w-32 md:w-48 mx-auto rounded shadow-sm border border-gray-200">
-                        <p class="mt-3 text-xs font-semibold text-gray-500">Government Approved Registration</p>
-                    </div>
-
-                    <div>
-                        <button onclick="goToProductPage()" class="btn-gold text-brand-green text-xl md:text-2xl font-bold py-4 px-12 md:px-16 rounded-full w-full sm:w-auto shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all">
-                            Order Now <i class="fas fa-shopping-cart ml-2"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="mt-8 flex flex-wrap justify-center gap-6 text-sm font-medium text-gray-600">
-                        <span class="flex items-center"><i class="fas fa-truck text-brand-gold mr-2 text-lg"></i> Free Delivery</span>
-                        <span class="flex items-center"><i class="fas fa-money-bill-wave text-brand-gold mr-2 text-lg"></i> Cash on Delivery</span>
-                        <span class="flex items-center"><i class="fas fa-box text-brand-gold mr-2 text-lg"></i> Private Packaging</span>
-                    </div>
-                </div>
-            </section>
+        <!-- ==================== 3. CONTENT SECTIONS (WIREFRAME ROWS) ==================== -->
+        <!-- Dynamic Container where the 3 Heading + 4 Show Thumbnail grids are rendered per selected Bottom Nav Icon -->
+        <div id="ottSectionsContainer" class="mt-8 space-y-10 pb-12">
+            <!-- Populated via JavaScript below based on active tab -->
         </div>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-[#0a261c] text-gray-400 pt-16 pb-8 border-t-4 border-brand-gold relative mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
-                
-                <!-- Business Info -->
-                <div>
-                    <h3 class="font-bold text-white text-lg mb-4 flex items-center justify-center md:justify-start">
-                        <i class="fas fa-leaf text-brand-gold mr-2"></i> SUKH HEALTHCARE
-                    </h3>
-                    <p class="text-sm mb-2"><i class="fas fa-map-marker-alt mr-2 text-gray-500"></i> House No 23/786, Krishna Nagar, Kath Mandi, Sonipat 131001, India, Rai (69), Sonipat, Haryana</p>
-                    <p class="text-sm mb-2"><i class="fas fa-envelope mr-2 text-gray-500"></i> HEALTHCARESUKH@GMAIL.COM</p>
-                    <p class="text-sm"><i class="fas fa-phone mr-2 text-gray-500"></i> +91-9306027053 (Mon-Sat, 10 AM - 6 PM)</p>
+    <!-- ==================== 4. BOTTOM HEADER / NAVIGATION BAR ==================== -->
+    <footer class="fixed bottom-0 left-0 right-0 z-50 bg-lightblack-900/95 backdrop-blur-lg border-t border-gold/40 py-2 px-3 sm:px-4 shadow-[0_-8px_25px_rgba(0,0,0,0.85)]">
+        <div class="max-w-7xl mx-auto flex items-center justify-around w-full gap-1">
+            <!-- 1. Short Film (Amber-Orange Gradient Squircle UI) -->
+            <button type="button" data-tab="short-films" onclick="switchCategoryTab('short-films')" class="nav-btn group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
+                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.45)] group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-clapperboard text-lightblack-900 text-sm"></i>
                 </div>
+                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-amber-400 group-hover:text-amber-300 transition-colors">Short Film</span>
+            </button>
 
-                <!-- Legal Links (Mandatory for Payment Gateways) -->
-                <div>
-                    <h3 class="font-bold text-white text-lg mb-4">Quick Links</h3>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-brand-gold transition-colors">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-brand-gold transition-colors">Terms & Conditions</a></li>
-                        <li><a href="#" class="hover:text-brand-gold transition-colors">Refund & Cancellation Policy</a></li>
-                        <li><a href="#" class="hover:text-brand-gold transition-colors">Shipping Policy</a></li>
-                    </ul>
+            <!-- 2. Movie (Crimson-Red Neon Ring Circle UI) -->
+            <button type="button" data-tab="movies" onclick="switchCategoryTab('movies')" class="nav-btn group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
+                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-rose-600 to-red-500 ring-2 ring-rose-400/50 flex items-center justify-center shadow-[0_0_12px_rgba(244,63,94,0.45)] group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-film text-white text-sm"></i>
                 </div>
+                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-rose-400 group-hover:text-rose-300 transition-colors">Movie</span>
+            </button>
 
-                <!-- Disclaimer -->
-                <div>
-                    <h3 class="font-bold text-white text-lg mb-4">Disclaimer</h3>
-                    <p class="text-xs text-gray-500 leading-relaxed text-justify">
-                        *The statements made on this website have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Results may vary from person to person. Please consult a physician before using any dietary supplement, especially if you have a medical condition or are taking medication.
-                    </p>
+            <!-- 3. Web Series (CENTER DEFAULT ICON - Electric Cyan Glassmorphic Border Box UI) -->
+            <button type="button" data-tab="web-series" onclick="switchCategoryTab('web-series')" class="nav-btn active-nav group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
+                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-cyan-500/15 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_12px_rgba(34,211,238,0.4)] group-hover:bg-cyan-400/25 group-hover:scale-110 transition-all">
+                    <i class="fa-solid fa-tv text-cyan-300 text-sm"></i>
                 </div>
-            </div>
+                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-cyan-300 group-hover:text-cyan-200 transition-colors">Web Series</span>
+            </button>
 
-            <div class="border-t border-gray-800 pt-6 mt-6 flex flex-col md:flex-row justify-between items-center text-xs">
-                <p>&copy; 2026 KAMA-XXX GOLD by Sukh Healthcare. All Rights Reserved.</p>
-                <div class="flex space-x-4 mt-4 md:mt-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Rupay-Logo.png/800px-Rupay-Logo.png" alt="RuPay" class="h-6 filter grayscale opacity-50">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa" class="h-6 filter grayscale opacity-50">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png" alt="Mastercard" class="h-6 filter grayscale opacity-50">
+            <!-- 4. Silent (Violet-Indigo Soft Pill Frosted UI) -->
+            <button type="button" data-tab="silent" onclick="switchCategoryTab('silent')" class="nav-btn group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
+                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-2xl bg-gradient-to-b from-violet-600/40 to-indigo-900/80 border border-violet-400/60 flex items-center justify-center shadow-[0_0_12px_rgba(139,92,246,0.4)] group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-volume-xmark text-violet-300 text-sm"></i>
                 </div>
-            </div>
+                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-violet-300 group-hover:text-violet-200 transition-colors">Silent</span>
+            </button>
+
+            <!-- 5. Reel (Vibrant Fuchsia-Pink-Gold Tilted Gradient UI - Opens Native Reel Popup) -->
+            <button type="button" onclick="openReelPopup()" class="nav-btn group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
+                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-tr-2xl rounded-bl-2xl rounded-tl-md rounded-br-md bg-gradient-to-tr from-fuchsia-600 via-pink-500 to-yellow-400 flex items-center justify-center shadow-[0_0_14px_rgba(236,72,153,0.5)] group-hover:rotate-6 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-bolt text-white text-sm"></i>
+                </div>
+                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-pink-400 group-hover:text-pink-300 transition-colors">Reel</span>
+            </button>
         </div>
     </footer>
 
-    <!-- JavaScript For Page Logic -->
+    <!-- ==================== 5. NATIVE REEL POPUP MODAL (5TH ICON - YT SHORTS AS APP REELS) ==================== -->
+    <div id="reelPopupModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-lightblack-900/95 backdrop-blur-xl sm:p-4">
+        <!-- Close Button -->
+        <button onclick="closeReelPopup()" class="fixed top-4 right-4 z-[65] w-10 h-10 rounded-full bg-lightblack-900/80 gold-border flex items-center justify-center text-white hover:text-gold transition shadow-lg">
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+
+        <!-- Desktop Up/Down Navigation Controls -->
+        <div class="hidden sm:flex flex-col space-y-3 fixed right-8 top-1/2 -translate-y-1/2 z-[65]">
+            <button onclick="scrollReelBy(-1)" class="w-11 h-11 rounded-full bg-lightblack-800 gold-border flex items-center justify-center text-gold hover:bg-gold hover:text-lightblack-900 transition shadow-lg" title="Previous Reel">
+                <i class="fa-solid fa-chevron-up"></i>
+            </button>
+            <button onclick="scrollReelBy(1)" class="w-11 h-11 rounded-full bg-lightblack-800 gold-border flex items-center justify-center text-gold hover:bg-gold hover:text-lightblack-900 transition shadow-lg" title="Next Reel">
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+        </div>
+
+        <!-- 9:16 Vertical Swipe Container -->
+        <div id="reelFeedContainer" class="w-full h-[100dvh] sm:h-[90vh] sm:max-w-[410px] sm:rounded-2xl sm:gold-border bg-lightblack-900 overflow-y-scroll snap-y snap-mandatory no-scrollbar relative shadow-[0_0_60px_rgba(212,175,55,0.2)]">
+            <!-- Dynamically filled from reelShortsData -->
+        </div>
+    </div>
+
+    <!-- ==================== 6. VIP PASS MODAL ==================== -->
+    <div id="vipModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-lightblack-900/80 backdrop-blur-md p-4">
+        <div class="bg-lightblack-800 gold-border rounded-2xl max-w-md w-full p-6 text-center relative shadow-[0_0_50px_rgba(212,175,55,0.25)]">
+            <button onclick="closeVipModal()" class="absolute top-4 right-4 text-white/60 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="w-16 h-16 rounded-2xl gold-shine-bg mx-auto flex items-center justify-center mb-4">
+                <i class="fa-solid fa-crown text-3xl text-lightblack-900"></i>
+            </div>
+            <h3 class="font-royal text-2xl font-extrabold gold-shine-text">AURA GOLD VIP PASS</h3>
+            <p class="text-white/80 text-xs sm:text-sm mt-2">
+                Unlock unlimited 4096×2160 Cinema 4K streaming with zero ads and Golden Dolby Atmos audio.
+            </p>
+            <div class="my-5 p-4 rounded-xl bg-lightblack-700 gold-border flex items-center justify-between">
+                <div class="text-left">
+                    <span class="text-xs uppercase tracking-widest text-gold block font-bold">Annual Royal Plan</span>
+                    <span class="text-white text-lg font-extrabold">₹999 / Year</span>
+                </div>
+                <span class="gold-shine-bg text-[11px] px-3 py-1 rounded-full uppercase font-extrabold">Best Value</span>
+            </div>
+            <button onclick="activateVip()" class="w-full gold-shine-bg py-3 rounded-xl text-sm uppercase tracking-wider">
+                Activate Golden Membership
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== 7. NOTIFICATION TOAST ==================== -->
+    <div id="toastBox" class="fixed top-20 right-5 z-[70] hidden bg-lightblack-900 gold-border px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all">
+        <i class="fa-solid fa-circle-check text-gold text-lg"></i>
+        <span id="toastMessage" class="text-white text-xs sm:text-sm font-semibold">Playing Show in 4K!</span>
+    </div>
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
     <script>
-        // Function to redirect to the specific product page URL
-        function goToProductPage() {
-            // Redirects the user to the specified link
-            window.location.href = 'kama-xxx-gold.html';
+        /**
+         * COMPLETE TAB-WISE CATALOG FOR ALL 4 MAIN SCREENS
+         * Center Icon ("web-series") is set as the Default Screen on load.
+         * Clicking Short Film, Movie, Web Series, or Silent loads this exact same Hero + 3-Row UI
+         * with content tailored specifically to that category.
+         */
+        const categoryScreensData = {
+            // ==================== 3. WEB SERIES (CENTER ICON - DEFAULT SCREEN) ====================
+            "web-series": {
+                label: "Web Series",
+                hero: {
+                    badge: "#1 Trending Series",
+                    category: "Web Series • Royal • UHD",
+                    title: "DYNASTY OF LIGHT",
+                    desc: "Experience true 4096×2160 cinema resolution. In an empire ruled by the Golden Dynasty, rival heirs clash across eight gripping episodes to reclaim the eternal throne.",
+                    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+                    posterUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=85",
+                    watchUrl: "watch-series.html"
+                },
+                sections: [
+                    {
+                        id: "ws-section-1",
+                        heading: "TRENDING WEB SERIES",
+                        viewAllUrl: "web-series-trending.html",
+                        shows: [
+                            { title: "DYNASTY OF LIGHT", rating: "9.8", Category: "Web Series • Royal", thumb: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80", pageUrl: "series-1.html" },
+                            { title: "BLACK VELVET SYNDICATE", rating: "9.5", Category: "Web Series • Crime", thumb: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80", pageUrl: "series-2.html" },
+                            { title: "SOLARIS EXPEDITION", rating: "9.7", Category: "Web Series • Space", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", pageUrl: "series-3.html" },
+                            { title: "SYMPHONY OF GOLD", rating: "9.6", Category: "Web Series • Drama", thumb: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80", pageUrl: "series-4.html" }
+                        ]
+                    },
+                    {
+                        id: "ws-section-2",
+                        heading: "CRIME & THRILLER ORIGINALS",
+                        viewAllUrl: "web-series-crime.html",
+                        shows: [
+                            { title: "CARTEL OF CROWN", rating: "9.4", Category: "Web Series • Thriller", thumb: "https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=600&q=80", pageUrl: "series-5.html" },
+                            { title: "SHADOW PROTOCOL", rating: "9.6", Category: "Web Series • Spy", thumb: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80", pageUrl: "series-6.html" },
+                            { title: "THE OBSIDIAN COURT", rating: "9.3", Category: "Web Series • Legal", thumb: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80", pageUrl: "series-7.html" },
+                            { title: "MIDNIGHT HEIRS", rating: "9.5", Category: "Web Series • Mystery", thumb: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80", pageUrl: "series-8.html" }
+                        ]
+                    },
+                    {
+                        id: "ws-section-3",
+                        heading: "4K SCI-FI & EPIC SAGAS",
+                        viewAllUrl: "web-series-scifi.html",
+                        shows: [
+                            { title: "NEBULA CHRONICLES", rating: "9.9", Category: "Web Series • Sci-Fi", thumb: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80", pageUrl: "series-9.html" },
+                            { title: "EMPIRE OF DUNE", rating: "9.7", Category: "Web Series • Epic", thumb: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80", pageUrl: "series-10.html" },
+                            { title: "VALHALLA RISING", rating: "9.4", Category: "Web Series • Action", thumb: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80", pageUrl: "series-11.html" },
+                            { title: "AURA REBORN", rating: "9.8", Category: "Web Series • Fantasy", thumb: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80", pageUrl: "series-12.html" }
+                        ]
+                    }
+                ]
+            },
+
+            // ==================== 1. SHORT FILM ====================
+            "short-films": {
+                label: "Short Film",
+                hero: {
+                    badge: "#1 Trending Short Film",
+                    category: "Short Film • Sci-Fi • UHD",
+                    title: "CHRONICLES OF GOLD",
+                    desc: "A breathtaking 18-minute 4096×2160 short masterpiece. One lone guardian enters the sunken golden vault to unlock humanity's final memory.",
+                    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+                    posterUrl: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1920&q=85",
+                    watchUrl: "watch-short-film.html"
+                },
+                sections: [
+                    {
+                        id: "sf-section-1",
+                        heading: "TRENDING SHORT FILMS",
+                        viewAllUrl: "short-films.html",
+                        shows: [
+                            { title: "THE GOLDEN EMPIRE", rating: "9.8", Category: "Short Film • Drama", thumb: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-1.html" },
+                            { title: "SHADOW OF THE CROWN", rating: "9.5", Category: "Short Film • Mystery", thumb: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-2.html" },
+                            { title: "AURA OF ETERNITY", rating: "9.7", Category: "Short Film • Sci-Fi", thumb: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-3.html" },
+                            { title: "KNIGHTS OF VALHALLA", rating: "9.4", Category: "Short Film • Action", thumb: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-4.html" }
+                        ]
+                    },
+                    {
+                        id: "sf-section-2",
+                        heading: "AWARD-WINNING SHORTS",
+                        viewAllUrl: "short-films-awards.html",
+                        shows: [
+                            { title: "LAST TRAIN TO PARIS", rating: "9.6", Category: "Short Film • Romance", thumb: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-5.html" },
+                            { title: "EMBER & ASH", rating: "9.5", Category: "Short Film • Indie", thumb: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-6.html" },
+                            { title: "GLASS HORIZON", rating: "9.7", Category: "Short Film • Sci-Fi", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-7.html" },
+                            { title: "VELVET MIRAGE", rating: "9.3", Category: "Short Film • Drama", thumb: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-8.html" }
+                        ]
+                    },
+                    {
+                        id: "sf-section-3",
+                        heading: "10-MINUTE THRILLER SHORTS",
+                        viewAllUrl: "short-films-thriller.html",
+                        shows: [
+                            { title: "THE LOCKED ROOM", rating: "9.5", Category: "Short Film • Suspense", thumb: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-9.html" },
+                            { title: "ZERO HOUR", rating: "9.4", Category: "Short Film • Thriller", thumb: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-10.html" },
+                            { title: "RED CORRIDOR", rating: "9.6", Category: "Short Film • Horror", thumb: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-11.html" },
+                            { title: "CHECKMATE", rating: "9.2", Category: "Short Film • Mystery", thumb: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80", pageUrl: "short-film-12.html" }
+                        ]
+                    }
+                ]
+            },
+
+            // ==================== 2. MOVIE ====================
+            "movies": {
+                label: "Movie",
+                hero: {
+                    badge: "#1 Premiere Movie",
+                    category: "Movie • Heist • Action • UHD",
+                    title: "MIDNIGHT IN MONACO",
+                    desc: "A high-stakes 4K Ultra HD blockbuster. When a royal diamond disappears from the Grand Casino, an elite mastermind has only one night to outrun Interpol.",
+                    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+                    posterUrl: "https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=1920&q=85",
+                    watchUrl: "watch-movie.html"
+                },
+                sections: [
+                    {
+                        id: "mv-section-1",
+                        heading: "4096×2160 PREMIERE MOVIES",
+                        viewAllUrl: "movies.html",
+                        shows: [
+                            { title: "MIDNIGHT IN MONACO", rating: "9.6", Category: "Movie • Heist", thumb: "https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-1.html" },
+                            { title: "SULTANATE OF SANDS", rating: "9.3", Category: "Movie • History", thumb: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-2.html" },
+                            { title: "CYBER GOLD 2099", rating: "9.9", Category: "Movie • Action", thumb: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-3.html" },
+                            { title: "THE ROYAL GAMBIT", rating: "9.2", Category: "Movie • Thriller", thumb: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-4.html" }
+                        ]
+                    },
+                    {
+                        id: "mv-section-2",
+                        heading: "BLOCKBUSTER ACTION & SCI-FI",
+                        viewAllUrl: "movies-action.html",
+                        shows: [
+                            { title: "IRON LEGACY", rating: "9.5", Category: "Movie • Action", thumb: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-5.html" },
+                            { title: "ORBITAL ECLIPSE", rating: "9.7", Category: "Movie • Space", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-6.html" },
+                            { title: "PHANTOM SOVEREIGN", rating: "9.4", Category: "Movie • Spy", thumb: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-7.html" },
+                            { title: "NEON EMPIRE", rating: "9.8", Category: "Movie • Cyberpunk", thumb: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-8.html" }
+                        ]
+                    },
+                    {
+                        id: "mv-section-3",
+                        heading: "GOLDEN CINEMA MASTERPIECES",
+                        viewAllUrl: "movies-classics.html",
+                        shows: [
+                            { title: "SONATA OF DUSK", rating: "9.5", Category: "Movie • Musical", thumb: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-9.html" },
+                            { title: "CRIMSON CURTAIN", rating: "9.6", Category: "Movie • Drama", thumb: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-10.html" },
+                            { title: "CROWN OF WINTER", rating: "9.3", Category: "Movie • Epic", thumb: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-11.html" },
+                            { title: "THE LAST ALCHEMIST", rating: "9.7", Category: "Movie • Fantasy", thumb: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80", pageUrl: "movie-12.html" }
+                        ]
+                    }
+                ]
+            },
+
+            // ==================== 4. SILENT ====================
+            "silent": {
+                label: "Silent",
+                hero: {
+                    badge: "#1 Silent Masterpiece",
+                    category: "Silent Cinema • Visual Art • UHD",
+                    title: "ECHOES IN SILENCE",
+                    desc: "Zero dialogue. Pure emotion in 4096×2160. Follow a lone traveler across misty peaks and golden ruins where every glance speaks louder than words.",
+                    videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                    posterUrl: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=1920&q=85",
+                    watchUrl: "watch-silent.html"
+                },
+                sections: [
+                    {
+                        id: "sl-section-1",
+                        heading: "TRENDING SILENT CINEMA",
+                        viewAllUrl: "silent-cinema.html",
+                        shows: [
+                            { title: "ECHOES IN SILENCE", rating: "9.7", Category: "Silent • Visual", thumb: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-1.html" },
+                            { title: "THE UNSPOKEN VOW", rating: "9.4", Category: "Silent • Drama", thumb: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-2.html" },
+                            { title: "STILLNESS OF GOLD", rating: "9.6", Category: "Silent • Art", thumb: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-3.html" },
+                            { title: "WHISPERS OF NIGHT", rating: "9.5", Category: "Silent • Noir", thumb: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-4.html" }
+                        ]
+                    },
+                    {
+                        id: "sl-section-2",
+                        heading: "PURE VISUAL STORYTELLING",
+                        viewAllUrl: "silent-visuals.html",
+                        shows: [
+                            { title: "DRIFTING HORIZONS", rating: "9.8", Category: "Silent • Nature", thumb: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-5.html" },
+                            { title: "SHADOW & LIGHT", rating: "9.5", Category: "Silent • Classic", thumb: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-6.html" },
+                            { title: "THE PAPER BOAT", rating: "9.6", Category: "Silent • Poetic", thumb: "https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-7.html" },
+                            { title: "QUIET SYMPHONY", rating: "9.7", Category: "Silent • Score", thumb: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-8.html" }
+                        ]
+                    },
+                    {
+                        id: "sl-section-3",
+                        heading: "FESTIVAL SILENT ARCHIVES",
+                        viewAllUrl: "silent-festival.html",
+                        shows: [
+                            { title: "THE CLOCKMAKER", rating: "9.4", Category: "Silent • Mystery", thumb: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-9.html" },
+                            { title: "SOLITUDE 2049", rating: "9.6", Category: "Silent • Sci-Fi", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-10.html" },
+                            { title: "GOLDEN DUST", rating: "9.5", Category: "Silent • Experimental", thumb: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-11.html" },
+                            { title: "THE LAST FRAME", rating: "9.8", Category: "Silent • Award", thumb: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-12.html" }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        // Track currently active screen (Default is Center Icon: "web-series")
+        let currentActiveTab = "web-series";
+
+        /**
+         * Switch Main Screen UI for any of the 4 bottom navigation tabs
+         * (Short Film, Movie, Web Series, Silent) while keeping the exact same UI layout.
+         */
+        function switchCategoryTab(tabKey, shouldScrollTop = true) {
+            try {
+                const screenData = categoryScreensData[tabKey];
+                if (!screenData) return;
+
+                // Ensure Reel popup is closed if user switches tab
+                const reelModal = document.getElementById("reelPopupModal");
+                if (reelModal && !reelModal.classList.contains("hidden")) {
+                    closeReelPopup();
+                }
+
+                currentActiveTab = tabKey;
+
+                // 1. Update Active State on Bottom Navigation Icons
+                document.querySelectorAll(".nav-btn[data-tab]").forEach((btn) => {
+                    if (btn.getAttribute("data-tab") === tabKey) {
+                        btn.classList.add("active-nav");
+                    } else {
+                        btn.classList.remove("active-nav");
+                    }
+                });
+
+                // 2. Update Hero 4096x2160 Automatic Video Player
+                const hero = screenData.hero;
+                const video = document.getElementById("heroVideo");
+                const source = document.getElementById("heroVideoSource");
+
+                document.getElementById("heroBadge").textContent = hero.badge;
+                document.getElementById("heroCategory").textContent = hero.category;
+                document.getElementById("heroTitle").textContent = hero.title;
+                document.getElementById("heroDesc").textContent = hero.desc;
+                document.getElementById("heroWatchNowLink").href = hero.watchUrl;
+
+                if (video && source) {
+                    video.poster = hero.posterUrl;
+                    if (source.getAttribute("src") !== hero.videoUrl) {
+                        source.setAttribute("src", hero.videoUrl);
+                        video.load();
+                    }
+                    video.play().catch(() => {});
+                }
+
+                // 3. Render the 3 Content Sections for this Category
+                renderSections(screenData.sections);
+
+                // 4. Subtle Fade-In Animation & Scroll to Top
+                const mainEl = document.getElementById("home");
+                if (mainEl) {
+                    mainEl.classList.remove("tab-fade-in");
+                    void mainEl.offsetWidth; // Reflow to restart animation
+                    mainEl.classList.add("tab-fade-in");
+                }
+
+                if (shouldScrollTop) {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+            } catch (error) {
+                console.error("Error switching category screen:", error);
+            }
         }
+
+        /**
+         * Render the 3 Sections + Horizontal Scrollable Cards connected to HTML pages
+         */
+        function renderSections(sectionsList, filterText = "") {
+            const container = document.getElementById("ottSectionsContainer");
+            if (!container || !sectionsList) return;
+
+            container.innerHTML = "";
+
+            sectionsList.forEach((section) => {
+                const filteredShows = section.shows.filter(show =>
+                    show.title.toLowerCase().includes(filterText.toLowerCase()) ||
+                    show.Category.toLowerCase().includes(filterText.toLowerCase())
+                );
+
+                if (filteredShows.length === 0) return;
+
+                // Create Section Block
+                const sectionEl = document.createElement("section");
+                sectionEl.id = section.id;
+                sectionEl.className = "space-y-3";
+
+                // Section Heading Bar with "View All" HTML link
+                const headingHTML = `
+                    <div class="flex items-center justify-between bg-lightblack-700/90 px-4 py-3 rounded-xl gold-border shadow-md">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-1.5 h-6 rounded-full gold-shine-bg"></span>
+                            <h2 class="font-royal text-sm sm:text-xl font-extrabold tracking-wider gold-shine-text uppercase">
+                                ${section.heading}
+                            </h2>
+                        </div>
+                        <a href="${section.viewAllUrl}" class="flex items-center space-x-1.5 text-xs font-bold text-gold hover:text-gold-light transition group">
+                            <span>View All</span>
+                            <i class="fa-solid fa-chevron-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                `;
+
+                // Horizontal Scrollable Container
+                let cardsHTML = `
+                    <div class="flex overflow-x-auto space-x-3 pb-3 pt-1 scrollbar-thin scrollbar-thumb-gold scrollbar-track-lightblack-700">
+                `;
+
+                filteredShows.forEach((show) => {
+                    cardsHTML += `
+                        <a href="${show.pageUrl}" 
+                           class="thumbnail-card group cursor-pointer flex flex-col rounded-xl overflow-hidden bg-lightblack-700 gold-border gold-border-glow flex-shrink-0 w-36 sm:w-48 md:w-56">
+                            
+                            <!-- SHOW THUMBNAIL BOX -->
+                            <div class="relative aspect-[3/4] w-full overflow-hidden bg-lightblack-800">
+                                <img 
+                                    src="${show.thumb}" 
+                                    alt="${show.title}"
+                                    loading="lazy"
+                                    onerror="this.src='https://placehold.co/600x800/16161A/D4AF37?text=4K+SHOW'"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
+                                >
+                                
+                                <div class="absolute inset-0 bg-gradient-to-t from-lightblack-900 via-transparent to-lightblack-900/40"></div>
+
+                                <div class="absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5">
+                                    <span class="bg-lightblack-900/90 text-white text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center space-x-1 border border-gold/30">
+                                        <i class="fa-solid fa-star text-gold text-[8px] sm:text-[9px]"></i>
+                                        <span>${show.rating}</span>
+                                    </span>
+                                </div>
+
+                                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-lightblack-900/40 backdrop-blur-[2px]">
+                                    <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full gold-shine-bg flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                                        <i class="fa-solid fa-play text-lightblack-900 text-xs sm:text-base ml-0.5"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TITLE BAR ATTACHED DIRECTLY BELOW -->
+                            <div class="bg-lightblack-700 group-hover:bg-lightblack-600 border-t border-gold/30 py-2 px-1.5 sm:px-3 text-center transition-colors">
+                                <h3 class="text-[10px] sm:text-xs md:text-sm font-bold tracking-wider text-white group-hover:text-gold-light truncate uppercase">
+                                    ${show.title}
+                                </h3>
+                            </div>
+                        </a>
+                    `;
+                });
+
+                cardsHTML += `</div>`;
+                sectionEl.innerHTML = headingHTML + cardsHTML;
+                container.appendChild(sectionEl);
+            });
+        }
+
+        // Play any selected show directly in the 4096x2160 Top Hero Video Player
+        function playSelectedShow(title, desc, category, videoUrl, posterUrl) {
+            const video = document.getElementById("heroVideo");
+            const source = document.getElementById("heroVideoSource");
+
+            document.getElementById("heroTitle").textContent = title;
+            document.getElementById("heroDesc").textContent = desc;
+            document.getElementById("heroCategory").textContent = category + " • 4096×2160";
+
+            video.poster = posterUrl;
+            source.src = videoUrl;
+            video.load();
+            video.play().catch(() => {});
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            showToast(`Now Playing "${title}" in 4096×2160 4K`);
+        }
+
+        // Search Filter Helper (Filters currently active tab's catalog)
+        function filterShows() {
+            const searchEl = document.getElementById("searchInput");
+            const query = searchEl ? searchEl.value : "";
+            const activeData = categoryScreensData[currentActiveTab];
+            if (activeData) {
+                renderSections(activeData.sections, query);
+            }
+        }
+
+        // VIP Modal Functions
+        function openVipModal() {
+            const modal = document.getElementById("vipModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        function closeVipModal() {
+            const modal = document.getElementById("vipModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        function activateVip() {
+            closeVipModal();
+            showToast("Crown VIP Activated! Enjoy 4096×2160 Streaming.");
+        }
+
+        // Custom Toast Notification (No alert() used)
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById("toastBox");
+            const msgEl = document.getElementById("toastMessage");
+            msgEl.textContent = message;
+            toast.classList.remove("hidden");
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 3000);
+        }
+
+        // ==================== 5TH ICON: NATIVE REEL PLAYER (YOUTUBE SHORTS LINKS) ====================
+        // Yaha aap apne YouTube channel ke Shorts ka direct link dal sakte hain (e.g., https://youtube.com/shorts/VIDEO_ID)
+        const reelShortsData = [
+            {
+                ytUrl: "https://www.youtube.com/shorts/aqz-KE-bpKQ",
+                title: "GOLDEN DYNASTY • OFFICIAL TEASER",
+                caption: "Experience pure 4K cinema right inside our app. #OriginalReels #4K",
+                likes: "14.2K",
+                pageUrl: "show-1.html"
+            },
+            {
+                ytUrl: "https://www.youtube.com/shorts/YE7VzlLtp-4",
+                title: "SHADOW OF THE CROWN • BEHIND THE SCENES",
+                caption: "Exclusive sneak peek from our upcoming short film! #ShortFilm #Exclusive",
+                likes: "9.8K",
+                pageUrl: "show-2.html"
+            },
+            {
+                ytUrl: "https://www.youtube.com/shorts/ScMzIvxBSi4",
+                title: "CYBER GOLD 2099 • ACTION CLIP",
+                caption: "Watch the full premiere movie only on our OTT platform. #Movie #Action",
+                likes: "22.5K",
+                pageUrl: "movie-3.html"
+            }
+        ];
+
+        let reelObserver = null;
+        let isReelMuted = false;
+
+        // Extract YouTube Video ID from any Shorts / Watch / Share URL
+        function extractYouTubeId(url) {
+            if (!url) return "";
+            const regex = /(?:youtube\.com\/(?:shorts\/|watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : url.trim();
+        }
+
+        // Build clean, native-looking YouTube Embed URL (no controls, no branding, autoplay + loop)
+        function buildNativeReelEmbedUrl(videoId, muted) {
+            const muteVal = muted ? 1 : 0;
+            return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${muteVal}&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&fs=0&playsinline=1&enablejsapi=1`;
+        }
+
+        function openReelPopup() {
+            // Pause background hero video so audio never clashes
+            const heroVideo = document.getElementById("heroVideo");
+            if (heroVideo && !heroVideo.paused) heroVideo.pause();
+
+            const feed = document.getElementById("reelFeedContainer");
+            feed.innerHTML = reelShortsData.map((reel, idx) => {
+                const videoId = extractYouTubeId(reel.ytUrl);
+                return `
+                    <div class="reel-slide snap-start snap-always relative w-full h-[100dvh] sm:h-[90vh] bg-lightblack-900 overflow-hidden flex items-center justify-center" data-video-id="${videoId}" data-index="${idx}">
+                        
+                        <!-- Cropped YouTube Iframe (Hides YouTube Title & Logo completely) -->
+                        <iframe
+                            id="reel-iframe-${idx}"
+                            class="native-reel-iframe"
+                            src=""
+                            allow="autoplay; encrypted-media; picture-in-picture"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                        ></iframe>
+
+                        <!-- Transparent Touch Shield (Prevents YouTube hover/click UI; Tap toggles Mute/Unmute) -->
+                        <div onclick="toggleReelMute(${idx})" class="absolute inset-0 z-10 cursor-pointer bg-gradient-to-t from-lightblack-900/90 via-transparent to-lightblack-900/50"></div>
+
+                        <!-- Top Native App Reels Header -->
+                        <div class="absolute top-4 left-4 z-20 flex items-center space-x-2 pointer-events-none">
+                            <span class="gold-shine-bg text-[10px] px-2.5 py-1 rounded-full font-extrabold uppercase tracking-widest">
+                                <i class="fa-solid fa-bolt mr-1"></i>REELS
+                            </span>
+                            <span class="text-white/90 text-xs font-bold tracking-wider drop-shadow">YOUR LOGO NAME</span>
+                        </div>
+
+                        <!-- Right-Side Native Action Buttons (Like, Sound, Share, Watch Full) -->
+                        <div class="absolute right-3 bottom-20 z-20 flex flex-col items-center space-y-5">
+                            <!-- Like Button -->
+                            <button onclick="toggleReelLike(this)" class="flex flex-col items-center group focus:outline-none">
+                                <div class="w-11 h-11 rounded-full bg-lightblack-900/70 backdrop-blur-md gold-border flex items-center justify-center text-white group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-heart text-lg"></i>
+                                </div>
+                                <span class="text-[11px] font-bold text-white mt-1 drop-shadow">${reel.likes}</span>
+                            </button>
+
+                            <!-- Audio Mute/Unmute Button -->
+                            <button onclick="toggleReelMute(${idx})" class="reel-mute-btn flex flex-col items-center group focus:outline-none">
+                                <div class="w-11 h-11 rounded-full bg-lightblack-900/70 backdrop-blur-md gold-border flex items-center justify-center text-gold group-hover:scale-110 transition">
+                                    <i class="fa-solid ${isReelMuted ? 'fa-volume-xmark' : 'fa-volume-high'} text-lg"></i>
+                                </div>
+                                <span class="text-[10px] font-bold text-white mt-1 drop-shadow">${isReelMuted ? 'Muted' : 'Sound'}</span>
+                            </button>
+
+                            <!-- Share Button -->
+                            <button onclick="shareReel('${reel.title}')" class="flex flex-col items-center group focus:outline-none">
+                                <div class="w-11 h-11 rounded-full bg-lightblack-900/70 backdrop-blur-md gold-border flex items-center justify-center text-white group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-share text-base"></i>
+                                </div>
+                                <span class="text-[10px] font-bold text-white mt-1 drop-shadow">Share</span>
+                            </button>
+
+                            <!-- Watch Full Show Link -->
+                            <a href="${reel.pageUrl}" class="flex flex-col items-center group">
+                                <div class="w-11 h-11 rounded-full gold-shine-bg flex items-center justify-center text-lightblack-900 group-hover:scale-110 transition shadow-lg">
+                                    <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                                </div>
+                                <span class="text-[10px] font-bold text-gold-light mt-1 drop-shadow">Full</span>
+                            </a>
+                        </div>
+
+                        <!-- Bottom-Left Native Reel Title & Caption -->
+                        <div class="absolute bottom-6 left-4 right-16 z-20 pointer-events-none">
+                            <h4 class="font-royal text-sm sm:text-base font-extrabold gold-shine-text uppercase tracking-wide drop-shadow">
+                                ${reel.title}
+                            </h4>
+                            <p class="text-white/85 text-xs mt-1 line-clamp-2 leading-relaxed drop-shadow">
+                                ${reel.caption}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            const modal = document.getElementById("reelPopupModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+            document.body.style.overflow = "hidden";
+
+            setupReelObserver();
+        }
+
+        // Automatically play ONLY the currently visible Reel & unload others
+        function setupReelObserver() {
+            if (reelObserver) reelObserver.disconnect();
+            const feed = document.getElementById("reelFeedContainer");
+            const slides = feed.querySelectorAll(".reel-slide");
+
+            reelObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const idx = entry.target.getAttribute("data-index");
+                    const videoId = entry.target.getAttribute("data-video-id");
+                    const iframe = document.getElementById(`reel-iframe-${idx}`);
+                    if (!iframe) return;
+
+                    if (entry.isIntersecting) {
+                        const targetUrl = buildNativeReelEmbedUrl(videoId, isReelMuted);
+                        if (iframe.src !== targetUrl) {
+                            iframe.src = targetUrl;
+                        }
+                    } else {
+                        iframe.src = "";
+                    }
+                });
+            }, { root: feed, threshold: 0.65 });
+
+            slides.forEach(slide => reelObserver.observe(slide));
+        }
+
+        function closeReelPopup() {
+            if (reelObserver) reelObserver.disconnect();
+            // Clear all iframes immediately so audio stops cleanly
+            document.querySelectorAll("#reelFeedContainer iframe").forEach(iframe => {
+                iframe.src = "";
+            });
+
+            const modal = document.getElementById("reelPopupModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            document.body.style.overflow = "";
+
+            // Resume hero promo video
+            const heroVideo = document.getElementById("heroVideo");
+            if (heroVideo && heroVideo.paused) heroVideo.play().catch(() => {});
+        }
+
+        function scrollReelBy(direction) {
+            const feed = document.getElementById("reelFeedContainer");
+            const slideHeight = feed.clientHeight;
+            feed.scrollBy({ top: direction * slideHeight, behavior: "smooth" });
+        }
+
+        function toggleReelMute(idx) {
+            isReelMuted = !isReelMuted;
+            // Update all mute icons in the reel feed
+            document.querySelectorAll(".reel-mute-btn").forEach(btn => {
+                const icon = btn.querySelector("i");
+                const label = btn.querySelector("span");
+                icon.className = `fa-solid ${isReelMuted ? 'fa-volume-xmark' : 'fa-volume-high'} text-lg`;
+                label.textContent = isReelMuted ? "Muted" : "Sound";
+            });
+
+            // Send instant mute/unMute command to active YouTube iframe via postMessage
+            const iframe = document.getElementById(`reel-iframe-${idx}`);
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.postMessage(JSON.stringify({
+                    event: "command",
+                    func: isReelMuted ? "mute" : "unMute",
+                    args: ""
+                }), "*");
+            }
+            showToast(isReelMuted ? "Reel Audio Muted" : "Reel Audio On");
+        }
+
+        function toggleReelLike(btn) {
+            const icon = btn.querySelector("i");
+            const isLiked = icon.classList.toggle("text-rose-500");
+            if (isLiked) {
+                showToast("Added to Liked Reels!");
+            }
+        }
+
+        function shareReel(title) {
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(window.location.href).catch(() => {});
+                } else {
+                    const tempInput = document.createElement("input");
+                    tempInput.value = window.location.href;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(tempInput);
+                }
+                showToast(`Link copied for "${title}"!`);
+            } catch (e) {
+                showToast(`Shared "${title}"!`);
+            }
+        }
+
+        // Close Reel popup on ESC key
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") {
+                closeReelPopup();
+            }
+        });
+
+        // Initialize OTT App on Load with Center Icon ("web-series") as Default
+        window.onload = function () {
+            switchCategoryTab("web-series", false);
+        };
     </script>
 </body>
 </html>
