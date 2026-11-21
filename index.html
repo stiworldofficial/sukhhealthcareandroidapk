@@ -3,24 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>AURA GOLD | 4K Luxury OTT Platform</title>
+    <meta name="theme-color" content="#0A0A0D">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>ZEN G | 4K Cinema Edition</title>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Cinzel for Royal Gold Vibe & Plus Jakarta Sans for Modern UI -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Cinzel for Royal Gold Vibe & Plus Jakarta Sans for Modern 2026 Android UI -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         lightblack: {
-                            900: '#0F0F12', /* Deepest Light-Black */
-                            800: '#16161A', /* Primary Background */
-                            700: '#202026', /* Card Background */
-                            600: '#2C2C35'  /* Border / Hover */
+                            950: '#08080B', /* True OLED Cinema Deep */
+                            900: '#0E0E13', /* Primary Surface */
+                            800: '#15151C', /* Elevated Background */
+                            700: '#1E1E27', /* Card Surface */
+                            600: '#2A2A36'  /* Hover / Border */
                         },
                         gold: {
                             light: '#FFF3B0',
@@ -39,214 +46,297 @@
     </script>
 
     <style>
-        /* Android WebView Safe-Area Variables (Status Bar & System Navigation Bar) */
+        /* ==================== 1. ANDROID WEBVIEW & 4K TV/PROJECTOR ADAPTIVE ROOT ==================== */
         :root {
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
             --safe-left: env(safe-area-inset-left, 0px);
             --safe-right: env(safe-area-inset-right, 0px);
+            --rail-collapsed: 78px;
+            --rail-expanded: 236px;
         }
 
-        /* Full-Height App Shell Layout for Android WebView (Prevents Header & Footer Overlay) */
+        /* Proportional 10-Foot UI Scaling for Large Screens, 4K TVs & 300-inch Projectors (3840x2160 / 4096x2160) */
         html {
             height: 100%;
             overflow: hidden;
+            font-size: 16px;
+            background-color: #08080B;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Strict Color Palette & Golden Shine Custom Styles */
+        @media (min-width: 1920px) {
+            html { font-size: 18px; }
+            :root { --rail-collapsed: 86px; --rail-expanded: 260px; }
+        }
+
+        @media (min-width: 2560px) {
+            html { font-size: 22px; }
+            :root { --rail-collapsed: 100px; --rail-expanded: 300px; }
+        }
+
+        @media (min-width: 3400px) {
+            /* True 3840x2160 (UHD 4K) & 4096x2160 (DCI 4K) Projector Scale */
+            html { font-size: 28px; }
+            :root { --rail-collapsed: 120px; --rail-expanded: 360px; }
+        }
+
         body {
-            background-color: #16161A;
+            background-color: #08080B;
             color: #FFFFFF;
             font-family: 'Plus Jakarta Sans', sans-serif;
             height: 100%;
             height: 100dvh;
+            width: 100%;
             margin: 0;
             padding: 0;
             overflow: hidden;
             overscroll-behavior: none;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
-        /* Safe-Area Aware Header & Footer for Android WebView */
-        .webview-header {
-            padding-top: calc(0.875rem + var(--safe-top));
-        }
-
-        .webview-footer {
-            padding-bottom: calc(0.5rem + var(--safe-bottom));
-        }
-
-        /* Dedicated Smooth Scroll Area strictly between Header and Footer */
-        #mainScrollArea {
-            -webkit-overflow-scrolling: touch;
-            overscroll-behavior-y: contain;
-        }
-
-        /* Safe-Area Adjustments for Reel Modal & Toast inside Android WebView */
-        .reel-safe-top {
-            top: calc(1rem + var(--safe-top));
-        }
-
-        .reel-safe-bottom {
-            bottom: calc(1.5rem + var(--safe-bottom));
-        }
-
-        .reel-actions-safe-bottom {
-            bottom: calc(5rem + var(--safe-bottom));
-        }
-
-        .toast-safe-top {
-            top: calc(5rem + var(--safe-top));
-        }
-
-        /* Metallic Golden Shine Text */
+        /* ==================== 2. 2026 LIQUID METALLIC GOLD DESIGN TOKENS ==================== */
         .gold-shine-text {
             background: linear-gradient(
-                to right, 
-                #BF953F 0%, 
-                #FCF6BA 25%, 
-                #B38728 50%, 
-                #FBF5B7 75%, 
+                90deg,
+                #BF953F 0%,
+                #FCF6BA 25%,
+                #D4AF37 50%,
+                #FBF5B7 75%,
                 #AA771C 100%
             );
             background-size: 200% auto;
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: shineText 4s linear infinite;
+            animation: shineText 4.5s linear infinite;
         }
 
-        /* Metallic Golden Shine Background (Buttons & Badges) */
         .gold-shine-bg {
-            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 35%, #D4AF37 65%, #AA771C 100%);
+            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 35%, #D4AF37 68%, #9A6B11 100%);
             background-size: 200% 200%;
-            color: #0F0F12;
-            font-weight: 700;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
-            transition: all 0.3s ease;
+            color: #08080B;
+            font-weight: 800;
+            box-shadow: 0 6px 24px rgba(212, 175, 55, 0.35);
+            transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .gold-shine-bg:hover {
+        .gold-shine-bg:hover,
+        .gold-shine-bg:focus-visible {
             background-position: right center;
-            box-shadow: 0 6px 28px rgba(252, 246, 186, 0.6);
-            transform: translateY(-2px);
+            box-shadow: 0 8px 34px rgba(252, 246, 186, 0.55);
+            transform: translateY(-2px) scale(1.02);
         }
 
-        /* Golden Border & Glow */
         .gold-border {
-            border: 1px solid rgba(212, 175, 55, 0.35);
+            border: 1px solid rgba(212, 175, 55, 0.28);
         }
 
-        .gold-border-glow:hover {
-            border-color: #FCF6BA;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+        .glass-surface {
+            background: rgba(14, 14, 19, 0.78);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
         }
 
-        /* Animated Shimmer Sweep on Thumbnail Hover */
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0.25; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-fade-in {
+            animation: tabFadeIn 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* ==================== 3. ANDROID TV / GOOGLE TV / PROJECTOR D-PAD FOCUS SYSTEM ==================== */
+        .tv-focusable {
+            outline: none;
+            transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.25s ease,
+                        border-color 0.25s ease,
+                        background-color 0.25s ease;
+        }
+
+        .tv-focusable:focus-visible,
+        .tv-focusable.dpad-active {
+            outline: none;
+            border-color: #FCF6BA !important;
+            box-shadow: 0 0 0 3px #FCF6BA, 0 12px 35px rgba(212, 175, 55, 0.45) !important;
+            transform: scale(1.045);
+            z-index: 30;
+        }
+
+        /* ==================== 4. ADAPTIVE NAVIGATION SHELL (MOBILE BOTTOM BAR <-> TV LEFT RAIL) ==================== */
+        .webview-header {
+            padding-top: calc(0.65rem + var(--safe-top));
+            padding-left: calc(0.85rem + var(--safe-left));
+            padding-right: calc(0.85rem + var(--safe-right));
+        }
+
+        .webview-footer {
+            padding-bottom: calc(0.55rem + var(--safe-bottom));
+            padding-left: calc(0.5rem + var(--safe-left));
+            padding-right: calc(0.5rem + var(--safe-right));
+        }
+
+        /* Desktop / Android TV / Google TV / Projector Left Collapsible Navigation Rail (>= 1024px) */
+        .tv-side-rail {
+            width: var(--rail-collapsed);
+            padding-top: calc(1rem + var(--safe-top));
+            padding-bottom: calc(1rem + var(--safe-bottom));
+            transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+        }
+
+        .tv-side-rail:hover,
+        .tv-side-rail:focus-within,
+        .tv-side-rail.rail-expanded {
+            width: var(--rail-expanded);
+            background: linear-gradient(90deg, rgba(8, 8, 11, 0.98) 0%, rgba(14, 14, 19, 0.94) 80%, rgba(14, 14, 19, 0.8) 100%);
+            box-shadow: 16px 0 48px rgba(0, 0, 0, 0.8);
+        }
+
+        .tv-side-rail .rail-text {
+            opacity: 0;
+            transform: translateX(-8px);
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.22s ease, transform 0.22s ease;
+        }
+
+        .tv-side-rail:hover .rail-text,
+        .tv-side-rail:focus-within .rail-text,
+        .tv-side-rail.rail-expanded .rail-text {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        /* Active Navigation State (Both Mobile Pill Bar & TV Left Rail) */
+        .nav-btn {
+            position: relative;
+            border-radius: 14px;
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .nav-btn.active-nav {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(252, 246, 186, 0.06));
+        }
+
+        .mobile-nav-btn.active-nav::before {
+            content: "";
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #BF953F, #FCF6BA, #AA771C);
+            box-shadow: 0 0 12px rgba(252, 246, 186, 0.95);
+        }
+
+        .rail-nav-btn.active-nav::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3.5px;
+            height: 60%;
+            border-radius: 0 9999px 9999px 0;
+            background: linear-gradient(180deg, #BF953F, #FCF6BA, #AA771C);
+            box-shadow: 0 0 14px rgba(252, 246, 186, 0.95);
+        }
+
+        .nav-btn.active-nav .nav-icon-wrap {
+            transform: scale(1.1);
+            box-shadow: 0 0 18px rgba(252, 246, 186, 0.55);
+        }
+
+        .nav-btn.active-nav .nav-label {
+            color: #FCF6BA !important;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.55);
+        }
+
+        /* ==================== 5. CINEMA POSTER CARDS & SHIMMER ==================== */
         .thumbnail-card {
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            scroll-snap-align: start;
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.35s ease,
+                        border-color 0.35s ease;
         }
 
         .thumbnail-card::after {
             content: "";
             position: absolute;
             top: -50%;
-            left: -60%;
-            width: 40%;
+            left: -70%;
+            width: 45%;
             height: 200%;
             background: linear-gradient(
                 to right,
                 rgba(255, 255, 255, 0) 0%,
-                rgba(252, 246, 186, 0.35) 50%,
+                rgba(252, 246, 186, 0.3) 50%,
                 rgba(255, 255, 255, 0) 100%
             );
-            transform: rotate(30deg);
-            transition: all 0.65s ease;
+            transform: rotate(28deg);
+            transition: left 0.65s ease;
             pointer-events: none;
         }
 
-        .thumbnail-card:hover::after {
-            left: 130%;
+        .thumbnail-card:hover::after,
+        .thumbnail-card:focus-visible::after {
+            left: 135%;
         }
 
         .thumbnail-card:hover {
-            transform: translateY(-6px) scale(1.02);
+            transform: translateY(-6px) scale(1.03);
+            border-color: rgba(252, 246, 186, 0.8);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.75), 0 0 22px rgba(212, 175, 55, 0.28);
+            z-index: 20;
         }
 
-        @keyframes shineText {
-            to {
-                background-position: 200% center;
-            }
+        /* Dedicated Smooth Scroll Area strictly inside App Shell */
+        #mainScrollArea {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-y: contain;
+            scroll-behavior: smooth;
         }
 
-        /* Smooth Screen Transition on Tab Switch */
-        @keyframes tabFadeIn {
-            from {
-                opacity: 0.35;
-                transform: translateY(6px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .tab-fade-in {
-            animation: tabFadeIn 0.35s ease-out forwards;
-        }
-
-        /* Active Bottom Nav Tab Indicator */
-        .nav-btn {
-            position: relative;
-            padding: 4px 8px;
-            border-radius: 12px;
-        }
-
-        .nav-btn.active-nav::before {
-            content: "";
-            position: absolute;
-            top: -9px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 32px;
-            height: 3px;
-            border-radius: 9999px;
-            background: linear-gradient(90deg, #BF953F, #FCF6BA, #AA771C);
-            box-shadow: 0 0 12px rgba(252, 246, 186, 0.9);
-        }
-
-        .nav-btn.active-nav .nav-icon-wrap {
-            transform: scale(1.12);
-            box-shadow: 0 0 18px rgba(252, 246, 186, 0.55);
-        }
-
-        .nav-btn.active-nav .nav-label {
-            color: #FCF6BA !important;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
-        }
+        /* Safe-Area Helpers for Overlays & Reels */
+        .reel-safe-top { top: calc(1rem + var(--safe-top)); }
+        .reel-safe-bottom { bottom: calc(1.5rem + var(--safe-bottom)); }
+        .reel-actions-safe-bottom { bottom: calc(5rem + var(--safe-bottom)); }
+        .toast-safe-top { top: calc(4.75rem + var(--safe-top)); }
 
         /* Custom Gold Scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: #0F0F12;
+            background: transparent;
         }
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, #BF953F, #FCF6BA, #AA771C);
             border-radius: 10px;
         }
 
-        /* Hide Scrollbar for Native Reel Swipe Experience */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* Crop YouTube Shorts Top Title & Bottom Logo to look 100% Native */
         .native-reel-iframe {
@@ -258,204 +348,396 @@
             border: 0;
             pointer-events: none;
         }
+
+        /* Hero Unified 16:9 Widescreen Cinema Ratio (Same Height/Width Ratio on Phone, Laptop, TV & 300" Projector) */
+        .hero-cinema-stage {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            height: auto;
+            max-height: 70vh;
+        }
     </style>
 </head>
-<body class="bg-lightblack-800 text-white flex flex-col select-none">
+<body class="bg-lightblack-950 text-white flex flex-col lg:flex-row overflow-hidden">
 
-    <!-- ==================== 1. TOP HEADER (NON-OVERLAYING DOCKED HEADER) ==================== -->
-    <header class="webview-header flex-none relative z-50 bg-lightblack-900/95 backdrop-blur-md border-b border-gold/30 px-4 lg:px-10 pb-3.5 transition-all">
-        <div class="max-w-7xl mx-auto flex items-center justify-between relative">
-            <!-- Left Side Logo (Swapped as requested) -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.href='index.html'">
-                <div class="w-10 h-10 rounded-lg gold-shine-bg flex items-center justify-center shadow-lg">
-                    <!-- Aap yaha apna <img src="logo.png"> ya icon laga sakte hain -->
-                    <i class="fa-solid fa-crown text-lightblack-900 text-xl"></i>
+    <!-- ==================== 1. LARGE SCREEN LEFT NAVIGATION RAIL ==================== -->
+    <aside id="tvSideRail" aria-label="Main Navigation Rail" class="tv-side-rail hidden lg:flex flex-col justify-between flex-none z-50 glass-surface border-r border-gold/25 px-2.5 overflow-hidden">
+        <!-- Top Brand Logo -->
+        <div class="space-y-5">
+            <button type="button" onclick="window.location.href='index.html'" class="tv-focusable w-full flex items-center gap-3.5 p-2 rounded-2xl hover:bg-white/5 text-left" data-nav-group="rail">
+                <div class="w-11 h-11 rounded-xl bg-lightblack-800 gold-border flex items-center justify-center flex-none shadow-lg overflow-hidden">
+                    <!-- Yahan apni LOGO image ka naam ya link daalein -->
+                    <img
+                        src="sti.png"
+                        alt="Brand Logo"
+                        onerror="this.src='https://placehold.co/100x100/D4AF37/08080B?text=LOGO'"
+                        class="w-full h-full object-cover"
+                    >
                 </div>
-            </div>
-
-            <!-- Center Text (Logo Name Placeholder - Aap yaha apna naam dal sakte hain) -->
-            <div class="flex items-center space-x-3 cursor-pointer absolute left-1/2 transform -translate-x-1/2" onclick="window.location.href='index.html'">
-                <div class="text-center">
-                    <span class="font-royal text-lg md:text-xl font-extrabold tracking-wider gold-shine-text block leading-none">YOUR LOGO NAME</span>
-                    <span class="text-[9px] tracking-[0.2em] text-white/70 font-semibold uppercase">4K Cinema Edition</span>
+                <div class="rail-text overflow-hidden flex items-center">
+                    <!-- Yahan apni ZEN-G NAME image ka naam ya link daalein -->
+                    <img
+                        src="lumi.png"
+                        alt=""
+                        onerror="this.src='https://placehold.co/220x60/0E0E13/FCF6BA?text=ZEN-G'"
+                        class="h-7 w-auto max-w-[130px] object-contain"
+                    >
                 </div>
-            </div>
+            </button>
 
-            <!-- Right Side Profile Icon (Swapped as requested) -->
-            <a href="profile.html" class="w-9 h-9 rounded-full bg-lightblack-700 gold-border flex items-center justify-center text-gold hover:bg-white hover:text-lightblack-900 transition">
-                <i class="fa-solid fa-user text-sm"></i>
+            <!-- Quick Search Button on Side Rail -->
+            <button type="button" onclick="openSearchModal()" class="tv-focusable rail-nav-btn nav-btn w-full flex items-center gap-3.5 p-2.5 rounded-xl hover:bg-white/10 text-white/80 hover:text-white" data-nav-group="rail">
+                <div class="nav-icon-wrap w-9 h-9 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center flex-none">
+                    <i class="fa-solid fa-magnifying-glass text-gold-light text-sm"></i>
+                </div>
+                <span class="rail-text text-xs font-bold tracking-wider uppercase">Search 4K</span>
+            </button>
+
+            <div class="h-px bg-gradient-to-r from-transparent via-gold/25 to-transparent mx-1"></div>
+
+            <!-- 5 Core Category Icons (Synced with Mobile Bottom Bar) -->
+            <nav class="flex flex-col gap-2">
+                <!-- 1. Web Series -->
+                <button type="button" data-tab="web-series" onclick="switchCategoryTab('web-series')" class="tv-focusable rail-nav-btn nav-btn w-full flex items-center gap-3.5 p-2.5 text-left" data-nav-group="rail">
+                    <div class="nav-icon-wrap w-9 h-9 rounded-lg bg-cyan-500/15 border-2 border-cyan-400 flex items-center justify-center flex-none shadow-[0_0_12px_rgba(34,211,238,0.4)]">
+                        <i class="fa-solid fa-tv text-cyan-300 text-sm"></i>
+                    </div>
+                    <span class="rail-text nav-label text-xs font-bold tracking-wider uppercase text-cyan-300">Web Series</span>
+                </button>
+
+                <!-- 2. Movie -->
+                <button type="button" data-tab="movies" onclick="switchCategoryTab('movies')" class="tv-focusable rail-nav-btn nav-btn w-full flex items-center gap-3.5 p-2.5 text-left" data-nav-group="rail">
+                    <div class="nav-icon-wrap w-9 h-9 rounded-full bg-gradient-to-tr from-rose-600 to-red-500 ring-2 ring-rose-400/50 flex items-center justify-center flex-none shadow-[0_0_12px_rgba(244,63,94,0.45)]">
+                        <i class="fa-solid fa-film text-white text-sm"></i>
+                    </div>
+                    <span class="rail-text nav-label text-xs font-bold tracking-wider uppercase text-rose-400">Movies</span>
+                </button>
+
+                <!-- 3. Short Film -->
+                <button type="button" data-tab="short-films" onclick="switchCategoryTab('short-films')" class="tv-focusable rail-nav-btn nav-btn w-full flex items-center gap-3.5 p-2.5 text-left" data-nav-group="rail">
+                    <div class="nav-icon-wrap w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center flex-none shadow-[0_0_12px_rgba(245,158,11,0.45)]">
+                        <i class="fa-solid fa-clapperboard text-lightblack-950 text-sm"></i>
+                    </div>
+                    <span class="rail-text nav-label text-xs font-bold tracking-wider uppercase text-amber-400">Short Film</span>
+                </button>
+
+                <!-- 4. Hots (Slightly Larger & Default Active) -->
+                <button type="button" data-tab="hots" onclick="switchCategoryTab('hots')" class="tv-focusable rail-nav-btn nav-btn active-nav w-full flex items-center gap-3.5 p-2 text-left" data-nav-group="rail">
+                    <div class="nav-icon-wrap w-10 h-10 rounded-2xl bg-gradient-to-b from-violet-500/55 to-indigo-900/90 border-2 border-violet-300/80 flex items-center justify-center flex-none shadow-[0_0_18px_rgba(139,92,246,0.65)]">
+                        <i class="fa-solid fa-fire text-violet-200 text-base"></i>
+                    </div>
+                    <span class="rail-text nav-label text-[13px] font-extrabold tracking-wider uppercase text-violet-200">Hots</span>
+                </button>
+
+                <!-- 5. ZEENS -->
+                <button type="button" onclick="openReelPopup()" class="tv-focusable rail-nav-btn nav-btn w-full flex items-center gap-3.5 p-2.5 text-left" data-nav-group="rail">
+                    <div class="nav-icon-wrap w-9 h-9 rounded-tr-2xl rounded-bl-2xl rounded-tl-md rounded-br-md bg-gradient-to-tr from-fuchsia-600 via-pink-500 to-yellow-400 flex items-center justify-center flex-none shadow-[0_0_14px_rgba(236,72,153,0.5)]">
+                        <i class="fa-solid fa-bolt text-white text-sm"></i>
+                    </div>
+                    <span class="rail-text nav-label text-xs font-bold tracking-wider uppercase text-pink-400">ZEENS</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Bottom Rail Actions: VIP + Profile -->
+        <div class="space-y-2 pt-3 border-t border-gold/20">
+            <button type="button" onclick="openVipModal()" class="tv-focusable rail-nav-btn nav-btn w-full flex items-center gap-3.5 p-2.5 rounded-xl bg-gold/10 hover:bg-gold/20 border border-gold/30 text-left" data-nav-group="rail">
+                <div class="w-9 h-9 rounded-xl gold-shine-bg flex items-center justify-center flex-none">
+                    <i class="fa-solid fa-gem text-lightblack-950 text-sm"></i>
+                </div>
+                <div class="rail-text">
+                    <span class="text-xs font-extrabold gold-shine-text block uppercase tracking-wider">VIP Pass</span>
+                    <span class="text-[10px] text-white/60 block">4K HDR Ad-Free</span>
+                </div>
+            </button>
+
+            <a href="profile.html" class="tv-focusable rail-nav-btn nav-btn w-full flex items-center gap-3.5 p-2.5 rounded-xl hover:bg-white/10" data-nav-group="rail">
+                <div class="w-9 h-9 rounded-full bg-lightblack-700 gold-border flex items-center justify-center text-gold flex-none">
+                    <i class="fa-solid fa-user text-sm"></i>
+                </div>
+                <div class="rail-text">
+                    <span class="text-xs font-bold text-white block">My Profile</span>
+                    <span class="text-[10px] text-emerald-400 block font-semibold">● Online</span>
+                </div>
             </a>
         </div>
-    </header>
+    </aside>
 
-    <!-- ==================== 2. SCROLLABLE CONTENT WRAPPER (NEVER OVERLAPS HEADER OR FOOTER) ==================== -->
-    <div id="mainScrollArea" class="flex-1 w-full overflow-y-auto overflow-x-hidden">
-        <!-- HERO 4096x2160 AUTOMATIC VIDEO PLAYER & DYNAMIC SECTIONS -->
-        <main id="home" class="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-10 pt-4">
-            <div class="relative w-full rounded-2xl overflow-hidden gold-border shadow-[0_10px_40px_rgba(0,0,0,0.8)] bg-lightblack-900 aspect-[16/10] sm:aspect-[16/9] md:aspect-[21/9]">
-                
-                <!-- Automatic HTML5 Video Element -->
-                <video 
-                    id="heroVideo"
-                    class="w-full h-full object-cover brightness-90 scale-105 transition-transform duration-1000"
-                    autoplay 
-                    muted 
-                    loop 
-                    playsinline
-                    poster="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1920&q=85"
-                >
-                    <source id="heroVideoSource" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
-                </video>
+    <!-- ==================== 2. MAIN APP SHELL COLUMN (TOP HUD + SCROLLABLE STAGE + MOBILE BOTTOM BAR) ==================== -->
+    <div class="flex-1 flex flex-col min-w-0 min-h-0 h-full overflow-hidden relative bg-gradient-to-b from-lightblack-950 via-lightblack-900 to-lightblack-950">
 
-                <!-- Dark Charcoal & Gold Vignette Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-t from-lightblack-800 via-lightblack-900/40 to-transparent"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-lightblack-900/90 via-lightblack-900/30 to-transparent"></div>
+        <!-- TOP ADAPTIVE HEADER / ANDROID TV CINEMA HUD -->
+        <header class="webview-header flex-none relative z-40 glass-surface border-b border-gold/25 pb-2.5 lg:py-3 lg:px-8 transition-all">
+            <div class="w-full flex items-center justify-between gap-2 relative">
 
-                <!-- Top-Right Resolution & Live Indicator (As per wireframe 4096x2160 requirement) -->
-                <div class="absolute top-3 right-3 sm:top-5 sm:right-5 flex items-center space-x-2 bg-lightblack-900/85 backdrop-blur-md px-3 py-1.5 rounded-lg gold-border">
-                    <span class="w-2 h-2 rounded-full bg-gold animate-ping"></span>
-                    <span class="text-[11px] sm:text-xs font-bold tracking-widest gold-shine-text">4096 × 2160 DCI 4K • AUTO</span>
-                </div>
+                <!-- Mobile/Tablet Left Logo | Large Screen Brand & Active Category -->
+                <div class="flex items-center gap-2.5">
+                    <!-- Mobile Logo Button -->
+                    <button type="button" onclick="window.location.href='index.html'" class="lg:hidden flex items-center gap-2.5 focus:outline-none">
+                        <div class="w-9 h-9 rounded-xl bg-lightblack-800 gold-border flex items-center justify-center shadow-lg overflow-hidden">
+                            <!-- Yahan apni LOGO image ka naam ya link daalein -->
+                            <img
+                                src="sti.png"
+                                alt="Brand Logo"
+                                onerror="this.src='https://placehold.co/100x100/D4AF37/08080B?text=LOGO'"
+                                class="w-full h-full object-cover"
+                            >
+                        </div>
+                    </button>
 
-                <!-- Bottom-Left Movie/Show Details & Controls -->
-                <div class="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 max-w-xl z-10 flex flex-col justify-end">
-                    <div class="inline-flex items-center space-x-2 mb-2">
-                        <span id="heroBadge" class="gold-shine-bg text-[10px] px-2.5 py-0.5 rounded font-extrabold uppercase tracking-widest">#1 Trending</span>
-                        <span id="heroCategory" class="text-white/90 text-xs font-medium bg-lightblack-700/80 px-2.5 py-0.5 rounded border border-white/15">Web Series • Royal • UHD</span>
-                    </div>
-
-                    <h1 id="heroTitle" class="font-royal text-2xl sm:text-4xl md:text-5xl font-extrabold gold-shine-text tracking-wide drop-shadow-lg leading-tight">
-                        DYNASTY OF LIGHT
-                    </h1>
-
-                    <p id="heroDesc" class="text-white/80 text-xs sm:text-sm mt-2 line-clamp-2 sm:line-clamp-none font-normal leading-relaxed">
-                        Experience true 4096×2160 cinema resolution. In an empire built on secrets and gold, rival heirs clash across eight gripping episodes for the eternal throne.
-                    </p>
-
-                    <!-- Action Button: Sirf Ek "Watch Now" Button -->
-                    <div class="flex items-center mt-4 sm:mt-6">
-                        <a id="heroWatchNowLink" href="watch-series.html" class="gold-shine-bg px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm flex items-center space-x-2.5 shadow-lg">
-                            <i class="fa-solid fa-play text-lightblack-900"></i>
-                            <span class="uppercase tracking-wider font-extrabold">Watch Now</span>
-                        </a>
+                    <!-- Large Screen Brand Pill -->
+                    <div class="hidden lg:flex items-center gap-3">
+                        <div class="flex items-center gap-2.5 glass-pill px-3.5 py-1.5 rounded-full">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-none"></span>
+                            <!-- Yahan apni ZEN-G NAME image ka naam ya link daalein -->
+                            <img
+                                src="lumi.png"
+                                alt=""
+                                onerror="this.src='https://placehold.co/220x60/0E0E13/FCF6BA?text=ZEN-G'"
+                                class="h-5 w-auto max-w-[120px] object-contain"
+                            >
+                        </div>
+                        <span id="activeCategoryPill" class="text-xs font-bold tracking-wider uppercase text-white/70 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
+                            Hots
+                        </span>
                     </div>
                 </div>
-            </div>
 
-            <!-- ==================== 3. CONTENT SECTIONS (WIREFRAME ROWS) ==================== -->
-            <!-- Dynamic Container where the 3 Heading + 4 Show Thumbnail grids are rendered per selected Bottom Nav Icon -->
-            <div id="ottSectionsContainer" class="mt-8 space-y-10 pb-8">
-                <!-- Populated via JavaScript below based on active tab -->
+                <!-- Mobile/Tablet Center Brand Title Image -->
+                <div class="lg:hidden flex items-center cursor-pointer absolute left-1/2 -translate-x-1/2" onclick="window.location.href='index.html'">
+                    <div class="flex items-center justify-center">
+                        <!-- Yahan apni ZEN-G NAME image ka naam ya link daalein -->
+                        <img
+                            src="lumi.png"
+                            alt="ZEN-G"
+                            onerror="this.src='https://placehold.co/240x64/0E0E13/FCF6BA?text=ZEN-G'"
+                            class="h-7 sm:h-8 w-auto max-w-[140px] sm:max-w-[180px] object-contain"
+                        >
+                    </div>
+                </div>
+
+                <!-- Right Controls: Search + VIP Chip + Live Clock (TV) + Profile -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Universal Search Trigger -->
+                    <button type="button" onclick="openSearchModal()" aria-label="Search" class="tv-focusable w-9 h-9 lg:w-auto lg:px-4 lg:h-10 rounded-full glass-pill flex items-center justify-center gap-2 text-white/90 hover:text-gold-light hover:border-gold/50 transition" data-nav-group="header">
+                        <i class="fa-solid fa-magnifying-glass text-xs sm:text-sm text-gold"></i>
+                        <span class="hidden lg:inline text-xs font-semibold text-white/75">Search movies, series...</span>
+                    </button>
+
+                    <!-- Mobile VIP Trigger -->
+                    <button type="button" onclick="openVipModal()" aria-label="VIP Pass" class="hidden sm:flex lg:hidden items-center gap-1.5 px-3 h-9 rounded-full gold-shine-bg text-[11px] uppercase tracking-wider">
+                        <i class="fa-solid fa-crown text-xs"></i>
+                        <span>VIP</span>
+                    </button>
+
+                    <!-- Live Android TV / Google TV System Clock (Visible on Tablet/TV/Projector) -->
+                    <div class="hidden md:flex items-center gap-2 glass-pill px-3.5 h-9 lg:h-10 rounded-full">
+                        <i class="fa-regular fa-clock text-gold text-xs"></i>
+                        <span id="tvSystemClock" class="text-xs font-bold tracking-wider text-white/90 tabular-nums">--:--</span>
+                    </div>
+
+                    <!-- Profile Avatar -->
+                    <a href="profile.html" aria-label="Profile" class="tv-focusable w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-lightblack-700 gold-border flex items-center justify-center text-gold hover:bg-gold hover:text-lightblack-950 transition" data-nav-group="header">
+                        <i class="fa-solid fa-user text-xs sm:text-sm"></i>
+                    </a>
+                </div>
             </div>
-        </main>
+        </header>
+
+        <!-- ==================== 3. SCROLLABLE CINEMA STAGE (100% FLUID FROM MOBILE TO 300" 4K PROJECTOR) ==================== -->
+        <div id="mainScrollArea" class="flex-1 min-h-0 w-full overflow-y-auto overflow-x-hidden">
+            <main id="home" class="w-full mx-auto px-3 sm:px-5 lg:px-8 xl:px-10 pt-3 lg:pt-5 pb-8 lg:pb-12">
+
+                <!-- IMMERSIVE 2026 HERO 4096x2160 CINEMA STAGE -->
+                <section aria-label="Featured 4K Showcase" class="hero-cinema-stage relative w-full rounded-2xl lg:rounded-3xl overflow-hidden gold-border shadow-[0_16px_60px_rgba(0,0,0,0.85)] bg-lightblack-900">
+                    <!-- Automatic HTML5 Video Element (Default: Hots Promo) -->
+                    <video
+                        id="heroVideo"
+                        class="w-full h-full object-cover brightness-90 scale-[1.03] transition-transform duration-1000"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        poster="https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=1920&q=85"
+                    >
+                        <source id="heroVideoSource" src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    </video>
+
+                    <!-- Multi-Layer Cinema Vignette (Google TV / JioTV+ Depth Look) -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-lightblack-950 via-lightblack-950/45 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-lightblack-950/95 via-lightblack-950/45 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.14),transparent_48%)] pointer-events-none"></div>
+
+                    <!-- Bottom-Left Featured Metadata & D-Pad Focusable Controls -->
+                    <div class="absolute bottom-2.5 left-3 right-3 sm:bottom-7 sm:left-7 lg:bottom-10 lg:left-10 max-w-2xl xl:max-w-3xl z-20 flex flex-col justify-end">
+                        <div class="inline-flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2.5">
+                        </div>
+
+                        <!-- Action Controls: Watch Now (Linked to HTML Page) + Audio Mute/Unmute -->
+                        <div class="flex flex-wrap items-center gap-2 sm:gap-3.5 mt-2 sm:mt-5 lg:mt-6" id="heroActionRow">
+                            <!-- Watch Now HTML Page Link (Default: watch-hots.html, updates per tab via categoryScreensData.hero.watchUrl) -->
+                            <a id="heroWatchNowLink" href="watch-hots.html" class="tv-focusable gold-shine-bg px-3.5 sm:px-8 lg:px-9 py-1.5 sm:py-3.5 rounded-lg sm:rounded-xl lg:rounded-2xl text-[10px] sm:text-sm lg:text-base flex items-center gap-1.5 sm:gap-2.5 shadow-xl cursor-pointer" data-nav-group="hero">
+                                <i class="fa-solid fa-play text-lightblack-950 text-[10px] sm:text-sm"></i>
+                                <span class="uppercase tracking-wider font-extrabold">Watch Now</span>
+                            </a>
+
+                            <button type="button" id="heroAudioToggleBtn" onclick="toggleHeroAudio()" aria-label="Toggle Hero Audio" class="tv-focusable glass-pill hover:bg-white/15 w-7 h-7 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center text-gold transition" data-nav-group="hero" title="Toggle Preview Sound">
+                                <i id="heroAudioIcon" class="fa-solid fa-volume-xmark text-xs sm:text-base"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ==================== 4. DYNAMIC 4K CONTENT RAILS ==================== -->
+                <div id="ottSectionsContainer" class="mt-5 lg:mt-8 space-y-8 lg:space-y-11">
+                    <!-- Populated dynamically via JS based on active tab -->
+                </div>
+            </main>
+        </div>
+
+        <!-- ==================== 5. MOBILE & TABLET DOCKED BOTTOM NAVIGATION BAR (5 EQUAL COLUMNS, HOTS CENTERED, LARGER & DEFAULT) ==================== -->
+        <footer class="webview-footer lg:hidden flex-none relative z-40 w-full glass-surface border-t border-gold/35 pt-2 shadow-[0_-10px_30px_rgba(0,0,0,0.85)] overflow-visible">
+            <div class="max-w-3xl mx-auto grid grid-cols-5 items-end w-full">
+                <!-- 1. Short Film -->
+                <button type="button" data-tab="short-films" onclick="switchCategoryTab('short-films')" class="mobile-nav-btn nav-btn group w-full flex flex-col items-center justify-center py-1 px-0.5 focus:outline-none">
+                    <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.45)] group-active:scale-95 transition-transform">
+                        <i class="fa-solid fa-clapperboard text-lightblack-950 text-sm"></i>
+                    </div>
+                    <span class="nav-label text-[9px] sm:text-xs font-bold tracking-wide uppercase mt-1 text-amber-400 whitespace-nowrap leading-tight transition-colors">Short Film</span>
+                </button>
+
+                <!-- 2. Movie -->
+                <button type="button" data-tab="movies" onclick="switchCategoryTab('movies')" class="mobile-nav-btn nav-btn group w-full flex flex-col items-center justify-center py-1 px-0.5 focus:outline-none">
+                    <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-rose-600 to-red-500 ring-2 ring-rose-400/50 flex items-center justify-center shadow-[0_0_12px_rgba(244,63,94,0.45)] group-active:scale-95 transition-transform">
+                        <i class="fa-solid fa-film text-white text-sm"></i>
+                    </div>
+                    <span class="nav-label text-[9px] sm:text-xs font-bold tracking-wide uppercase mt-1 text-rose-400 whitespace-nowrap leading-tight transition-colors">Movie</span>
+                </button>
+
+                <!-- 3. Hots (EXACT CENTER, SLIGHTLY BIGGER & DEFAULT ACTIVE) -->
+                <button type="button" data-tab="hots" onclick="switchCategoryTab('hots')" class="mobile-nav-btn nav-btn active-nav group w-full flex flex-col items-center justify-center py-1 px-0.5 focus:outline-none">
+                    <div class="nav-icon-wrap w-10 h-10 sm:w-11 sm:h-11 -mt-2 rounded-2xl bg-gradient-to-b from-violet-500/55 to-indigo-900/90 border-2 border-violet-300/80 flex items-center justify-center shadow-[0_0_18px_rgba(139,92,246,0.65)] group-active:scale-95 transition-transform">
+                        <i class="fa-solid fa-fire text-violet-200 text-base sm:text-lg"></i>
+                    </div>
+                    <span class="nav-label text-[10px] sm:text-xs font-extrabold tracking-wider uppercase mt-1 text-violet-200 whitespace-nowrap leading-tight transition-colors">Hots</span>
+                </button>
+
+                <!-- 4. ZEENS -->
+                <button type="button" onclick="openReelPopup()" class="mobile-nav-btn nav-btn group w-full flex flex-col items-center justify-center py-1 px-0.5 focus:outline-none">
+                    <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-tr-2xl rounded-bl-2xl rounded-tl-md rounded-br-md bg-gradient-to-tr from-fuchsia-600 via-pink-500 to-yellow-400 flex items-center justify-center shadow-[0_0_14px_rgba(236,72,153,0.5)] group-active:scale-95 transition-transform">
+                        <i class="fa-solid fa-bolt text-white text-sm"></i>
+                    </div>
+                    <span class="nav-label text-[9px] sm:text-xs font-bold tracking-wide uppercase mt-1 text-pink-400 whitespace-nowrap leading-tight transition-colors">ZEENS</span>
+                </button>
+
+                <!-- 5. Web Series -->
+                <button type="button" data-tab="web-series" onclick="switchCategoryTab('web-series')" class="mobile-nav-btn nav-btn group w-full flex flex-col items-center justify-center py-1 px-0.5 focus:outline-none">
+                    <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-cyan-500/15 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_12px_rgba(34,211,238,0.4)] group-active:scale-95 transition-all">
+                        <i class="fa-solid fa-tv text-cyan-300 text-sm"></i>
+                    </div>
+                    <span class="nav-label text-[9px] sm:text-xs font-bold tracking-wide uppercase mt-1 text-cyan-300 whitespace-nowrap leading-tight transition-colors">Web Series</span>
+                </button>
+            </div>
+        </footer>
     </div>
 
-    <!-- ==================== 4. BOTTOM HEADER / NAVIGATION BAR (NON-OVERLAYING DOCKED FOOTER) ==================== -->
-    <footer class="webview-footer flex-none relative z-50 w-full bg-lightblack-900/95 backdrop-blur-lg border-t border-gold/40 pt-2 px-3 sm:px-4 shadow-[0_-8px_25px_rgba(0,0,0,0.85)]">
-        <div class="max-w-7xl mx-auto flex items-center justify-around w-full gap-1">
-            <!-- 1. Short Film (Amber-Orange Gradient Squircle UI) -->
-            <button type="button" data-tab="short-films" onclick="switchCategoryTab('short-films')" class="nav-btn group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
-                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center shadow-[0_0_12px_rgba(245,158,11,0.45)] group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-clapperboard text-lightblack-900 text-sm"></i>
+    <!-- ==================== 6. UNIVERSAL 4K SEARCH OVERLAY (ANDROID MOBILE + TV REMOTE READY) ==================== -->
+    <div id="searchModal" class="fixed inset-0 z-[65] hidden flex-col bg-lightblack-950/95 backdrop-blur-2xl">
+        <div class="webview-header flex-none border-b border-gold/25 pb-4 px-4 lg:px-10">
+            <div class="max-w-5xl mx-auto flex items-center gap-3">
+                <div class="flex-1 flex items-center gap-3 bg-lightblack-800 gold-border rounded-2xl px-4 py-3">
+                    <i class="fa-solid fa-magnifying-glass text-gold text-base"></i>
+                    <input
+                        id="globalSearchInput"
+                        type="text"
+                        autocomplete="off"
+                        oninput="runGlobalSearch(this.value)"
+                        placeholder="Search 4K Web Series, Movies, Short Films, Hots..."
+                        class="w-full bg-transparent text-white text-sm sm:text-base placeholder-white/45 focus:outline-none"
+                    >
+                    <button type="button" onclick="clearGlobalSearch()" id="clearSearchBtn" class="hidden text-white/50 hover:text-white">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
                 </div>
-                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-amber-400 group-hover:text-amber-300 transition-colors">Short Film</span>
-            </button>
-
-            <!-- 2. Movie (Crimson-Red Neon Ring Circle UI) -->
-            <button type="button" data-tab="movies" onclick="switchCategoryTab('movies')" class="nav-btn group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
-                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-rose-600 to-red-500 ring-2 ring-rose-400/50 flex items-center justify-center shadow-[0_0_12px_rgba(244,63,94,0.45)] group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-film text-white text-sm"></i>
-                </div>
-                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-rose-400 group-hover:text-rose-300 transition-colors">Movie</span>
-            </button>
-
-            <!-- 3. Web Series (CENTER DEFAULT ICON - Electric Cyan Glassmorphic Border Box UI) -->
-            <button type="button" data-tab="web-series" onclick="switchCategoryTab('web-series')" class="nav-btn active-nav group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
-                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-cyan-500/15 border-2 border-cyan-400 flex items-center justify-center shadow-[0_0_12px_rgba(34,211,238,0.4)] group-hover:bg-cyan-400/25 group-hover:scale-110 transition-all">
-                    <i class="fa-solid fa-tv text-cyan-300 text-sm"></i>
-                </div>
-                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-cyan-300 group-hover:text-cyan-200 transition-colors">Web Series</span>
-            </button>
-
-            <!-- 4. Silent (Violet-Indigo Soft Pill Frosted UI) -->
-            <button type="button" data-tab="silent" onclick="switchCategoryTab('silent')" class="nav-btn group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
-                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-2xl bg-gradient-to-b from-violet-600/40 to-indigo-900/80 border border-violet-400/60 flex items-center justify-center shadow-[0_0_12px_rgba(139,92,246,0.4)] group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-volume-xmark text-violet-300 text-sm"></i>
-                </div>
-                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-violet-300 group-hover:text-violet-200 transition-colors">Silent</span>
-            </button>
-
-            <!-- 5. Reel (Vibrant Fuchsia-Pink-Gold Tilted Gradient UI - Opens Native Reel Popup) -->
-            <button type="button" onclick="openReelPopup()" class="nav-btn group flex flex-col sm:flex-row items-center sm:space-x-2 transition-all focus:outline-none">
-                <div class="nav-icon-wrap w-8 h-8 sm:w-9 sm:h-9 rounded-tr-2xl rounded-bl-2xl rounded-tl-md rounded-br-md bg-gradient-to-tr from-fuchsia-600 via-pink-500 to-yellow-400 flex items-center justify-center shadow-[0_0_14px_rgba(236,72,153,0.5)] group-hover:rotate-6 group-hover:scale-110 transition-transform">
-                    <i class="fa-solid fa-bolt text-white text-sm"></i>
-                </div>
-                <span class="nav-label text-[10px] sm:text-xs font-bold tracking-wider uppercase mt-1 sm:mt-0 text-pink-400 group-hover:text-pink-300 transition-colors">Reel</span>
-            </button>
+                <button type="button" onclick="closeSearchModal()" class="tv-focusable w-11 h-11 rounded-2xl glass-pill flex items-center justify-center text-white hover:text-gold transition">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
         </div>
-    </footer>
+        <div class="flex-1 overflow-y-auto px-4 lg:px-10 py-6">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 id="searchResultHeading" class="font-royal text-sm sm:text-lg font-extrabold gold-shine-text uppercase tracking-wider">Popular 4K Catalog</h3>
+                    <span id="searchResultCount" class="text-xs text-white/60 font-semibold"></span>
+                </div>
+                <div id="searchResultsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- ==================== 5. NATIVE REEL POPUP MODAL (5TH ICON - YT SHORTS AS APP REELS) ==================== -->
-    <div id="reelPopupModal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-lightblack-900/95 backdrop-blur-xl sm:p-4">
+    <!-- ==================== 7. NATIVE REEL POPUP MODAL (5TH ICON - YT SHORTS AS APP REELS) ==================== -->
+    <div id="reelPopupModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-lightblack-950/96 backdrop-blur-2xl sm:p-4">
         <!-- Close Button -->
-        <button onclick="closeReelPopup()" class="reel-safe-top fixed right-4 z-[65] w-10 h-10 rounded-full bg-lightblack-900/80 gold-border flex items-center justify-center text-white hover:text-gold transition shadow-lg">
+        <button type="button" onclick="closeReelPopup()" class="reel-safe-top tv-focusable fixed right-4 lg:right-8 z-[75] w-11 h-11 rounded-full bg-lightblack-900/85 gold-border flex items-center justify-center text-white hover:text-gold transition shadow-lg">
             <i class="fa-solid fa-xmark text-lg"></i>
         </button>
 
-        <!-- Desktop Up/Down Navigation Controls -->
-        <div class="hidden sm:flex flex-col space-y-3 fixed right-8 top-1/2 -translate-y-1/2 z-[65]">
-            <button onclick="scrollReelBy(-1)" class="w-11 h-11 rounded-full bg-lightblack-800 gold-border flex items-center justify-center text-gold hover:bg-gold hover:text-lightblack-900 transition shadow-lg" title="Previous Reel">
+        <!-- Up-Down Navigation Controls -->
+        <div class="hidden sm:flex flex-col space-y-3 fixed right-8 top-1/2 -translate-y-1/2 z-[75]">
+            <button type="button" onclick="scrollReelBy(-1)" class="tv-focusable w-12 h-12 rounded-full bg-lightblack-800 gold-border flex items-center justify-center text-gold hover:bg-gold hover:text-lightblack-950 transition shadow-lg" title="Previous ZEENS">
                 <i class="fa-solid fa-chevron-up"></i>
             </button>
-            <button onclick="scrollReelBy(1)" class="w-11 h-11 rounded-full bg-lightblack-800 gold-border flex items-center justify-center text-gold hover:bg-gold hover:text-lightblack-900 transition shadow-lg" title="Next Reel">
+            <button type="button" onclick="scrollReelBy(1)" class="tv-focusable w-12 h-12 rounded-full bg-lightblack-800 gold-border flex items-center justify-center text-gold hover:bg-gold hover:text-lightblack-950 transition shadow-lg" title="Next ZEENS">
                 <i class="fa-solid fa-chevron-down"></i>
             </button>
         </div>
 
-        <!-- 9:16 Vertical Swipe Container -->
-        <div id="reelFeedContainer" class="w-full h-[100dvh] sm:h-[90vh] sm:max-w-[410px] sm:rounded-2xl sm:gold-border bg-lightblack-900 overflow-y-scroll snap-y snap-mandatory no-scrollbar relative shadow-[0_0_60px_rgba(212,175,55,0.2)]">
+        <!-- 9:16 Vertical Swipe Container (Scales cleanly even on 4K TV / Projector) -->
+        <div id="reelFeedContainer" class="w-full h-[100dvh] sm:h-[88vh] sm:aspect-[9/16] sm:max-w-[92vw] sm:rounded-3xl sm:gold-border bg-lightblack-900 overflow-y-scroll snap-y snap-mandatory no-scrollbar relative shadow-[0_0_80px_rgba(212,175,55,0.22)]">
             <!-- Dynamically filled from reelShortsData -->
         </div>
     </div>
 
-    <!-- ==================== 6. VIP PASS MODAL ==================== -->
-    <div id="vipModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-lightblack-900/80 backdrop-blur-md p-4">
-        <div class="bg-lightblack-800 gold-border rounded-2xl max-w-md w-full p-6 text-center relative shadow-[0_0_50px_rgba(212,175,55,0.25)]">
-            <button onclick="closeVipModal()" class="absolute top-4 right-4 text-white/60 hover:text-white text-lg">
+    <!-- ==================== 8. VIP PASS MODAL ==================== -->
+    <div id="vipModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-lightblack-950/85 backdrop-blur-lg p-4">
+        <div class="bg-lightblack-800 gold-border rounded-3xl max-w-md w-full p-6 sm:p-7 text-center relative shadow-[0_0_60px_rgba(212,175,55,0.28)]">
+            <button type="button" onclick="closeVipModal()" class="tv-focusable absolute top-4 right-4 w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-white/70 hover:text-white text-base">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="w-16 h-16 rounded-2xl gold-shine-bg mx-auto flex items-center justify-center mb-4">
-                <i class="fa-solid fa-crown text-3xl text-lightblack-900"></i>
+                <i class="fa-solid fa-crown text-3xl text-lightblack-950"></i>
             </div>
-            <h3 class="font-royal text-2xl font-extrabold gold-shine-text">AURA GOLD VIP PASS</h3>
-            <p class="text-white/80 text-xs sm:text-sm mt-2">
-                Unlock unlimited 4096×2160 Cinema 4K streaming with zero ads and Golden Dolby Atmos audio.
+            <h3 class="font-royal text-2xl font-extrabold gold-shine-text">ZEN G VIP PASS</h3>
+            <p class="text-white/80 text-xs sm:text-sm mt-2 leading-relaxed">
+                Unlock unlimited 4096×2160 Cinema 4K streaming on ZEN G with zero ads and Dolby Atmos audio.
             </p>
-            <div class="my-5 p-4 rounded-xl bg-lightblack-700 gold-border flex items-center justify-between">
+            <div class="my-5 p-4 rounded-2xl bg-lightblack-700 gold-border flex items-center justify-between">
                 <div class="text-left">
                     <span class="text-xs uppercase tracking-widest text-gold block font-bold">Annual Royal Plan</span>
                     <span class="text-white text-lg font-extrabold">₹999 / Year</span>
                 </div>
                 <span class="gold-shine-bg text-[11px] px-3 py-1 rounded-full uppercase font-extrabold">Best Value</span>
             </div>
-            <button onclick="activateVip()" class="w-full gold-shine-bg py-3 rounded-xl text-sm uppercase tracking-wider">
+            <button type="button" onclick="activateVip()" class="tv-focusable w-full gold-shine-bg py-3.5 rounded-2xl text-sm uppercase tracking-wider">
                 Activate Golden Membership
             </button>
         </div>
     </div>
 
-    <!-- ==================== 7. NOTIFICATION TOAST ==================== -->
-    <div id="toastBox" class="toast-safe-top fixed right-5 z-[70] hidden bg-lightblack-900 gold-border px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transition-all">
-        <i class="fa-solid fa-circle-check text-gold text-lg"></i>
+    <!-- ==================== 9. NOTIFICATION TOAST ==================== -->
+    <div id="toastBox" class="toast-safe-top fixed right-4 lg:right-8 z-[80] hidden glass-surface gold-border px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transition-all">
+        <i class="fa-solid fa-circle-check text-gold text-base"></i>
         <span id="toastMessage" class="text-white text-xs sm:text-sm font-semibold">Playing Show in 4K!</span>
     </div>
 
-    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+    <!-- ==================== JAVASCRIPT APPLICATION ENGINE ==================== -->
     <script>
         /**
-         * Optional Android WebView Bridge Helper:
-         * Agar aapka Android app manually status bar / nav bar height pass karna chahe,
-         * toh WebView se `window.setAndroidSafeArea(statusBarPx, navBarPx)` call kar sakte hain.
+         * 1. ANDROID WEBVIEW NATIVE BRIDGE HELPERS
+         * - Call window.setAndroidSafeArea(topPx, bottomPx) from Android WebView if injecting system bar insets manually.
+         * - Call window.handleAndroidBack() from Android Activity's onBackPressed() to close overlays before exiting app.
          */
         window.setAndroidSafeArea = function (topPx = 0, bottomPx = 0) {
             try {
@@ -466,31 +748,53 @@
             }
         };
 
+        window.handleAndroidBack = function () {
+            const reelModal = document.getElementById("reelPopupModal");
+            if (reelModal && !reelModal.classList.contains("hidden")) {
+                closeReelPopup();
+                return true;
+            }
+            const searchModal = document.getElementById("searchModal");
+            if (searchModal && !searchModal.classList.contains("hidden")) {
+                closeSearchModal();
+                return true;
+            }
+            const vipModal = document.getElementById("vipModal");
+            if (vipModal && !vipModal.classList.contains("hidden")) {
+                closeVipModal();
+                return true;
+            }
+            return false;
+        };
+
         /**
-         * Scroll main content wrapper cleanly to top inside App Shell layout
+         * 2. LIVE SYSTEM CLOCK & SCROLL HELPER
          */
+        function updateSystemClock() {
+            const clockEl = document.getElementById("tvSystemClock");
+            if (!clockEl) return;
+            const now = new Date();
+            clockEl.textContent = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        }
+
         function scrollMainToTop() {
             const scrollArea = document.getElementById("mainScrollArea");
             if (scrollArea) {
                 scrollArea.scrollTo({ top: 0, behavior: "smooth" });
-            } else {
-                window.scrollTo({ top: 0, behavior: "smooth" });
             }
         }
 
         /**
-         * COMPLETE TAB-WISE CATALOG FOR ALL 4 MAIN SCREENS
-         * Center Icon ("web-series") is set as the Default Screen on load.
-         * Clicking Short Film, Movie, Web Series, or Silent loads this exact same Hero + 3-Row UI
-         * with content tailored specifically to that category.
+         * 3. COMPLETE TAB-WISE 4K CATALOG (PRESERVES ALL ORIGINAL CATEGORIES & LINKS)
+         * Watch Now button links directly to the HTML page defined in hero.watchUrl for each tab.
          */
         const categoryScreensData = {
-            // ==================== 3. WEB SERIES (CENTER ICON - DEFAULT SCREEN) ====================
             "web-series": {
                 label: "Web Series",
                 hero: {
                     badge: "#1 Trending Series",
                     category: "Web Series • Royal • UHD",
+                    rating: "9.8",
                     title: "DYNASTY OF LIGHT",
                     desc: "Experience true 4096×2160 cinema resolution. In an empire ruled by the Golden Dynasty, rival heirs clash across eight gripping episodes to reclaim the eternal throne.",
                     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
@@ -506,7 +810,9 @@
                             { title: "DYNASTY OF LIGHT", rating: "9.8", Category: "Web Series • Royal", thumb: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80", pageUrl: "series-1.html" },
                             { title: "BLACK VELVET SYNDICATE", rating: "9.5", Category: "Web Series • Crime", thumb: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80", pageUrl: "series-2.html" },
                             { title: "SOLARIS EXPEDITION", rating: "9.7", Category: "Web Series • Space", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", pageUrl: "series-3.html" },
-                            { title: "SYMPHONY OF GOLD", rating: "9.6", Category: "Web Series • Drama", thumb: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80", pageUrl: "series-4.html" }
+                            { title: "SYMPHONY OF GOLD", rating: "9.6", Category: "Web Series • Drama", thumb: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80", pageUrl: "series-4.html" },
+                            { title: "CROWN OF SHADOWS", rating: "9.4", Category: "Web Series • Royal", thumb: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80", pageUrl: "series-1.html" },
+                            { title: "GOLDEN HORIZON", rating: "9.7", Category: "Web Series • Sci-Fi", thumb: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=600&q=80", pageUrl: "series-3.html" }
                         ]
                     },
                     {
@@ -517,7 +823,8 @@
                             { title: "CARTEL OF CROWN", rating: "9.4", Category: "Web Series • Thriller", thumb: "https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=600&q=80", pageUrl: "series-5.html" },
                             { title: "SHADOW PROTOCOL", rating: "9.6", Category: "Web Series • Spy", thumb: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80", pageUrl: "series-6.html" },
                             { title: "THE OBSIDIAN COURT", rating: "9.3", Category: "Web Series • Legal", thumb: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80", pageUrl: "series-7.html" },
-                            { title: "MIDNIGHT HEIRS", rating: "9.5", Category: "Web Series • Mystery", thumb: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80", pageUrl: "series-8.html" }
+                            { title: "MIDNIGHT HEIRS", rating: "9.5", Category: "Web Series • Mystery", thumb: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80", pageUrl: "series-8.html" },
+                            { title: "CRIMSON DOSSIER", rating: "9.4", Category: "Web Series • Crime", thumb: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80", pageUrl: "series-5.html" }
                         ]
                     },
                     {
@@ -534,12 +841,12 @@
                 ]
             },
 
-            // ==================== 1. SHORT FILM ====================
             "short-films": {
                 label: "Short Film",
                 hero: {
                     badge: "#1 Trending Short Film",
                     category: "Short Film • Sci-Fi • UHD",
+                    rating: "9.8",
                     title: "CHRONICLES OF GOLD",
                     desc: "A breathtaking 18-minute 4096×2160 short masterpiece. One lone guardian enters the sunken golden vault to unlock humanity's final memory.",
                     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
@@ -583,12 +890,12 @@
                 ]
             },
 
-            // ==================== 2. MOVIE ====================
             "movies": {
-                label: "Movie",
+                label: "Movies",
                 hero: {
                     badge: "#1 Premiere Movie",
                     category: "Movie • Heist • Action • UHD",
+                    rating: "9.6",
                     title: "MIDNIGHT IN MONACO",
                     desc: "A high-stakes 4K Ultra HD blockbuster. When a royal diamond disappears from the Grand Casino, an elite mastermind has only one night to outrun Interpol.",
                     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
@@ -632,69 +939,67 @@
                 ]
             },
 
-            // ==================== 4. SILENT ====================
-            "silent": {
-                label: "Silent",
+            "hots": {
+                label: "Hots",
                 hero: {
-                    badge: "#1 Silent Masterpiece",
-                    category: "Silent Cinema • Visual Art • UHD",
-                    title: "ECHOES IN SILENCE",
-                    desc: "Zero dialogue. Pure emotion in 4096×2160. Follow a lone traveler across misty peaks and golden ruins where every glance speaks louder than words.",
+                    badge: "#1 Trending Hots",
+                    category: "Hots • Exclusive • UHD",
+                    rating: "9.7",
+                    title: "ECHOES OF FIRE",
+                    desc: "Pure intensity in 4096×2160. Experience ZEN G's boldest 4K exclusive originals crafted with breathtaking cinematography and unstoppable drama.",
                     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                     posterUrl: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=1920&q=85",
-                    watchUrl: "watch-silent.html"
+                    watchUrl: "watch-hots.html"
                 },
                 sections: [
                     {
-                        id: "sl-section-1",
-                        heading: "TRENDING SILENT CINEMA",
-                        viewAllUrl: "silent-cinema.html",
+                        id: "ht-section-1",
+                        heading: "TRENDING HOTS",
+                        viewAllUrl: "hots.html",
                         shows: [
-                            { title: "ECHOES IN SILENCE", rating: "9.7", Category: "Silent • Visual", thumb: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-1.html" },
-                            { title: "THE UNSPOKEN VOW", rating: "9.4", Category: "Silent • Drama", thumb: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-2.html" },
-                            { title: "STILLNESS OF GOLD", rating: "9.6", Category: "Silent • Art", thumb: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-3.html" },
-                            { title: "WHISPERS OF NIGHT", rating: "9.5", Category: "Silent • Noir", thumb: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-4.html" }
+                            { title: "ECHOES OF FIRE", rating: "9.7", Category: "Hots • Exclusive", thumb: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-1.html" },
+                            { title: "THE UNSPOKEN VOW", rating: "9.4", Category: "Hots • Drama", thumb: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-2.html" },
+                            { title: "SPARK OF GOLD", rating: "9.6", Category: "Hots • Art", thumb: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-3.html" },
+                            { title: "WHISPERS OF NIGHT", rating: "9.5", Category: "Hots • Noir", thumb: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-4.html" }
                         ]
                     },
                     {
-                        id: "sl-section-2",
-                        heading: "PURE VISUAL STORYTELLING",
-                        viewAllUrl: "silent-visuals.html",
+                        id: "ht-section-2",
+                        heading: "ZEN G HOTS ORIGINALS",
+                        viewAllUrl: "hots-originals.html",
                         shows: [
-                            { title: "DRIFTING HORIZONS", rating: "9.8", Category: "Silent • Nature", thumb: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-5.html" },
-                            { title: "SHADOW & LIGHT", rating: "9.5", Category: "Silent • Classic", thumb: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-6.html" },
-                            { title: "THE PAPER BOAT", rating: "9.6", Category: "Silent • Poetic", thumb: "https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-7.html" },
-                            { title: "QUIET SYMPHONY", rating: "9.7", Category: "Silent • Score", thumb: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-8.html" }
+                            { title: "DRIFTING HORIZONS", rating: "9.8", Category: "Hots • Romance", thumb: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-5.html" },
+                            { title: "SHADOW & LIGHT", rating: "9.5", Category: "Hots • Classic", thumb: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-6.html" },
+                            { title: "VELVET DESIRE", rating: "9.6", Category: "Hots • Drama", thumb: "https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-7.html" },
+                            { title: "MIDNIGHT SYMPHONY", rating: "9.7", Category: "Hots • Bold", thumb: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-8.html" }
                         ]
                     },
                     {
-                        id: "sl-section-3",
-                        heading: "FESTIVAL SILENT ARCHIVES",
-                        viewAllUrl: "silent-festival.html",
+                        id: "ht-section-3",
+                        heading: "4K HOTS SPECIALS",
+                        viewAllUrl: "hots-specials.html",
                         shows: [
-                            { title: "THE CLOCKMAKER", rating: "9.4", Category: "Silent • Mystery", thumb: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-9.html" },
-                            { title: "SOLITUDE 2049", rating: "9.6", Category: "Silent • Sci-Fi", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-10.html" },
-                            { title: "GOLDEN DUST", rating: "9.5", Category: "Silent • Experimental", thumb: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-11.html" },
-                            { title: "THE LAST FRAME", rating: "9.8", Category: "Silent • Award", thumb: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80", pageUrl: "silent-12.html" }
+                            { title: "THE CLOCKMAKER", rating: "9.4", Category: "Hots • Mystery", thumb: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-9.html" },
+                            { title: "SOLITUDE 2049", rating: "9.6", Category: "Hots • Sci-Fi", thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-10.html" },
+                            { title: "GOLDEN DUST", rating: "9.5", Category: "Hots • Thriller", thumb: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-11.html" },
+                            { title: "THE LAST FRAME", rating: "9.8", Category: "Hots • Featured", thumb: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80", pageUrl: "hots-12.html" }
                         ]
                     }
                 ]
             }
         };
 
-        // Track currently active screen (Default is Center Icon: "web-series")
-        let currentActiveTab = "web-series";
+        let currentActiveTab = "hots";
+        const watchlistSet = new Set();
 
         /**
-         * Switch Main Screen UI for any of the 4 bottom navigation tabs
-         * (Short Film, Movie, Web Series, Silent) while keeping the exact same UI layout.
+         * 4. SWITCH CATEGORY TAB (SYNCS BOTH MOBILE BOTTOM BAR & TV LEFT RAIL)
          */
         function switchCategoryTab(tabKey, shouldScrollTop = true) {
             try {
                 const screenData = categoryScreensData[tabKey];
                 if (!screenData) return;
 
-                // Ensure Reel popup is closed if user switches tab
                 const reelModal = document.getElementById("reelPopupModal");
                 if (reelModal && !reelModal.classList.contains("hidden")) {
                     closeReelPopup();
@@ -702,7 +1007,7 @@
 
                 currentActiveTab = tabKey;
 
-                // 1. Update Active State on Bottom Navigation Icons
+                // Sync Active State on both Mobile Bottom Nav and Desktop/TV Side Rail
                 document.querySelectorAll(".nav-btn[data-tab]").forEach((btn) => {
                     if (btn.getAttribute("data-tab") === tabKey) {
                         btn.classList.add("active-nav");
@@ -711,16 +1016,33 @@
                     }
                 });
 
-                // 2. Update Hero 4096x2160 Automatic Video Player
+                const pillEl = document.getElementById("activeCategoryPill");
+                if (pillEl) pillEl.textContent = screenData.label;
+
+                // Update Hero 4K Cinema Stage (Null-safe so missing hero text tags never break card rendering)
                 const hero = screenData.hero;
                 const video = document.getElementById("heroVideo");
                 const source = document.getElementById("heroVideoSource");
 
-                document.getElementById("heroBadge").textContent = hero.badge;
-                document.getElementById("heroCategory").textContent = hero.category;
-                document.getElementById("heroTitle").textContent = hero.title;
-                document.getElementById("heroDesc").textContent = hero.desc;
-                document.getElementById("heroWatchNowLink").href = hero.watchUrl;
+                const heroBadgeEl = document.getElementById("heroBadge");
+                if (heroBadgeEl) heroBadgeEl.textContent = hero.badge;
+
+                const heroCategoryEl = document.getElementById("heroCategory");
+                if (heroCategoryEl) heroCategoryEl.textContent = hero.category;
+
+                const heroRatingEl = document.getElementById("heroRating");
+                if (heroRatingEl) heroRatingEl.textContent = hero.rating || "9.8";
+
+                const heroTitleEl = document.getElementById("heroTitle");
+                if (heroTitleEl) heroTitleEl.textContent = hero.title;
+
+                const heroDescEl = document.getElementById("heroDesc");
+                if (heroDescEl) heroDescEl.textContent = hero.desc;
+
+                const heroWatchNowLink = document.getElementById("heroWatchNowLink");
+                if (heroWatchNowLink) heroWatchNowLink.setAttribute("href", hero.watchUrl);
+
+                syncWatchlistButton(hero.title);
 
                 if (video && source) {
                     video.poster = hero.posterUrl;
@@ -731,14 +1053,14 @@
                     video.play().catch(() => {});
                 }
 
-                // 3. Render the 3 Content Sections for this Category
+                // Render Content Rails
                 renderSections(screenData.sections);
 
-                // 4. Subtle Fade-In Animation & Scroll to Top
+                // Smooth Transition
                 const mainEl = document.getElementById("home");
                 if (mainEl) {
                     mainEl.classList.remove("tab-fade-in");
-                    void mainEl.offsetWidth; // Reflow to restart animation
+                    void mainEl.offsetWidth;
                     mainEl.classList.add("tab-fade-in");
                 }
 
@@ -751,84 +1073,97 @@
         }
 
         /**
-         * Render the 3 Sections + Horizontal Scrollable Cards connected to HTML pages
+         * 5. RENDER HORIZONTAL 4K RAILS (ADAPTIVE CARD SIZING FROM PHONE TO 300" 4K PROJECTOR)
          */
-        function renderSections(sectionsList, filterText = "") {
+        function renderSections(sectionsList) {
             const container = document.getElementById("ottSectionsContainer");
             if (!container || !sectionsList) return;
 
             container.innerHTML = "";
 
-            sectionsList.forEach((section) => {
-                const filteredShows = section.shows.filter(show =>
-                    show.title.toLowerCase().includes(filterText.toLowerCase()) ||
-                    show.Category.toLowerCase().includes(filterText.toLowerCase())
-                );
+            sectionsList.forEach((section, rowIndex) => {
+                if (!section.shows || section.shows.length === 0) return;
 
-                if (filteredShows.length === 0) return;
-
-                // Create Section Block
                 const sectionEl = document.createElement("section");
                 sectionEl.id = section.id;
-                sectionEl.className = "space-y-3";
+                sectionEl.className = "space-y-3.5 relative group/row";
 
-                // Section Heading Bar with "View All" HTML link
+                const railId = `rail-track-${section.id}`;
+
                 const headingHTML = `
-                    <div class="flex items-center justify-between bg-lightblack-700/90 px-4 py-3 rounded-xl gold-border shadow-md">
+                    <div class="flex items-center justify-between px-1">
                         <div class="flex items-center space-x-3">
                             <span class="w-1.5 h-6 rounded-full gold-shine-bg"></span>
-                            <h2 class="font-royal text-sm sm:text-xl font-extrabold tracking-wider gold-shine-text uppercase">
+                            <h2 class="font-royal text-sm sm:text-lg lg:text-xl font-extrabold tracking-wider gold-shine-text uppercase">
                                 ${section.heading}
                             </h2>
                         </div>
-                        <a href="${section.viewAllUrl}" class="flex items-center space-x-1.5 text-xs font-bold text-gold hover:text-gold-light transition group">
-                            <span>View All</span>
-                            <i class="fa-solid fa-chevron-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
-                        </a>
+                        <div class="flex items-center gap-2">
+                            <!-- Desktop / Projector Left Arrow -->
+                            <button type="button" onclick="scrollRailHorizontal('${railId}', -1)" aria-label="Scroll Left" class="tv-focusable hidden lg:flex w-8 h-8 rounded-full glass-pill items-center justify-center text-white/75 hover:text-gold hover:border-gold/50 transition" data-nav-row="${rowIndex}">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <!-- Non-Navigating Scroll Indicator / Horizontal Scroll Trigger (Remote OK on TV/Projector & Tap on Phone) -->
+                            <button type="button" onclick="scrollRailHorizontal('${railId}', 1)" aria-label="Scroll Right to View More" class="tv-focusable flex items-center space-x-1.5 text-xs font-bold text-gold hover:text-gold-light glass-pill px-3 py-1.5 rounded-full transition group" data-nav-row="${rowIndex}">
+                                <span>View All</span>
+                                <i class="fa-solid fa-chevron-right text-[10px] group-hover:translate-x-0.5 transition-transform"></i>
+                            </button>
+                        </div>
                     </div>
                 `;
 
-                // Horizontal Scrollable Container
                 let cardsHTML = `
-                    <div class="flex overflow-x-auto space-x-3 pb-3 pt-1 scrollbar-thin scrollbar-thumb-gold scrollbar-track-lightblack-700">
+                    <div id="${railId}" class="flex overflow-x-auto snap-x snap-mandatory gap-3 sm:gap-4 lg:gap-5 pb-3 pt-1.5 px-1 no-scrollbar scroll-smooth">
                 `;
 
-                filteredShows.forEach((show) => {
+                section.shows.forEach((show, colIndex) => {
                     cardsHTML += `
-                        <a href="${show.pageUrl}" 
-                           class="thumbnail-card group cursor-pointer flex flex-col rounded-xl overflow-hidden bg-lightblack-700 gold-border gold-border-glow flex-shrink-0 w-36 sm:w-48 md:w-56">
-                            
-                            <!-- SHOW THUMBNAIL BOX -->
-                            <div class="relative aspect-[3/4] w-full overflow-hidden bg-lightblack-800">
-                                <img 
-                                    src="${show.thumb}" 
+                        <a href="${show.pageUrl}"
+                           data-nav-row="${rowIndex}"
+                           data-nav-col="${colIndex}"
+                           class="tv-focusable thumbnail-card group cursor-pointer flex flex-col rounded-2xl overflow-hidden bg-lightblack-700 gold-border flex-shrink-0 w-[39vw] min-w-[140px] sm:w-[27vw] md:w-[22vw] lg:w-[16.5rem] xl:w-[17.5rem] max-w-[290px]">
+
+                            <!-- POSTER THUMBNAIL -->
+                            <div class="relative aspect-[3/4] w-full flex-shrink-0 overflow-hidden bg-lightblack-800">
+                                <img
+                                    src="${show.thumb}"
                                     alt="${show.title}"
                                     loading="lazy"
-                                    onerror="this.src='https://placehold.co/600x800/16161A/D4AF37?text=4K+SHOW'"
-                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
+                                    onerror="this.src='https://placehold.co/600x800/15151C/D4AF37?text=4K+SHOW'"
+                                    class="w-full h-full object-cover group-hover:scale-110 group-focus-visible:scale-110 transition-transform duration-700 brightness-90 group-hover:brightness-100"
                                 >
-                                
-                                <div class="absolute inset-0 bg-gradient-to-t from-lightblack-900 via-transparent to-lightblack-900/40"></div>
 
-                                <div class="absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5">
-                                    <span class="bg-lightblack-900/90 text-white text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center space-x-1 border border-gold/30">
+                                <div class="absolute inset-0 bg-gradient-to-t from-lightblack-950 via-transparent to-lightblack-950/35"></div>
+
+                                <!-- 4K UHD Chip Top-Left -->
+                                <div class="absolute top-2 left-2">
+                                    <span class="bg-lightblack-950/80 backdrop-blur-md text-gold-light text-[9px] font-extrabold px-2 py-0.5 rounded-md border border-gold/30 tracking-wider">4K</span>
+                                </div>
+
+                                <!-- Rating Badge Top-Right -->
+                                <div class="absolute top-2 right-2">
+                                    <span class="bg-lightblack-950/85 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-md flex items-center space-x-1 border border-gold/30">
                                         <i class="fa-solid fa-star text-gold text-[8px] sm:text-[9px]"></i>
                                         <span>${show.rating}</span>
                                     </span>
                                 </div>
 
-                                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-lightblack-900/40 backdrop-blur-[2px]">
-                                    <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-full gold-shine-bg flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                                        <i class="fa-solid fa-play text-lightblack-900 text-xs sm:text-base ml-0.5"></i>
+                                <!-- Hover / TV Focus Play Overlay -->
+                                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300 bg-lightblack-950/35 backdrop-blur-[1px]">
+                                    <div class="w-11 h-11 sm:w-13 sm:h-13 rounded-full gold-shine-bg flex items-center justify-center shadow-2xl transform scale-75 group-hover:scale-100 group-focus-visible:scale-100 transition-transform duration-300">
+                                        <i class="fa-solid fa-play text-lightblack-950 text-sm sm:text-base ml-0.5"></i>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- TITLE BAR ATTACHED DIRECTLY BELOW -->
-                            <div class="bg-lightblack-700 group-hover:bg-lightblack-600 border-t border-gold/30 py-2 px-1.5 sm:px-3 text-center transition-colors">
-                                <h3 class="text-[10px] sm:text-xs md:text-sm font-bold tracking-wider text-white group-hover:text-gold-light truncate uppercase">
+                            <!-- METADATA FOOTER BAR -->
+                            <div class="bg-lightblack-800 group-hover:bg-lightblack-700 border-t border-gold/25 py-2.5 px-2.5 sm:px-3.5 transition-colors">
+                                <h3 class="text-[11px] sm:text-xs lg:text-sm font-extrabold tracking-wide text-white group-hover:text-gold-light truncate uppercase">
                                     ${show.title}
                                 </h3>
+                                <p class="text-[9px] sm:text-[10px] text-white/55 truncate mt-0.5 font-medium">
+                                    ${show.Category}
+                                </p>
                             </div>
                         </a>
                     `;
@@ -840,35 +1175,268 @@
             });
         }
 
-        // Play any selected show directly in the 4096x2160 Top Hero Video Player
-        function playSelectedShow(title, desc, category, videoUrl, posterUrl) {
-            const video = document.getElementById("heroVideo");
-            const source = document.getElementById("heroVideoSource");
+        function scrollRailHorizontal(railId, direction) {
+            const rail = document.getElementById(railId);
+            if (!rail) return;
+            const step = Math.max(rail.clientWidth * 0.72, 240);
+            const maxScroll = rail.scrollWidth - rail.clientWidth;
 
-            document.getElementById("heroTitle").textContent = title;
-            document.getElementById("heroDesc").textContent = desc;
-            document.getElementById("heroCategory").textContent = category + " • 4096×2160";
-
-            video.poster = posterUrl;
-            source.src = videoUrl;
-            video.load();
-            video.play().catch(() => {});
-
-            scrollMainToTop();
-            showToast(`Now Playing "${title}" in 4096×2160 4K`);
-        }
-
-        // Search Filter Helper (Filters currently active tab's catalog)
-        function filterShows() {
-            const searchEl = document.getElementById("searchInput");
-            const query = searchEl ? searchEl.value : "";
-            const activeData = categoryScreensData[currentActiveTab];
-            if (activeData) {
-                renderSections(activeData.sections, query);
+            if (direction > 0 && rail.scrollLeft >= maxScroll - 8) {
+                rail.scrollTo({ left: 0, behavior: "smooth" });
+            } else if (direction < 0 && rail.scrollLeft <= 8) {
+                rail.scrollTo({ left: maxScroll, behavior: "smooth" });
+            } else {
+                rail.scrollBy({ left: direction * step, behavior: "smooth" });
             }
         }
 
-        // VIP Modal Functions
+        /**
+         * 7. HERO CONTROLS (AUDIO TOGGLE & MY LIST)
+         */
+        function toggleHeroAudio() {
+            const video = document.getElementById("heroVideo");
+            const icon = document.getElementById("heroAudioIcon");
+            if (!video || !icon) return;
+            video.muted = !video.muted;
+            icon.className = `fa-solid ${video.muted ? "fa-volume-xmark" : "fa-volume-high"} text-sm sm:text-base`;
+            showToast(video.muted ? "Preview Audio Muted" : "4K Preview Sound On");
+        }
+
+        function toggleHeroWatchlist() {
+            const titleEl = document.getElementById("heroTitle");
+            const fallbackTitle = categoryScreensData[currentActiveTab]?.hero?.title || "Show";
+            const title = titleEl ? titleEl.textContent.trim() : fallbackTitle;
+            if (watchlistSet.has(title)) {
+                watchlistSet.delete(title);
+                showToast(`Removed "${title}" from My List`);
+            } else {
+                watchlistSet.add(title);
+                showToast(`Added "${title}" to My List`);
+            }
+            syncWatchlistButton(title);
+        }
+
+        function syncWatchlistButton(title) {
+            const icon = document.getElementById("heroWatchlistIcon");
+            const text = document.getElementById("heroWatchlistText");
+            if (!icon || !text) return;
+            const added = watchlistSet.has(title);
+            icon.className = `fa-solid ${added ? "fa-check text-emerald-400" : "fa-plus text-gold"}`;
+            text.textContent = added ? "In My List" : "My List";
+        }
+
+        /**
+         * 8. UNIVERSAL SEARCH MODAL (SEARCH ACROSS ALL 4 CATEGORIES)
+         */
+        function getAllCatalogShows() {
+            const seen = new Set();
+            const all = [];
+            Object.values(categoryScreensData).forEach((cat) => {
+                cat.sections.forEach((sec) => {
+                    sec.shows.forEach((show) => {
+                        if (!seen.has(show.title)) {
+                            seen.add(show.title);
+                            all.push(show);
+                        }
+                    });
+                });
+            });
+            return all;
+        }
+
+        function openSearchModal() {
+            const modal = document.getElementById("searchModal");
+            const input = document.getElementById("globalSearchInput");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+            runGlobalSearch(input.value || "");
+            setTimeout(() => input.focus(), 60);
+        }
+
+        function closeSearchModal() {
+            const modal = document.getElementById("searchModal");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+        }
+
+        function clearGlobalSearch() {
+            const input = document.getElementById("globalSearchInput");
+            input.value = "";
+            runGlobalSearch("");
+            input.focus();
+        }
+
+        function runGlobalSearch(query) {
+            const q = (query || "").trim().toLowerCase();
+            const clearBtn = document.getElementById("clearSearchBtn");
+            const heading = document.getElementById("searchResultHeading");
+            const countEl = document.getElementById("searchResultCount");
+            const grid = document.getElementById("searchResultsGrid");
+
+            if (clearBtn) clearBtn.classList.toggle("hidden", q.length === 0);
+
+            const allShows = getAllCatalogShows();
+            const matches = q
+                ? allShows.filter(s => s.title.toLowerCase().includes(q) || s.Category.toLowerCase().includes(q))
+                : allShows.slice(0, 15);
+
+            heading.textContent = q ? `Search Results for "${query}"` : "Popular 4K Catalog";
+            countEl.textContent = `${matches.length} Titles`;
+
+            if (matches.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full glass-pill rounded-2xl p-10 text-center">
+                        <i class="fa-solid fa-magnifying-glass text-gold text-3xl mb-3"></i>
+                        <p class="text-white font-bold">No 4K titles found for "${query}"</p>
+                        <p class="text-white/55 text-xs mt-1">Try searching "Royal", "Sci-Fi", "Movie", or "Hots".</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = matches.map(show => `
+                <a href="${show.pageUrl}" class="tv-focusable thumbnail-card group flex flex-col rounded-2xl overflow-hidden bg-lightblack-700 gold-border">
+                    <div class="relative aspect-[3/4] w-full flex-shrink-0 overflow-hidden bg-lightblack-800">
+                        <img src="${show.thumb}" alt="${show.title}" loading="lazy" onerror="this.src='https://placehold.co/600x800/15151C/D4AF37?text=4K+SHOW'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-2 right-2 bg-lightblack-950/85 px-1.5 py-0.5 rounded text-[10px] font-bold flex items-center gap-1 border border-gold/30">
+                            <i class="fa-solid fa-star text-gold text-[8px]"></i>${show.rating}
+                        </div>
+                    </div>
+                    <div class="p-2.5 bg-lightblack-800 border-t border-gold/25">
+                        <h4 class="text-xs font-bold text-white truncate uppercase">${show.title}</h4>
+                        <p class="text-[10px] text-white/55 truncate mt-0.5">${show.Category}</p>
+                    </div>
+                </a>
+            `).join("");
+        }
+
+        /**
+         * 9. ANDROID TV / PROJECTOR D-PAD SPATIAL NAVIGATION ENGINE
+         * Supports ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Enter, and Escape/Back
+         * for Google TV remotes, Android Projector remotes & keyboards.
+         */
+        document.addEventListener("keydown", function (e) {
+            const reelModal = document.getElementById("reelPopupModal");
+            const searchModal = document.getElementById("searchModal");
+            const vipModal = document.getElementById("vipModal");
+
+            // ESCAPE / ANDROID TV BACK
+            if (e.key === "Escape") {
+                if (window.handleAndroidBack()) {
+                    e.preventDefault();
+                    return;
+                }
+                // On TV/Desktop, Escape jumps focus back to Left Navigation Rail
+                const railFirst = document.querySelector("#tvSideRail .nav-btn.active-nav");
+                if (railFirst && window.innerWidth >= 1024) {
+                    railFirst.focus();
+                }
+                return;
+            }
+
+            // Reel Popup Remote Arrow Up / Down
+            if (reelModal && !reelModal.classList.contains("hidden")) {
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    scrollReelBy(1);
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    scrollReelBy(-1);
+                }
+                return;
+            }
+
+            // Do not hijack arrow keys while typing inside Search input
+            if (document.activeElement && document.activeElement.tagName === "INPUT") {
+                return;
+            }
+
+            if ((searchModal && !searchModal.classList.contains("hidden")) ||
+                (vipModal && !vipModal.classList.contains("hidden"))) {
+                return;
+            }
+
+            // Spatial Navigation for Main Stage & Left TV Rail
+            if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+                handleTvSpatialNavigation(e);
+            }
+        });
+
+        function handleTvSpatialNavigation(e) {
+            const focusables = Array.from(document.querySelectorAll("body .tv-focusable")).filter(el => {
+                if (!el.offsetParent) return false; // Skip hidden elements (e.g., mobile bar on desktop)
+                const modalParent = el.closest("#searchModal, #reelPopupModal, #vipModal");
+                return !modalParent;
+            });
+
+            if (focusables.length === 0) return;
+
+            const current = document.activeElement;
+            if (!current || !focusables.includes(current)) {
+                e.preventDefault();
+                const heroPlay = document.getElementById("heroWatchNowLink");
+                (heroPlay || focusables[0]).focus();
+                return;
+            }
+
+            const curRect = current.getBoundingClientRect();
+            const curCx = curRect.left + curRect.width / 2;
+            const curCy = curRect.top + curRect.height / 2;
+
+            let bestCandidate = null;
+            let bestScore = Infinity;
+
+            focusables.forEach(candidate => {
+                if (candidate === current) return;
+                const r = candidate.getBoundingClientRect();
+                const cx = r.left + r.width / 2;
+                const cy = r.top + r.height / 2;
+
+                const dx = cx - curCx;
+                const dy = cy - curCy;
+
+                let isDirectionMatch = false;
+                let primaryDist = 0;
+                let secondaryDist = 0;
+
+                if (e.key === "ArrowRight" && dx > 12) {
+                    isDirectionMatch = true;
+                    primaryDist = dx;
+                    secondaryDist = Math.abs(dy);
+                } else if (e.key === "ArrowLeft" && dx < -12) {
+                    isDirectionMatch = true;
+                    primaryDist = Math.abs(dx);
+                    secondaryDist = Math.abs(dy);
+                } else if (e.key === "ArrowDown" && dy > 12) {
+                    isDirectionMatch = true;
+                    primaryDist = dy;
+                    secondaryDist = Math.abs(dx);
+                } else if (e.key === "ArrowUp" && dy < -12) {
+                    isDirectionMatch = true;
+                    primaryDist = Math.abs(dy);
+                    secondaryDist = Math.abs(dx);
+                }
+
+                if (!isDirectionMatch) return;
+
+                // Prioritize alignment along the intended axis (Google TV style D-Pad feel)
+                const score = primaryDist + secondaryDist * 2.6;
+                if (score < bestScore) {
+                    bestScore = score;
+                    bestCandidate = candidate;
+                }
+            });
+
+            if (bestCandidate) {
+                e.preventDefault();
+                bestCandidate.focus({ preventScroll: true });
+                bestCandidate.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+            }
+        }
+
+        /**
+         * 10. VIP MODAL & TOAST HELPERS
+         */
         function openVipModal() {
             const modal = document.getElementById("vipModal");
             modal.classList.remove("hidden");
@@ -886,7 +1454,6 @@
             showToast("Crown VIP Activated! Enjoy 4096×2160 Streaming.");
         }
 
-        // Custom Toast Notification (No alert() used)
         let toastTimeout;
         function showToast(message) {
             const toast = document.getElementById("toastBox");
@@ -900,13 +1467,14 @@
             }, 3000);
         }
 
-        // ==================== 5TH ICON: NATIVE REEL PLAYER (YOUTUBE SHORTS LINKS) ====================
-        // Yaha aap apne YouTube channel ke Shorts ka direct link dal sakte hain (e.g., https://youtube.com/shorts/VIDEO_ID)
+        /**
+         * 11. NATIVE ZEENS PLAYER (YOUTUBE SHORTS AS NATIVE APP ZEENS)
+         */
         const reelShortsData = [
             {
                 ytUrl: "https://www.youtube.com/shorts/aqz-KE-bpKQ",
                 title: "GOLDEN DYNASTY • OFFICIAL TEASER",
-                caption: "Experience pure 4K cinema right inside our app. #OriginalReels #4K",
+                caption: "Experience pure 4K cinema right inside ZEN G. #OriginalZEENS #4K",
                 likes: "14.2K",
                 pageUrl: "show-1.html"
             },
@@ -920,7 +1488,7 @@
             {
                 ytUrl: "https://www.youtube.com/shorts/ScMzIvxBSi4",
                 title: "CYBER GOLD 2099 • ACTION CLIP",
-                caption: "Watch the full premiere movie only on our OTT platform. #Movie #Action",
+                caption: "Watch the full premiere movie only on ZEN G. #Movie #Action",
                 likes: "22.5K",
                 pageUrl: "movie-3.html"
             }
@@ -929,7 +1497,6 @@
         let reelObserver = null;
         let isReelMuted = false;
 
-        // Extract YouTube Video ID from any Shorts / Watch / Share URL
         function extractYouTubeId(url) {
             if (!url) return "";
             const regex = /(?:youtube\.com\/(?:shorts\/|watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -937,14 +1504,12 @@
             return match ? match[1] : url.trim();
         }
 
-        // Build clean, native-looking YouTube Embed URL (no controls, no branding, autoplay + loop)
         function buildNativeReelEmbedUrl(videoId, muted) {
             const muteVal = muted ? 1 : 0;
             return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${muteVal}&loop=1&playlist=${videoId}&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&disablekb=1&fs=0&playsinline=1&enablejsapi=1`;
         }
 
         function openReelPopup() {
-            // Pause background hero video so audio never clashes
             const heroVideo = document.getElementById("heroVideo");
             if (heroVideo && !heroVideo.paused) heroVideo.pause();
 
@@ -952,9 +1517,7 @@
             feed.innerHTML = reelShortsData.map((reel, idx) => {
                 const videoId = extractYouTubeId(reel.ytUrl);
                 return `
-                    <div class="reel-slide snap-start snap-always relative w-full h-[100dvh] sm:h-[90vh] bg-lightblack-900 overflow-hidden flex items-center justify-center" data-video-id="${videoId}" data-index="${idx}">
-                        
-                        <!-- Cropped YouTube Iframe (Hides YouTube Title & Logo completely) -->
+                    <div class="reel-slide snap-start snap-always relative w-full h-[100dvh] sm:h-[88vh] bg-lightblack-900 overflow-hidden flex items-center justify-center" data-video-id="${videoId}" data-index="${idx}">
                         <iframe
                             id="reel-iframe-${idx}"
                             class="native-reel-iframe"
@@ -963,53 +1526,45 @@
                             referrerpolicy="strict-origin-when-cross-origin"
                         ></iframe>
 
-                        <!-- Transparent Touch Shield (Prevents YouTube hover/click UI; Tap toggles Mute/Unmute) -->
-                        <div onclick="toggleReelMute(${idx})" class="absolute inset-0 z-10 cursor-pointer bg-gradient-to-t from-lightblack-900/90 via-transparent to-lightblack-900/50"></div>
+                        <div onclick="toggleReelMute(${idx})" class="absolute inset-0 z-10 cursor-pointer bg-gradient-to-t from-lightblack-950/90 via-transparent to-lightblack-950/50"></div>
 
-                        <!-- Top Native App Reels Header -->
                         <div class="reel-safe-top absolute left-4 z-20 flex items-center space-x-2 pointer-events-none">
                             <span class="gold-shine-bg text-[10px] px-2.5 py-1 rounded-full font-extrabold uppercase tracking-widest">
-                                <i class="fa-solid fa-bolt mr-1"></i>REELS
+                                <i class="fa-solid fa-bolt mr-1"></i>ZEENS
                             </span>
-                            <span class="text-white/90 text-xs font-bold tracking-wider drop-shadow">YOUR LOGO NAME</span>
+                            <span class="text-white/90 text-xs font-bold tracking-wider drop-shadow">ZEN G</span>
                         </div>
 
-                        <!-- Right-Side Native Action Buttons (Like, Sound, Share, Watch Full) -->
                         <div class="reel-actions-safe-bottom absolute right-3 z-20 flex flex-col items-center space-y-5">
-                            <!-- Like Button -->
-                            <button onclick="toggleReelLike(this)" class="flex flex-col items-center group focus:outline-none">
-                                <div class="w-11 h-11 rounded-full bg-lightblack-900/70 backdrop-blur-md gold-border flex items-center justify-center text-white group-hover:scale-110 transition">
+                            <button type="button" onclick="toggleReelLike(this)" class="flex flex-col items-center group focus:outline-none">
+                                <div class="w-11 h-11 rounded-full bg-lightblack-900/75 backdrop-blur-md gold-border flex items-center justify-center text-white group-hover:scale-110 transition">
                                     <i class="fa-solid fa-heart text-lg"></i>
                                 </div>
                                 <span class="text-[11px] font-bold text-white mt-1 drop-shadow">${reel.likes}</span>
                             </button>
 
-                            <!-- Audio Mute/Unmute Button -->
-                            <button onclick="toggleReelMute(${idx})" class="reel-mute-btn flex flex-col items-center group focus:outline-none">
-                                <div class="w-11 h-11 rounded-full bg-lightblack-900/70 backdrop-blur-md gold-border flex items-center justify-center text-gold group-hover:scale-110 transition">
+                            <button type="button" onclick="toggleReelMute(${idx})" class="reel-mute-btn flex flex-col items-center group focus:outline-none">
+                                <div class="w-11 h-11 rounded-full bg-lightblack-900/75 backdrop-blur-md gold-border flex items-center justify-center text-gold group-hover:scale-110 transition">
                                     <i class="fa-solid ${isReelMuted ? 'fa-volume-xmark' : 'fa-volume-high'} text-lg"></i>
                                 </div>
                                 <span class="text-[10px] font-bold text-white mt-1 drop-shadow">${isReelMuted ? 'Muted' : 'Sound'}</span>
                             </button>
 
-                            <!-- Share Button -->
-                            <button onclick="shareReel('${reel.title}')" class="flex flex-col items-center group focus:outline-none">
-                                <div class="w-11 h-11 rounded-full bg-lightblack-900/70 backdrop-blur-md gold-border flex items-center justify-center text-white group-hover:scale-110 transition">
+                            <button type="button" onclick="shareReel('${reel.title}')" class="flex flex-col items-center group focus:outline-none">
+                                <div class="w-11 h-11 rounded-full bg-lightblack-900/75 backdrop-blur-md gold-border flex items-center justify-center text-white group-hover:scale-110 transition">
                                     <i class="fa-solid fa-share text-base"></i>
                                 </div>
                                 <span class="text-[10px] font-bold text-white mt-1 drop-shadow">Share</span>
                             </button>
 
-                            <!-- Watch Full Show Link -->
                             <a href="${reel.pageUrl}" class="flex flex-col items-center group">
-                                <div class="w-11 h-11 rounded-full gold-shine-bg flex items-center justify-center text-lightblack-900 group-hover:scale-110 transition shadow-lg">
+                                <div class="w-11 h-11 rounded-full gold-shine-bg flex items-center justify-center text-lightblack-950 group-hover:scale-110 transition shadow-lg">
                                     <i class="fa-solid fa-play text-sm ml-0.5"></i>
                                 </div>
                                 <span class="text-[10px] font-bold text-gold-light mt-1 drop-shadow">Full</span>
                             </a>
                         </div>
 
-                        <!-- Bottom-Left Native Reel Title & Caption -->
                         <div class="reel-safe-bottom absolute left-4 right-16 z-20 pointer-events-none">
                             <h4 class="font-royal text-sm sm:text-base font-extrabold gold-shine-text uppercase tracking-wide drop-shadow">
                                 ${reel.title}
@@ -1029,7 +1584,6 @@
             setupReelObserver();
         }
 
-        // Automatically play ONLY the currently visible Reel & unload others
         function setupReelObserver() {
             if (reelObserver) reelObserver.disconnect();
             const feed = document.getElementById("reelFeedContainer");
@@ -1058,7 +1612,6 @@
 
         function closeReelPopup() {
             if (reelObserver) reelObserver.disconnect();
-            // Clear all iframes immediately so audio stops cleanly
             document.querySelectorAll("#reelFeedContainer iframe").forEach(iframe => {
                 iframe.src = "";
             });
@@ -1067,7 +1620,6 @@
             modal.classList.add("hidden");
             modal.classList.remove("flex");
 
-            // Resume hero promo video
             const heroVideo = document.getElementById("heroVideo");
             if (heroVideo && heroVideo.paused) heroVideo.play().catch(() => {});
         }
@@ -1080,7 +1632,6 @@
 
         function toggleReelMute(idx) {
             isReelMuted = !isReelMuted;
-            // Update all mute icons in the reel feed
             document.querySelectorAll(".reel-mute-btn").forEach(btn => {
                 const icon = btn.querySelector("i");
                 const label = btn.querySelector("span");
@@ -1088,7 +1639,6 @@
                 label.textContent = isReelMuted ? "Muted" : "Sound";
             });
 
-            // Send instant mute/unMute command to active YouTube iframe via postMessage
             const iframe = document.getElementById(`reel-iframe-${idx}`);
             if (iframe && iframe.contentWindow) {
                 iframe.contentWindow.postMessage(JSON.stringify({
@@ -1097,46 +1647,41 @@
                     args: ""
                 }), "*");
             }
-            showToast(isReelMuted ? "Reel Audio Muted" : "Reel Audio On");
+            showToast(isReelMuted ? "ZEENS Audio Muted" : "ZEENS Audio On");
         }
 
         function toggleReelLike(btn) {
             const icon = btn.querySelector("i");
             const isLiked = icon.classList.toggle("text-rose-500");
-            if (isLiked) {
-                showToast("Added to Liked Reels!");
-            }
+            if (isLiked) showToast("Added to Liked ZEENS!");
         }
 
         function shareReel(title) {
             try {
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(window.location.href).catch(() => {});
-                } else {
-                    const tempInput = document.createElement("input");
-                    tempInput.value = window.location.href;
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    document.execCommand("copy");
-                    document.body.removeChild(tempInput);
-                }
+                const tempInput = document.createElement("input");
+                tempInput.value = window.location.href;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
                 showToast(`Link copied for "${title}"!`);
             } catch (e) {
                 showToast(`Shared "${title}"!`);
             }
         }
 
-        // Close Reel popup on ESC key
-        document.addEventListener("keydown", function(e) {
-            if (e.key === "Escape") {
-                closeReelPopup();
-            }
-        });
+        // ==================== APP INITIALIZATION ====================
+        let isAppInitialized = false;
+        function initOttApp() {
+            if (isAppInitialized) return;
+            isAppInitialized = true;
+            switchCategoryTab("hots", false);
+            updateSystemClock();
+            setInterval(updateSystemClock, 15000);
+        }
 
-        // Initialize OTT App on Load with Center Icon ("web-series") as Default
-        window.onload = function () {
-            switchCategoryTab("web-series", false);
-        };
+        document.addEventListener("DOMContentLoaded", initOttApp);
+        window.addEventListener("load", initOttApp);
     </script>
 </body>
 </html>
